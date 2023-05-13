@@ -1,0 +1,8 @@
+<Entity>
+    
+<LuaComponent
+    script_damage_about_to_be_received="mods/grahamsperks/files/effects/damageresist.lua"
+execute_every_n_frame="-1">
+</LuaComponent>
+
+</Entity>

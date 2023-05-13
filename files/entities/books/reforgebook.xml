@@ -1,0 +1,38 @@
+<Entity tags="scroll">
+	<Base file="data/entities/items/books/base_book.xml">
+		<BookComponent
+			_enabled="0"
+			>
+		</BookComponent>
+
+		<ParticleEmitterComponent 
+			_enabled="0"
+			>
+		</ParticleEmitterComponent>
+		
+		<PhysicsImageShapeComponent 
+			image_file="mods/grahamsperks/files/entities/book_blue_inhand.png"
+		></PhysicsImageShapeComponent>
+
+		<UIInfoComponent
+			name="$graham_reforgebook_name"
+			>
+		</UIInfoComponent>
+		
+		<ItemComponent
+			ui_sprite="mods/grahamsperks/files/entities/book_blue.png"
+			item_name="$graham_reforgebook_name"
+			ui_description="$graham_reforgebook_desc"
+			>
+		</ItemComponent>
+		
+		<SpriteComponent
+			image_file="mods/grahamsperks/files/entities/book_blue_inhand.png"
+		></SpriteComponent>
+		
+		<AbilityComponent
+			ui_name="$graham_reforgebook_name"
+			>
+		</AbilityComponent>
+	</Base>
+</Entity>

@@ -1,0 +1,17 @@
+<Entity>
+
+         <GameEffectComponent  
+                 effect="CUSTOM" 
+                 custom_effect_id="GRAHAM_CONSUMED" 
+                 frames="600" 
+         > 
+         </GameEffectComponent >         
+          
+         <InheritTransformComponent /> 
+<LuaComponent
+      script_source_file="mods/grahamsperks/files/effects/ouch.lua"
+      execute_every_n_frame="3"
+      >
+</LuaComponent>
+
+</Entity>

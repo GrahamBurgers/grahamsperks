@@ -1,0 +1,40 @@
+<Entity tags="energy_shield">
+    
+    <Base file="mods/grahamsperks/files/entities/umbrella.xml" > 
+
+        <SpriteComponent 
+            image_file="data/ui_gfx/gun_actions/energy_shield_sector.png" >
+        </SpriteComponent>
+
+        <ItemActionComponent 
+            _tags="enabled_in_world"
+            action_id="ENERGY_SHIELD_SECTOR" >
+        </ItemActionComponent>
+
+        <InheritTransformComponent
+		_enabled="1" 
+        use_root_parent="1">
+  <Transform
+    rotation="-1.5707963267948966192"
+  ></Transform>
+        </InheritTransformComponent>
+
+        <EnergyShieldComponent 
+            sector_degrees="150" >
+        </EnergyShieldComponent>
+
+        <ParticleEmitterComponent
+            area_circle_sector_degrees="150" >
+        </ParticleEmitterComponent>
+
+        <ParticleEmitterComponent
+            area_circle_sector_degrees="150" >
+        </ParticleEmitterComponent>
+
+        <ParticleEmitterComponent
+            area_circle_sector_degrees="150" >
+        </ParticleEmitterComponent>
+
+    </Base>
+    
+</Entity>

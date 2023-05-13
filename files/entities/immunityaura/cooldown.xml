@@ -1,0 +1,17 @@
+<Entity tags="perk_entity, graham_immunityaura_cooldown" >
+
+    <LifetimeComponent
+        lifetime="18000" >
+    </LifetimeComponent>
+
+    <UIIconComponent
+        name="$graham_status_immunityaura"
+        description="$graham_statusdesc_immunityaura"
+        icon_sprite_file="mods/grahamsperks/files/effects/immunityaura.png"
+        is_perk="0"
+        display_above_head="0"
+        display_in_hud="1"
+        >
+    </UIIconComponent>
+
+</Entity>

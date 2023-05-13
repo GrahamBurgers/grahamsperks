@@ -1,0 +1,26 @@
+<Entity>
+	<MagicConvertMaterialComponent
+      kill_when_finished="0"
+      from_material_array="meat,wood_wall,grass,templerock_soft,sandstone,sandstone_surface,sand_surface,sand,radioactive_liquid_yellow,radioactive_liquid,slime,wood_static_vertical,wood_static_wet,wood_static,wood_tree,water,steel_static,sand_static_rainforest,soil_lush,templebrick_noedge_static,templebrick_static"
+      steps_per_frame="24"
+      to_material_array="rotten_meat,graham_wood_rot,bone,mud,graham_ash,graham_ash,graham_ash,graham_ash,water_swamp,water_swamp,graham_mundane,graham_wood_rot,graham_wood_rot,graham_wood_rot,graham_wood_rot,water_swamp,steelmoss_static,root,moss,templebrick_static_broken,templebrick_static_broken"
+      clean_stains="0"
+      is_circle="1"
+      radius="24" 
+	  loop="1"
+	  >
+    </MagicConvertMaterialComponent>
+	
+	<MagicConvertMaterialComponent
+      kill_when_finished="0"
+      from_material_array="lava,acid"
+      steps_per_frame="12"
+      to_material_array="graham_lava,graham_acid"
+      clean_stains="0"
+      is_circle="1"
+      radius="12" 
+	  loop="1"
+	  >
+    </MagicConvertMaterialComponent>
+	
+</Entity>

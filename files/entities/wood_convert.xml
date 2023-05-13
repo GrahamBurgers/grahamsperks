@@ -1,0 +1,44 @@
+<Entity>
+
+	<LifetimeComponent
+		lifetime="2" >
+	</LifetimeComponent>
+	
+	<MagicConvertMaterialComponent
+      _enabled="1"
+      kill_when_finished="0"
+      from_material="wood_static"
+      steps_per_frame="150"
+      to_material="alcohol_gas"
+      radius="150" >
+    </MagicConvertMaterialComponent>
+
+	<MagicConvertMaterialComponent
+      _enabled="1"
+      kill_when_finished="0"
+      from_material="root_growth"
+      steps_per_frame="150"
+      to_material="alcohol_gas"
+      radius="150" >
+    </MagicConvertMaterialComponent>
+	
+	<MagicConvertMaterialComponent
+      _enabled="1"
+      kill_when_finished="0"
+      from_material="ice_static"
+      steps_per_frame="150"
+      to_material="alcohol_gas"
+      radius="150" >
+    </MagicConvertMaterialComponent>
+
+	<MagicConvertMaterialComponent
+      _enabled="1"
+      kill_when_finished="0"
+      from_material="templebrick_static"
+      steps_per_frame="150"
+      to_material="graham_ash"
+	  is_circle="1"
+      radius="150" >
+    </MagicConvertMaterialComponent>
+
+</Entity>

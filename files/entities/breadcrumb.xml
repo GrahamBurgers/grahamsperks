@@ -1,0 +1,69 @@
+<Entity name="$projectile_default" tags="graham_breadcrumb" >
+	<!--
+	<Base file="data/entities/base_projectile.xml" >
+		<VelocityComponent
+			_enabled="1"
+			air_friction="0"
+			terminal_velocity="0"
+			gravity_y="0"
+			mass="0.04"
+			>
+		</VelocityComponent> 
+	</Base>
+	-->
+
+	<ProjectileComponent 
+		speed_min="0"
+		speed_max="0"
+		direction_random_rad="3.14"
+		die_on_liquid_collision="0"
+		on_death_explode="0"
+		on_death_gfx_leave_sprite="0"
+		on_lifetime_out_explode="1"
+		friendly_fire="0"
+		collide_with_entities="0"
+		collide_with_world="0"
+		penetrate_entities="1"
+		penetrate_world="1"
+		shoot_light_flash_radius="100"
+		shoot_light_flash_r="255"
+		shoot_light_flash_g="30"
+		shoot_light_flash_b="30"
+		lifetime="-1"
+		hit_particle_force_multiplier="0.25"
+		knockback_force="1.5"
+		ragdoll_force_multiplier="0.05"
+		collide_with_shooter_frames="-1"
+		> 
+	</ProjectileComponent>
+
+	<!-- main sprite -->
+	<SpriteComponent
+		image_file="mods/grahamsperks/files/projectiles_gfx/breadcrumb.xml"
+		alpha="0.3"
+		additive="0"
+		emissive="0" >
+	</SpriteComponent>
+
+<LuaComponent 
+  execute_on_added="0"
+  remove_after_executed="1"
+  script_source_file="mods/grahamsperks/files/entities/breadcrumb_add.lua"
+  execute_every_n_frame="210">
+</LuaComponent>
+
+	<LightComponent
+		radius="30"
+		r="255"
+		g="255"
+		b="2"
+		>
+	</LightComponent>
+
+	
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="mods/grahamsperks/files/entities/breadcrumb.xml"
+		>
+	</VariableStorageComponent>
+</Entity>

@@ -1,0 +1,55 @@
+<Entity tags="perk_entity">
+
+	<InheritTransformComponent>
+	</InheritTransformComponent>
+
+	<MagicConvertMaterialComponent
+		_enabled="1"
+		kill_when_finished="0"
+		from_material_array="steelfrost_static,water_ice,ice_static,ice_glass,ice_cold_static,ice_cold_glass,ice_acid_static,ice_acid_glass,ice_blood_static,ice_blood_glass,ice_slime_static,ice_slime_glass,ice_radioactive_static,ice_radioactive_glass,ice_poison_glass,ice_poison_static,snow_static,snow,snow_sticky,slush"
+		steps_per_frame="32"
+		to_material_array="steel_static,water,water,water,water_ice,water_ice,acid,acid,blood,blood,slime,slime,radioactive_liquid,radioactive_liquid,poison,poison,smoke,smoke,smoke,smoke"
+		clean_stains="0"
+		is_circle="1"
+		radius="32" 
+		loop="1"
+		>
+	</MagicConvertMaterialComponent>
+
+	<MagicConvertMaterialComponent
+		_enabled="1"
+		kill_when_finished="0"
+		from_material_array="smoke,blood_cold,blood_cold_vapour"
+		steps_per_frame="17"
+		to_material_array="air,air,air"
+		clean_stains="0"
+		is_circle="1"
+		radius="17" 
+		loop="1"
+		>
+	</MagicConvertMaterialComponent>
+
+	<ParticleEmitterComponent
+		emitted_material_name="graham_spark_orange"
+		gravity.y="0.0"
+		lifetime_min="0.2"
+		lifetime_max="1"
+		count_min="4"
+		count_max="8"
+		render_on_grid="1"
+		fade_based_on_lifetime="1"
+		area_circle_radius.max="32"
+		cosmetic_force_create="0"
+		airflow_force="0.5"
+		airflow_time="0.1"
+		airflow_scale="0.5"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="1"
+		emit_cosmetic_particles="1"
+		is_emitting="1" 
+		area_circle_sector_degrees="360"
+		velocity_always_away_from_center="50"
+		>
+	</ParticleEmitterComponent>
+
+</Entity>

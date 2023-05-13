@@ -1,0 +1,15 @@
+<Entity>
+	<PixelSceneComponent
+		pixel_scene="mods/grahamsperks/files/pixelscenes/yinyang.png"
+		pixel_scene_visual="mods/grahamsperks/files/pixelscenes/yinyang_visual.png"
+		pixel_scene_background="mods/grahamsperks/files/pixelscenes/yinyang_background.png"
+		offset_x="-80"
+		offset_y="-60"
+		skip_biome_checks="1"
+		>
+	</PixelSceneComponent>
+	<LifetimeComponent
+		lifetime="2"
+		>
+	</LifetimeComponent>
+</Entity>

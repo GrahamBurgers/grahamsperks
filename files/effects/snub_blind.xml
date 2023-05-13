@@ -1,0 +1,26 @@
+<Entity>
+	<InheritTransformComponent 
+		_enabled="1" >
+    </InheritTransformComponent>	
+    
+    <GameEffectComponent 
+        effect="BLINDNESS"
+        frames="301"
+    >
+	</GameEffectComponent>
+	
+	<LifetimeComponent
+		lifetime="300"
+		>
+	</LifetimeComponent>
+	
+	<UIIconComponent
+		name="$graham_status_snub"
+		description="$graham_statusdesc_snub"
+		icon_sprite_file="mods/grahamsperks/files/effects/snub_blind.png"
+		is_perk="0"
+		display_above_head="0"
+		display_in_hud="1"
+		>
+	</UIIconComponent>
+</Entity>

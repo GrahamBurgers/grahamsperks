@@ -1,0 +1,11 @@
+<Entity>
+
+<InheritTransformComponent>
+</InheritTransformComponent>
+<GameEffectComponent
+    frames="4"
+    effect="PROTECTION_ALL"
+    exclusivity_group="1"
+></GameEffectComponent>
+
+</Entity>

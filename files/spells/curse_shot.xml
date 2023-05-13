@@ -1,0 +1,155 @@
+<Entity name="$projectile_default" tags="projectile_player" >
+
+	<Base file="data/entities/base_projectile.xml" >
+    <VelocityComponent
+      air_friction="-0.1"
+  	  gravity_y="0"
+  	  mass="0.03"
+	    >
+    </VelocityComponent>
+	</Base>
+
+  <ProjectileComponent 
+    damage="0.2"
+    lob_min="0.9"
+    lob_max="1.0"
+    speed_min="80"
+    speed_max="100"
+    friction="0.6"
+    direction_random_rad="0.05"
+    on_death_explode="1"
+    on_death_gfx_leave_sprite="0" 
+    on_lifetime_out_explode="1"
+    explosion_dont_damage_shooter="0" 
+    on_collision_die="1"
+    die_on_liquid_collision="1"
+    lifetime="300"
+    damage="0"
+    velocity_sets_scale="1"
+    lifetime_randomness="7"
+    ragdoll_force_multiplier="0.04"
+    hit_particle_force_multiplier="5.5 "
+    camera_shake_when_shot="1.0"
+    shoot_light_flash_r="255"
+    shoot_light_flash_g="140"
+    shoot_light_flash_b="10"
+    shoot_light_flash_radius="60"
+    knockback_force="0.6"
+	physics_impulse_coeff="10000"
+    >
+	<damage_by_type
+		curse="0.2"
+		>
+	</damage_by_type>
+    <config_explosion
+      never_cache="0" 
+      camera_shake="4" 
+      explosion_radius="2"
+      explosion_sprite="data/particles/explosion_016_plasma_pink.xml" 
+      explosion_sprite_lifetime="0" 
+      create_cell_probability="320" 
+	  create_cell_material="poison_gas" 
+      hole_destroy_liquid="0"
+      explosion_sprite_emissive="1"
+      explosion_sprite_additive="1"
+      hole_enabled="1" 
+      ray_energy="300000"
+      damage="0"
+      particle_effect="0"
+      damage_mortals="1"
+      physics_explosion_power.min="0.05" 
+      physics_explosion_power.max="0.1"
+      physics_throw_enabled="1"
+      shake_vegetation="1" 
+      sparks_count_min="4" 
+      sparks_count_max="10" 
+      sparks_enabled="1" 
+      stains_enabled="1"
+      stains_radius="4"
+      >
+    </config_explosion>
+  </ProjectileComponent>
+  
+  <SpriteComponent  
+    image_file="mods/grahamsperks/files/projectiles_gfx/curse_bomb.xml" 
+    next_rect_animation="" 
+    offset_x="0" 
+    offset_y="0" 
+    rect_animation="" 
+    additive="1"
+    emissive="1"
+    >
+  </SpriteComponent>
+
+  <ParticleEmitterComponent 
+    emitted_material_name="spark_blue_dark"
+    offset.x="0"
+    offset.y="0"
+    x_pos_offset_min="-1"
+    y_pos_offset_min="-1"
+    x_pos_offset_max="1"
+    y_pos_offset_max="1"
+    x_vel_min="-10"
+    x_vel_max="10"
+    y_vel_min="-10"
+    y_vel_max="10"
+    count_min="1"
+    count_max="1"
+    lifetime_min="0.1"
+    lifetime_max="0.3"
+    create_real_particles="0"
+    emit_cosmetic_particles="1"
+    emission_interval_min_frames="1"
+    emission_interval_max_frames="2"
+    is_emitting="1"
+    >
+  </ParticleEmitterComponent>
+
+	<LuaComponent
+		script_source_file="mods/grahamsperks/files/spells/mild_avoiding_arc.lua"
+		execute_every_n_frame="5"
+		>
+	</LuaComponent>
+	
+	<MagicConvertMaterialComponent
+      kill_when_finished="0"
+      from_material_array="meat,wood_wall,grass,templerock_soft,sandstone,sandstone_surface,sand_surface,sand,radioactive_liquid_yellow,radioactive_liquid,slime,wood_static_vertical,wood_static_wet,wood_static,wood_tree,water,steel_static,sand_static_rainforest,soil_lush"
+      steps_per_frame="20"
+      to_material_array="rotten_meat,graham_wood_rot,bone,mud,graham_ash,graham_ash,graham_ash,graham_ash,poison_gas,poison_gas,graham_mundane,graham_wood_rot,graham_wood_rot,graham_wood_rot,graham_wood_rot,poison_gas,steelmoss_static,root,moss"
+      clean_stains="0"
+      is_circle="1"
+      radius="20" 
+	  loop="1"
+	  >
+    </MagicConvertMaterialComponent>
+
+	<MagicConvertMaterialComponent
+      kill_when_finished="0"
+      from_material_array="graham_pureliquid,purifying_powder"
+      steps_per_frame="20"
+      to_material_array="poison_gas,poison_gas"
+      clean_stains="0"
+      is_circle="1"
+      radius="20" 
+	  loop="1"
+	  >
+    </MagicConvertMaterialComponent>
+
+  <LightComponent 
+    radius="10"
+    >
+  </LightComponent>
+  
+  <AudioComponent
+      file="data/audio/Desktop/projectiles.bank"
+      event_root="player_projectiles/bullet_fire_small">
+  </AudioComponent>
+  
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="mods/grahamsperks/files/spells/curse_shot.xml"
+		>
+	</VariableStorageComponent>
+  
+</Entity>
+

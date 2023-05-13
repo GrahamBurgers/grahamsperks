@@ -1,0 +1,52 @@
+<Entity>
+	
+	<MagicConvertMaterialComponent
+		_enabled="1"
+		kill_when_finished="0"
+		from_material_tag="[blood]"
+		to_material="graham_meatgold"
+		radius="12"
+		steps_per_frame="12"
+		clean_stains="0"
+		is_circle="1"
+		loop="1"
+		>
+	</MagicConvertMaterialComponent>
+
+	<MagicConvertMaterialComponent
+		_enabled="1"
+		kill_when_finished="0"
+		from_material_tag="[meat]"
+		to_material="gold"
+		radius="12"
+		steps_per_frame="12"
+		clean_stains="0"
+		is_circle="1"
+		loop="1"
+		>
+	</MagicConvertMaterialComponent>
+
+	<ParticleEmitterComponent
+		emitted_material_name="spark_yellow"
+		gravity.y="0.0"
+		lifetime_min="1"
+		lifetime_max="2"
+		count_min="1"
+		count_max="3"
+		render_on_grid="1"
+		fade_based_on_lifetime="1"
+		area_circle_radius.max="12"
+		area_circle_radius.min="12"
+		cosmetic_force_create="0"
+		airflow_force="0.5"
+		airflow_time="0.1"
+		airflow_scale="0.5"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="1"
+		emit_cosmetic_particles="1"
+		is_emitting="1" 
+		area_circle_sector_degrees="360"
+		>
+	</ParticleEmitterComponent>
+
+</Entity>

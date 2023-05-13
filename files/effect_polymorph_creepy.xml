@@ -1,0 +1,16 @@
+<Entity>
+
+	<InheritTransformComponent>
+    </InheritTransformComponent>	
+    
+	<GameEffectComponent
+		effect="NONE"
+		frames="3"
+	></GameEffectComponent>
+	
+	<LuaComponent
+		script_source_file="mods/grahamsperks/files/hamis.lua"
+		execute_every_n_frame="1">
+	</LuaComponent>
+
+</Entity>

@@ -1,0 +1,11 @@
+<Entity tags="perk_entity">
+
+	<InheritTransformComponent>
+	</InheritTransformComponent>
+
+    <LuaComponent
+        script_source_file="mods/grahamsperks/files/scripts/magic_skin_curse.lua"
+        execute_every_n_frame="60"
+    ></LuaComponent>
+
+</Entity>

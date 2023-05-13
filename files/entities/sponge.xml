@@ -1,0 +1,18 @@
+<Entity tags="perk_entity">
+
+	<InheritTransformComponent>
+	</InheritTransformComponent>
+
+    <MagicConvertMaterialComponent
+	_enabled="1"
+	kill_when_finished="0"
+        from_material_tag="[liquid]"
+        to_material="air"
+        steps_per_frame="48"
+        loop="1"
+        is_circle="1"
+        radius="2" >
+    </MagicConvertMaterialComponent>
+
+
+</Entity>

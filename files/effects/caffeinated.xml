@@ -1,0 +1,22 @@
+<Entity>
+    
+
+    <GameEffectComponent 
+    	effect="MOVEMENT_FASTER"
+    	frames="600"
+    >
+	</GameEffectComponent >
+
+    <GameEffectComponent 
+    	effect="FASTER_LEVITATION"
+    	frames="600"
+    >
+	</GameEffectComponent >
+
+<LuaComponent
+    script_damage_about_to_be_received="mods/grahamsperks/files/effects/damagemore.lua"
+execute_every_n_frame="-1">
+</LuaComponent>
+
+
+</Entity>

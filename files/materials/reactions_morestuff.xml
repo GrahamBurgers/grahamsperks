@@ -1,0 +1,9 @@
+<Materials>
+
+<Reaction probability="80"
+input_cell1="water" 			input_cell2="graham_coffee" 			input_cell3="graham_mundane"
+output_cell1="magic_liquid_aquatic" 			output_cell2="magic_liquid_aquatic" 			output_cell3="magic_liquid_aquatic"
+blob_radius1="2"	blob_radius2="2" >
+</Reaction>
+
+</Materials>

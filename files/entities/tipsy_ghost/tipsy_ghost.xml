@@ -1,0 +1,72 @@
+<Entity tags="tipsy_ghost" >
+	<HitboxComponent 
+        _tags="enabled_in_world"
+        aabb_min_x="-4" 
+        aabb_max_x="4" 
+        aabb_min_y="-3" 
+        aabb_max_y="3"
+    ></HitboxComponent>
+
+	<GenomeDataComponent 
+	herd_id="player"
+	food_chain_rank="7"
+	is_predator="1" >
+	</GenomeDataComponent>
+
+    <SimplePhysicsComponent
+        _tags="enabled_in_world" 
+    ></SimplePhysicsComponent>
+
+    <VelocityComponent
+        _tags="enabled_in_world"
+		gravity_y="0"
+    ></VelocityComponent>
+
+	<!-- ghost functionality and visuals -->		
+	<SpriteComponent 
+		image_file="mods/grahamsperks/files/entities/tipsy_ghost/tipsy_ghost_anim.xml"
+		>
+	</SpriteComponent>
+	<LuaComponent 
+		script_source_file="data/scripts/animals/tiny_ghost_move.lua"
+		execute_every_n_frame="1"
+		>
+	</LuaComponent>
+
+	<LuaComponent 
+		script_source_file="mods/grahamsperks/files/scripts/tipsy_ghost.lua"
+		execute_every_n_frame="600"
+		>
+	</LuaComponent>
+
+	<CellEaterComponent
+		radius="20"
+		eat_probability="2"
+		limited_materials="1"
+        materials="urine,soil"
+	></CellEaterComponent>
+
+	<LuaComponent 
+		script_source_file="mods/grahamsperks/files/scripts/tipsy_ghost_chomp.lua"
+		execute_every_n_frame="1"
+		>
+	</LuaComponent>
+
+	<LuaComponent 
+		script_source_file="mods/grahamsperks/files/scripts/drunk_immunity.lua"
+		execute_every_n_frame="1"
+		>
+	</LuaComponent>
+	
+	<AudioComponent
+		file="data/audio/Desktop/animals.bank"
+		event_root="animals/tiny_ghost" >
+	</AudioComponent>
+
+	<AudioLoopComponent
+		file="data/audio/Desktop/animals.bank"
+		event_name="animals/tiny_ghost/movement_loop"
+		set_speed_parameter="1"
+		auto_play="1">
+	</AudioLoopComponent>
+</Entity>

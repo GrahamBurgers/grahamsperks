@@ -1,0 +1,14 @@
+<Entity>
+    
+<LuaComponent
+    script_damage_about_to_be_received="mods/grahamsperks/files/effects/damagemuchless.lua"
+execute_every_n_frame="-1">
+</LuaComponent>
+
+    <GameEffectComponent 
+    	effect="MOVEMENT_FASTER"
+    	frames="600"
+    >
+	</GameEffectComponent >
+
+</Entity>

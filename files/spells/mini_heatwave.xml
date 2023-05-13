@@ -1,0 +1,75 @@
+<Entity>
+
+	<Base file="data/entities/base_custom_card.xml" > 
+		<SpriteComponent 
+			image_file="mods/grahamsperks/files/spells/mini_heatwave.png" 
+			>
+		</SpriteComponent>
+		
+		<ItemActionComponent 
+			_tags="enabled_in_world"
+			action_id="GRAHAM_MINI_HEATWAVE" >
+		</ItemActionComponent>
+	</Base>
+
+	<InheritTransformComponent
+		_tags="enabled_in_world,enabled_in_hand" >
+	  <Transform 
+		position.x="8" 
+		position.y="0" >
+	  </Transform>
+	</InheritTransformComponent>
+
+	<MagicConvertMaterialComponent
+		_tags="enabled_in_hand"
+		_enabled="1"
+		kill_when_finished="0"
+		from_material_array="snowrock_static,steelfrost_static,water_ice,ice_static,ice_glass,ice_cold_static,ice_cold_glass,ice_acid_static,ice_acid_glass,ice_blood_static,ice_blood_glass,ice_slime_static,ice_slime_glass,ice_radioactive_static,ice_radioactive_glass,ice_poison_glass,ice_poison_static,snow_static,snow,snow_sticky,slush"
+		steps_per_frame="16"
+		to_material_array="sand_static_bright,steel_static,water,water,water,water_ice,water_ice,acid,acid,blood,blood,slime,slime,radioactive_liquid,radioactive_liquid,poison,poison,smoke,smoke,smoke,smoke"
+		clean_stains="0"
+		is_circle="1"
+		radius="16" 
+		loop="1"
+		>
+	</MagicConvertMaterialComponent>
+	
+	<MagicConvertMaterialComponent
+		_tags="enabled_in_hand"
+		_enabled="1"
+		kill_when_finished="0"
+		from_material_array="smoke,blood_cold,blood_cold_vapour"
+		steps_per_frame="8"
+		to_material_array="air,air,air"
+		clean_stains="0"
+		is_circle="1"
+		radius="8" 
+		loop="1"
+		>
+	</MagicConvertMaterialComponent>
+
+	<ParticleEmitterComponent
+		_tags="enabled_in_hand"
+		emitted_material_name="graham_spark_orange"
+		gravity.y="0.0"
+		lifetime_min="0.5"
+		lifetime_max="2"
+		count_min="2"
+		count_max="4"
+		render_on_grid="1"
+		fade_based_on_lifetime="1"
+		area_circle_radius.min="16"
+		area_circle_radius.max="16"
+		cosmetic_force_create="0"
+		airflow_force="0.5"
+		airflow_time="0.1"
+		airflow_scale="0.5"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="1"
+		emit_cosmetic_particles="1"
+		is_emitting="1" 
+		area_circle_sector_degrees="360"
+		>
+	</ParticleEmitterComponent>
+
+</Entity>

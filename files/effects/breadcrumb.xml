@@ -1,0 +1,39 @@
+<Entity  tags="graham_breadcrumb_effect" >
+	<InheritTransformComponent 
+		_enabled="1" >
+    </InheritTransformComponent>	
+    
+    <GameEffectComponent 
+        effect="FASTER_LEVITATION"
+        frames="1"
+    >
+	</GameEffectComponent>
+
+    
+    <GameEffectComponent 
+        effect="MOVEMENT_FASTER"
+        frames="1"
+    >
+	</GameEffectComponent>
+	
+	<LifetimeComponent
+		lifetime="1"
+		>
+	</LifetimeComponent>
+	
+<LuaComponent
+    script_damage_about_to_be_received="mods/grahamsperks/files/effects/damageresist.lua"
+execute_every_n_frame="-1">
+</LuaComponent>
+
+	
+	<UIIconComponent
+		name="$graham_status_breadcrumb"
+		description="$graham_statusdesc_breadcrumb"
+		icon_sprite_file="mods/grahamsperks/files/effects/breadcrumb.png"
+		is_perk="0"
+		display_above_head="0"
+		display_in_hud="1"
+		>
+	</UIIconComponent>
+</Entity>
