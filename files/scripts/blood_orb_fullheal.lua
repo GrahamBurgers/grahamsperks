@@ -45,5 +45,13 @@ function item_pickup( entity_item, entity_who_picked, name )
         EntitySetComponentIsEnabled(eyes[i], genome, true)
     end
 
+    local robots = GlobalsGetValue( "GRAHAM_ROBOTS_COUNT", "0" )
+    local x, y = EntityGetTransform(GetUpdatedEntityID())
+    local options = {"tank.xml", "tank_rocket.xml", "tank_super.xml", "toasterbot.xml"}
+    for i = 1, robots do
+        SetRandomSeed(entity_item + x, y + i)
+        EntityLoad("mods/grahamsperks/files/entities/mini_tanks/" .. options[Random(1, #options)], x, y)
+    end
+
     item_pickup_old( entity_item, entity_who_picked, name )
 end

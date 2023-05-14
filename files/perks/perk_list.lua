@@ -744,18 +744,27 @@ table.insert(perk_list,{
     perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/robot.png",
     usable_by_enemies = false,
     not_in_default_perk_pool = false,
-    game_effect = "PROTECTION_ELECTRICITY",
-    remove_other_perks = {"PROTECTION_ELECTRICITY"},
-    stackable = STACKABLE_NO,
+    stackable = STACKABLE_YES,
+    stackable_max = 3,
     func = function( entity_perk_item, entity_who_picked, item_name )
-        GenomeSetHerdId( entity_who_picked, "player_robotic" )
-	local x, y = EntityGetTransform( entity_who_picked )
-	local entity_id = EntityLoad( "mods/grahamsperks/files/entities/oil.xml", x, y )
-	EntityAddChild( entity_who_picked, entity_id )
-    end,
+      local x, y = EntityGetTransform( entity_who_picked )
+      local entity_id = EntityLoad( "mods/grahamsperks/files/entities/oil.xml", x, y )
+      EntityAddChild(entity_who_picked, entity_id)
+
+      local value = GlobalsGetValue( "GRAHAM_ROBOTS_COUNT", 0)
+      GlobalsSetValue( "GRAHAM_ROBOTS_COUNT", value + 3 )
+      local options = {"tank.xml", "tank_rocket.xml", "tank_super.xml", "toasterbot.xml"}
+      for i = 1, 3 do
+        SetRandomSeed(x, y + i)
+        EntityLoad("mods/grahamsperks/files/entities/mini_tanks/" .. options[Random(1, #options)], x, y)
+      end
+  end,
+  func_remove = function( entity_who_picked )
+    GlobalsSetValue( "GRAHAM_ROBOTS_COUNT", 0 )
+  end,
 })
 else
-table.insert(perk_list,{
+  table.insert(perk_list,{
     id = "GRAHAM_ROBOTS",
     ui_name = "$perkname_graham_robot",
     ui_description = "$perkdesc_graham_robot",
@@ -763,15 +772,24 @@ table.insert(perk_list,{
     perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/robot.png",
     usable_by_enemies = false,
     not_in_default_perk_pool = true,
-    game_effect = "PROTECTION_ELECTRICITY",
-    remove_other_perks = {"PROTECTION_ELECTRICITY"},
-    stackable = STACKABLE_NO,
+    stackable = STACKABLE_YES,
+    stackable_max = 3,
     func = function( entity_perk_item, entity_who_picked, item_name )
-    GenomeSetHerdId( entity_who_picked, "player_robotic" )
-	local x, y = EntityGetTransform( entity_who_picked )
-	local entity_id = EntityLoad( "mods/grahamsperks/files/entities/oil.xml", x, y )
-	EntityAddChild( entity_who_picked, entity_id )
-    end,
+      local x, y = EntityGetTransform( entity_who_picked )
+      local entity_id = EntityLoad( "mods/grahamsperks/files/entities/oil.xml", x, y )
+      EntityAddChild(entity_who_picked, entity_id)
+
+      local value = GlobalsGetValue( "GRAHAM_ROBOTS_COUNT", 0)
+      GlobalsSetValue( "GRAHAM_ROBOTS_COUNT", value + 3 )
+      local options = {"tank.xml", "tank_rocket.xml", "tank_super.xml", "toasterbot.xml"}
+      for i = 1, 3 do
+        SetRandomSeed(x, y + i)
+        EntityLoad("mods/grahamsperks/files/entities/mini_tanks/" .. options[Random(1, #options)], x, y)
+      end
+  end,
+  func_remove = function( entity_who_picked )
+    GlobalsSetValue( "GRAHAM_ROBOTS_COUNT", 0 )
+  end,
 })
 end
 
