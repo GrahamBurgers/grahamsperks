@@ -58,235 +58,139 @@ end
 -------------------------------------------------------------------------------
 
 function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
-	local set_rnd = false 
+	local set_rnd = false
 	if( set_rnd_ ~= nil ) then set_rnd = set_rnd_ end
 
 	if( set_rnd ) then
 		SetRandomSeed( GameGetFrameNum(), x + y + entity_id )
 	end
-	
-	local good_item_dropped = true
-	
-	-- using deferred loading of entities, since loading some of them (e.g. potion.xml) will call SetRandomSeed(...)
-	-- if position is not given (in entities table), will load the entity to rand_x, rand_y and then move it to chest position
-	-- reason for this is that then the SetRandomSeed() of those entities will be deterministic 
-	-- but for some reason it cannot be done to random_card.xml, since I'm guessing
-	local entities = {}
 
+	local good_item_dropped = true
+
+	local entities = {}
+	local drops = {}
+	local value = nil
+
+	local remove_gold_timer = false
+	
+	local comp_worldstate = EntityGetFirstComponent( GameGetWorldStateEntity(), "WorldStateComponent" )
+	if( comp_worldstate ~= nil ) then
+		if( ComponentGetValue2( comp_worldstate, "perk_gold_is_forever" ) ) then
+			remove_gold_timer = true
+		end
+	end
+
+	-- CHEST DROPS GO HERE (Welcome to elseif hell)
 	local count = 1
 	while( count > 0 ) do
 		count = count - 1
 		local rnd = Random(1,100)
-
-		if( rnd <= 7 ) then
-			-------------------------------------------------------------------
-			-- Drone
-			-------------------------------------------------------------------
-			table.insert( entities, { "data/entities/animals/deer.xml" } )
+		if rnd <= 10 then
+			-- 10%: Random potions
+			table.insert(entities, { "data/entities/items/pickup/potion_random_material.xml" })
+			table.insert(entities, { "data/entities/items/pickup/potion_random_material.xml" })
+		elseif rnd <= 20 then
+			-- 10%: Large extra max health
+			if Random(1, 50) == 50 then
+				table.insert( entities, { "data/entities/animals/illusions/dark_alchemist.xml" } )
+			else
+				table.insert( entities, { "data/entities/items/pickup/heart_better.xml" })
+			end
+		elseif rnd <= 40 then
+			-- 20%: Identical lost chest
+			-- Load it directly here to avoid rng wackiness
+			EntityLoad("mods/grahamsperks/files/pickups/chest_lost.xml", x + 1, y - 1)
+		elseif rnd <= 45 then
+			-- 10%: Containers
+			table.insert(entities, { "mods/grahamsperks/files/pickups/balloon.xml" })
+			table.insert(entities, { "mods/grahamsperks/files/pickups/vial.xml" })
+			table.insert(entities, { "data/entities/items/pickup/potion.xml" })
+		elseif rnd <= 55 then
+			-- 5%: Holy bomb
+			table.insert(entities, { "data/entities/projectiles/bomb_holy.xml" })
 			good_item_dropped = false
-			
-		elseif( rnd <= 40 ) then
-			-------------------------------------------------------------------
-			-- Gold (I think the reason there's empty is chests is goldnuggets)
-			-------------------------------------------------------------------
-			local remove_gold_timer = false
-	
-			local comp_worldstate = EntityGetFirstComponent( GameGetWorldStateEntity(), "WorldStateComponent" )
-			if( comp_worldstate ~= nil ) then
-				if( ComponentGetValue2( comp_worldstate, "perk_gold_is_forever" ) ) then
-					remove_gold_timer = true
-				end
-			end
-
-			local amount = 5
-			rnd = Random(0,100)
-			if (rnd <= 80) then
-				amount = 7
-			elseif (rnd <= 95) then
-				amount = 10
-			elseif (rnd <= 100) then
-				amount = 20
-			end
-
-			rnd = Random(0,100)
-			if( rnd > 30 and rnd <= 80 ) then
-				chest_load_gold_entity( "data/entities/items/pickup/goldnugget_200.xml", x + Random(-10,10), y - 4 + Random(-10,5), remove_gold_timer )
-			elseif (rnd <= 95) then
-				chest_load_gold_entity( "data/entities/items/pickup/goldnugget_1000.xml", x + Random(-10,10), y - 4 + Random(-10,5), remove_gold_timer )
-			elseif (rnd <= 99) then
-				chest_load_gold_entity( "data/entities/items/pickup/goldnugget_1000.xml", x + Random(-10,10), y - 4 + Random(-10,5), remove_gold_timer )
-			else
-				local tamount = Random( 1, 3 )
-				for i=1,tamount do
-					chest_load_gold_entity( "data/entities/items/pickup/goldnugget_200.xml", x + Random(-10,10), y - 4 + Random(-10,5), remove_gold_timer )
-				end
-				if( Random(0, 100 ) > 50 ) then
-					tamount = Random( 1, 3 )
-					for i=1,tamount do
-						chest_load_gold_entity( "data/entities/items/pickup/goldnugget_1000.xml", x + Random(-10,10), y - 4 + Random(-10,5), remove_gold_timer )
-					end
-				end
-				if( Random(0, 100 ) > 80 ) then
-					tamount = Random( 1, 3 )
-					for i=1,tamount do
-						chest_load_gold_entity( "data/entities/items/pickup/goldnugget_1000.xml", x + Random(-10,10), y - 4 + Random(-10,5), remove_gold_timer )
-					end
-				end
-			end
-
-
-			for i=1,amount do
-				chest_load_gold_entity( "data/entities/items/pickup/goldnugget.xml", x + Random(-10,10), y - 4 + Random(-10,5), remove_gold_timer )
-			end
-		elseif( rnd <= 50 ) then
-			-------------------------------------------------------------------
-			-- Potion
-			-------------------------------------------------------------------
-			rnd = Random(0,100)
-			if (rnd <= 94) then
-					table.insert( entities, { "data/entities/items/pickup/potion_random_material.xml" } )
-			elseif (rnd <= 98) then
-				table.insert( entities, { "data/entities/items/pickup/potion_starting.xml" } )
-			elseif (rnd <= 100) then
-				rnd = Random(0,100)
-				if( rnd <= 98 ) then
-					table.insert( entities, { "data/entities/items/pickup/potion_secret.xml" } )
-				elseif( rnd <= 100 ) then
-					table.insert( entities, { "data/entities/items/pickup/potion_random_material.xml" } )
-				end
-			end
-		elseif( rnd <= 54 ) then
-			-------------------------------------------------------------------
-			-- NOT Spell refresh
-			-------------------------------------------------------------------
-			table.insert( entities, { "data/entities/items/pickup/heart_better.xml" } )
-		
-		elseif( rnd <= 60 ) then
-			-------------------------------------------------------------------
-			-- Misc items
-			-------------------------------------------------------------------
-			local opts = { "data/entities/items/pickup/safe_haven.xml", "data/entities/items/pickup/musicstone.xml", "data/entities/items/pickup/jar.xml", "mods/grahamsperks/files/pickups/cybereye.xml", "data/entities/items/pickup/gourd.xml", "runestone", "die", "orb" }
-			rnd = Random( 1, #opts )
-			local opt = opts[rnd]
-			
-			if ( opt == "die" ) then
-				local flag_status = HasFlagPersistent( "card_unlocked_duplicate" )
-				
-				if flag_status then
-					if GameHasFlagRun( "greed_curse" ) and ( GameHasFlagRun( "greed_curse_gone" ) == false ) then
-						opt = "data/entities/items/pickup/physics_greed_die.xml"
-					else
-						opt = "data/entities/items/pickup/physics_greed_die.xml"
-					end
+		elseif rnd <= 60 then
+			-- 5%: Eye
+			EntityLoad("mods/grahamsperks/files/entities/eye/blood_orb.xml", x-10, y)
+			EntityLoad("mods/grahamsperks/files/entities/eye/blood_orb.xml", x+10, y)
+			good_item_dropped = false
+		elseif rnd <= 65 then
+			-- 5%: Bunch of wands and ghosts
+			for i = 1, Random(2, 6) do
+				table.insert(entities, { "data/entities/animals/wand_ghost_charmed.xml" })
+				if Random(1, 2) == 1 then
+					table.insert(entities, { "data/entities/items/wand_level_02.xml" })
 				else
-					opt = "data/entities/items/pickup/potion.xml"
-				end
-			elseif ( opt == "runestone" ) then
-				local r_opts = { "laser", "fireball", "lava", "slow", "null", "disc", "metal" }
-				rnd = Random( 1, #r_opts )
-				local r_opt = r_opts[rnd]
-				
-				opt = "data/entities/items/pickup/runestones/runestone_" .. r_opt .. ".xml"
-			elseif ( opt == "orb" ) then
-				if GameHasFlagRun( "greed_curse" ) and ( GameHasFlagRun( "greed_curse_gone" ) == false ) then
-					opt = "data/entities/items/pickup/physics_gold_orb_greed.xml"
-				else
-					opt = "data/entities/items/pickup/physics_gold_orb_greed.xml"
+					table.insert(entities, { "data/entities/items/wand_level_01.xml" })
 				end
 			end
-			
-			table.insert( entities, { opt, x, y - 10 } )
-			
-		elseif( rnd <= 65 ) then
-			-------------------------------------------------------------------
-			-- Random card
-			-------------------------------------------------------------------
-			-- NOTE( Petri ): random_card.xml is bad, it leaves an empty entity hanging around
-			-- table.insert( entities, { "data/entities/items/pickup/random_card.xml",  x + Random(-10,10), y - 4 + Random(-5,5) } )
-			-- this does NOT call SetRandomSeed() on purpouse
-			local amount = 1
-			rnd = Random(0,100)
-			if (rnd <= 50) then
-				amount = amount + 3
-			elseif (rnd <= 70) then
-				amount = amount + 4
-			elseif (rnd <= 80) then
-				amount = amount + 4
-			elseif (rnd <= 90) then
-				amount = amount + 5
-			else
-				amount = amount + 6
+			good_item_dropped = false
+		elseif rnd <= 70 then
+			-- 5%: Mini mimic
+			table.insert(entities, { "data/entities/animals/mini_mimic.xml" })
+			good_item_dropped = false
+		elseif rnd <= 75 then
+			-- 5%: Gourds
+			for i = 1, Random(1, 3) do
+				table.insert(entities, { "data/entities/items/pickup/gourd.xml" })
+			end
+		elseif rnd <= 80 then
+			-- 5%: Gold
+			drops = {
+				"10",
+				"10",
+				"10",
+				"10",
+				"50",
+				"50",
+				"50",
+				"200",
+				"200",
+				"1000",
+			}
+			for i = 1, Random(5, 14) do
+				value = drops[Random(1, #drops)]
+				if Random(1, i) == i then
+					chest_load_gold_entity( "data/entities/items/pickup/goldnugget_" .. value .. ".xml", x + Random(-10,10), y - 4 + Random(-10,5), remove_gold_timer )
+				else
+					chest_load_gold_entity( "data/entities/items/pickup/bloodmoney_" .. value .. ".xml", x + Random(-10,10), y - 4 + Random(-10,5), remove_gold_timer )
+				end
 			end
 
+		elseif rnd <= 82 then
+			-- 6%: spells
+			local amount = Random(5,8)
 			for i=1,amount do
 				make_random_card( x + (i - (amount / 2)) * 8, y - 4 + Random(-5,5) )
 			end
-		elseif( rnd <= 84 ) then
-			-------------------------------------------------------------------
-			-- Wand
-			-------------------------------------------------------------------
-
-			rnd = Random(0,100)
-			
-			if( rnd <= 25 ) then
-				table.insert( entities, { "data/entities/items/wand_level_02.xml" } )
-			elseif( rnd <= 50 ) then
-				table.insert( entities, { "data/entities/items/wand_unshuffle_02.xml" } )
-			elseif( rnd <= 75 ) then
-				table.insert( entities, { "data/entities/items/wand_level_03.xml" } )
-			elseif( rnd <= 90 ) then
-				table.insert( entities, { "data/entities/items/wand_unshuffle_03.xml" } )
-			elseif( rnd <= 96 ) then
-				table.insert( entities, { "data/entities/items/wand_level_04.xml" } )
-			elseif( rnd <= 98 ) then
-				table.insert( entities, { "data/entities/items/wand_unshuffle_04.xml" } )
-			elseif( rnd <= 99 ) then
-				table.insert( entities, { "data/entities/items/wand_level_05.xml" } )
-			elseif( rnd <= 100 ) then
-				table.insert( entities, { "data/entities/items/wand_unshuffle_05.xml" } )
-			end
-		elseif( rnd <= 95 ) then
-			-------------------------------------------------------------------
-			-- Heart(s)
-			-------------------------------------------------------------------
-			rnd = Random(0,100)
-			
-			if (rnd <= 88) then
-				table.insert( entities, { "data/entities/items/pickup/heart_better.xml" } )
-			elseif (rnd <= 89) then
-				table.insert( entities, { "data/entities/animals/illusions/dark_alchemist.xml" } )
-			elseif (rnd <= 99) then
-				table.insert( entities, { "data/entities/items/pickup/jar.xml" } )
-			else
-				table.insert( entities, { "data/entities/items/pickup/heart_fullhp_temple.xml" } )
-			end
-		elseif( rnd <= 98 ) then
-			-------------------------------------------------------------------
-			-- Converts the chest into gold
-			-------------------------------------------------------------------
-			EntityConvertToMaterial( entity_id, "magic_liquid_hp_regeneration_unstable")
-		elseif( rnd <= 99 ) then
-			-------------------------------------------------------------------
-			-- exploding "dice"
-			-------------------------------------------------------------------
-
-			-- explode the random table
-			-- do random reward 2 times...
+		elseif rnd <= 88 then
+			-- 2%: Midas
+			EntityConvertToMaterial(GetUpdatedEntityID(), "midas_precursor")
+		elseif rnd <= 90 then
+			-- 2%: Wacky items
+			drops = {
+				"data/entities/items/pickup/physics_greed_die.xml",
+				"data/entities/items/pickup/physics_gold_orb_greed.xml",
+				"data/entities/items/pickup/musicstone.xml",
+				"mods/grahamsperks/files/pickups/magmastone.xml",
+				"mods/grahamsperks/files/pickups/safe.xml"
+			}
+			table.insert(entities, { drops[Random(1, #drops)] })
+			table.insert(entities, { drops[Random(1, #drops)] })
+		else
+			-- 10%: Double roll
+			-- No triple roll because the double roll chance is 10% anyway
 			count = count + 2
-		elseif( rnd <= 100 ) then
-			-- explode the random table
-			-- do random reward 3 times...
-			count = count + 3
 		end
 	end
 
 	for i,entity in ipairs(entities) do
-		local eid = 0 
+		local eid = 0
 		if( entity[2] ~= nil and entity[3] ~= nil ) then 
 			eid = EntityLoad( entity[1], entity[2], entity[3] ) 
 		else
-			eid = EntityLoad( entity[1], rand_x, rand_y )
-			EntityApplyTransform( eid, x + Random(-10,10), y - 4 + Random(-5,5)  )
+			eid = EntityLoad( entity[1], rand_x + 1, rand_y )
+			EntityApplyTransform( eid, x + Random(-12,12), y - 4 + Random(-7,7)  )
 		end
 
 		local item_comp = EntityGetFirstComponent( eid, "ItemComponent" )
@@ -297,15 +201,15 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 				ComponentSetValue2( item_comp, "next_frame_pickable", GameGetFrameNum() + 30 )	
 			end
 		end
+
+		local comp = EntityGetFirstComponentIncludingDisabled(eid, "ProjectileComponent")
+		if comp ~= nil and entity[1] == "data/entities/projectiles/bomb_holy.xml" then
+			ComponentSetValue2(comp, "lifetime", 400)
+		end
 	end
 
 
 	return good_item_dropped
-end
-
-function drop_money( entity_item )
-	
-	-- 
 end
 
 function on_open( entity_item )
