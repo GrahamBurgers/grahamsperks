@@ -8,9 +8,7 @@ if translations ~= nil then
     ModTextFileSetContent( "data/translations/common.csv", translations );
 end
 
-dofile_once("mods/grahamsperks/lib/polytools_init.lua").init("mods/grahamsperks/lib")
-dofile("mods/grahamsperks/lib/polytools.lua")
-dofile_once("mods/grahamsperks/lib/polytools_init.lua").init("mods/grahamsperks/lib")
+-- Polytools isn't necessary any more! thank you petri, you are a wonderful man
 
 ModMaterialsFileAdd("mods/grahamsperks/files/materials/materials.xml")
 ModMaterialsFileAdd("mods/grahamsperks/files/materials/materials_reactions.xml")
