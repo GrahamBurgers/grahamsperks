@@ -50,8 +50,15 @@ Hope you enjoy it!
 ...Well, the mod was meant to be Vanilla+ all along, so whatever.)
 
 Added in 1.43:
-Thanks to the community members that suggested some of these fixes to me! I enjoy recieving all constructive feedback.
+Thanks to the community members that suggested some of these fixes to me! I enjoy receiving all constructive feedback.
 Never be afraid to tell me something you think I need to hear, even if you think it'll hurt my feelings. It's for the best for all of us.
 ...Hey, Noita's been getting some patches lately, huh? That's... really, really cool.
 I feel like my brain is rate-limiting the amount of excitement that I'm experiencing, but rest assured, I am incredibly excited about it.
 And I will NEVER have to explain to someone why the Chainsaw is lagging their game ever again. Hell yeah.
+
+Added in 1.5:
+I just can't stop adding things. Compared to my other mods, this one is just so inviting to work on. I can put basically whatever I want in...
+there are no rules other than fitting my own style. Woohoo!
+I'm overjoyed at the updates being added to the game. For one, polytools is no longer necessary! Which sounds sorta mean now that I
+say it out loud... but it's always nice to not have to depend on libraries. This update is pretty fun, I think. Hopefully people won't
+badger me too hard about the reworked chest pools.

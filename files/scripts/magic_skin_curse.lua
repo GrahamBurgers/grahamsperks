@@ -1,17 +1,18 @@
-local entity_id = GetUpdatedEntityID()
-local player = EntityGetRootEntity(entity_id)
-local skins = GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" )
-local damage = ( skins * skins ) / 25
-
-local damagemodels = EntityGetComponent( player, "DamageModelComponent" )
-if( damagemodels ~= nil ) then
-    for i,damagemodel in ipairs(damagemodels) do
-        local hp = tonumber( ComponentGetValue( damagemodel, "hp" ) )
-        local x, y = EntityGetTransform(player)
-        local current_biome = BiomeMapGetName(x, y):gsub("$biome_", "")
-
-        if hp > damage + 1 and current_biome ~= "holymountain" then
-            EntityInflictDamage(player, damage, "DAMAGE_CURSE", "curse", "NORMAL", 0, 0, player)
-        end
+local item_pickup_old = nil
+if item_pickup ~= nil then
+    item_pickup_old = item_pickup
+end
+function item_pickup( entity_item, entity_who_picked, item_name )
+    local comp = EntityGetFirstComponent(entity_who_picked, "DamageModelComponent") or 0
+    SetRandomSeed(entity_item, GameGetFrameNum() + entity_who_picked)
+    local amount = Random(10, 20 + GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" ) * 5)
+    GamePrint(GameTextGetTranslatedOrNot("$graham_magicskin_01") .. amount .. GameTextGetTranslatedOrNot("$graham_magicskin_02"))
+    EntityInflictDamage(entity_who_picked, amount / 25, DAMAGE_CURSE, "$perkname_graham_magicskin", "BLOOD_EXPLOSION", 0, 0)
+    ComponentSetValue2(comp, "max_hp", ComponentGetValue2(comp, "max_hp") - amount / 25)
+    -- I have no idea if script_item_picked_up gets replaced when there are multiple
+    -- This is a precaution in case it does
+    if item_pickup_old ~= nil then
+        item_pickup_old( entity_item, entity_who_picked, item_name )
     end
+
 end

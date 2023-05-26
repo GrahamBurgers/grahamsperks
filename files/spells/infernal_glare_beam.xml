@@ -45,7 +45,7 @@
     <config_explosion
       never_cache="0" 
       camera_shake="4" 
-      explosion_radius="12"
+      explosion_radius="2"
       explosion_sprite="mods/grahamsperks/files/projectiles_gfx/empty.png" 
       explosion_sprite_lifetime="1" 
       create_cell_probability="40" 
@@ -65,20 +65,38 @@
       sparks_count_min="4" 
       sparks_count_max="10" 
       sparks_enabled="1" 
-      stains_enabled="1"
+      stains_enabled="0"
       stains_radius="12"
       >
     </config_explosion>
   </ProjectileComponent>
 
-    <MagicConvertMaterialComponent
-      from_material_tag="[burnable]"
-      to_material="liquid_fire"
-      steps_per_frame="8"
-      loop="1"
-		  is_circle="1"
-      radius="8" >
-    </MagicConvertMaterialComponent>
+  <MagicConvertMaterialComponent
+    from_material_tag="[burnable]"
+    to_material="liquid_fire"
+    steps_per_frame="8"
+    loop="1"
+    is_circle="1"
+    radius="8" >
+  </MagicConvertMaterialComponent>
+
+  <MagicConvertMaterialComponent
+    from_material_tag="[frozen]"
+    to_material="steam"
+    steps_per_frame="8"
+    loop="1"
+    is_circle="1"
+    radius="8" >
+  </MagicConvertMaterialComponent>
+
+  <MagicConvertMaterialComponent
+    from_material_tag="[cold]"
+    to_material="steam"
+    steps_per_frame="8"
+    loop="1"
+    is_circle="1"
+    radius="8" >
+  </MagicConvertMaterialComponent>
 
   <LightComponent 
     _enabled="1" 
@@ -109,6 +127,7 @@
     emission_interval_min_frames="1"
     emission_interval_max_frames="2"
     is_emitting="1"
+    is_trail="1"
     >
   </ParticleEmitterComponent>
 
@@ -123,7 +142,6 @@
     y_vel_max="2"
     count_min="1"
     count_max="2"
-	  is_trail="0"
 	  trail_gap="0.8"
     lifetime_min="0.1"
     lifetime_max="0.8"
@@ -133,6 +151,7 @@
     emission_interval_min_frames="1"
     emission_interval_max_frames="2"
   	fade_based_on_lifetime="1"
+    is_trail="1"
     is_emitting="1" >
   </ParticleEmitterComponent>
   

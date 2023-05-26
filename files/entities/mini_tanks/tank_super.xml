@@ -1,6 +1,6 @@
 <Entity name="$animal_tank" >
   
-	<Base file="data/entities/base_enemy_robot.xml" >
+	<Base file="mods/grahamsperks/files/entities/mini_tanks/base_minitank.xml"  >
 		<ItemChestComponent level="2" ></ItemChestComponent>
 		
 		<AnimalAIComponent 
@@ -91,7 +91,7 @@
 	
 	<ExplodeOnDamageComponent
 		explode_on_death_percent="1"
-		explode_on_damage_percent="0.05"
+		explode_on_damage_percent="0"
 		>
 		<config_explosion 
 		never_cache="0"

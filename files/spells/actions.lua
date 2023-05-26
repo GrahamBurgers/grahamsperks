@@ -1346,12 +1346,44 @@ local to_insert = {
 		spawn_probability  = "0.2,0.3,0.4,1",
 		price = 80,
 		mana = 120,
-			action 		= function()
-				add_projectile("mods/grahamsperks/files/spells/holy_bullet.xml")
-				c.fire_rate_wait = c.fire_rate_wait + 20
-			end,
+		action 		= function()
+			add_projectile("mods/grahamsperks/files/spells/holy_bullet.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 20
+		end,
 	},
-
+	-- NEW SINCE 1.5
+	{
+		id                 = "GRAHAM_ROLLOUT",
+		name               = "$graham_name_rollout",
+		description        = "$graham_desc_rollout",
+		sprite             = "mods/grahamsperks/files/spells/rollout.png",
+		type               = ACTION_TYPE_PROJECTILE,
+		spawn_level        = "0,2,3,4,10",
+		spawn_probability  = "0.4,1,0.5,1,0.5",
+		price = 130,
+		mana = 60,
+		max_uses = 20,
+		action 		= function()
+			c.fire_rate_wait = c.fire_rate_wait + 150
+			c.damage_critical_chance = c.damage_critical_chance + 15
+			add_projectile("mods/grahamsperks/files/spells/rollout.xml")
+		end,
+	},
+	{
+		id                 = "GRAHAM_WILLOWISP",
+		name               = "$graham_name_willowisp",
+		description        = "$graham_desc_willowisp",
+		sprite             = "mods/grahamsperks/files/spells/willowisp.png",
+		type               = ACTION_TYPE_PROJECTILE,
+		spawn_level        = "0,1,2",
+		spawn_probability  = "1,1,1",
+		price = 40,
+		mana = 6,
+		action 		= function()
+			c.fire_rate_wait = c.fire_rate_wait - 6
+			add_projectile("mods/grahamsperks/files/spells/willowisp.xml")
+		end,
+	},
 
 }
 for i,v in ipairs(to_insert) do

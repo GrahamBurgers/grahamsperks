@@ -9,3 +9,7 @@ if x2 ~= nil and y2 ~= nil then
         EntityApplyTransform(me, x2, y2)
     end
 end
+
+-- make friendly to player (so friends don't beat each other up when game is restarted)
+local comp = EntityGetFirstComponentIncludingDisabled(me, "GenomeDataComponent") or 0
+ComponentSetValue2(comp, "herd_id", StringToHerdId("player"))

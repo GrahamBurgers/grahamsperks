@@ -1,0 +1,12 @@
+table.insert(materials_from, {probability = 0.4, materials = { "graham_mundane"}})
+table.insert(materials_from, {probability = 0.4, materials = { "graham_hellblood"}})
+table.insert(materials_from, {probability = 0.4, materials = { "graham_slush"}})
+table.insert(materials_from, {probability = 0.4, materials = { "graham_coffee"}})
+table.insert(materials_from, {probability = 0.4, materials = { "graham_statium"}})
+
+table.insert(materials_to, {probability = 0.40, materials = { "graham_mundane"}})
+table.insert(materials_to, {probability = 0.40, materials = { "graham_hellblood"}})
+table.insert(materials_to, {probability = 0.40, materials = { "graham_slush"}})
+table.insert(materials_to, {probability = 0.40, materials = { "graham_precursor"}})
+table.insert(materials_to, {probability = 0.40, materials = { "graham_beans"}})
+table.insert(materials_to, {probability = 0.40, materials = { "graham_pureliquid"}})

@@ -69,6 +69,7 @@ ModLuaFileAppend( "data/scripts/buildings/forge_item_convert.lua", "mods/grahams
 ModLuaFileAppend( "data/scripts/perks/perk.lua", "mods/grahamsperks/files/scripts/perk_append_test.lua")
 ModLuaFileAppend( "data/scripts/items/heart_fullhp.lua", "mods/grahamsperks/files/scripts/blood_orb_fullheal.lua")
 ModLuaFileAppend( "data/scripts/items/heart_fullhp_temple.lua", "mods/grahamsperks/files/scripts/blood_orb_fullheal.lua")
+ModLuaFileAppend( "data/scripts/magic/fungal_shift.lua", "mods/grahamsperks/files/scripts/fungal_shift_append.lua")
 
 local biome_path = "data/biome/_pixel_scenes.xml"
 if ModIsEnabled("noitavania") then biome_path = "mods/noitavania/data/biome/_pixel_scenes.xml" end
@@ -167,6 +168,7 @@ path = "data/scripts/gun/procedural/starting_bomb_wand.lua"
 content = ModTextFileGetContent(path)
 content = content:gsub("\"GRENADE\"", "\"GRENADE\",\"GRAHAM_BARREL\"")
 ModTextFileSetContent(path, content)
+
 
 -- noita together perk compat
 if ModIsEnabled("noita_together") then

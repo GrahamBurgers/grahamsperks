@@ -131,9 +131,9 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 		elseif rnd <= 90 then
 			-- 5%: Swapper
 			if Random(1, 10) == 1 then
-				table.insert(entities, { "data/entities/items/wand_level_03.xml" })
-			else
 				table.insert(entities, { "data/entities/animals/wizard_swapper.xml" })
+			else
+				table.insert(entities, { "data/entities/items/wand_level_03.xml" })
 			end
 		elseif rnd <= 98 then
 			-- 8%: Double roll
@@ -162,9 +162,10 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 			end
 		end
 
-		local comp = EntityGetFirstComponentIncludingDisabled(eid, "GenomeDataComponent")
-		if comp ~= nil and entity[1] == "data/entities/animals/longleg.xml" then
-			ComponentSetValue2(comp, "herd_id", StringToHerdId("player"))
+		if entity[1] == "data/entities/animals/longleg.xml" then
+			EntityAddComponent2(eid, "LuaComponent", {
+				script_source_file="mods/grahamsperks_chinese/files/scripts/tank_teleport.lua"
+			})
 		end
 	end
 

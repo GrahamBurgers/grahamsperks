@@ -4,17 +4,12 @@ function damage_about_to_be_received( damage, x, y, ent_thats_responsible, crit_
 
 	local player = EntityGetParent(GetUpdatedEntityID())
 
-	local damagemodels = EntityGetComponent( player, "DamageModelComponent" )
-	if( damagemodels ~= nil ) then
-		for i,v in ipairs(damagemodels) do
-			local hp = tonumber( ComponentGetValue2( v, "hp" ) )
-            local max_hp = tonumber( ComponentGetValue2( v, "max_hp"))
-			new_damage = new_damage * ( 0.5 * (max_hp / hp) )
-			break
-		end
-	else
+	local damagemodel = EntityGetFirstComponent( player, "DamageModelComponent" )
+	if( damagemodel ~= nil ) then
+		local hp = tonumber( ComponentGetValue2( damagemodel, "hp" ) )
+        local max_hp = tonumber( ComponentGetValue2( damagemodel, "max_hp"))
+		new_damage = new_damage * (1 + (hp / max_hp) * -0.5)
 	end
-
 
 	return new_damage, crit_chance
 end

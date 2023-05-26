@@ -26,8 +26,6 @@ function damage_about_to_be_received( damage, x, y, ent_thats_responsible, crit_
 
 	local rand = Random(1,100)
 
-	rand = 0 -- DEBUG
-
 	if cutoff >= rand and damage >= 2 then
 		new_damage = 0
 		

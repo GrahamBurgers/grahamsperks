@@ -217,9 +217,16 @@
 	blob_radius2="6" >
   </Reaction>
 
+  <Reaction probability="900"
+  input_cell1="graham_creepypoly"     input_cell2="graham_creepypoly_frozen"
+  output_cell1="graham_creepypoly_frozen"     output_cell2="graham_creepypoly_frozen"
+	blob_radius2="4" >
+  </Reaction>
+
   <Reaction probability="400"
   input_cell1="graham_creepypoly"     input_cell2="graham_creepypoly_frozen"
-  output_cell1="graham_creepypoly_frozen"     output_cell2="graham_creepypoly_frozen" >
+  output_cell1="graham_creepypoly_frozen"     output_cell2="graham_creepypoly_frozen" 
+  blob_radius2="3">
   </Reaction>
 
   <Reaction probability="160"

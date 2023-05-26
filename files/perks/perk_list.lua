@@ -581,6 +581,22 @@ local to_insert = {
 	end,
 },
 {
+  id = "GRAHAM_BLIND_SPOT",
+  ui_name = "$perkname_graham_blindspot",
+  ui_description = "$perkdesc_graham_blindspot",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/blindspot.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/blindspot.png",
+  usable_by_enemies = true,
+  not_in_default_perk_pool = false,
+  stackable = STACKABLE_NO,
+  func = function( entity_perk_item, entity_who_picked, item_name )
+    -- hopefully this won't be too op when used by enemies
+    local child_id = EntityLoad( "mods/grahamsperks/files/entities/halo.xml", x, y )
+    EntityAddTag( child_id, "perk_entity" )
+    EntityAddChild( entity_who_picked, child_id )
+  end,
+},
+{
   id = "GRAHAM_MAP",
   ui_name = "$perkname_graham_map",
   ui_description = "$perkdesc_graham_map",
@@ -905,58 +921,16 @@ if HasFlagPersistent("graham_bloodymimic_killed") then
       add_halo_level(entity_who_picked, -1)
       local x, y = EntityGetTransform(entity_who_picked)
 
-      local damagemodels = EntityGetComponent( entity_who_picked, "DamageModelComponent" )
-      if( damagemodels ~= nil ) then
-        for i,damagemodel in ipairs(damagemodels) do
-          local old_max_hp = tonumber( ComponentGetValue( damagemodel, "max_hp" ) )
-          local max_hp = old_max_hp * 2
-          
-          local max_hp_cap = tonumber( ComponentGetValue( damagemodel, "max_hp_cap" ) )
-          if max_hp_cap > 0 then
-            max_hp = math.min( max_hp, max_hp_cap )
-          end
-          
-          local current_hp = tonumber( ComponentGetValue( damagemodel, "hp" ) )
-          current_hp = math.min( current_hp + math.abs(max_hp - old_max_hp), max_hp )
-          
-          ComponentSetValue( damagemodel, "max_hp", max_hp )
-          ComponentSetValue( damagemodel, "hp", current_hp )
-        end
-      end
-
       local value = GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" ) + 1
       GlobalsSetValue( "GRAHAM_MAGIC_SKIN_COUNTER", value )
-      value = tostring(math.min(6, value))
-      -- EntityLoad("data/entities/items/wand_level_0" .. value .. ".xml", x, y - 5)
-  
-      local child_id = EntityLoad( "mods/grahamsperks/files/entities/magic_skin.xml", x, y )
-      EntityAddChild( entity_who_picked, child_id )
+
+      local comp = EntityGetFirstComponent(entity_who_picked, "DamageModelComponent") or 0
+      GamePrint(GameTextGetTranslatedOrNot("$graham_magicskin_01") .. math.ceil(ComponentGetValue2(comp, "max_hp") * 5) .. GameTextGetTranslatedOrNot("$graham_magicskin_02"))
+      ComponentSetValue2(comp, "max_hp", ComponentGetValue2(comp, "max_hp") * 0.8)
     end,
     func_remove = function( entity_who_picked )
       local count = tonumber(GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" ))
       GlobalsSetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" )
-      local damagemodels = EntityGetComponent( entity_who_picked, "DamageModelComponent" )
-      if( damagemodels ~= nil ) then
-        for i,damagemodel in ipairs(damagemodels) do
-          local old_max_hp = tonumber( ComponentGetValue( damagemodel, "max_hp" ) )
-          local max_hp = old_max_hp
-          while count > 0 do
-            max_hp = max_hp * 0.5
-            count = count - 1
-          end
-          
-          local max_hp_cap = tonumber( ComponentGetValue( damagemodel, "max_hp_cap" ) )
-          if max_hp_cap > 0 then
-            max_hp = math.min( max_hp, max_hp_cap )
-          end
-          
-          local current_hp = tonumber( ComponentGetValue( damagemodel, "hp" ) )
-          current_hp = math.min( current_hp + math.abs(max_hp - old_max_hp), max_hp )
-          
-          ComponentSetValue( damagemodel, "max_hp", max_hp )
-          ComponentSetValue( damagemodel, "hp", current_hp )
-        end
-      end
     end,
   })
 else
@@ -968,63 +942,20 @@ else
     perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/magicskin.png",
     usable_by_enemies = false,
     stackable = STACKABLE_YES,
-    not_in_default_perk_pool = true,
+    not_in_default_perk_pool = false,
     func = function( entity_perk_item, entity_who_picked, item_name )
       add_halo_level(entity_who_picked, -1)
       local x, y = EntityGetTransform(entity_who_picked)
 
-      local damagemodels = EntityGetComponent( entity_who_picked, "DamageModelComponent" )
-      if( damagemodels ~= nil ) then
-        for i,damagemodel in ipairs(damagemodels) do
-          local old_max_hp = tonumber( ComponentGetValue( damagemodel, "max_hp" ) )
-          local max_hp = old_max_hp * 2
-          
-          local max_hp_cap = tonumber( ComponentGetValue( damagemodel, "max_hp_cap" ) )
-          if max_hp_cap > 0 then
-            max_hp = math.min( max_hp, max_hp_cap )
-          end
-          
-          local current_hp = tonumber( ComponentGetValue( damagemodel, "hp" ) )
-          current_hp = math.min( current_hp + math.abs(max_hp - old_max_hp), max_hp )
-          
-          ComponentSetValue( damagemodel, "max_hp", max_hp )
-          ComponentSetValue( damagemodel, "hp", current_hp )
-        end
-      end
-
       local value = GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" ) + 1
       GlobalsSetValue( "GRAHAM_MAGIC_SKIN_COUNTER", value )
-      value = tostring(math.min(6, value))
-      -- EntityLoad("data/entities/items/wand_level_0" .. value .. ".xml", x, y - 5)
-  
-      local child_id = EntityLoad( "mods/grahamsperks/files/entities/magic_skin.xml", x, y )
-      EntityAddChild( entity_who_picked, child_id )
+
+      local comp = EntityGetFirstComponent(entity_who_picked, "DamageModelComponent") or 0
+      GamePrint(GameTextGetTranslatedOrNot("$graham_magicskin_01") .. math.ceil(ComponentGetValue2(comp, "max_hp") * 5) .. GameTextGetTranslatedOrNot("$graham_magicskin_02"))
+      ComponentSetValue2(comp, "max_hp", ComponentGetValue2(comp, "max_hp") * 0.8)
     end,
     func_remove = function( entity_who_picked )
-      local count = tonumber(GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" ))
       GlobalsSetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" )
-      local damagemodels = EntityGetComponent( entity_who_picked, "DamageModelComponent" )
-      if( damagemodels ~= nil ) then
-        for i,damagemodel in ipairs(damagemodels) do
-          local old_max_hp = tonumber( ComponentGetValue( damagemodel, "max_hp" ) )
-          local max_hp = old_max_hp
-          while count > 0 do
-            max_hp = max_hp * 0.5
-            count = count - 1
-          end
-          
-          local max_hp_cap = tonumber( ComponentGetValue( damagemodel, "max_hp_cap" ) )
-          if max_hp_cap > 0 then
-            max_hp = math.min( max_hp, max_hp_cap )
-          end
-          
-          local current_hp = tonumber( ComponentGetValue( damagemodel, "hp" ) )
-          current_hp = math.min( current_hp + math.abs(max_hp - old_max_hp), max_hp )
-          
-          ComponentSetValue( damagemodel, "max_hp", max_hp )
-          ComponentSetValue( damagemodel, "hp", current_hp )
-        end
-      end
     end,
   })
 end
