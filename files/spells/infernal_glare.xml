@@ -38,7 +38,7 @@
   
 	<AudioComponent
 		file="data/audio/Desktop/projectiles.bank"
-		event_root="player_projectiles/freezing_gaze">
+		event_root="projectiles/flamethrower">
 	</AudioComponent>
 	
 </Entity>

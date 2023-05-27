@@ -32,6 +32,7 @@
     camera_shake_when_shot="5.0"
     bounces_left="10"
 	  muzzle_flash_file="data/entities/particles/muzzle_flashes/muzzle_flash_laser.xml"
+    damage_game_effect_entities="data/entities/misc/effect_on_fire.xml,"
 	  shoot_light_flash_radius="180"
     shoot_light_flash_r="30"
     shoot_light_flash_g="170"
@@ -160,6 +161,11 @@
 		value_string="mods/grahamsperks/files/spells/infernal_glare_beam.xml"
 		>
 	</VariableStorageComponent>
+
+	<AudioComponent
+		file="data/audio/Desktop/projectiles.bank"
+		event_root="projectiles/flamethrower">
+	</AudioComponent>
 	
 
 </Entity>

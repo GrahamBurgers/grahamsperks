@@ -1,0 +1,116 @@
+<Entity 
+  name="$projectile_default" 
+   >
+  <GameAreaEffectComponent
+      radius="28"
+    />
+
+
+	<ParticleEmitterComponent
+		_tags="character,enabled_in_hand,item_identified__LEGACY,shield_ring"
+		emitted_material_name="plasma_fading_pink"
+		gravity.y="0.0"
+		lifetime_min="0.02"
+		lifetime_max="0.05"
+		count_min="90"
+		count_max="100"
+		render_on_grid="1"
+		fade_based_on_lifetime="1"
+		area_circle_radius.min="28"
+		area_circle_radius.max="28"
+		cosmetic_force_create="0"
+		airflow_force="0.3"
+		airflow_time="0.01"
+		airflow_scale="0.05"
+		emission_interval_min_frames="0"
+		emission_interval_max_frames="0"
+		emit_cosmetic_particles="1"
+		is_emitting="1" >
+	</ParticleEmitterComponent>
+
+	<Base file="data/entities/projectiles/deck/base_field.xml">
+		<SpriteComponent
+			_tags="enabled_in_world,character"
+			image_file="mods/grahamsperks/files/projectiles_gfx/blast_translocation.xml"
+			>
+		</SpriteComponent>
+
+		<LifetimeComponent
+			lifetime="7200" >
+		</LifetimeComponent>
+
+		<SpriteParticleEmitterComponent
+			_enabled="0" >
+		</SpriteParticleEmitterComponent>
+
+		<ProjectileComponent 
+			damage_game_effect_entities=""
+			friendly_fire="0"
+			collide_with_shooter_frames="0"
+			lifetime="7200"
+			>
+			<config_explosion
+				explosion_sprite="data/particles/blast_out_shield.xml"
+				>
+			</config_explosion>
+		</ProjectileComponent>
+	</Base>
+	<AudioComponent
+		file="data/audio/Desktop/projectiles.bank"
+		event_root="player_projectiles/shield"
+		set_latest_event_position="1" >
+	</AudioComponent>
+
+	<LuaComponent
+	script_source_file="mods/grahamsperks/files/scripts/translocation.lua"
+	></LuaComponent>
+
+	<ParticleEmitterComponent 
+		_tags="enabled_in_world,enabled_in_hand"
+		emitted_material_name="plastic_red_molten"
+		gravity.y="0.0"
+		lifetime_min="0.3"
+		lifetime_max="0.5"
+		count_min="1"
+		count_max="2"
+		render_on_grid="1"
+		fade_based_on_lifetime="1"
+		area_circle_radius.max="28"
+		cosmetic_force_create="0"
+		airflow_force="0.5"
+		airflow_time="0.01"
+		airflow_scale="-0.05"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="1"
+		emit_cosmetic_particles="1"
+		is_emitting="1" 
+		draw_as_long="1"
+		velocity_always_away_from_center="100"
+		>
+	</ParticleEmitterComponent>
+
+	<ParticleEmitterComponent 
+		_tags="enabled_in_world,enabled_in_hand"
+		emitted_material_name="plastic_red_molten"
+		gravity.y="0.0"
+		lifetime_min="0.3"
+		lifetime_max="0.5"
+		count_min="1"
+		count_max="2"
+		render_on_grid="1"
+		fade_based_on_lifetime="1"
+		area_circle_radius.max="28"
+		cosmetic_force_create="0"
+		airflow_force="0.5"
+		airflow_time="0.01"
+		airflow_scale="-0.05"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="1"
+		emit_cosmetic_particles="1"
+		is_emitting="1" 
+		draw_as_long="1"
+		velocity_always_away_from_center="-100"
+		>
+	</ParticleEmitterComponent>
+	
+</Entity>

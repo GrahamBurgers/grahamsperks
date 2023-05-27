@@ -1384,7 +1384,22 @@ local to_insert = {
 			add_projectile("mods/grahamsperks/files/spells/willowisp.xml")
 		end,
 	},
-
+	{
+		-- trans rights
+		id                 = "GRAHAM_TRANSLOCATION",
+		name               = "$graham_name_circle_translocation",
+		description        = "$graham_desc_circle_translocation",
+		sprite             = "mods/grahamsperks/files/spells/translocation.png",
+		type               = ACTION_TYPE_PROJECTILE,
+		spawn_level        = "1,2,3,4,5,6", -- SHIELD_FIELD
+		spawn_probability  = "0.2,0.2,0.2,0.6,0.6,0.2", -- SHIELD_FIELD
+		price = 260,
+		mana = 60,
+		max_uses = 6,
+		action 		= function()
+			add_projectile("mods/grahamsperks/files/spells/translocation.xml")
+		end,
+	},
 }
 for i,v in ipairs(to_insert) do
     table.insert(actions, v)
