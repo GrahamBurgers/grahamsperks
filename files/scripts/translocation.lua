@@ -3,7 +3,7 @@ dofile_once("data/scripts/lib/utilities.lua")
 local entity_id = GetUpdatedEntityID()
 local x, y = EntityGetTransform( entity_id )
 
-local projectiles = EntityGetInRadiusWithTag( x, y, 28, "projectile" )
+local projectiles = EntityGetInRadiusWithTag( x, y, 32, "projectile" )
 SetRandomSeed( x, y - GameGetFrameNum() )
 
 for i,projectile_id in ipairs(projectiles) do

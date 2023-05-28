@@ -19,7 +19,8 @@ for _, id in pairs(EntityGetInRadiusWithTag(pos_x, pos_y, 70, "grahams_things"))
 		  "burg.xml",
 		  "cybereye.xml",
 		  "safe.xml",
-		  "magmastone.xml"
+		  "magmastone.xml",
+		  "soapstone.xml"
 		}
 
 		local name = EntityGetFilename(id):match("%w*.%w*$")

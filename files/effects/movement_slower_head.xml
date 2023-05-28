@@ -3,7 +3,7 @@
     </InheritTransformComponent>	
     
     <GameEffectComponent 
-    	effect="MOVEMENT_SLOWER"
+    	effect="MOVEMENT_SLOWER_2X"
     	frames="4"
     >
 	</GameEffectComponent >

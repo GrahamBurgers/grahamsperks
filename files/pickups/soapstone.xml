@@ -1,0 +1,104 @@
+<Entity tags="hittable,teleportable_NOT,item_physics,item_pickup,grahams_things" >
+	<Base file="data/entities/base_item_projectile.xml" />
+
+	<!-- physical presence -->
+
+	<PhysicsBodyComponent 
+		_tags="enabled_in_world"
+		uid="1" 
+		allow_sleep="1" 
+		angular_damping="0.95" 
+		linear_damping="0"
+		fixed_rotation="0" 
+		is_bullet="1" 
+		auto_clean="0"
+		on_death_leave_physics_body="1"
+		hax_fix_going_through_ground="1"
+		>
+	</PhysicsBodyComponent>
+	
+	<PhysicsImageShapeComponent 
+		body_id="1"
+		centered="1"
+		is_circle="0"
+		image_file="mods/grahamsperks/files/pickups/soapstone.png"
+		material="item_box2d"
+		>
+	</PhysicsImageShapeComponent>
+	
+	<PhysicsThrowableComponent
+		max_throw_speed="180"
+		throw_force_coeff="1.25"
+		min_torque="0.1"
+		max_torque="1"
+		>
+	</PhysicsThrowableComponent>
+
+	<LuaComponent
+		_tags="enabled_in_hand"
+		_enabled="0"
+		script_source_file="mods/grahamsperks/files/scripts/soapstone_hold.lua"
+		execute_every_n_frame="1"
+	></LuaComponent>
+
+
+	<VelocityComponent
+		_tags="enabled_in_world"
+		>
+	</VelocityComponent>
+
+    <GameEffectComponent
+		_tags="enabled_in_hand"
+    	effect="MOVEMENT_SLOWER"
+    	frames="-1"
+    >
+	</GameEffectComponent >
+
+	<CellEaterComponent
+		_enabled="0"
+		_tags="enabled_in_hand"
+		ignored_material_tag="[liquid]"
+		radius="20"
+		eat_probability="10"
+		only_stain="1"
+		>
+	</CellEaterComponent>
+	
+	<!-- item -->
+
+	<SpriteComponent
+		_tags="enabled_in_hand"
+		_enabled="0"
+		offset_x="3"
+		offset_y="3"
+		image_file="mods/grahamsperks/files/pickups/soapstone.png"
+		>
+	</SpriteComponent>
+
+	<ItemComponent
+		_tags="enabled_in_world"
+		item_name="$graham_unstainer_name"
+		max_child_items="0"
+		is_pickable="1"
+		is_equipable_forced="1"
+		ui_sprite="mods/grahamsperks/files/pickups/soapstone_ui.png"
+		ui_description="$graham_unstainer_desc"
+		preferred_inventory="QUICK"
+		>
+	</ItemComponent>
+
+	<UIInfoComponent
+		_tags="enabled_in_world"
+		name="$graham_unstainer_name">
+	</UIInfoComponent>
+
+	<AbilityComponent
+		ui_name="$graham_unstainer_name"
+		throw_as_item="1"
+		>
+		<gun_config
+			deck_capacity="0">
+		</gun_config>
+	</AbilityComponent>
+
+</Entity>

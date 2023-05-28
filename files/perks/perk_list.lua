@@ -43,7 +43,7 @@ local to_insert = {
       if ( rockrandom == 3) then EntityLoad("data/entities/items/pickup/waterstone.xml", x - 15, y) end
       if ( rockrandom == 4) then EntityLoad("data/entities/items/pickup/stonestone.xml", x - 15, y) end
       if ( rockrandom == 5) then EntityLoad("data/entities/items/pickup/safe_haven.xml", x - 15, y) end
-      if ( rockrandom == 6) then EntityLoad("mods/grahamsperks/files/pickups/safe.xml", x - 15, y) end
+      if ( rockrandom == 6) then EntityLoad("mods/grahamsperks/files/pickups/soapstone.xml", x - 15, y) end
     end,
 },
 {

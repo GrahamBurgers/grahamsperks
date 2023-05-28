@@ -9,7 +9,7 @@ if caster ~= nil then
 
     local xs, ys = PhysicsGetComponentVelocity(me, EntityGetFirstComponent(me, "PhysicsBodyComponent") or 0)
     local speed = (xs^2+ys^2)^0.5
-    ComponentObjectSetValue2(proj, "damage_by_type", "physics_hit", speed / 20)
+    ComponentObjectSetValue2(proj, "damage_by_type", "physics_hit", speed / 15)
     if speed < 1.5 then
         EntityKill(me)
     end

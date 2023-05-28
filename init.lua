@@ -1,9 +1,12 @@
 local translations = ModTextFileGetContent( "data/translations/common.csv" );
+local new_translations
 if translations ~= nil then
     while translations:find("\r\n\r\n") do
         translations = translations:gsub("\r\n\r\n","\r\n");
     end
-    local new_translations = ModTextFileGetContent( "mods/grahamsperks/files/translations.csv" );
+    new_translations = ModTextFileGetContent( "mods/grahamsperks/files/translations.csv" );
+    translations = translations .. new_translations;
+	new_translations = ModTextFileGetContent( "mods/grahamsperks/files/translations_1.5.csv" );
     translations = translations .. new_translations;
     ModTextFileSetContent( "data/translations/common.csv", translations );
 end

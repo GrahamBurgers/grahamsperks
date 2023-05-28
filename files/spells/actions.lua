@@ -1405,6 +1405,7 @@ local to_insert = {
 		name               = "$graham_name_foamarmor",
 		description        = "$graham_desc_foamarmor",
 		sprite             = "mods/grahamsperks/files/spells/foamarmor.png",
+		custom_xml_file    = "mods/grahamsperks/files/spells/foamarmor.xml",
 		type               = ACTION_TYPE_UTILITY,
 		spawn_level        = "0,1,10",
 		spawn_probability  = "1,0.5,0.5",
