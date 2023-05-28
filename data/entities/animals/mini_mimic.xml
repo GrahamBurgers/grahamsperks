@@ -52,11 +52,6 @@
 			jump_velocity_y="0" 
 			run_velocity="0"  >
 		</CharacterPlatformingComponent>
-
-	<LuaComponent
-		script_death="mods/grahamsperks/files/scripts/mini_mimic_death.lua"
-		>
-	</LuaComponent>
 		
 		<PathFindingComponent
 			can_jump="0"
@@ -99,11 +94,14 @@
 	</VariableStorageComponent>
 
 	<LuaComponent
+		script_death="mods/grahamsperks/files/scripts/mini_mimic_death.lua"
+	></LuaComponent>
+
+	<LuaComponent
 		_enabled="1"
 		script_source_file="data/scripts/animals/mimic_charm.lua"
-		execute_every_n_frame="183"
+		execute_every_n_frame="50"
 		>
 	</LuaComponent>
 
 </Entity>
-

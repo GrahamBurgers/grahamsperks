@@ -1400,6 +1400,31 @@ local to_insert = {
 			add_projectile("mods/grahamsperks/files/spells/translocation.xml")
 		end,
 	},
+	{
+		id                 = "GRAHAM_FOAMARMOR",
+		name               = "$graham_name_foamarmor",
+		description        = "$graham_desc_foamarmor",
+		sprite             = "mods/grahamsperks/files/spells/foamarmor.png",
+		type               = ACTION_TYPE_UTILITY,
+		spawn_level        = "0,1,10",
+		spawn_probability  = "1,0.5,0.5",
+		price = 320,
+		mana = 140,
+		max_uses = 2,
+		action 		= function()
+			if not reflecting then
+				local entity_who_shot = GetUpdatedEntityID()
+				local x, y = EntityGetTransform( entity_who_shot )
+				local entity_id = EntityLoad( "mods/grahamsperks/files/effects/foam_armor.xml", x, y )
+				EntityAddChild( entity_who_shot, entity_id )
+				add_projectile("mods/grahamsperks/files/entities/foamarmor.xml")
+
+				local comp = EntityGetFirstComponent(entity_who_shot, "DamageModelComponent") or 0
+				ComponentSetValue2(comp, "hp", ComponentGetValue2(comp, "hp") + 0.8)
+				ComponentSetValue2(comp, "max_hp", ComponentGetValue2(comp, "max_hp") + 0.8)
+			end
+		end,
+	},
 }
 for i,v in ipairs(to_insert) do
     table.insert(actions, v)

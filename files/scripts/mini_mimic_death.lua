@@ -1,18 +1,14 @@
-dofile_once("data/scripts/lib/utilities.lua")
-
-function death( damage_type_bit_field, damage_message, entity_thats_responsible, drop_items )
+function death()
 	local entity_id = GetUpdatedEntityID()
 	local x, y = EntityGetTransform( entity_id )
 	local component_id = EntityGetFirstComponent( entity_id, "DamageModelComponent" ) or 0
-
 	SetRandomSeed(x, y)
-	
+
 	-- gold drop
 	EntityLoad( "data/entities/items/pickup/goldnugget_10.xml",  x - 5, y - 10 )
 	EntityLoad( "data/entities/items/pickup/goldnugget_50.xml",  x, y - 10 )
 	EntityLoad( "data/entities/items/pickup/goldnugget_10.xml",  x + 5, y - 10 )
-	
-	
+
 	local rnd = Random(1, 8)
 	-- GamePrint("rolled a " .. rnd)
 	
@@ -21,14 +17,14 @@ function death( damage_type_bit_field, damage_message, entity_thats_responsible,
 	elseif rnd == 2 then
 		-- widdle chest
 		ComponentSetValue2(component_id, "ragdoll_material", "graham_sweetgas")
-		local eid = EntityLoad( "mods/grahamsperks/files/pickups/chest_SMALLER.xml",  x, y )
-		EntityLoad("data/entities/particles/image_emitters/chest_effect.xml", x, y)
+		EntityLoad( "mods/grahamsperks/files/pickups/chest_SMALLER.xml",  x, y )
 	elseif rnd == 3 then
 		ComponentSetValue2(component_id, "ragdoll_material", "gold")
 	elseif rnd == 4 then
 		ComponentSetValue2(component_id, "ragdoll_material", "material_rainbow")
 	elseif rnd == 5 then
 		-- Spawn two random mini perk spells
+		SetRandomSeed(entity_id + x, component_id + y)
 		local options = {
 					"GRAHAM_MINI_HEATWAVE",
 					"GRAHAM_MINI_FREEZEFIELD",
@@ -42,7 +38,7 @@ function death( damage_type_bit_field, damage_message, entity_thats_responsible,
 		local result = options[math.random(1, #options)]
 		CreateItemActionEntity(result, x - 12, y)
 		
-		local result = options[math.random(1, #options)]
+		result = options[math.random(1, #options)]
 		CreateItemActionEntity(result, x + 12, y)
 	elseif rnd == 6 then
 		EntityLoad( "data/entities/items/pickup/goldnugget_200.xml",  x, y - 10 )

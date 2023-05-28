@@ -1,5 +1,3 @@
-dofile_once("data/scripts/lib/utilities.lua")
-
 -- thanks conga
 local entity_id    = GetUpdatedEntityID()
 local player_id = EntityGetRootEntity(entity_id)

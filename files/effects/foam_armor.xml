@@ -1,0 +1,37 @@
+<Entity>
+
+	<InheritTransformComponent>
+    </InheritTransformComponent>
+
+	<UIIconComponent
+		name="$graham_status_foam"
+		description="$graham_statusdesc_foam"
+		icon_sprite_file="mods/grahamsperks/files/effects/foam_armor.png"
+		is_perk="0"
+		display_above_head="1"
+		display_in_hud="1"
+		>
+	</UIIconComponent>
+
+	<GameEffectComponent
+		frames="3600"
+		effect="PROTECTION_FIRE">
+	</GameEffectComponent>
+
+	<GameEffectComponent
+		frames="3600"
+		effect="PROTECTION_RADIOACTIVITY">
+	</GameEffectComponent>
+
+	<LifetimeComponent
+		lifetime="3600"
+	></LifetimeComponent>
+
+	<LuaComponent
+		execute_on_removed="1"
+		execute_every_n_frame="-1"
+		script_source_file="mods/grahamsperks/files/scripts/foam_armor_remove.lua"
+	></LuaComponent>
+
+
+</Entity>
