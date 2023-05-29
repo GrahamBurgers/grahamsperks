@@ -4,11 +4,6 @@ function death()
 	local component_id = EntityGetFirstComponent( entity_id, "DamageModelComponent" ) or 0
 	SetRandomSeed(x, y)
 
-	-- gold drop
-	EntityLoad( "data/entities/items/pickup/goldnugget_10.xml",  x - 5, y - 10 )
-	EntityLoad( "data/entities/items/pickup/goldnugget_50.xml",  x, y - 10 )
-	EntityLoad( "data/entities/items/pickup/goldnugget_10.xml",  x + 5, y - 10 )
-
 	local rnd = Random(1, 8)
 	-- GamePrint("rolled a " .. rnd)
 	

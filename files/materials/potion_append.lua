@@ -26,13 +26,17 @@ local mm_insert = {
         material="graham_mundane",
         cost=150,
     },
-    {
+        {
         material="graham_slush",
         cost=150,
     },
         {
         material="graham_statium",
         cost=100,
+    },
+        {
+        material="graham_tele_chaotic",
+        cost=80,
     },
         {
         material="graham_bubbly",
@@ -42,7 +46,7 @@ local mm_insert = {
         material="graham_resist",
         cost=20,
     },
-    {
+        {
         material="graham_confuse",
         cost=20,
     },

@@ -1,0 +1,21 @@
+<Entity>
+	<Base file="data/entities/particles/teleportation_blast.xml" >
+		<SpriteParticleEmitterComponent
+			randomize_position_inside_hitbox="1"  >
+		</SpriteParticleEmitterComponent>
+	</Base>
+	
+	<InheritTransformComponent>
+    </InheritTransformComponent>
+
+    <LuaComponent
+        execute_every_n_frame="60"
+        script_source_file="mods/grahamsperks/files/scripts/chaotic_teleport.lua"
+    ></LuaComponent>
+
+    <GameEffectComponent 
+        effect="CUSTOM"
+    >
+	</GameEffectComponent >
+
+</Entity>

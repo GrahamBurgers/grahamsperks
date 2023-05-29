@@ -1099,38 +1099,33 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/copium.png">
   	tags="[liquid],[water],[magic_liquid],[impure]"
 	density="4.43"
 	cell_type="liquid"
-	wang_color="8000BEE8"
+	wang_color="8043878f"
 	generates_smoke="250"
 	liquid_gravity="0.8"
 	liquid_sand="0"
 	gfx_glow="150"
+	gfx_glow_color="ff43878f"
 	on_fire="0"
 	requires_oxygen="0"
 	liquid_stains="1"
-	liquid_sprite_stain_shaken_drop_chance="5"
-	status_effects="UNSTABLE_TELEPORTATION"
+	liquid_sprite_stain_shaken_drop_chance="2"
 	audio_materialaudio_type="MAGICAL" 
 	show_in_creative_mode="1"
 	burnable="1"
-	on_fire_flame_material="fire_blue"
-	temperature_of_fire="95"
-	autoignition_temperature="10"
-	electrical_conductivity="1"
-	on_fire_smoke_material="blood_cold_vapour"
 	liquid_sprite_stains_status_threshold="0.2"
 	liquid_sprite_stains_check_offset="1"
 	>
 	<Graphics 
 		texture_file="mods/grahamsperks/files/materials/materials_gfx/chaotic_tele.png" 
-		color="8000BEE4"
+		color="8043878f"
 		>
     </Graphics>
 	<ParticleEffect
-		vel.y="17.14"
+		vel.y="5.14"
 		vel_random.min_y="-100"
-		vel_random.max_y="25.71"
-		vel_random.min_x="-20"
-		vel_random.max_x="20"
+		vel_random.max_y="85.71"
+		vel_random.min_x="-30"
+		vel_random.max_x="30"
 		lifetime.min="0"
 		lifetime.max="0.5"
 		gravity.y="-8.57"
@@ -1142,8 +1137,11 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/copium.png">
 	</ParticleEffect>
 	<StatusEffects>
 		<Ingestion>
-			<StatusEffect type="UNSTABLE_TELEPORTATION" amount="0.05" />
+			<StatusEffect type="GRAHAM_CHAOTIC_TELEPORTATION" amount="0.2" />
 		</Ingestion>
+		<Stains>
+	      <StatusEffect type="GRAHAM_CHAOTIC_TELEPORTATION" />
+	    </Stains>
 	</StatusEffects>
   </CellData>
 

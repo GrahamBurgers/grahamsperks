@@ -83,6 +83,14 @@ local to_insert = {
 		is_harmful=false,
 		min_threshold_normalized="0.6667",
 	},
+	{
+		id="GRAHAM_CHAOTIC_TELEPORTATION",
+		ui_name="$status_teleportation",
+		ui_description="$statusdesc_teleportation",
+		ui_icon="data/ui_gfx/status_indicators/teleportation.png",
+		effect_entity="mods/grahamsperks/files/entities/teleportation.xml",
+		is_harmful=true,
+	},
 }
 
 for i, v in ipairs(status_effects) do

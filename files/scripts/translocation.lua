@@ -7,7 +7,7 @@ local projectiles = EntityGetInRadiusWithTag( x, y, 32, "projectile" )
 SetRandomSeed( x, y - GameGetFrameNum() )
 
 for i,projectile_id in ipairs(projectiles) do
-	if projectile_id ~= entity_id and not EntityHasTag(projectile_id, "graham_translocation_phased") then
+	if projectile_id ~= entity_id then
 		local px, py = EntityGetTransform( projectile_id )
 		local vel_x, vel_y = 0,0
 		local who_shot = 0
@@ -35,12 +35,11 @@ for i,projectile_id in ipairs(projectiles) do
 				local final = mirror + ( mirror - dir2 )
 				
 				EntityLoad( "data/entities/particles/teleportation_source.xml", px, py )
-				px = x + math.cos( final ) * 24
-				py = y - math.sin( final ) * 24
+				px = x + math.cos( final ) * 34
+				py = y - math.sin( final ) * 34
 				EntityLoad( "data/entities/particles/teleportation_target.xml", px, py )
 				
 				EntitySetTransform( projectile_id, px, py )
-				EntityAddTag( projectile_id, "graham_translocation_phased")
 
 				-- subtract 4 seconds of lifetime for each projectile successfully phased
 				-- I hope this can't cause any funky infinite lifetime shenanigans

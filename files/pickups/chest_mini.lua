@@ -98,8 +98,8 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 			end
 			table.insert( entities, { "mods/grahamsperks/files/entities/mini_tanks/toasterbot.xml" })
 		elseif rnd <= 35 then
-			-- 5%: Coffee
-			table.insert( entities, { "mods/grahamsperks/files/entities/coffee.xml" })
+			-- 5%: Soapstone
+			table.insert( entities, { "mods/grahamsperks/files/pickups/soapstone.xml" })
 		elseif rnd <= 40 then
 			-- 5%: Book
 			table.insert( entities, { "mods/grahamsperks/files/entities/books/chestbook.xml" })

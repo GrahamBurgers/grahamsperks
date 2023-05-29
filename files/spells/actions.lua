@@ -1426,6 +1426,21 @@ local to_insert = {
 			end
 		end,
 	},
+	{
+		id                 = "GRAHAM_BRAMBALL",
+		name               = "$graham_name_bramball",
+		description        = "$graham_desc_bramball",
+		sprite             = "mods/grahamsperks/files/spells/bramball.png",
+		type               = ACTION_TYPE_PROJECTILE,
+		spawn_level        = "0,1",
+		spawn_probability  = "1,1.5",
+		price = 80,
+		mana = 16,
+			action 		= function()
+				add_projectile("mods/grahamsperks/files/spells/bramball.xml")
+				c.fire_rate_wait = c.fire_rate_wait + 4
+			end,
+	},
 }
 for i,v in ipairs(to_insert) do
     table.insert(actions, v)
