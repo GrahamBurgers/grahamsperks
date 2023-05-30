@@ -53,6 +53,10 @@
   ></PhysicsImageShapeComponent>
 
   <LuaComponent
+    script_source_file="mods/grahamsperks/files/scripts/pull_speed.lua"
+  ></LuaComponent>
+
+  <LuaComponent
     script_source_file="mods/grahamsperks/files/scripts/pull_caster.lua"
   ></LuaComponent>
 

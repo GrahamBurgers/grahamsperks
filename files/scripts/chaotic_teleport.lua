@@ -21,4 +21,4 @@ end
 
 -- chaos, chaos!
 local comp = GetUpdatedComponentID()
-ComponentSetValue2(comp, "execute_every_n_frame", Random(20, 150))
+ComponentSetValue2(comp, "execute_every_n_frame", Random(20, 250))

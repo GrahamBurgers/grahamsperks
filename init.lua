@@ -172,6 +172,20 @@ content = ModTextFileGetContent(path)
 content = content:gsub("\"GRENADE\"", "\"GRENADE\",\"GRAHAM_BARREL\"")
 ModTextFileSetContent(path, content)
 
+-- midas curse
+path = "data/entities/base_humanoid.xml"
+content = ModTextFileGetContent(path)
+content = content:gsub("<GameStatsComponent />", [[
+	<GameStatsComponent />
+	<LuaComponent
+	execute_on_added="0"
+	execute_every_n_frame="2"
+	remove_after_executed="1"
+	script_source_file="mods/grahamsperks/files/scripts/midas_kill.lua"
+	></LuaComponent>
+]])
+ModTextFileSetContent(path, content)
+
 
 -- noita together perk compat
 if ModIsEnabled("noita_together") then
@@ -227,6 +241,10 @@ function OnPlayerSpawned(player_entity)
 				EntityLoad("data/entities/_debug/random_perk.xml", x, y - 20)
 			end
 		end
+
+		local eid = EntityCreateNew()
+		EntityAddTag(eid, "graham_midas_curse")
+		EntityAddChild(GameGetWorldStateEntity(), eid)
 	end
 end
 

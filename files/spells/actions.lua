@@ -186,9 +186,25 @@ local to_insert = {
 		price = 200,
 		mana = -10,
 		action 		= function()
-			c.fire_rate_wait = c.fire_rate_wait - 3
-			current_reload_time = current_reload_time - 6
+			current_reload_time = current_reload_time + 10
 			draw_actions( 1, true )
+			if not reflecting then
+				local me = GetUpdatedEntityID()
+				local inv_comp = EntityGetFirstComponentIncludingDisabled(me, "Inventory2Component")
+				if inv_comp ~= nil then
+					me = ComponentGetValue2(inv_comp, "mActiveItem")
+				end
+
+				local comp = EntityGetFirstComponentIncludingDisabled(me, "AbilityComponent") or 0
+				if comp ~= 0 then
+					ComponentSetValue2(comp, "mana_max", ComponentGetValue2(comp, "mana_max") - 10)
+					EntityAddComponent2(me, "LuaComponent", {
+						script_source_file="mods/grahamsperks/files/scripts/mana_heartbreak.lua",
+						execute_every_n_frame=60,
+						execute_times=10,
+					})
+				end
+			end
 		end,
 	},
 	{
@@ -1362,7 +1378,7 @@ local to_insert = {
 		spawn_probability  = "0.4,1,0.5,1,0.5",
 		price = 130,
 		mana = 60,
-		max_uses = 20,
+		max_uses = 12,
 		action 		= function()
 			c.fire_rate_wait = c.fire_rate_wait + 150
 			c.damage_critical_chance = c.damage_critical_chance + 15

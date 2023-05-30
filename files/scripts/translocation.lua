@@ -41,10 +41,10 @@ for i,projectile_id in ipairs(projectiles) do
 				
 				EntitySetTransform( projectile_id, px, py )
 
-				-- subtract 4 seconds of lifetime for each projectile successfully phased
+				-- subtract 2 seconds of lifetime for each projectile successfully phased
 				-- I hope this can't cause any funky infinite lifetime shenanigans
 				local lifetime = EntityGetFirstComponent(entity_id, "LifetimeComponent") or 0
-				ComponentSetValue2(lifetime, "kill_frame", ComponentGetValue2(lifetime, "kill_frame") - 240)
+				ComponentSetValue2(lifetime, "kill_frame", ComponentGetValue2(lifetime, "kill_frame") - 120)
 			end
 		end
 	end
