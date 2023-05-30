@@ -11,5 +11,6 @@ if enemy ~= 0 and not EntityHasTag(enemy, "miniboss") and not EntityHasTag(enemy
         value_string = name,
     })
     -- hopefully this works
-    obliterate(me)
+    obliterate(enemy)
+    EntityKill(me)
 end
