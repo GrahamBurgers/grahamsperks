@@ -242,7 +242,7 @@ function on_open( entity_item )
 end
 
 function item_pickup( entity_item, entity_who_picked, name )
-	GamePrintImportant( "$log_chest", "" )
+	GamePrintImportant( "$logdesc_graham_chest_lost", "" )
 	-- GameTriggerMusicCue( "item" )
 
 	--if (remove_entity == false) then

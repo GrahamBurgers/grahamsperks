@@ -203,7 +203,11 @@ function on_open( entity_item )
 end
 
 function item_pickup( entity_item, entity_who_picked, name )
-	GamePrintImportant( "$log_chest", "" )
+	if ( EntityGetName( entity_item ) == "$graham_chest_SMALLER" ) then
+		GamePrintImportant( "$logdesc_graham_chest_SMALLER", "" )
+	else
+		GamePrintImportant( "$logdesc_graham_chest_mini", "" )	
+	end
 	-- GameTriggerMusicCue( "item" )
 
 	--if (remove_entity == false) then
