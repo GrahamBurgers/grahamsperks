@@ -22,7 +22,7 @@ for i = 1, #entities do
 				ComponentSetValue2(cx, "value_int", x)
 				ComponentSetValue2(cy, "value_int", y)
 			else
-				EntityApplyTransform(entities[i], bx, by)
+				EntityApplyTransform(entities[i], ex + (bx - ex) / 6, ey + (by - ey) / 6)
 			end
 			
 			if math.floor(GameGetFrameNum()) == math.floor(GameGetFrameNum() / 8) * 8 then
@@ -31,7 +31,6 @@ for i = 1, #entities do
 				if velocity ~= 0 then
 					ComponentSetValue2(velocity, "mVelocity", 0, 0)
 				end
-				EntityApplyTransform(entities[i], x, y)
 			end
 		else
 			EntityAddComponent2(entities[i], "VariableStorageComponent", {
