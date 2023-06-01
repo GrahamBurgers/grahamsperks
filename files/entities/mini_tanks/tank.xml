@@ -1,4 +1,4 @@
-<Entity name="$animal_tank" >
+<Entity name="$graham_minitank_name" >
   
 	<Base file="mods/grahamsperks/files/entities/mini_tanks/base_minitank.xml"  >
 		<ItemChestComponent level="2" ></ItemChestComponent>

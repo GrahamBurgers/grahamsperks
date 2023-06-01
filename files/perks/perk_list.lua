@@ -626,336 +626,158 @@ local to_insert = {
     EntityAddChild( entity_who_picked, child_id )
   end,
 },
+{
+  id = "GRAHAM_SHEEPIFICATION",
+  ui_name = "$perkname_graham_sheepification",
+  ui_description = "$perkdesc_graham_sheepification",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/baba.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/baba.png",
+  usable_by_enemies = true,
+  not_in_default_perk_pool = not HasFlagPersistent("graham_progress_sheep"),
+  stackable = STACKABLE_YES,
+  stackable_maximum = 2,
+  func = function( entity_perk_item, entity_who_picked, item_name )
+      EntityAddComponent2(entity_who_picked,"LuaComponent",
+      {
+          _tags = "perk_component",
+          _enabled = 1,
+          script_shot="mods/grahamsperks/files/polychance.lua",
+          execute_every_n_frame= -1
+      })
+  end,
+},
+{
+  id = "GRAHAM_MATERIALIST",
+  ui_name = "$perkname_graham_materialist",
+  ui_description = "$perkdesc_graham_materialist",
+  ui_icon = "mods/grahamsperks/files/perks/perks_gfx/gui/materialist.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/materialist.png",
+  usable_by_enemies = false,
+  not_in_default_perk_pool = not HasFlagPersistent("graham_progress_robot"),
+  stackable = STACKABLE_NO,
+  func = function( entity_perk_item, entity_who_picked, item_name )
+  local x, y = EntityGetTransform( entity_who_picked )
+  local entity_id = EntityLoad( "mods/grahamsperks/files/entities/wandcharger.xml", x, y )
+  EntityAddChild( entity_who_picked, entity_id )
+  end,
+},
+{
+  id = "GRAHAM_LUCKYDAY",
+  ui_name = "$perkname_graham_luckyday",
+  ui_description = "$perkdesc_graham_luckyday",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/luckyday.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/luckyday.png",
+  usable_by_enemies = true,
+  not_in_default_perk_pool = not HasFlagPersistent("graham_progress_lucky"),
+  stackable = STACKABLE_NO,
+  func = function( entity_perk_item, entity_who_picked, item_name )
+  EntityAddComponent( entity_who_picked, "LuaComponent", 
+  {
+    _tags = "perk_component",
+    script_damage_about_to_be_received = "mods/grahamsperks/files/luckyday.lua",
+    execute_every_n_frame = "-1",
+  } )
+  end,
+},
+{
+  id = "GRAHAM_ROBOTS",
+  ui_name = "$perkname_graham_robot",
+  ui_description = "$perkdesc_graham_robot",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/robot.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/robot.png",
+  usable_by_enemies = false,
+  not_in_default_perk_pool = not HasFlagPersistent("graham_progress_tech"),
+  stackable = STACKABLE_YES,
+  stackable_max = 3,
+  func = function( entity_perk_item, entity_who_picked, item_name )
+    local x, y = EntityGetTransform( entity_who_picked )
+    local entity_id = EntityLoad( "mods/grahamsperks/files/entities/oil.xml", x, y )
+    EntityAddChild(entity_who_picked, entity_id)
+
+    local value = GlobalsGetValue( "GRAHAM_ROBOTS_COUNT", 0)
+    GlobalsSetValue( "GRAHAM_ROBOTS_COUNT", value + 3 )
+    local options = {"tank.xml", "tank_rocket.xml", "tank_super.xml", "toasterbot.xml"}
+    for i = 1, 3 do
+      SetRandomSeed(x, y + i)
+      EntityLoad("mods/grahamsperks/files/entities/mini_tanks/" .. options[Random(1, #options)], x, y)
+    end
+end,
+func_remove = function( entity_who_picked )
+  GlobalsSetValue( "GRAHAM_ROBOTS_COUNT", 0 )
+end,
+},
+{
+  id = "GRAHAM_DEATH",
+  ui_name = "$perkname_graham_death",
+  ui_description = "$perkdesc_graham_death",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/death.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/death.png",
+  usable_by_enemies = false,
+  not_in_default_perk_pool = not HasFlagPersistent("graham_progress_hunger"),
+  stackable = STACKABLE_NO,
+  func = function( entity_perk_item, entity_who_picked, item_name )
+  AddFlagPersistent("graham_death_hp_boost")
+  add_halo_level(entity_who_picked, -1)
+  EntityAddComponent( entity_who_picked, "LuaComponent", 
+  {
+    _tags = "perk_component",
+    script_damage_received = "mods/grahamsperks/files/demise.lua",
+    execute_every_n_frame = "-1",
+  } )
+  end,
+func_remove = function( entity_who_picked )
+  RemoveFlagPersistent("graham_death_hp_boost")
+end,
+},
+{
+  id = "GRAHAM_IMMUNITY_AURA",
+  ui_name = "$perkname_graham_immunityaura",
+  ui_description = "$perkdesc_graham_immunityaura",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/immunityaura.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/immunityaura.png",
+  usable_by_enemies = false,
+  stackable = STACKABLE_NO,
+  not_in_default_perk_pool = not HasFlagPersistent("graham_progress_immunity"),
+  func = function( entity_perk_item, entity_who_picked, item_name )
+    local x, y = EntityGetTransform( entity_who_picked )
+    local entity_id = EntityLoad( "mods/grahamsperks/files/entities/immunityaura/none.xml", x, y )
+    EntityAddChild( entity_who_picked, entity_id )
+
+    EntityLoad("mods/grahamsperks/files/entities/immunityaura/potion_flum.xml", x, y)
+
+    EntityAddComponent2(entity_who_picked, "VariableStorageComponent", {
+      name="graham_immunityaura",
+      value_string="NONE",
+    })
+  end,
+},
+{
+  id = "GRAHAM_MAGIC_SKIN",
+  ui_name = "$perkname_graham_magicskin",
+  ui_description = "$perkdesc_graham_magicskin",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/magicskin.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/magicskin.png",
+  usable_by_enemies = false,
+  stackable = STACKABLE_YES,
+  not_in_default_perk_pool = not HasFlagPersistent("graham_bloodymimic_killed"),
+  func = function( entity_perk_item, entity_who_picked, item_name )
+    add_halo_level(entity_who_picked, -1)
+    local x, y = EntityGetTransform(entity_who_picked)
+
+    local value = GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" ) + 1
+    GlobalsSetValue( "GRAHAM_MAGIC_SKIN_COUNTER", value )
+
+    local comp = EntityGetFirstComponent(entity_who_picked, "DamageModelComponent") or 0
+    GamePrint(GameTextGetTranslatedOrNot("$graham_magicskin_01") .. math.ceil(ComponentGetValue2(comp, "max_hp") * 5) .. GameTextGetTranslatedOrNot("$graham_magicskin_02"))
+    ComponentSetValue2(comp, "max_hp", ComponentGetValue2(comp, "max_hp") * 0.8)
+  end,
+  func_remove = function( entity_who_picked )
+    local count = tonumber(GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" ))
+    GlobalsSetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" )
+  end,
+}
 
 }
 for i,v in ipairs(to_insert) do
     table.insert(perk_list, v)
-end
-
-----UNLOCKABLES----
-
-if HasFlagPersistent("graham_progress_sheep") then
-table.insert(perk_list,{
-    id = "GRAHAM_SHEEPIFICATION",
-    ui_name = "$perkname_graham_sheepification",
-    ui_description = "$perkdesc_graham_sheepification",
-    ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/baba.png",
-    perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/baba.png",
-    usable_by_enemies = true,
-    not_in_default_perk_pool = false,
-    stackable = STACKABLE_YES,
-    stackable_maximum = 2,
-    func = function( entity_perk_item, entity_who_picked, item_name )
-        EntityAddComponent2(entity_who_picked,"LuaComponent",
-        {
-            _tags = "perk_component",
-            _enabled = 1,
-            script_shot="mods/grahamsperks/files/polychance.lua",
-            execute_every_n_frame= -1
-        })
-    end,
-})
-else
-table.insert(perk_list,{
-    id = "GRAHAM_SHEEPIFICATION",
-    ui_name = "$perkname_graham_sheepification",
-    ui_description = "$perkdesc_graham_sheepification",
-    ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/baba.png",
-    perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/baba.png",
-    usable_by_enemies = true,
-    not_in_default_perk_pool = true,
-    stackable = STACKABLE_YES,
-    stackable_maximum = 2,
-    func = function( entity_perk_item, entity_who_picked, item_name )
-            EntityAddComponent2(entity_who_picked,"LuaComponent",
-        {
-            _tags = "perk_component",
-            _enabled = 1,
-            script_shot="mods/grahamsperks/files/polychance.lua",
-            execute_every_n_frame= -1
-        })
-    end,
-})
-end
-
-if HasFlagPersistent("graham_progress_robot") then
-table.insert(perk_list,{
-    id = "GRAHAM_MATERIALIST",
-    ui_name = "$perkname_graham_materialist",
-    ui_description = "$perkdesc_graham_materialist",
-    ui_icon = "mods/grahamsperks/files/perks/perks_gfx/gui/materialist.png",
-    perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/materialist.png",
-    usable_by_enemies = false,
-    not_in_default_perk_pool = false,
-    stackable = STACKABLE_NO,
-    func = function( entity_perk_item, entity_who_picked, item_name )
-		local x, y = EntityGetTransform( entity_who_picked )
-		local entity_id = EntityLoad( "mods/grahamsperks/files/entities/wandcharger.xml", x, y )
-		EntityAddChild( entity_who_picked, entity_id )
-    end,
-})
-else
-table.insert(perk_list,{
-    id = "GRAHAM_MATERIALIST",
-    ui_name = "$perkname_graham_materialist",
-    ui_description = "$perkdesc_graham_materialist",
-    ui_icon = "mods/grahamsperks/files/perks/perks_gfx/gui/materialist.png",
-    perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/materialist.png",
-    usable_by_enemies = false,
-    not_in_default_perk_pool = true,
-    stackable = STACKABLE_NO,
-    func = function( entity_perk_item, entity_who_picked, item_name )
-		local x, y = EntityGetTransform( entity_who_picked )
-		local entity_id = EntityLoad( "mods/grahamsperks/files/entities/wandcharger.xml", x, y )
-		EntityAddChild( entity_who_picked, entity_id )
-    end,
-})
-end
-if HasFlagPersistent("graham_progress_lucky") then
-table.insert(perk_list,{
-    id = "GRAHAM_LUCKYDAY",
-    ui_name = "$perkname_graham_luckyday",
-    ui_description = "$perkdesc_graham_luckyday",
-    ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/luckyday.png",
-    perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/luckyday.png",
-    usable_by_enemies = true,
-    not_in_default_perk_pool = false,
-    stackable = STACKABLE_NO,
-    func = function( entity_perk_item, entity_who_picked, item_name )
-		EntityAddComponent( entity_who_picked, "LuaComponent", 
-		{
-			_tags = "perk_component",
-			script_damage_about_to_be_received = "mods/grahamsperks/files/luckyday.lua",
-			execute_every_n_frame = "-1",
-		} )
-    end,
-})
-else
-table.insert(perk_list,{
-    id = "GRAHAM_LUCKYDAY",
-    ui_name = "$perkname_graham_luckyday",
-    ui_description = "$perkdesc_graham_luckyday",
-    ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/luckyday.png",
-    perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/luckyday.png",
-    usable_by_enemies = true,
-    not_in_default_perk_pool = true,
-    stackable = STACKABLE_NO,
-    func = function( entity_perk_item, entity_who_picked, item_name )
-		EntityAddComponent( entity_who_picked, "LuaComponent", 
-		{
-			_tags = "perk_component",
-			script_damage_about_to_be_received = "mods/grahamsperks/files/luckyday.lua",
-			execute_every_n_frame = "-1",
-		} )
-    end,
-})
-end
-
-if HasFlagPersistent("graham_progress_tech") then
-table.insert(perk_list,{
-    id = "GRAHAM_ROBOTS",
-    ui_name = "$perkname_graham_robot",
-    ui_description = "$perkdesc_graham_robot",
-    ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/robot.png",
-    perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/robot.png",
-    usable_by_enemies = false,
-    not_in_default_perk_pool = false,
-    stackable = STACKABLE_YES,
-    stackable_max = 3,
-    func = function( entity_perk_item, entity_who_picked, item_name )
-      local x, y = EntityGetTransform( entity_who_picked )
-      local entity_id = EntityLoad( "mods/grahamsperks/files/entities/oil.xml", x, y )
-      EntityAddChild(entity_who_picked, entity_id)
-
-      local value = GlobalsGetValue( "GRAHAM_ROBOTS_COUNT", 0)
-      GlobalsSetValue( "GRAHAM_ROBOTS_COUNT", value + 3 )
-      local options = {"tank.xml", "tank_rocket.xml", "tank_super.xml", "toasterbot.xml"}
-      for i = 1, 3 do
-        SetRandomSeed(x, y + i)
-        EntityLoad("mods/grahamsperks/files/entities/mini_tanks/" .. options[Random(1, #options)], x, y)
-      end
-  end,
-  func_remove = function( entity_who_picked )
-    GlobalsSetValue( "GRAHAM_ROBOTS_COUNT", 0 )
-  end,
-})
-else
-  table.insert(perk_list,{
-    id = "GRAHAM_ROBOTS",
-    ui_name = "$perkname_graham_robot",
-    ui_description = "$perkdesc_graham_robot",
-    ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/robot.png",
-    perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/robot.png",
-    usable_by_enemies = false,
-    not_in_default_perk_pool = true,
-    stackable = STACKABLE_YES,
-    stackable_max = 3,
-    func = function( entity_perk_item, entity_who_picked, item_name )
-      local x, y = EntityGetTransform( entity_who_picked )
-      local entity_id = EntityLoad( "mods/grahamsperks/files/entities/oil.xml", x, y )
-      EntityAddChild(entity_who_picked, entity_id)
-
-      local value = GlobalsGetValue( "GRAHAM_ROBOTS_COUNT", 0)
-      GlobalsSetValue( "GRAHAM_ROBOTS_COUNT", value + 3 )
-      local options = {"tank.xml", "tank_rocket.xml", "tank_super.xml", "toasterbot.xml"}
-      for i = 1, 3 do
-        SetRandomSeed(x, y + i)
-        EntityLoad("mods/grahamsperks/files/entities/mini_tanks/" .. options[Random(1, #options)], x, y)
-      end
-  end,
-  func_remove = function( entity_who_picked )
-    GlobalsSetValue( "GRAHAM_ROBOTS_COUNT", 0 )
-  end,
-})
-end
-
-if HasFlagPersistent("graham_progress_hunger") then
-table.insert(perk_list,{
-    id = "GRAHAM_DEATH",
-    ui_name = "$perkname_graham_death",
-    ui_description = "$perkdesc_graham_death",
-    ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/death.png",
-    perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/death.png",
-    usable_by_enemies = false,
-    not_in_default_perk_pool = false,
-    stackable = STACKABLE_NO,
-    func = function( entity_perk_item, entity_who_picked, item_name )
-		AddFlagPersistent("graham_death_hp_boost")
-		add_halo_level(entity_who_picked, -1)
-		EntityAddComponent( entity_who_picked, "LuaComponent", 
-		{
-			_tags = "perk_component",
-			script_damage_received = "mods/grahamsperks/files/demise.lua",
-			execute_every_n_frame = "-1",
-		} )
-    end,
-	func_remove = function( entity_who_picked )
-		RemoveFlagPersistent("graham_death_hp_boost")
-	end,
-})
-else
-table.insert(perk_list,{
-    id = "GRAHAM_DEATH",
-    ui_name = "$perkname_graham_death",
-    ui_description = "$perkdesc_graham_death",
-    ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/death.png",
-    perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/death.png",
-    usable_by_enemies = false,
-    not_in_default_perk_pool = true,
-    stackable = STACKABLE_NO,
-    func = function( entity_perk_item, entity_who_picked, item_name )
-		AddFlagPersistent("graham_death_hp_boost")
-		add_halo_level(entity_who_picked, -1)
-		EntityAddComponent( entity_who_picked, "LuaComponent", 
-		{
-			_tags = "perk_component",
-			script_damage_received = "mods/grahamsperks/files/demise.lua",
-			execute_every_n_frame = "-1",
-		} )
-    end,
-	func_remove = function( entity_who_picked )
-		RemoveFlagPersistent("graham_death_hp_boost")
-	end,
-})
-end
-
-if HasFlagPersistent("graham_progress_immunity") then
-  table.insert(perk_list,{
-    id = "GRAHAM_IMMUNITY_AURA",
-    ui_name = "$perkname_graham_immunityaura",
-    ui_description = "$perkdesc_graham_immunityaura",
-    ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/immunityaura.png",
-    perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/immunityaura.png",
-    usable_by_enemies = false,
-    stackable = STACKABLE_NO,
-    not_in_default_perk_pool = false,
-    func = function( entity_perk_item, entity_who_picked, item_name )
-      local x, y = EntityGetTransform( entity_who_picked )
-      local entity_id = EntityLoad( "mods/grahamsperks/files/entities/immunityaura/none.xml", x, y )
-      EntityAddChild( entity_who_picked, entity_id )
-  
-      EntityLoad("mods/grahamsperks/files/entities/immunityaura/potion_flum.xml", x, y)
-  
-      EntityAddComponent2(entity_who_picked, "VariableStorageComponent", {
-        name="graham_immunityaura",
-        value_string="NONE",
-      })
-    end,
-  })
-else
-  table.insert(perk_list,{
-    id = "GRAHAM_IMMUNITY_AURA",
-    ui_name = "$perkname_graham_immunityaura",
-    ui_description = "$perkdesc_graham_immunityaura",
-    ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/immunityaura.png",
-    perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/immunityaura.png",
-    usable_by_enemies = false,
-    stackable = STACKABLE_NO,
-    not_in_default_perk_pool = true,
-    func = function( entity_perk_item, entity_who_picked, item_name )
-      local x, y = EntityGetTransform( entity_who_picked )
-      local entity_id = EntityLoad( "mods/grahamsperks/files/entities/immunityaura/none.xml", x, y )
-      EntityAddChild( entity_who_picked, entity_id )
-  
-      EntityLoad("mods/grahamsperks/files/entities/immunityaura/potion_flum.xml", x, y)
-  
-      EntityAddComponent2(entity_who_picked, "VariableStorageComponent", {
-        name="graham_immunityaura",
-        value_string="NONE",
-      })
-    end,
-  })
-end
-
-if HasFlagPersistent("graham_bloodymimic_killed") then
-  table.insert(perk_list,{
-    id = "GRAHAM_MAGIC_SKIN",
-    ui_name = "$perkname_graham_magicskin",
-    ui_description = "$perkdesc_graham_magicskin",
-    ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/magicskin.png",
-    perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/magicskin.png",
-    usable_by_enemies = false,
-    stackable = STACKABLE_YES,
-    not_in_default_perk_pool = false,
-    func = function( entity_perk_item, entity_who_picked, item_name )
-      add_halo_level(entity_who_picked, -1)
-      local x, y = EntityGetTransform(entity_who_picked)
-
-      local value = GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" ) + 1
-      GlobalsSetValue( "GRAHAM_MAGIC_SKIN_COUNTER", value )
-
-      local comp = EntityGetFirstComponent(entity_who_picked, "DamageModelComponent") or 0
-      GamePrint(GameTextGetTranslatedOrNot("$graham_magicskin_01") .. math.ceil(ComponentGetValue2(comp, "max_hp") * 5) .. GameTextGetTranslatedOrNot("$graham_magicskin_02"))
-      ComponentSetValue2(comp, "max_hp", ComponentGetValue2(comp, "max_hp") * 0.8)
-    end,
-    func_remove = function( entity_who_picked )
-      local count = tonumber(GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" ))
-      GlobalsSetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" )
-    end,
-  })
-else
-  table.insert(perk_list,{
-    id = "GRAHAM_MAGIC_SKIN",
-    ui_name = "$perkname_graham_magicskin",
-    ui_description = "$perkdesc_graham_magicskin",
-    ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/magicskin.png",
-    perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/magicskin.png",
-    usable_by_enemies = false,
-    stackable = STACKABLE_YES,
-    not_in_default_perk_pool = false,
-    func = function( entity_perk_item, entity_who_picked, item_name )
-      add_halo_level(entity_who_picked, -1)
-      local x, y = EntityGetTransform(entity_who_picked)
-
-      local value = GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" ) + 1
-      GlobalsSetValue( "GRAHAM_MAGIC_SKIN_COUNTER", value )
-
-      local comp = EntityGetFirstComponent(entity_who_picked, "DamageModelComponent") or 0
-      GamePrint(GameTextGetTranslatedOrNot("$graham_magicskin_01") .. math.ceil(ComponentGetValue2(comp, "max_hp") * 5) .. GameTextGetTranslatedOrNot("$graham_magicskin_02"))
-      ComponentSetValue2(comp, "max_hp", ComponentGetValue2(comp, "max_hp") * 0.8)
-    end,
-    func_remove = function( entity_who_picked )
-      GlobalsSetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" )
-    end,
-  })
 end
