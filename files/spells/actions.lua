@@ -1457,6 +1457,23 @@ local to_insert = {
 				c.fire_rate_wait = c.fire_rate_wait + 4
 			end,
 	},
+	{
+		id          = "GRAHAM_GOLDEN",
+		name 		= "$graham_name_golden",
+		description = "$graham_desc_golden",
+		sprite 		= "mods/grahamsperks/files/spells/golden.png",
+		related_extra_entities = { "mods/grahamsperks/files/spells/golden.xml," },
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "0,1,2",
+		spawn_probability                 = "1.5,1,0.5",
+		price = 20,
+		mana = 0,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "mods/grahamsperks/files/spells/golden.xml,"
+			c.fire_rate_wait = c.fire_rate_wait - 8
+			draw_actions( 1, true )
+		end,
+	},
 }
 for i,v in ipairs(to_insert) do
     table.insert(actions, v)
