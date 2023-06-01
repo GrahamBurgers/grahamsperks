@@ -191,22 +191,22 @@ local to_insert = {
 		action            = function()
 			current_reload_time = current_reload_time + 10
 			draw_actions(1, true)
-			if not reflecting then
-				local me = GetUpdatedEntityID()
-				local inv_comp = EntityGetFirstComponentIncludingDisabled(me, "Inventory2Component")
-				if inv_comp ~= nil then
-					me = ComponentGetValue2(inv_comp, "mActiveItem")
-				end
+			if reflecting then return end
 
-				local comp = EntityGetFirstComponentIncludingDisabled(me, "AbilityComponent") or 0
-				if comp ~= 0 then
-					ComponentSetValue2(comp, "mana_max", ComponentGetValue2(comp, "mana_max") - 10)
-					EntityAddComponent2(me, "LuaComponent", {
-						script_source_file = "mods/grahamsperks/files/scripts/mana_heartbreak.lua",
-						execute_every_n_frame = 60,
-						execute_times = 10,
-					})
-				end
+			local me = GetUpdatedEntityID()
+			local inv_comp = EntityGetFirstComponentIncludingDisabled(me, "Inventory2Component")
+			if inv_comp ~= nil then
+				me = ComponentGetValue2(inv_comp, "mActiveItem")
+			end
+
+			local comp = EntityGetFirstComponentIncludingDisabled(me, "AbilityComponent") or 0
+			if comp ~= 0 then
+				ComponentSetValue2(comp, "mana_max", ComponentGetValue2(comp, "mana_max") - 10)
+				EntityAddComponent2(me, "LuaComponent", {
+					script_source_file = "mods/grahamsperks/files/scripts/mana_heartbreak.lua",
+					execute_every_n_frame = 60,
+					execute_times = 10,
+				})
 			end
 		end,
 	},
@@ -1026,7 +1026,7 @@ local to_insert = {
 		name                = "$graham_name_breadcrumb",
 		description         = "$graham_desc_breadcrumb",
 		sprite              = "mods/grahamsperks/files/spells/breadcrumb.png",
-		type                = ACTION_TYPE_UTILITY,
+		type                = ACTION_TYPE_STATIC_PROJECTILE,
 		spawn_level         = "0,1,2,3,4",
 		spawn_probability   = "0.4,0.6,0.8,1.0,1.5",
 		price               = 160,
@@ -1301,32 +1301,31 @@ local to_insert = {
 		action              = function()
 			current_reload_time = current_reload_time + 240
 
-			if not reflecting then
-				local player = GetUpdatedEntityID()
-				local damagemodels = EntityGetComponent(player, "DamageModelComponent")
-				if (damagemodels ~= nil) then
-					for i, v in ipairs(damagemodels) do
-						local hp = ComponentGetValue2(v, "hp")
-						local max_hp = ComponentGetValue2(v, "max_hp")
+			if reflecting then return end
+			local player = GetUpdatedEntityID()
+			local damagemodels = EntityGetComponent(player, "DamageModelComponent")
+			if (damagemodels ~= nil) then
+				for i, v in ipairs(damagemodels) do
+					local hp = ComponentGetValue2(v, "hp")
+					local max_hp = ComponentGetValue2(v, "max_hp")
 
-						if max_hp >= 8 then
-							max_hp = max_hp * 0.8
-							ComponentSetValue2(v, "max_hp", max_hp)
-							if hp > max_hp then
-								ComponentSetValue2(v, "hp", max_hp)
-							end
-
-							local x, y = EntityGetTransform(player)
-							SetRandomSeed(player, GameGetFrameNum())
-							local options = { "waterstone.xml", "thunderstone.xml", "stonestone.xml", "brimstone.xml",
-								"poopstone.xml" }
-							local result = "data/entities/items/pickup/" .. options[Random(1, #options)]
-							EntityLoad(result, x, y)
-
-							-- using add_projectile on firestone or thunderstone crashes the game. no idea why
-							EntityLoad("data/entities/particles/image_emitters/potion_effect.xml", x, y - 5)
-							add_projectile("mods/grahamsperks/files/spells/material_healthium.xml")
+					if max_hp >= 8 then
+						max_hp = max_hp * 0.8
+						ComponentSetValue2(v, "max_hp", max_hp)
+						if hp > max_hp then
+							ComponentSetValue2(v, "hp", max_hp)
 						end
+
+						local x, y = EntityGetTransform(player)
+						SetRandomSeed(player, GameGetFrameNum())
+						local options = { "waterstone.xml", "thunderstone.xml", "stonestone.xml", "brimstone.xml",
+							"poopstone.xml" }
+						local result = "data/entities/items/pickup/" .. options[Random(1, #options)]
+						EntityLoad(result, x, y)
+
+						-- using add_projectile on firestone or thunderstone crashes the game. no idea why
+						EntityLoad("data/entities/particles/image_emitters/potion_effect.xml", x, y - 5)
+						add_projectile("mods/grahamsperks/files/spells/material_healthium.xml")
 					end
 				end
 			end
@@ -1405,8 +1404,8 @@ local to_insert = {
 		name                = "$graham_name_circle_translocation",
 		description         = "$graham_desc_circle_translocation",
 		sprite              = "mods/grahamsperks/files/spells/translocation.png",
-		type                = ACTION_TYPE_PROJECTILE,
-		spawn_level         = "1,2,3,4,5,6",     -- SHIELD_FIELD
+		type                = ACTION_TYPE_STATIC_PROJECTILE,
+		spawn_level         = "1,2,3,4,5,6",       -- SHIELD_FIELD
 		spawn_probability   = "0.2,0.2,0.2,0.6,0.6,0.2", -- SHIELD_FIELD
 		price               = 260,
 		mana                = 60,
@@ -1430,17 +1429,16 @@ local to_insert = {
 		max_uses            = 2,
 		related_projectiles = { "mods/grahamsperks/files/entities/foamarmor.xml" },
 		action              = function()
-			if not reflecting then
-				local entity_who_shot = GetUpdatedEntityID()
-				local x, y = EntityGetTransform(entity_who_shot)
-				local entity_id = EntityLoad("mods/grahamsperks/files/effects/foam_armor.xml", x, y)
-				EntityAddChild(entity_who_shot, entity_id)
-				add_projectile("mods/grahamsperks/files/entities/foamarmor.xml")
+			if reflecting then return end
+			local entity_who_shot = GetUpdatedEntityID()
+			local x, y = EntityGetTransform(entity_who_shot)
+			local entity_id = EntityLoad("mods/grahamsperks/files/effects/foam_armor.xml", x, y)
+			EntityAddChild(entity_who_shot, entity_id)
+			add_projectile("mods/grahamsperks/files/entities/foamarmor.xml")
 
-				local comp = EntityGetFirstComponent(entity_who_shot, "DamageModelComponent") or 0
-				ComponentSetValue2(comp, "hp", ComponentGetValue2(comp, "hp") + 0.8)
-				ComponentSetValue2(comp, "max_hp", ComponentGetValue2(comp, "max_hp") + 0.8)
-			end
+			local comp = EntityGetFirstComponent(entity_who_shot, "DamageModelComponent") or 0
+			ComponentSetValue2(comp, "hp", ComponentGetValue2(comp, "hp") + 0.8)
+			ComponentSetValue2(comp, "max_hp", ComponentGetValue2(comp, "max_hp") + 0.8)
 		end,
 	},
 	{
