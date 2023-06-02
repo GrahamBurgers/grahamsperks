@@ -1,5 +1,3 @@
-SetRandomSeed( entity_id, entity_id )
-
 local entity_id = GetUpdatedEntityID()
 local particle = "gold"
 local comps

@@ -172,6 +172,20 @@ content = ModTextFileGetContent(path)
 content = content:gsub("\"GRENADE\"", "\"GRENADE\",\"GRAHAM_BARREL\"")
 ModTextFileSetContent(path, content)
 
+-- temple altar append
+path = "data/entities/animals/boss_centipede/ending/ending_sampo_spot_mountain.xml"
+content = ModTextFileGetContent(path)
+content = content:gsub("</Entity>", [[
+	<LuaComponent 
+        _enabled="1" 
+        execute_every_n_frame="240"
+        script_source_file="mods/grahamsperks/files/scripts/altar_append.lua" 
+	>
+    </LuaComponent>
+</Entity>
+]])
+ModTextFileSetContent(path, content)
+
 -- midas curse
 path = "data/entities/base_humanoid.xml"
 content = ModTextFileGetContent(path)

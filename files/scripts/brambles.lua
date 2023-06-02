@@ -1,7 +1,7 @@
 dofile_once("data/scripts/lib/utilities.lua")
 
 local x, y = EntityGetTransform(GetUpdatedEntityID())
-local entities = EntityGetInRadiusWithTag(x, y, 18, "mortal")
+local entities = EntityGetInRadiusWithTag(x, y, 18, "hittable")
 local comp = EntityGetFirstComponent(GetUpdatedEntityID(), "ProjectileComponent")
 -- awful code but it actually works
 local shooter, bx, by, ex, ey, cx, cy
@@ -22,7 +22,7 @@ for i = 1, #entities do
 				ComponentSetValue2(cx, "value_int", x)
 				ComponentSetValue2(cy, "value_int", y)
 			else
-				EntityApplyTransform(entities[i], ex + (bx - ex) / 6, ey + (by - ey) / 6)
+				EntityApplyTransform(entities[i], ex + (bx - ex) / 6, ey + (by - ey) / 4)
 			end
 			
 			if math.floor(GameGetFrameNum()) == math.floor(GameGetFrameNum() / 8) * 8 then
