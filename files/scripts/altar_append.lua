@@ -1,4 +1,3 @@
-GamePrint("working")
 dofile_once("data/scripts/perks/perk.lua")
 
 local x, y = EntityGetTransform( GetUpdatedEntityID() )
