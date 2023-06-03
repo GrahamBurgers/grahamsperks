@@ -37,7 +37,7 @@ function collision_trigger()
 			if ModSettingGet("grahamsperks.pacifist") == "yes" then
 
 				if Random(1, 12) == 12 then
-					local eid = EntityLoad( "data/entities/animal/mini_mimic.xml", sx, sy )
+					local eid = EntityLoad( "data/entities/animals/mini_mimic.xml", sx, sy )
 				else
 					local eid = EntityLoad( "mods/grahamsperks/files/pickups/chest_mini.xml", sx, sy )
 					change_entity_ingame_name( eid, "$item_chest_treasure_pacifist" )
@@ -87,7 +87,7 @@ function collision_trigger()
 				end
 
 				if Random(1, chance) == chance then
-					local eid = EntityLoad( "data/entities/animal/bloody_mimic.xml", sx, sy )
+					local eid = EntityLoad( "data/entities/animals/bloody_mimic.xml", sx, sy )
 				else
 					local eid = EntityLoad( "mods/grahamsperks/files/pickups/chest_bloody.xml", sx, sy + 7)
 				end

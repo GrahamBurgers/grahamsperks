@@ -55,7 +55,7 @@ function spawn_heart( x, y )
 				
 				SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
 				if Random(1, 3) == 3 then
-					local entity = EntityLoad( "data/entities/animal/mini_mimic.xml", x, y)
+					local entity = EntityLoad( "data/entities/animals/mini_mimic.xml", x, y)
 					-- GamePrint("spawning mini mimic")
 				else
 					local entity = EntityLoad( "mods/grahamsperks/files/pickups/chest_mini.xml", x, y)

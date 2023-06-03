@@ -1,15 +1,6 @@
-<Entity tags="scroll">
-	<Base file="data/entities/items/books/base_book.xml">
-		<BookComponent
-			_enabled="0"
-			>
-		</BookComponent>
+<Entity tags="scroll,graham_book">
+	<Base file="mods/grahamsperks/files/entities/books/base_book.xml">
 
-		<ParticleEmitterComponent 
-			_enabled="0"
-			>
-		</ParticleEmitterComponent>
-		
 		<PhysicsImageShapeComponent 
 			image_file="mods/grahamsperks/files/entities/book_blue_inhand.png"
 		></PhysicsImageShapeComponent>

@@ -26,6 +26,7 @@ graham_desc_bramball,A prickly projectile that brambles enemies in place,,,,,,,,
 graham_name_golden,Golden Glimmer,,,,,,,,,,,,
 graham_desc_golden,Gives a projectile a vibrant golden trail,,,,,,,,,,,,
 OTHER,,,,,,,,,,,,
+graham_minitank_name,Pikku-tankki,,,,,,,,,,,,
 graham_status_foam,Foamed,,,,,,,,,,,,
 graham_statusdesc_foam,"You are immune to fire and toxicity, and gain extra max health for a time.",,,,,,,,,,,,
 graham_unstainer_name,Saippuakivi,,,,,,,,,,,,doesn't need to be translated

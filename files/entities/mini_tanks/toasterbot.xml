@@ -1,4 +1,4 @@
-<Entity  name="$animal_drone_lasership" tags="drone_lasership">
+<Entity  name="$graham_minitank_name" tags="drone_lasership">
   
 	<Base file="mods/grahamsperks/files/entities/mini_tanks/base_minitank.xml"  >
 		<AnimalAIComponent 
