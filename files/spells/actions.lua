@@ -1532,6 +1532,24 @@ local to_insert = {
 			draw_actions(1, true)
 		end,
 	},
+	{
+		id                  = "GRAHAM_ECHO_BUBBLE",
+		name                = "$graham_name_echo_bubble",
+		description         = "$graham_desc_echo_bubble",
+		sprite              = "mods/grahamsperks/files/spells/echo_bubble.png",
+		type                = ACTION_TYPE_PROJECTILE,
+		spawn_level         = "1,2,3,4,5",
+		spawn_probability   = "0.6,0.7,0.8,0.9,1.0",
+		price               = 60,
+		mana                = 20,
+		--max_uses = 100,
+		related_projectiles = { "mods/grahamsperks/files/spells/echo_bubble.xml" },
+		action              = function()
+			current_reload_time = current_reload_time + 30
+			add_projectile("mods/grahamsperks/files/spells/echo_bubble.xml")
+			c.damage_critical_chance = c.damage_critical_chance + 15
+		end,
+	},
 }
 for i, v in ipairs(to_insert) do
 	table.insert(actions, v)

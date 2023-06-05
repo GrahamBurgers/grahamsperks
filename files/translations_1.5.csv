@@ -29,6 +29,8 @@ graham_name_toggler_alt,Alt Fire Toggler,,,,,,,,,,,,
 graham_desc_toggler_alt,"When you right click, switches any toggle Requirement spells between the red and blue state",,,,,,,,,,,,
 graham_name_toggler3_alt,Alt Fire Toggle Disabler,,,,,,,,,,,,
 graham_desc_toggler3_alt,"When you right click, disables all toggle requirement spells until another toggler is cast",,,,,,,,,,,,
+graham_name_echo_bubble,Echo Bubble,,,,,,,,,,,,
+graham_desc_echo_bubble,A shining bubble that echoes the position of its caster,,,,,,,,,,,,
 OTHER,,,,,,,,,,,,
 graham_minitank_name,Pikku-tankki,,,,,,,,,,,,doesn't need to be translated
 graham_status_foam,Foamed,,,,,,,,,,,,
