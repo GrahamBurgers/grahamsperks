@@ -597,6 +597,33 @@ local to_insert = {
   end,
 },
 {
+  id = "GRAHAM_REFRESHER",
+  ui_name = "$perkname_graham_refresher",
+  ui_description = "$perkdesc_graham_refresher",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/refresher.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/refresher.png",
+  usable_by_enemies = false,
+  not_in_default_perk_pool = false,
+  stackable = STACKABLE_YES,
+  stackable_max = 5,
+  func = function( entity_perk_item, entity_who_picked, item_name )
+    local amount = GlobalsGetValue( "GRAHAM_REFRESHER_COUNT", 0 )
+    GlobalsSetValue( "GRAHAM_REFRESHER_COUNT", amount + 1 )
+    local x, y = EntityGetTransform(entity_who_picked)
+    local eid = EntityLoad("data/entities/items/pickup/spell_refresh.xml", x, y)
+    local item_comp = EntityGetFirstComponent( eid, "ItemComponent" )
+    if item_comp ~= nil then
+      if( ComponentGetValue2( item_comp, "auto_pickup") ) then
+        ComponentSetValue2( item_comp, "next_frame_pickable", GameGetFrameNum() + 60 )
+      end
+    end
+
+  end,
+  func_remove = function( entity_who_picked )
+    GlobalsSetValue( "GRAHAM_REFRESHER_COUNT", 0 )
+  end,
+},
+{
   id = "GRAHAM_MAP",
   ui_name = "$perkname_graham_map",
   ui_description = "$perkdesc_graham_map",
