@@ -12,5 +12,11 @@ if enemy ~= 0 and not EntityHasTag(enemy, "miniboss") and not EntityHasTag(enemy
     })
     -- hopefully this works
     obliterate(enemy)
+    -- pretend like this is a holy mountain collapse
+    GameTriggerMusicFadeOutAndDequeueAll( 2.0 )
+    EntityLoad("data/entities/misc/workshop_collapse.xml", x, y)
+    GamePlaySound( "data/audio/Desktop/misc.bank", "misc/temple_collapse", x, y )
+    EntityLoad("data/entities/projectiles/deck/crumbling_earth.xml", x - 100, y)
+    EntityLoad("data/entities/projectiles/deck/crumbling_earth.xml", x + 100, y)
     EntityKill(me)
 end

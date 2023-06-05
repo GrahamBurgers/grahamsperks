@@ -202,11 +202,23 @@ local to_insert = {
 			local comp = EntityGetFirstComponentIncludingDisabled(me, "AbilityComponent") or 0
 			if comp ~= 0 then
 				ComponentSetValue2(comp, "mana_max", ComponentGetValue2(comp, "mana_max") - 10)
-				EntityAddComponent2(me, "LuaComponent", {
-					script_source_file = "mods/grahamsperks/files/scripts/mana_heartbreak.lua",
-					execute_every_n_frame = 60,
-					execute_times = 10,
-				})
+				if EntityGetComponent(me, "LuaComponent", "mana_debt_script") == nil then
+					EntityAddComponent2(me, "LuaComponent", {
+						_tags="mana_debt_script,enabled_in_hand,enabled_in_world",
+						script_source_file = "mods/grahamsperks/files/scripts/mana_heartbreak.lua",
+						execute_every_n_frame = 30,
+					})
+				end
+
+				local storage = EntityGetFirstComponentIncludingDisabled(me, "VariableStorageComponent", "mana_debt")
+				if storage ~= nil then
+					ComponentSetValue2(storage, "value_int", ComponentGetValue2(storage, "value_int") + 10)
+				else
+					EntityAddComponent2(me, "VariableStorageComponent", {
+						_tags="mana_debt,enabled_in_hand,enabled_in_world",
+						value_int=10
+					})
+				end
 			end
 		end,
 	},
@@ -396,13 +408,13 @@ local to_insert = {
 			if reflecting then return end -- technically means reflecting wont catch the draw
 
 			local toggle = tonumber(GlobalsGetValue("GRAHAM_TOGGLE", "null"))
-			if (toggle ~= 1) and (toggle ~= 0) then GamePrint("Enabled Red/Blue togglers") end
+			if (toggle ~= 1) and (toggle ~= 0) then GamePrint("$graham_enable_redblue") end
 			if (toggle == 0) then
 				toggle = 1
-				GamePrint("Toggled to BLUE")
+				GamePrint("$graham_toggle_blue")
 			else
 				toggle = 0
-				GamePrint("Toggled to RED")
+				GamePrint("$graham_toggle_red")
 			end
 			toggle = tostring(toggle)
 			GlobalsSetValue("GRAHAM_TOGGLE", toggle)
@@ -424,13 +436,13 @@ local to_insert = {
 			if reflecting then return end
 
 			local toggle = tonumber(GlobalsGetValue("GRAHAM_TOGGLE2", "null"))
-			if (toggle ~= 1) and (toggle ~= 0) then GamePrint("Enabled Green/Yellow togglers") end
+			if (toggle ~= 1) and (toggle ~= 0) then GamePrint("$graham_enable_greenyellow") end
 			if (toggle == 0) then
 				toggle = 1
-				GamePrint("Toggled to YELLOW")
+				GamePrint("$graham_toggle_yellow")
 			else
 				toggle = 0
-				GamePrint("Toggled to GREEN")
+				GamePrint("$graham_toggle_green")
 			end
 			toggle = tostring(toggle)
 			GlobalsSetValue("GRAHAM_TOGGLE2", toggle)
@@ -452,10 +464,10 @@ local to_insert = {
 			current_reload_time = current_reload_time + 20
 			if reflecting then return end
 
-			chatspam = GlobalsGetValue("GRAHAM_TOGGLE", "null")
-			chatspam2 = GlobalsGetValue("GRAHAM_TOGGLE2", "null")
+			local chatspam = GlobalsGetValue("GRAHAM_TOGGLE", "null")
+			local chatspam2 = GlobalsGetValue("GRAHAM_TOGGLE2", "null")
 
-			if (chatspam ~= "null") or (chatspam2 ~= "null") then GamePrint("Disabled all togglers") end
+			if (chatspam ~= "null") or (chatspam2 ~= "null") then GamePrint("$graham_toggle_disable") end
 			GlobalsSetValue("GRAHAM_TOGGLE", "null")
 			GlobalsSetValue("GRAHAM_TOGGLE2", "null")
 
@@ -1378,7 +1390,7 @@ local to_insert = {
 		related_projectiles = { "mods/grahamsperks/files/spells/rollout.xml" },
 		action              = function()
 			c.fire_rate_wait = c.fire_rate_wait + 150
-			c.damage_critical_chance = c.damage_critical_chance + 15
+			c.damage_critical_chance = c.damage_critical_chance + 5
 			add_projectile("mods/grahamsperks/files/spells/rollout.xml")
 		end,
 	},
@@ -1462,15 +1474,61 @@ local to_insert = {
 		name                   = "$graham_name_golden",
 		description            = "$graham_desc_golden",
 		sprite                 = "mods/grahamsperks/files/spells/golden.png",
+		spawn_requires_flag    = "card_unlocked_paint",
 		type                   = ACTION_TYPE_MODIFIER,
 		spawn_level            = "0,1,2",
-		spawn_probability      = "1.5,1,0.5",
+		spawn_probability      = "1,1,0.5",
 		price                  = 20,
 		mana                   = 0,
 		related_extra_entities = { "mods/grahamsperks/files/spells/golden.xml," },
 		action                 = function()
 			c.extra_entities = c.extra_entities .. "mods/grahamsperks/files/spells/golden.xml,"
 			c.fire_rate_wait = c.fire_rate_wait - 8
+			draw_actions(1, true)
+		end,
+	},
+	{
+		id                  = "GRAHAM_TOGGLER_ALT",
+		name                = "$graham_name_toggler_alt",
+		description         = "$graham_desc_toggler_alt",
+		sprite              = "mods/grahamsperks/files/spells/toggler_alt.png",
+		type                = ACTION_TYPE_PASSIVE,
+		spawn_level       = "10",
+		spawn_probability = "1",
+		price               = 120,
+		mana                = 0,
+		custom_xml_file     = "mods/grahamsperks/files/spells/toggler_alt.xml",
+		action              = function()
+			draw_actions(1, true)
+		end,
+	},
+	{
+		id                  = "GRAHAM_TOGGLER2_ALT",
+		name                = "$graham_name_toggler_alt",
+		description         = "$graham_desc_toggler_alt",
+		sprite              = "mods/grahamsperks/files/spells/toggler2_alt.png",
+		type                = ACTION_TYPE_PASSIVE,
+		spawn_level       = "10",
+		spawn_probability = "1",
+		price               = 120,
+		mana                = 0,
+		custom_xml_file     = "mods/grahamsperks/files/spells/toggler2_alt.xml",
+		action              = function()
+			draw_actions(1, true)
+		end,
+	},
+	{
+		id                  = "GRAHAM_TOGGLER3_ALT",
+		name                = "$graham_name_toggler3_alt",
+		description         = "$graham_desc_toggler3_alt",
+		sprite              = "mods/grahamsperks/files/spells/toggler3_alt.png",
+		type                = ACTION_TYPE_PASSIVE,
+		spawn_level       = "10",
+		spawn_probability = "1",
+		price               = 120,
+		mana                = 0,
+		custom_xml_file     = "mods/grahamsperks/files/spells/toggler3_alt.xml",
+		action              = function()
 			draw_actions(1, true)
 		end,
 	},

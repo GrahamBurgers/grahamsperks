@@ -10,7 +10,7 @@ if comp ~= nil then
 end
 
 for i = 1, #entities do
-	if shooter ~= entities[i] and not EntityHasTag(entities[i], "glue_NOT") then
+	if shooter ~= entities[i] and not EntityHasTag(entities[i], "glue_NOT") and EntityGetComponent(entities[i], "PhysicsBody2Component") == nil then
 		ex, ey = EntityGetTransform(entities[i])
 		cx = get_variable_storage_component( entities[i], "graham_brambles_x" )
 		cy = get_variable_storage_component( entities[i], "graham_brambles_y" )
@@ -23,14 +23,14 @@ for i = 1, #entities do
 				ComponentSetValue2(cy, "value_int", y)
 			else
 				EntityApplyTransform(entities[i], ex + (bx - ex) / 6, ey + (by - ey) / 4)
-			end
-			
-			if math.floor(GameGetFrameNum()) == math.floor(GameGetFrameNum() / 8) * 8 then
-				EntityInflictDamage(entities[i], 0.024,  "DAMAGE_SLICE", "$graham_name_bramball", "NONE", 0, 0, shooter)
 				local velocity = EntityGetFirstComponentIncludingDisabled(entities[i], "CharacterDataComponent") or 0
 				if velocity ~= 0 then
 					ComponentSetValue2(velocity, "mVelocity", 0, 0)
 				end
+			end
+			
+			if math.floor(GameGetFrameNum()) == math.floor(GameGetFrameNum() / 12) * 12 then
+				EntityInflictDamage(entities[i], 0.024,  "DAMAGE_SLICE", "$graham_name_bramball", "NONE", 0, 0, shooter)
 			end
 		else
 			EntityAddComponent2(entities[i], "VariableStorageComponent", {
