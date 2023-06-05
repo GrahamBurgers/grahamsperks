@@ -1550,6 +1550,23 @@ local to_insert = {
 			c.damage_critical_chance = c.damage_critical_chance + 15
 		end,
 	},
+	{
+		id                = "GRAHAM_PASSIVES",
+		name              = "$graham_name_passives",
+		description       = "$graham_desc_passives",
+		sprite            = "mods/grahamsperks/files/spells/passives.png",
+		type              = ACTION_TYPE_PASSIVE,
+		spawn_level       = "0,1,4,5",
+		spawn_probability = "1,1,1,1",
+		price             = 30,
+		mana              = 0,
+		custom_xml_file   = "mods/grahamsperks/files/spells/passives.xml",
+		action            = function()
+			-- does nothing to the projectiles
+			current_reload_time = current_reload_time + 5
+			draw_actions(1, true)
+		end,
+	},
 }
 for i, v in ipairs(to_insert) do
 	table.insert(actions, v)

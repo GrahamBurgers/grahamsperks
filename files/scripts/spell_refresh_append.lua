@@ -6,7 +6,7 @@ function item_pickup( entity_item, entity_who_picked, name )
 	SetRandomSeed(entity_item + GameGetFrameNum(), entity_who_picked)
     -- Refreshing Variety: decide if we spawn spells instead (hopefully this can't spawn spells without the perk)
     local stack = tonumber(GlobalsGetValue( "GRAHAM_REFRESHER_COUNT", "0" ))
-    if (50 * (0.50 ^ stack) < Random(1, 100)) then
+    if (50 * (0.50 ^ (stack - 1)) < Random(1, 100)) then
         EntityLoad("data/entities/particles/image_emitters/chest_effect.xml", x, y-12)
         -- decide how many to spawn, up to a max of 10
         local amount = math.min(10, Random(3, 5) + stack - 1)

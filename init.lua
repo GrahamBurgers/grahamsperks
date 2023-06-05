@@ -203,6 +203,36 @@ content = content:gsub("<GameStatsComponent />", [[
 ]])
 ModTextFileSetContent(path, content)
 
+-- spell types
+path = "data/entities/misc/custom_cards/action.xml"
+content = ModTextFileGetContent(path)
+content = content:gsub("</Entity>", [[
+	<LuaComponent
+	_tags="enabled_in_world,enabled_in_hand"
+	execute_on_added="0"
+	execute_every_n_frame="2"
+	remove_after_executed="1"
+	script_source_file="mods/grahamsperks/files/scripts/add_action_type.lua"
+	></LuaComponent>
+
+	</Entity>
+]])
+ModTextFileSetContent(path, content)
+
+path = "data/entities/base_custom_card.xml"
+content = ModTextFileGetContent(path)
+content = content:gsub("</Entity>", [[
+	<LuaComponent
+	_tags="enabled_in_world,enabled_in_hand"
+	execute_on_added="0"
+	execute_every_n_frame="2"
+	remove_after_executed="1"
+	script_source_file="mods/grahamsperks/files/scripts/add_action_type.lua"
+	></LuaComponent>
+
+	</Entity>
+]])
+ModTextFileSetContent(path, content)
 
 -- noita together perk compat
 if ModIsEnabled("noita_together") then

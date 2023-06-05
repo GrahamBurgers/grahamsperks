@@ -33,6 +33,8 @@ graham_name_toggler3_alt,Alt Fire Toggle Disabler,,,,,,,,,,,,
 graham_desc_toggler3_alt,"When you right click, disables all toggle requirement spells until another toggler is cast",,,,,,,,,,,,
 graham_name_echo_bubble,Echo Bubble,,,,,,,,,,,,
 graham_desc_echo_bubble,A shining bubble that echoes the position of its caster,,,,,,,,,,,,
+graham_name_passives,Active Passives,,,,,,,,,,,,
+graham_desc_passives,Your wand regenerates mana 10% faster for every passive spell it has (besides this),,,,,,,,,,,,
 OTHER,,,,,,,,,,,,
 graham_minitank_name,Pikku-tankki,,,,,,,,,,,,doesn't need to be translated
 graham_status_foam,Foamed,,,,,,,,,,,,
