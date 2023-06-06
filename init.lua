@@ -113,7 +113,6 @@ content = content:gsub("<mBufferedPixelScenes>", [[<mBufferedPixelScenes>
   <PixelScene pos_x="-5302" pos_y="575" just_load_an_entity="mods/grahamsperks/files/pixelscenes/materials.xml" />
   <PixelScene pos_x="-6760" pos_y="7424" just_load_an_entity="mods/grahamsperks/files/pixelscenes/yinyang.xml" />
   <PixelScene pos_x="-6693" pos_y="7515" just_load_an_entity="mods/grahamsperks/files/entities/halo_checker.xml" />
-  <PixelScene pos_x="4074" pos_y="12889" just_load_an_entity="mods/grahamsperks/files/pixelscenes/credits.xml" />
   <PixelScene pos_x="11537" pos_y="9956" just_load_an_entity="mods/grahamsperks/files/pixelscenes/water.xml" />
   <PixelScene pos_x="11537" pos_y="9986" just_load_an_entity="mods/grahamsperks/files/pickups/chest_immunity.xml" />
   <PixelScene pos_x="-317" pos_y="-1673" just_load_an_entity="mods/grahamsperks/files/pixelscenes/island.xml" />

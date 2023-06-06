@@ -187,7 +187,7 @@ local to_insert = {
 		spawn_level       = "1,2,3,4,5,6",
 		spawn_probability = "1,1,0.6,0.6,1,1",
 		price             = 200,
-		mana              = -10,
+		mana              = -60,
 		action            = function()
 			current_reload_time = current_reload_time + 10
 			draw_actions(1, true)
@@ -204,7 +204,7 @@ local to_insert = {
 				ComponentSetValue2(comp, "mana_max", ComponentGetValue2(comp, "mana_max") - 10)
 				if EntityGetComponent(me, "LuaComponent", "mana_debt_script") == nil then
 					EntityAddComponent2(me, "LuaComponent", {
-						_tags="mana_debt_script,enabled_in_hand,enabled_in_world",
+						_tags="mana_debt_script,enabled_in_hand,enabled_in_world,enabled_in_inventory",
 						script_source_file = "mods/grahamsperks/files/scripts/mana_heartbreak.lua",
 						execute_every_n_frame = 30,
 					})

@@ -7,7 +7,7 @@ if EntityHasTag(wand, "wand") then
     -- get passives
     local spells = EntityGetAllChildren(wand) or {}
     for i, j in ipairs(spells) do
-        if EntityHasTag(j, "graham_is_passive") then
+        if EntityHasTag(j, "graham_spelltype_passive") then
             amount = amount + 1
         end
     end

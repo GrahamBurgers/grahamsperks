@@ -34,7 +34,9 @@ graham_desc_toggler3_alt,"When you right click, disables all toggle requirement 
 graham_name_echo_bubble,Echo Bubble,,,,,,,,,,,,
 graham_desc_echo_bubble,A shining bubble that echoes the position of its caster,,,,,,,,,,,,
 graham_name_passives,Active Passives,,,,,,,,,,,,
-graham_desc_passives,Your wand regenerates mana 10% faster for every passive spell it has (besides this),,,,,,,,,,,,
+graham_desc_passives,This wand regenerates mana 10% faster for every other passive spell on this wand,,,,,,,,,,,,
+graham_name_diversify,Diversify,,,,,,,,,,,,
+graham_desc_diversify,Decreases recharge time by 0.50 if you have 4 or more different spell types on this wand,,,,,,,,,,,,
 OTHER,,,,,,,,,,,,
 graham_minitank_name,Pikku-tankki,,,,,,,,,,,,doesn't need to be translated
 graham_status_foam,Foamed,,,,,,,,,,,,

@@ -21,9 +21,15 @@ local comp = EntityGetAllComponents(j) or {}
 for i = 1, #comp do
     if ComponentGetTypeName( comp[i] ) == "SpriteComponent" then
         local sprite = ComponentGetValue2(comp[i], "image_file")
-        if sprite == "data/ui_gfx/inventory/item_bg_passive.png" then
-            EntityAddTag(j, "graham_is_passive")
-            break
+        if string.find(sprite, "data/ui_gfx/inventory/item_bg_") then
+            sprite = sprite:gsub("data/ui_gfx/inventory/item_bg_", "")
+            sprite = sprite:gsub(".png", "")
+            sprite = "graham_spelltype_" .. sprite
+            EntityAddTag(j, sprite)
+            EntityAddComponent2(j, "VariableStorageComponent", {
+                _tags="graham_spelltype",
+                value_string=sprite
+            })
         end
     end
 end
