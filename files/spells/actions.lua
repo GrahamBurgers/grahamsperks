@@ -1567,6 +1567,23 @@ local to_insert = {
 			draw_actions(1, true)
 		end,
 	},
+	{
+		id                     = "GRAHAM_DIVEBOMB",
+		name                   = "$graham_name_divebomb",
+		description            = "$graham_desc_divebomb",
+		sprite                 = "mods/grahamsperks/files/spells/divebomb.png",
+		type                   = ACTION_TYPE_MODIFIER,
+		spawn_level            = "0,3",
+		spawn_probability      = "1,1",
+		price                  = 50,
+		mana                   = 18,
+		related_extra_entities = { "mods/grahamsperks/files/spells/divebomb.xml," },
+		action                 = function()
+			c.fire_rate_wait = c.fire_rate_wait + 8
+			c.extra_entities = c.extra_entities .. "mods/grahamsperks/files/spells/divebomb.xml,"
+			draw_actions(1, true)
+		end,
+	},
 }
 for i, v in ipairs(to_insert) do
 	table.insert(actions, v)

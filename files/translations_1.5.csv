@@ -37,6 +37,8 @@ graham_name_passives,Active Passives,,,,,,,,,,,,
 graham_desc_passives,This wand regenerates mana 10% faster for every other passive spell on this wand,,,,,,,,,,,,
 graham_name_diversify,Diversify,,,,,,,,,,,,
 graham_desc_diversify,Decreases recharge time by 0.50 if you have 4 or more different spell types on this wand,,,,,,,,,,,,
+graham_name_divebomb,Dive-bomb,,,,,,,,,,,,
+graham_desc_divebomb,A projectile will swiftly fall if there are any enemies below it,,,,,,,,,,,,
 OTHER,,,,,,,,,,,,
 graham_minitank_name,Pikku-tankki,,,,,,,,,,,,doesn't need to be translated
 graham_status_foam,Foamed,,,,,,,,,,,,
