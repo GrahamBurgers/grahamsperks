@@ -795,7 +795,7 @@ end,
     GlobalsSetValue( "GRAHAM_MAGIC_SKIN_COUNTER", value )
 
     local comp = EntityGetFirstComponent(entity_who_picked, "DamageModelComponent") or 0
-    GamePrint(GameTextGetTranslatedOrNot("$graham_magicskin_01") .. math.ceil(ComponentGetValue2(comp, "max_hp") * 5) .. GameTextGetTranslatedOrNot("$graham_magicskin_02"))
+    GamePrint(GameTextGet("$graham_magicskin", math.ceil(ComponentGetValue2(comp, "max_hp") * 5)))
     ComponentSetValue2(comp, "max_hp", ComponentGetValue2(comp, "max_hp") * 0.8)
   end,
   func_remove = function( entity_who_picked )

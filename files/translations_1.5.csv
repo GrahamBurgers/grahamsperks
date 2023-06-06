@@ -40,6 +40,7 @@ graham_desc_diversify,Decreases recharge time by 0.50 if you have 4 or more diff
 graham_name_divebomb,Dive-bomb,,,,,,,,,,,,
 graham_desc_divebomb,A projectile will swiftly fall if there are any enemies below it,,,,,,,,,,,,
 OTHER,,,,,,,,,,,,
+graham_magicskin,"Deducted $0 max health",,,,,,,,,,,,
 graham_minitank_name,Pikku-tankki,,,,,,,,,,,,doesn't need to be translated
 graham_status_foam,Foamed,,,,,,,,,,,,
 graham_statusdesc_foam,"You are immune to fire and toxicity, and gain extra max health for a time.",,,,,,,,,,,,
@@ -52,3 +53,5 @@ graham_toggle_blue,Toggled to BLUE,,,,,,,,,,,,
 graham_toggle_green,Toggled to GREEN,,,,,,,,,,,,
 graham_toggle_yellow,Toggled to YELLOW,,,,,,,,,,,,
 graham_toggle_disable,Disabled all togglers,,,,,,,,,,,,
+graham_killsleft,"$0 kills left",,,,,,,,,,,,
+graham_1killleft,"1 kill left",,,,,,,,,,,,

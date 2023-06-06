@@ -490,8 +490,6 @@ local to_insert = {
 
 			local endpoint = -1
 			local elsepoint = -1
-			local entity_id = GetUpdatedEntityID()
-			local comp = EntityGetFirstComponent(entity_id, "DamageModelComponent")
 			local toggle = tonumber(GlobalsGetValue("GRAHAM_TOGGLE", "null"))
 			local doskip = true
 
@@ -578,7 +576,6 @@ local to_insert = {
 
 			local endpoint = -1
 			local elsepoint = -1
-			local entity_id = GetUpdatedEntityID()
 			local toggle = tonumber(GlobalsGetValue("GRAHAM_TOGGLE", "null"))
 			local doskip = true
 
@@ -1477,8 +1474,8 @@ local to_insert = {
 		spawn_requires_flag    = "card_unlocked_paint",
 		type                   = ACTION_TYPE_MODIFIER,
 		spawn_level            = "0,1,2",
-		spawn_probability      = "1,1,0.5",
-		price                  = 20,
+		spawn_probability      = "0.8,1,0.5",
+		price                  = 30,
 		mana                   = 0,
 		related_extra_entities = { "mods/grahamsperks/files/spells/golden.xml," },
 		action                 = function()
@@ -1573,8 +1570,8 @@ local to_insert = {
 		description            = "$graham_desc_divebomb",
 		sprite                 = "mods/grahamsperks/files/spells/divebomb.png",
 		type                   = ACTION_TYPE_MODIFIER,
-		spawn_level            = "0,3",
-		spawn_probability      = "1,1",
+		spawn_level            = "0,3,5",
+		spawn_probability      = "0.6,1,1",
 		price                  = 50,
 		mana                   = 18,
 		related_extra_entities = { "mods/grahamsperks/files/spells/divebomb.xml," },
