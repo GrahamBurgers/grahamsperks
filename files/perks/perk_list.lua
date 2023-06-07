@@ -623,6 +623,32 @@ local to_insert = {
     GlobalsSetValue( "GRAHAM_REFRESHER_COUNT", 0 )
   end,
 },
+--[[
+{
+  id = "GRAHAM_ALLIANCE",
+  ui_name = "$perkname_graham_alliance",
+  ui_description = "$perkdesc_graham_alliance",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/alliance.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/alliance.png",
+  usable_by_enemies = true,
+  not_in_default_perk_pool = false,
+  stackable = STACKABLE_YES,
+  stackable_maximum = 4,
+  func = function( entity_perk_item, entity_who_picked, item_name )
+    local amount = GlobalsGetValue( "GRAHAM_ALLIANCE_COUNT", 10 )
+    GlobalsSetValue( "GRAHAM_ALLIANCE_COUNT", amount + 10 )
+      EntityAddComponent2(entity_who_picked,"LuaComponent",
+      {
+          _tags = "perk_component",
+          _enabled = 1,
+          script_shot="mods/grahamsperks/files/scripts/alliance.lua",
+          execute_every_n_frame= -1
+      })
+  end,
+  func_remove = function( entity_who_picked )
+    GlobalsSetValue( "GRAHAM_ALLIANCE_COUNT", 10 )
+  end,
+},]]--
 {
   id = "GRAHAM_MAP",
   ui_name = "$perkname_graham_map",

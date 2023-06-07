@@ -1459,10 +1459,26 @@ local to_insert = {
 		spawn_level         = "0,1",
 		spawn_probability   = "1,1.5",
 		price               = 80,
-		mana                = 16,
+		mana                = 15,
 		related_projectiles = { "mods/grahamsperks/files/spells/bramball.xml" },
 		action              = function()
 			add_projectile("mods/grahamsperks/files/spells/bramball.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 4
+		end,
+	},
+	{
+		id                  = "GRAHAM_BRAMBALL_TRIGGER",
+		name                = "$graham_name_bramball_trigger",
+		description         = "$graham_desc_bramball_trigger",
+		sprite              = "mods/grahamsperks/files/spells/bramball_trigger.png",
+		type                = ACTION_TYPE_PROJECTILE,
+		spawn_level         = "0,1",
+		spawn_probability   = "0.8,1",
+		price               = 110,
+		mana                = 20,
+		related_projectiles = { "mods/grahamsperks/files/spells/bramball.xml" },
+		action              = function()
+			add_projectile_trigger_hit_world("mods/grahamsperks/files/spells/bramball.xml", 1)
 			c.fire_rate_wait = c.fire_rate_wait + 4
 		end,
 	},
@@ -1579,6 +1595,49 @@ local to_insert = {
 			c.fire_rate_wait = c.fire_rate_wait + 8
 			c.extra_entities = c.extra_entities .. "mods/grahamsperks/files/spells/divebomb.xml,"
 			draw_actions(1, true)
+		end,
+	},
+	{
+		id                     = "GRAHAM_MIXUP",
+		name                   = "$graham_name_mixup",
+		description            = "$graham_desc_mixup",
+		sprite                 = "mods/grahamsperks/files/spells/mixup.png",
+		type                   = ACTION_TYPE_MODIFIER,
+		spawn_level            = "2,3,4,5,10",
+		spawn_probability      = "0.5,0.5,0.5,0.5,0.5",
+		price                  = 50,
+		mana                   = 24,
+		action                 = function()
+			draw_actions(1, true)
+
+			if reflecting then
+				current_reload_time = current_reload_time - 30
+				c.damage_critical_chance = c.damage_critical_chance + 30
+			else
+				local shooter = EntityGetRootEntity(GetUpdatedEntityID())
+				local inv2comp = EntityGetFirstComponentIncludingDisabled(shooter, "Inventory2Component")
+				local activeitem = 0
+				if inv2comp then
+					activeitem = ComponentGetValue2(inv2comp, "mActiveItem")
+				end
+				local projs = 0
+				local mods  = 0
+				if EntityHasTag(activeitem, "wand") then
+					local spells = EntityGetAllChildren(activeitem) or {}
+					for i, j in ipairs(spells) do
+						if EntityHasTag(j, "graham_spelltype_projectile") then
+							projs = projs + 1
+						elseif EntityHasTag(j, "graham_spelltype_modifier") then
+							mods = mods + 1
+						end
+					end
+				end
+				if projs > mods then
+					current_reload_time = current_reload_time - 30
+				else
+					c.damage_critical_chance = c.damage_critical_chance + 30
+				end
+			end
 		end,
 	},
 }
