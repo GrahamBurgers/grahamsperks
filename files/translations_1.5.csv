@@ -45,6 +45,8 @@ graham_name_divebomb,Dive-bomb,,,,,,,,,,,,
 graham_desc_divebomb,A projectile will swiftly fall if there are any enemies below it,,,,,,,,,,,,
 graham_name_mixup,Mix-up,,,,,,,,,,,,
 graham_desc_mixup,"Decreases recharge time if the wand has more projectiles than modifiers; otherwise, increases crit chance",,,,,,,,,,,,
+graham_name_sliceshield,Segmented Shield,,,,,,,,,,,,
+graham_desc_sliceshield,An energy shield made of eight different segments,,,,,,,,,,,,
 OTHER,,,,,,,,,,,,
 graham_magicskin,"Deducted $0 max health",,,,,,,,,,,,
 graham_minitank_name,Pikku-tankki,,,,,,,,,,,,doesn't need to be translated

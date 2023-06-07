@@ -1640,6 +1640,23 @@ local to_insert = {
 			end
 		end,
 	},
+	{
+		id                = "GRAHAM_SLICESHIELD",
+		name              = "$graham_name_sliceshield",
+		description       = "$graham_desc_sliceshield",
+		sprite            = "mods/grahamsperks/files/spells/sliceshield.png",
+		type              = ACTION_TYPE_PASSIVE,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "1,0.4,0.4,0.4",
+		price             = 120,
+		mana              = 20,
+		custom_xml_file   = "mods/grahamsperks/files/spells/sliceshield.xml",
+		action            = function()
+			-- does nothing to the projectiles
+			current_reload_time = current_reload_time + 12
+			draw_actions(1, true)
+		end,
+	},
 }
 for i, v in ipairs(to_insert) do
 	table.insert(actions, v)
