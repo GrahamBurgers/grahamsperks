@@ -11,3 +11,5 @@ if comps ~= nil then
         end
     end
 end
+
+EntityAddTag(me, "graham_midas_curseable")

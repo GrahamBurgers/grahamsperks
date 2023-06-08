@@ -34,27 +34,6 @@ if ModSettingGet("grahamsperks.creepy") == "yes" then
 	ModMaterialsFileAdd("mods/grahamsperks/files/materials/reactions_creepy.xml")
 end
 
-local path = ""
-local content = ""
-local year, month, day, hour, minute, second = GameGetDateAndTimeLocal()
-SetRandomSeed(second, minute)
-local lifelottery = Random(1, 6)
-if ModSettingGet("grahamsperks.lifelottery") == "yes" then
-	if (lifelottery == 5) then
-		path = "mods/grahamsperks/files/perks/perk_list.lua"
-		content = ModTextFileGetContent(path)
-		content = content:gsub("spoopyboi2.png", "mine.png")
-		content = content:gsub("spoopyboi.png", "mine2.png")
-		ModTextFileSetContent(path, content)
-	elseif (lifelottery == 6) then
-		path = "mods/grahamsperks/files/perks/perk_list.lua"
-		content = ModTextFileGetContent(path)
-		content = content:gsub("spoopyboi2.png", "threehamburgers.png")
-		content = content:gsub("spoopyboi.png", "threehamburgers.png")
-		ModTextFileSetContent(path, content)
-	end
-end
-
 if ModSettingGet("grahamsperks.perks") == "yes" then
 	ModLuaFileAppend("data/scripts/perks/perk_list.lua", "mods/grahamsperks/files/perks/perk_list.lua")
 end
@@ -133,8 +112,8 @@ content = content:gsub("<mBufferedPixelScenes>", [[<mBufferedPixelScenes>
   <PixelScene pos_x="-16117" pos_y="-7015" just_load_an_entity="mods/grahamsperks/files/pickups/chest_mini.xml" />
   <PixelScene pos_x="-16038" pos_y="-7010" just_load_an_entity="mods/grahamsperks/files/entities/fireplace_worse.xml" />
   <PixelScene pos_x="7412" pos_y="6175" just_load_an_entity="mods/grahamsperks/files/pixelscenes/heart.xml" />
-  <PixelScene pos_x="12055" pos_y="2800" just_load_an_entity="mods/grahamsperks/files/pixelscenes/wealth.xml" />
-  <PixelScene pos_x="12055" pos_y="2830" just_load_an_entity="mods/grahamsperks/files/entities/midas_curse.xml" />
+  <PixelScene pos_x="12055" pos_y="2700" just_load_an_entity="mods/grahamsperks/files/pixelscenes/wealth.xml" />
+  <PixelScene pos_x="12055" pos_y="2730" just_load_an_entity="mods/grahamsperks/files/entities/midas_curse.xml" />
 ]])
 ModTextFileSetContent(biome_path, content)
 

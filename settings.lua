@@ -102,6 +102,7 @@ mod_settings =
 		change_fn = mod_setting_change_callback, -- Called when the user interact with the settings widget.
 		},
 		{
+		--[[
 		id = "lifelottery",
 		ui_name = "Life Lottery alternate costumes",
 		ui_description = "Should Life Lottery spawn with a random costume?",
@@ -110,6 +111,7 @@ mod_settings =
 		scope = MOD_SETTING_SCOPE_NEW_GAME,
 		change_fn = mod_setting_change_callback, -- Called when the user interact with the settings widget.
 		},
+		]]--
 		{
 		id = "luckyclover",
 		ui_name = "Lucky Clover great chests",
