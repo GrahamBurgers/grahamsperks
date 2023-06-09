@@ -16,6 +16,7 @@ end
 ModMaterialsFileAdd("mods/grahamsperks/files/materials/materials.xml")
 ModMaterialsFileAdd("mods/grahamsperks/files/materials/materials_reactions.xml")
 ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_append.lua" )
+ModLuaFileAppend( "data/scripts/items/potion_aggressive.lua", "mods/grahamsperks/files/materials/potion_aggressive.lua" )
 
 	-- Extra mod compatibility
 if ModIsEnabled("more-stuff") then

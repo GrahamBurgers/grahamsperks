@@ -389,8 +389,9 @@ local to_insert = {
 		custom_xml_file     = "mods/grahamsperks/files/spells/teleport_fast_card.xml",
 		related_projectiles = { "mods/grahamsperks/files/spells/teleport_fast.xml" },
 		action              = function()
-			add_projectile("mods/grahamsperks/files/spells/teleport_fast.xml")
 			c.fire_rate_wait = c.fire_rate_wait + 35
+			if refecting then return end
+			add_projectile("mods/grahamsperks/files/spells/teleport_fast.xml")
 		end,
 	},
 	{
@@ -1545,6 +1546,7 @@ local to_insert = {
 			draw_actions(1, true)
 		end,
 	},
+	--[[
 	{
 		id                  = "GRAHAM_ECHO_BUBBLE",
 		name                = "$graham_name_echo_bubble",
@@ -1563,6 +1565,7 @@ local to_insert = {
 			c.damage_critical_chance = c.damage_critical_chance + 15
 		end,
 	},
+	]]--
 	{
 		id                = "GRAHAM_PASSIVES",
 		name              = "$graham_name_passives",

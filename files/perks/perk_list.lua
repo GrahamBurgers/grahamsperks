@@ -650,6 +650,20 @@ local to_insert = {
   end,
 },]]--
 {
+  id = "GRAHAM_LUKKI_MOUNT",
+  ui_name = "$perkname_graham_lukkimount",
+  ui_description = "$perkdesc_graham_lukkimount",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/lukkimount.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/lukkimount.png",
+  usable_by_enemies = false,
+  not_in_default_perk_pool = false,
+  stackable = STACKABLE_YES,
+  func = function( entity_perk_item, entity_who_picked, item_name )
+    local x, y = EntityGetTransform(entity_who_picked)
+    EntityLoad("mods/grahamsperks/files/entities/lukki_mount/lukki_mount.xml", x, y)
+  end,
+},
+{
   id = "GRAHAM_MAP",
   ui_name = "$perkname_graham_map",
   ui_description = "$perkdesc_graham_map",
