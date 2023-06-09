@@ -661,6 +661,8 @@ local to_insert = {
   func = function( entity_perk_item, entity_who_picked, item_name )
     local x, y = EntityGetTransform(entity_who_picked)
     EntityLoad("mods/grahamsperks/files/entities/lukki_mount/lukki_mount.xml", x, y)
+    perk_pickup_event("LUKKI")
+    add_lukkiness_level(entity_who_picked)
   end,
 },
 {
