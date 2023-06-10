@@ -666,6 +666,22 @@ local to_insert = {
   end,
 },
 {
+  id = "GRAHAM_WAND_KICK",
+  ui_name = "$perkname_graham_wandkick",
+  ui_description = "$perkdesc_graham_wandkick",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/wandkick.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/wandkick.png",
+  usable_by_enemies = false,
+  not_in_default_perk_pool = false,
+  stackable = STACKABLE_NO,
+  func = function( entity_perk_item, entity_who_picked, item_name )
+    EntityAddComponent(entity_who_picked, "LuaComponent", {
+      script_kick="mods/grahamsperks/files/scripts/wandkick.lua",
+      execute_every_n_frame="-1",
+    })
+  end,
+},
+{
   id = "GRAHAM_MAP",
   ui_name = "$perkname_graham_map",
   ui_description = "$perkdesc_graham_map",

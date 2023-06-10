@@ -187,11 +187,13 @@ local to_insert = {
 		spawn_level       = "1,2,3,4,5,6",
 		spawn_probability = "1,1,0.6,0.6,1,1",
 		price             = 200,
-		mana              = -60,
+		mana              = -120,
 		action            = function()
 			current_reload_time = current_reload_time + 10
 			draw_actions(1, true)
 			if reflecting then return end
+
+			local AMOUNT = 40
 
 			local me = GetUpdatedEntityID()
 			local inv_comp = EntityGetFirstComponentIncludingDisabled(me, "Inventory2Component")
@@ -201,7 +203,7 @@ local to_insert = {
 
 			local comp = EntityGetFirstComponentIncludingDisabled(me, "AbilityComponent") or 0
 			if comp ~= 0 then
-				ComponentSetValue2(comp, "mana_max", ComponentGetValue2(comp, "mana_max") - 10)
+				ComponentSetValue2(comp, "mana_max", ComponentGetValue2(comp, "mana_max") - AMOUNT)
 				if EntityGetComponent(me, "LuaComponent", "mana_debt_script") == nil then
 					EntityAddComponent2(me, "LuaComponent", {
 						_tags="mana_debt_script,enabled_in_hand,enabled_in_world,enabled_in_inventory",
@@ -212,11 +214,11 @@ local to_insert = {
 
 				local storage = EntityGetFirstComponentIncludingDisabled(me, "VariableStorageComponent", "mana_debt")
 				if storage ~= nil then
-					ComponentSetValue2(storage, "value_int", ComponentGetValue2(storage, "value_int") + 10)
+					ComponentSetValue2(storage, "value_int", ComponentGetValue2(storage, "value_int") + AMOUNT)
 				else
 					EntityAddComponent2(me, "VariableStorageComponent", {
 						_tags="mana_debt,enabled_in_hand,enabled_in_world",
-						value_int=10
+						value_int=AMOUNT
 					})
 				end
 			end
@@ -827,8 +829,8 @@ local to_insert = {
 		description         = "$graham_desc_mini_heatwave",
 		sprite              = "mods/grahamsperks/files/spells/mini_heatwave.png",
 		type                = ACTION_TYPE_PASSIVE,
-		spawn_level         = "1,2,3,5,6,10",
-		spawn_probability   = "0.3,1,0.5,1,1,0.2",
+		spawn_level         = "1,2,3,5,6",
+		spawn_probability   = "0.3,1,0.5,1,1",
 		spawn_requires_flag = "graham_minimimic_killed",
 		price               = 180,
 		mana                = 0,
@@ -844,8 +846,8 @@ local to_insert = {
 		description         = "$graham_desc_mini_freezefield",
 		sprite              = "mods/grahamsperks/files/spells/mini_freezefield.png",
 		type                = ACTION_TYPE_PASSIVE,
-		spawn_level         = "1,2,3,5,6,10",
-		spawn_probability   = "0.3,1,0.5,1,1,0.2",
+		spawn_level         = "1,2,3,5,6",
+		spawn_probability   = "0.3,1,0.5,1,1",
 		spawn_requires_flag = "graham_minimimic_killed",
 		price               = 180,
 		mana                = 0,
@@ -861,8 +863,8 @@ local to_insert = {
 		description         = "$graham_desc_mini_dissolvepowders",
 		sprite              = "mods/grahamsperks/files/spells/mini_dissolvepowders.png",
 		type                = ACTION_TYPE_PASSIVE,
-		spawn_level         = "1,2,3,5,6,10",
-		spawn_probability   = "0.3,1,0.5,1,1,0.2",
+		spawn_level         = "1,2,3,5,6",
+		spawn_probability   = "0.3,1,0.5,1,1",
 		spawn_requires_flag = "graham_minimimic_killed",
 		price               = 180,
 		mana                = 0,
@@ -878,8 +880,8 @@ local to_insert = {
 		description         = "$graham_desc_mini_attractgold",
 		sprite              = "mods/grahamsperks/files/spells/mini_attractgold.png",
 		type                = ACTION_TYPE_PASSIVE,
-		spawn_level         = "1,2,3,5,6,10",
-		spawn_probability   = "0.3,1,0.5,1,1,0.2",
+		spawn_level         = "1,2,3,5,6",
+		spawn_probability   = "0.3,1,0.5,1,1",
 		spawn_requires_flag = "graham_minimimic_killed",
 		price               = 180,
 		mana                = 0,
@@ -895,8 +897,8 @@ local to_insert = {
 		description         = "$graham_desc_mini_electricity",
 		sprite              = "mods/grahamsperks/files/spells/mini_electricity.png",
 		type                = ACTION_TYPE_PASSIVE,
-		spawn_level         = "1,2,3,5,6,10",
-		spawn_probability   = "0.3,1,0.5,1,1,0.2",
+		spawn_level         = "1,2,3,5,6",
+		spawn_probability   = "0.3,1,0.5,1,1",
 		spawn_requires_flag = "graham_minimimic_killed",
 		price               = 180,
 		mana                = 0,
@@ -912,8 +914,8 @@ local to_insert = {
 		description         = "$graham_desc_mini_noknockback",
 		sprite              = "mods/grahamsperks/files/spells/mini_noknockback.png",
 		type                = ACTION_TYPE_PASSIVE,
-		spawn_level         = "1,2,3,5,6,10",
-		spawn_probability   = "0.3,1,0.5,1,1,0.2",
+		spawn_level         = "1,2,3,5,6",
+		spawn_probability   = "0.3,1,0.5,1,1",
 		spawn_requires_flag = "graham_minimimic_killed",
 		price               = 180,
 		mana                = 0,
@@ -929,8 +931,8 @@ local to_insert = {
 		description         = "$graham_desc_mini_midasmeat",
 		sprite              = "mods/grahamsperks/files/spells/mini_midasmeat.png",
 		type                = ACTION_TYPE_PASSIVE,
-		spawn_level         = "1,2,3,5,6,10",
-		spawn_probability   = "0.3,1,0.5,1,1,0.2",
+		spawn_level         = "1,2,3,5,6",
+		spawn_probability   = "0.3,1,0.5,1,1",
 		spawn_requires_flag = "graham_minimimic_killed",
 		price               = 180,
 		mana                = 0,
@@ -1183,8 +1185,8 @@ local to_insert = {
 		description         = "$graham_desc_redhands",
 		sprite              = "mods/grahamsperks/files/spells/redhands.png",
 		type                = ACTION_TYPE_PROJECTILE,
-		spawn_level         = "1,2,3,4,10",
-		spawn_probability   = "0.1,0.2,0.3,0.4,1",
+		spawn_level         = "1,2,3,4",
+		spawn_probability   = "0.1,0.2,0.3,0.4",
 		price               = 200,
 		mana                = 35,
 		related_projectiles = { "mods/grahamsperks/files/spells/redhand.xml", 3 },
@@ -1202,8 +1204,8 @@ local to_insert = {
 		description         = "$graham_desc_handportal",
 		sprite              = "mods/grahamsperks/files/spells/hand_portal.png",
 		type                = ACTION_TYPE_PROJECTILE,
-		spawn_level         = "1,2,3,4,10",
-		spawn_probability   = "0.05,0.1,0.15,0.2,0.5",
+		spawn_level         = "1,2,3,4",
+		spawn_probability   = "0.05,0.1,0.15,0.2",
 		price               = 200,
 		mana                = 100,
 		max_uses            = 8,

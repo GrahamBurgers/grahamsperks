@@ -1,4 +1,4 @@
-<Entity tags="enemy,mortal,hittable,homing_target,teleportable_NOT,music_energy_100,lukki,glue_NOT,touchmagic_immunity" name="$graham_lukkimount_name" >	
+<Entity tags="teleportable_NOT,lukki,glue_NOT,touchmagic_immunity" name="$graham_lukkimount_name" >	
 
 	<SpriteComponent 
 		image_file="mods/grahamsperks/files/entities/lukki_mount/sprite.xml"
@@ -26,16 +26,17 @@
 
 	<AreaDamageComponent
 		_tags="enabled_in_world"
-		circle_radius="16"
+		circle_radius="18"
 		damage_per_frame="0.16"
 		damage_type="DAMAGE_MELEE"
 		entity_responsible="0"
 		death_cause="$graham_lukkimount_name"
+		entities_with_tag="enemy"
 		update_every_n_frame="5"
-		aabb_min.x="-8"
-		aabb_min.y="-8"
-		aabb_max.x="8"
-		aabb_max.y="8"
+		aabb_min.x="-10"
+		aabb_min.y="-10"
+		aabb_max.x="10"
+		aabb_max.y="10"
 	></AreaDamageComponent>
 
 	<LuaComponent
