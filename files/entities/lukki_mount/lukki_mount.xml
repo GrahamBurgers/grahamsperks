@@ -127,6 +127,8 @@
 
 	<PhysicsBodyComponent 
 		force_add_update_areas="1"
+		hax_fix_going_through_ground="1"
+		hax_fix_going_through_sand="1"
 		allow_sleep="0" 
 		angular_damping="0.02" 
 		fixed_rotation="1" 

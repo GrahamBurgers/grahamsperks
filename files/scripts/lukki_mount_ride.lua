@@ -1,12 +1,33 @@
 local me = GetUpdatedEntityID()
 local varsto = EntityGetFirstComponent(me, "VariableStorageComponent", "player_riding_id") or 0
-local player_riding = ComponentGetValue2(varsto, "value_int")
+local player_riding = ComponentGetValue2(varsto, "value_int") or 0
 if player_riding ~= 0 then
     local x, y = EntityGetTransform(me)
+    if EntityHasTag(player_riding, "player_unit") == false then
+        -- panic
+        local substitute = EntityGetClosestWithTag(x, y, "player_unit")
+        local x2, y2 = EntityGetTransform(substitute)
+        local kick = EntityGetFirstComponentIncludingDisabled(substitute, "KickComponent") or 0
+        local comp = EntityGetFirstComponent(me, "InteractableComponent") or 0
+        ComponentSetValue2(comp, "name", "graham_lukki_mount")
+        ComponentSetValue2(comp, "ui_text", "$graham_lukki_mount")
+        EntitySetComponentsWithTagEnabled(me, "graham_lukki_mount", false)
+        EntitySetComponentsWithTagEnabled(me, "graham_lukki_dismount", true)
+        ComponentSetValue2(varsto, "value_int", 0)
+        ComponentSetValue2(kick, "player_kickforce", 28)
+        EntityLoad( "data/entities/particles/teleportation_source.xml", x, y )
+        EntityLoad( "data/entities/particles/teleportation_target.xml", x2, y2 )
+        EntityApplyTransform(me, x2, y2)
+        return
+    end
     local x2, y2 = EntityGetTransform(player_riding)
     local distance = math.abs( x - x2 ) + math.abs( y - y2)
     if distance < 80 then
         EntityApplyTransform(player_riding, x, y - 4)
+        local chomp = EntityGetFirstComponent(player_riding, "CharacterDataComponent")
+        if chomp ~= nil then
+            ComponentSetValue2(chomp, "is_on_ground", true)
+        end
     else
         EntityLoad( "data/entities/particles/teleportation_source.xml", x, y )
         EntityLoad( "data/entities/particles/teleportation_target.xml", x2, y2 )
