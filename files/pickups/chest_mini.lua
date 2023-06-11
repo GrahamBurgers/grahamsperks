@@ -166,6 +166,8 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 			EntityAddComponent2(eid, "LuaComponent", {
 				script_source_file="mods/grahamsperks_chinese/files/scripts/tank_teleport.lua"
 			})
+			local comp = EntityGetFirstComponentIncludingDisabled(eid, "GenomeDataComponent") or 0
+			ComponentSetValue2(comp, "herd_id", StringToHerdId("player"))
 		end
 	end
 

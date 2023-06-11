@@ -18,7 +18,7 @@ for i, enemy in ipairs(enemies) do
             local vel_x,vel_y = ComponentGetValueVector2( comp, "mVelocity")
         
             vel_y = math.abs(vel_x) * 1.2
-            vel_x = ((x2 - x) * 8) - (DISTANCE / math.abs(y2 - y)) -- try to course-correct to the enemy
+            vel_x = ((x2 - x) * 10) - (DISTANCE / math.abs(y2 - y)) -- try to course-correct to the enemy
         
             ComponentSetValueVector2( comp, "mVelocity", vel_x, vel_y)
         end)

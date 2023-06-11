@@ -2,8 +2,8 @@ local entity = EntityGetRootEntity(GetUpdatedEntityID())
 local x, y = EntityGetTransform(entity)
 local x2, y2 = 123, 321
 
--- try 20 times to teleport, do nothing if it fails
-for i = 1, 20 do
+-- try 80 times to teleport, do nothing if it fails
+for i = 1, 80 do
     SetRandomSeed(x + i, y + GameGetFrameNum())
     x2 = x + Random(-200, 200) * 3
     y2 = y + Random(-100, 100)
@@ -15,7 +15,7 @@ for i = 1, 20 do
         EntityLoad( "data/entities/particles/teleportation_target.xml", x2, y2 )
         EntityApplyTransform(entity, x2, y2)
         GamePlaySound("data/audio/Desktop/misc.bank", "game_effect/teleport/tick", x2, y2)
-        
+        GamePrint("$log_teleported")
         break
     end
 end

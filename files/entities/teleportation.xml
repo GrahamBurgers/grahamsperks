@@ -19,7 +19,7 @@
 	</GameEffectComponent >
 
     <LifetimeComponent
-    lifetime="2"
+        lifetime="120"
     ></LifetimeComponent>
 
 </Entity>

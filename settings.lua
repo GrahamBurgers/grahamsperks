@@ -21,9 +21,11 @@ RemoveFlagPersistent("graham_progress_sheep") -- sheepification
 RemoveFlagPersistent("graham_progress_robot") -- technical prowess
 RemoveFlagPersistent("graham_progress_lucky") -- lucky day
 RemoveFlagPersistent("graham_progress_tech") -- materialist
+RemoveFlagPersistent("graham_progress_lukki") -- lukki mount
 RemoveFlagPersistent("graham_progress_immunity") -- immmunity aura
 RemoveFlagPersistent("graham_minimimic_killed") -- mini perk spells
 RemoveFlagPersistent("graham_bloodymimic_killed") -- magic skin
+
 end
 
 function unlock_all_data()
@@ -32,6 +34,7 @@ AddFlagPersistent("graham_progress_sheep")
 AddFlagPersistent("graham_progress_robot")
 AddFlagPersistent("graham_progress_lucky")
 AddFlagPersistent("graham_progress_tech")
+AddFlagPersistent("graham_progress_lukki")
 AddFlagPersistent("graham_progress_immunity")
 AddFlagPersistent("graham_minimimic_killed")
 AddFlagPersistent("graham_bloodymimic_killed")
