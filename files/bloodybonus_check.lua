@@ -3,6 +3,23 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
 	orig_death(damage_type_bit_field, damage_message, entity_thats_responsible, drop_items)
 	
 	if EntityHasTag(entity_thats_responsible, "player_unit") then
+
+		if GameHasFlagRun("PERK_PICKED_GRAHAM_REPOSSESSION") then
+			local me = GetUpdatedEntityID()
+			local x, y = EntityGetTransform(me)
+			local projectiles = EntityGetInRadiusWithTag(x, y, 500, "projectile") or {}
+			for i = 1, #projectiles do
+				local comps = EntityGetComponent(projectiles[i], "ProjectileComponent") or {}
+				for j = 1, #comps do
+					if ComponentGetValue2(comps[j], "mWhoShot") == me then
+						ComponentSetValue2(comps[j], "explosion_dont_damage_shooter", true)
+						ComponentSetValue2(comps[j], "mWhoShot", entity_thats_responsible)
+						ComponentSetValue2(comps[j], "never_hit_player", true)
+						GamePrint("worked")
+					end
+				end
+			end
+		end
 	
 		local x, y = EntityGetTransform(entity_thats_responsible)
 

@@ -115,6 +115,9 @@ content = content:gsub("<mBufferedPixelScenes>", [[<mBufferedPixelScenes>
   <PixelScene pos_x="7412" pos_y="6175" just_load_an_entity="mods/grahamsperks/files/pixelscenes/heart.xml" />
   <PixelScene pos_x="12055" pos_y="2700" just_load_an_entity="mods/grahamsperks/files/pixelscenes/wealth.xml" />
   <PixelScene pos_x="12055" pos_y="2730" just_load_an_entity="mods/grahamsperks/files/entities/midas_curse.xml" />
+  <PixelScene pos_x="1800" pos_y="6600" just_load_an_entity="mods/grahamsperks/files/pixelscenes/egg.xml" />
+  <PixelScene pos_x="1800" pos_y="6600" just_load_an_entity="mods/grahamsperks/files/pickups/egg.xml" />
+  <PixelScene pos_x="1800" pos_y="6600" just_load_an_entity="mods/grahamsperks/files/entities/books/eggbook.xml" />
 ]])
 ModTextFileSetContent(biome_path, content)
 

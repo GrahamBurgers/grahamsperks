@@ -5,6 +5,7 @@ function kick( entity_who_kicked )
     for i = 1, #wands do
         local x2, y2 = EntityGetTransform(wands[i])
         if EntityGetRootEntity(wands[i]) == wands[i] then
+            local removed = false
             local spells = EntityGetAllChildren(wands[i]) or 0
             if spells ~= 0 then
                 for j = 1, #spells do
@@ -21,10 +22,10 @@ function kick( entity_who_kicked )
                             EntityApplyTransform(spells[j], x2, y2)
                             local velcomp = EntityGetFirstComponentIncludingDisabled(spells[j], "VelocityComponent") or 0
                             ComponentSetValue2(velcomp, "mVelocity", Random(-100, 100), Random(-50, -100))
+                            removed = true
                         end
                     end
                 end
-                GamePlaySound("data/audio/Desktop/items.bank", "magic_wand/mana_fully_recharged", x2, y2)
 
                 if EntityGetFirstComponent(wands[i], "ItemCostComponent") ~= nil and BiomeMapGetName(x, y) == "$biome_holymountain" then
                     -- player stole spells from a wand in a shop
@@ -32,7 +33,6 @@ function kick( entity_who_kicked )
                     GamePlaySound( "data/audio/Desktop/event_cues.bank", "event_cues/angered_the_gods/create", x2, y2 )
                 	if( GlobalsGetValue( "TEMPLE_PEACE_WITH_GODS" ) == "1" ) then
                         GamePrintImportant( "$logdesc_temple_peace_temple_break", "" )
-    
                     else
                         GameScreenshake( 150 )
                         dofile_once( "data/scripts/biomes/temple_shared.lua" )
@@ -51,14 +51,17 @@ function kick( entity_who_kicked )
                         -- poof shop wands
                         local poof = EntityGetInRadiusWithTag(x2, y2, 150, "wand")
                         for q = 1, #poof do
-                            local x3, y3 = EntityGetTransform(poof[q])
-                            if EntityGetFirstComponent(poof[q], "ItemCostComponent") ~= nil and BiomeMapGetName(x3, y3) == "$biome_holymountain" then
-                                EntityLoad("data/entities/particles/poof_blue.xml", x3, y3)
+                            if EntityGetFirstComponent(poof[q], "ItemCostComponent") ~= nil and BiomeMapGetName(EntityGetTransform(poof[q])) == "$biome_holymountain" then
+                                EntityLoad("data/entities/particles/poof_blue.xml", EntityGetTransform(poof[q]))
                                 EntityKill(poof[q])
                             end
                         end
                     end
                 end
+            end
+
+            if removed then
+                GamePlaySound("data/audio/Desktop/items.bank", "magic_wand/mana_fully_recharged", x2, y2)
             else
                 GamePlaySound("data/audio/Desktop/items.bank", "magic_wand/casting_empty_wand", x2, y2)
             end

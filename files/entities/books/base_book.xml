@@ -1,4 +1,4 @@
-<Entity>
+<Entity tags="scroll">
 
 	<UIInfoComponent
 		name="$booktitle01"
@@ -78,5 +78,8 @@
 			deck_capacity="0"
 		></gun_config>
 	</AbilityComponent>
+
+	<BookComponent>
+	</BookComponent>
 
 </Entity>

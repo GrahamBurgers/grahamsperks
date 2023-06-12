@@ -1,0 +1,133 @@
+<Entity name="$graham_lukkiegg" tags="hittable,teleportable_NOT,item_physics,item_pickup,grahams_things" >
+  <Base file="data/entities/base_item_projectile.xml">
+  </Base>
+
+  <!-- physical presence -->
+  
+  <PhysicsBodyComponent 
+    _tags="enabled_in_world"
+    uid="1" 
+    allow_sleep="1" 
+    angular_damping="0"
+    force_add_update_areas="1" 
+    fixed_rotation="1" 
+    is_bullet="0" 
+    linear_damping="0"
+    auto_clean="0"
+    on_death_leave_physics_body="1"
+    hax_fix_going_through_ground="1"
+  ></PhysicsBodyComponent>
+
+  <PhysicsShapeComponent
+		is_circle="1"
+		radius_x="4"
+		radius_y="4"
+		friction="0.0"
+		restitution="0.3" >
+	</PhysicsShapeComponent>
+  
+  <PhysicsThrowableComponent
+    max_throw_speed="280"
+    throw_force_coeff="1.8"
+  ></PhysicsThrowableComponent>
+
+  <VelocityComponent
+    _tags="enabled_in_world"
+  ></VelocityComponent>
+  
+  <!-- item -->
+
+  <SpriteComponent
+    _tags="enabled_in_hand,enabled_in_world"
+    _enabled="1"
+    offset_x="4"
+    offset_y="4"
+    image_file="mods/grahamsperks/files/pickups/egg.png"
+  ></SpriteComponent>
+
+  <ItemComponent
+    _tags="enabled_in_world"
+    item_name="$graham_lukkiegg"
+    ui_description="$graham_lukkiegg_desc"
+    ui_sprite="mods/grahamsperks/files/pickups/egg_ui.png"
+    max_child_items="0"
+    is_pickable="1"
+    is_equipable_forced="1"
+    preferred_inventory="QUICK"
+  ></ItemComponent>
+
+  <UIInfoComponent
+    _tags="enabled_in_world"
+    name="$graham_lukkiegg">
+  </UIInfoComponent>
+	
+	<AbilityComponent
+		ui_name="$graham_lukkiegg"
+		throw_as_item="1"
+		><gun_config
+			deck_capacity="0"
+		></gun_config>
+	</AbilityComponent>
+
+  <LightComponent 
+    _tags="enabled_in_hand,enabled_in_world,item_identified"
+    _enabled="1" 
+    radius="16"
+    fade_out_time="1.5" 
+    r="0"
+    g="255"
+    b="0" >
+  </LightComponent>
+
+  <!-- animal AI -->
+
+  <PathFindingComponent 
+    _tags="enabled_in_world"
+		can_dive="1" 
+		can_fly="1" 
+		can_jump="0" 
+		can_swim_on_surface="1" 
+		can_walk="1" 
+		cost_of_flying="500" 
+		distance_to_reach_node_x="20" 
+		distance_to_reach_node_y="20" 
+		frames_between_searches="20" 
+		frames_to_get_stuck="120" 
+		initial_jump_lob="1" 
+		initial_jump_max_distance_x="100" 
+		initial_jump_max_distance_y="60" 
+		iterations_max_no_goal="9999999" 
+		iterations_max_with_goal="145000" 
+		jump_speed="200" 
+		max_jump_distance_from_camera="400" 
+		search_depth_max_no_goal="120" 
+		search_depth_max_with_goal="145000" 
+		y_walking_compensation="8" >
+	</PathFindingComponent>
+
+  <PhysicsAIComponent
+    _tags="enabled_in_world"
+		target_vec_max_len="15.0"
+		force_coeff="7.0"
+		force_balancing_coeff="0.8"
+		force_max="50"
+		torque_coeff="50"
+		torque_balancing_coeff="4"
+		torque_max="30.0"
+		damage_deactivation_probability="0"
+		damage_deactivation_time_min="2"
+		damage_deactivation_time_max="10" >
+	</PhysicsAIComponent>
+
+	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb_tiny.xml" />  </Entity>
+	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb_tiny.xml" />  </Entity>
+	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb_tiny.xml" />  </Entity>
+	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb_tiny.xml" />  </Entity>
+	<Entity>  <Base file="data/entities/animals/lukki/lukki_feet/lukki_limb_tiny.xml" />  </Entity>
+
+  <LuaComponent
+      _tags="enabled_in_hand,enabled_in_world"
+      script_source_file="mods/grahamsperks/files/scripts/shield_fix.lua"
+  ></LuaComponent>
+
+</Entity>

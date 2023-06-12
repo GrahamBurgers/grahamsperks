@@ -682,6 +682,18 @@ local to_insert = {
   end,
 },
 {
+  id = "GRAHAM_REPOSSESSION",
+  ui_name = "$perkname_graham_repossession",
+  ui_description = "$perkdesc_graham_repossession",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/repossession.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/repossession.png",
+  usable_by_enemies = false,
+  not_in_default_perk_pool = false,
+  stackable = STACKABLE_NO,
+  func = function( entity_perk_item, entity_who_picked, item_name )
+  end,
+},
+{
   id = "GRAHAM_MAP",
   ui_name = "$perkname_graham_map",
   ui_description = "$perkdesc_graham_map",
