@@ -15,7 +15,7 @@ for i = 1, 80 do
         EntityLoad( "data/entities/particles/teleportation_target.xml", x2, y2 )
         EntityApplyTransform(entity, x2, y2)
         GamePlaySound("data/audio/Desktop/misc.bank", "game_effect/teleport/tick", x2, y2)
-        GamePrint("$log_teleported")
+        if EntityHasTag(entity, "player_unit") then GamePrint("$log_teleported") end
         break
     end
 end

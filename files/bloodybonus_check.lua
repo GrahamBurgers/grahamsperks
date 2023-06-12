@@ -10,12 +10,20 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
 			local projectiles = EntityGetInRadiusWithTag(x, y, 500, "projectile") or {}
 			for i = 1, #projectiles do
 				local comps = EntityGetComponent(projectiles[i], "ProjectileComponent") or {}
+				local yes = false
 				for j = 1, #comps do
 					if ComponentGetValue2(comps[j], "mWhoShot") == me then
 						ComponentSetValue2(comps[j], "explosion_dont_damage_shooter", true)
 						ComponentSetValue2(comps[j], "mWhoShot", entity_thats_responsible)
 						ComponentSetValue2(comps[j], "never_hit_player", true)
-						GamePrint("worked")
+						yes = true
+					end
+				end
+				if yes == true then
+					local sprites = EntityGetComponent(projectiles[i], "SpriteComponent") or {}
+					for k = 1, #sprites do
+						local alpha = ComponentGetValue2(sprites[k], "alpha") or 1
+						ComponentSetValue2(sprites[k], "alpha", alpha / 4)
 					end
 				end
 			end

@@ -13,7 +13,7 @@ perkdesc_graham_lukkimount,A friendly mountable spider is summoned to assist you
 perkname_graham_wandkick,Kickstraction,,,,,,,,,,,,
 perkdesc_graham_wandkick,Kicking near a wand will instantly remove all of its spells.,,,,,,,,,,,,
 perkname_graham_repossession,Repossession,,,,,,,,,,,,
-perkdesc_graham_repossession,"When you kill an enemy, their existing projectiles become yours.",,,,,,,,,,,,
+perkdesc_graham_repossession,"When you kill an enemy, their existing projectiles become friendly.",,,,,,,,,,,,
 SPELLS,,,,,,,,,,,,
 graham_name_manaheart,Mana Heartbreak,,,,,,,,,,,,
 graham_desc_manaheart,"Instantly adds 120 mana to the wand, but temporarily decreases its max mana by 40",,,,,,,,,,,,
