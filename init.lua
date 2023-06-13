@@ -1,14 +1,14 @@
 local translations = ModTextFileGetContent( "data/translations/common.csv" );
 local new_translations
 if translations ~= nil then
-    while translations:find("\r\n\r\n") do
-        translations = translations:gsub("\r\n\r\n","\r\n");
-    end
-    new_translations = ModTextFileGetContent( "mods/grahamsperks/files/translations.csv" );
-    translations = translations .. new_translations;
+	while translations:find("\r\n\r\n") do
+		translations = translations:gsub("\r\n\r\n","\r\n");
+	end
+	new_translations = ModTextFileGetContent( "mods/grahamsperks/files/translations.csv" );
+	translations = translations .. new_translations;
 	new_translations = ModTextFileGetContent( "mods/grahamsperks/files/translations_1.5.csv" );
-    translations = translations .. new_translations;
-    ModTextFileSetContent( "data/translations/common.csv", translations );
+	translations = translations .. new_translations;
+	ModTextFileSetContent( "data/translations/common.csv", translations );
 end
 
 -- Polytools isn't necessary any more! thank you petri, you are a wonderful man
@@ -157,16 +157,22 @@ content = ModTextFileGetContent(path)
 content = content:gsub("\"GRENADE\"", "\"GRENADE\",\"GRAHAM_BARREL\"")
 ModTextFileSetContent(path, content)
 
+-- put glow dart in starting wands
+path = "data/scripts/gun/procedural/starting_wand.lua"
+content = ModTextFileGetContent(path)
+content = content:gsub("\"SPITTER\"", "\"SPITTER\",\"GRAHAM_GLOW_DART\"")
+ModTextFileSetContent(path, content)
+
 -- temple altar append
 path = "data/entities/animals/boss_centipede/ending/ending_sampo_spot_mountain.xml"
 content = ModTextFileGetContent(path)
 content = content:gsub("</Entity>", [[
 	<LuaComponent 
-        _enabled="1" 
-        execute_every_n_frame="240"
-        script_source_file="mods/grahamsperks/files/scripts/altar_append.lua" 
+		_enabled="1" 
+		execute_every_n_frame="240"
+		script_source_file="mods/grahamsperks/files/scripts/altar_append.lua" 
 	>
-    </LuaComponent>
+	</LuaComponent>
 </Entity>
 ]])
 ModTextFileSetContent(path, content)
@@ -218,7 +224,7 @@ ModTextFileSetContent(path, content)
 
 -- noita together perk compat
 if ModIsEnabled("noita_together") then
-	path = "data/scripts/gun/procedural/starting_bomb_wand.lua"
+	path = "mods/noita-together/files/scripts/perks.lua"
 	content = ModTextFileGetContent(path)
 	content = content:gsub("EXTRA_MONEY=true,", "EXTRA_MONEY=true,GRAHAM_HEALTHY_HEARTS=true,GRAHAM_LUCKY_CLOVER=true,GRAHAM_CAMPFIRE=true,")
 	ModTextFileSetContent(path, content)
@@ -240,35 +246,29 @@ if HasFlagPersistent("graham_death_hp_boost") then
 	ModTextFileSetContent(path, content)
 end
 
-function OnPlayerSpawned(player_entity)
+function OnPlayerSpawned(player)
 	
 	GlobalsSetValue( "GRAHAM_TOGGLE", "null" )
 	GlobalsSetValue( "GRAHAM_TOGGLE2", "null" )
 
 	local message = ModSettingGet("grahamsperks.message2")
 	if message == "yes" then
-	GamePrint("Check the mod settings menu for Graham's Things - new settings were added!")
+	GamePrint("$graham_settings_check")
 	end
 	
 	if GameHasFlagRun("spawned_lifelottery") == false then
 		GlobalsSetValue( "GRAHAM_ONEOFFS", "0" )
 		GameAddFlagRun("spawned_lifelottery")
 		
-		local player = EntityGetWithTag( "player_unit" )[1]
 		local x, y = EntityGetTransform(player)
 		local entity_id = EntityLoad( "mods/grahamsperks/files/entities/unlockchecker.xml", x, y )
 		EntityAddChild( player, entity_id )
 			
 		if HasFlagPersistent("graham_death_hp_boost") then
 			RemoveFlagPersistent("graham_death_hp_boost")
-
-			local player = EntityGetWithTag("player_unit")[1]
-			if player ~= nil then
-				local x, y = EntityGetTransform(player)
-				EntityLoad("mods/grahamsperks/files/pickups/heart_healthy.xml", x, y)
-				EntityLoad("mods/grahamsperks/files/pickups/heart_healthy.xml", x, y)
-				EntityLoad("data/entities/_debug/random_perk.xml", x, y - 20)
-			end
+			EntityLoad("mods/grahamsperks/files/pickups/heart_healthy.xml", x, y)
+			EntityLoad("mods/grahamsperks/files/pickups/heart_healthy.xml", x, y)
+			EntityLoad("data/entities/_debug/random_perk.xml", x, y - 20)
 		end
 
 		local eid = EntityCreateNew()

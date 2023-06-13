@@ -46,8 +46,8 @@ if player_riding ~= 0 then
         yv = yv - 0.3 --stop falling
         if ComponentGetValue2(comp, "mButtonDownRight") then xv = xv + 1 end
         if ComponentGetValue2(comp, "mButtonDownLeft") then xv = xv - 1 end
-        if ComponentGetValue2(comp, "mButtonDownDown") then yv = yv + 1 end
-        if ComponentGetValue2(comp, "mButtonDownUp") then yv = yv - 1 end
+        if ComponentGetValue2(comp, "mButtonDownDown") then yv = yv + 1.2 end
+        if ComponentGetValue2(comp, "mButtonDownUp") then yv = yv - 1.2 end
         PhysicsApplyForce(me, xv * 30, yv * 60)
     end
 end
