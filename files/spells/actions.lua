@@ -1662,6 +1662,40 @@ local to_insert = {
 			draw_actions(1, true)
 		end,
 	},
+	{
+		id                     = "GRAHAM_INTENSIFY",
+		name                   = "$graham_name_intensify",
+		description            = "$graham_desc_intensify",
+		sprite                 = "mods/grahamsperks/files/spells/intensify.png",
+		type                   = ACTION_TYPE_MODIFIER,
+		spawn_level            = "3,4,5,6",
+		spawn_probability      = "1,1,1,1",
+		price                  = 250,
+		mana                   = 30,
+		related_extra_entities = { "mods/grahamsperks/files/spells/intensify.xml," },
+		action                 = function()
+			current_reload_time = current_reload_time + 12
+			c.trail_material_amount = c.trail_material_amount * 2
+			c.extra_entities = c.extra_entities .. "mods/grahamsperks/files/spells/intensify.xml,"
+			draw_actions(1, true)
+		end,
+	},
+	{
+		id                  = "GRAHAM_INVISIBLE",
+		name                = "$graham_name_invisible",
+		description         = "$graham_desc_invisible",
+		sprite              = "mods/grahamsperks/files/spells/invisible.png",
+		type                = ACTION_TYPE_PROJECTILE,
+		spawn_level         = "0,2,5",
+		spawn_probability   = "1,1,1",
+		price               = 100,
+		mana                = 12,
+		related_projectiles = { "mods/grahamsperks/files/spells/invisible.xml" },
+		action              = function()
+			c.fire_rate_wait = c.fire_rate_wait + 4
+			add_projectile("mods/grahamsperks/files/spells/invisible.xml")
+		end,
+	},
 }
 for i, v in ipairs(to_insert) do
 	table.insert(actions, v)
