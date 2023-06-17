@@ -694,6 +694,31 @@ local to_insert = {
   end,
 },
 {
+  id = "GRAHAM_FORTUNE_TELLER",
+  ui_name = "$perkname_graham_fortuneteller",
+  ui_description = "$perkdesc_graham_fortuneteller",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/fortuneteller.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/fortuneteller.png",
+  usable_by_enemies = false,
+  not_in_default_perk_pool = false,
+  stackable = STACKABLE_YES,
+  stackable_max = 5,
+  stackable_is_rare = true,
+  func = function( entity_perk_item, entity_who_picked, item_name )
+
+  local amount = tonumber(GlobalsGetValue( "GRAHAM_FORTUNETELLER_COUNT", "-1" ) or "-1")
+  if amount < 0 then
+      local child_id = EntityLoad( "mods/grahamsperks/files/entities/fortuneteller.xml")
+      EntityAddChild( entity_who_picked, child_id )
+  end
+  GlobalsSetValue( "GRAHAM_FORTUNETELLER_COUNT", tostring(amount + 1))
+
+  end,
+func_remove = function( entity_who_picked )
+  GlobalsSetValue( "GRAHAM_FORTUNETELLER_COUNT", "-1" )
+end,
+},
+{
   id = "GRAHAM_MAP",
   ui_name = "$perkname_graham_map",
   ui_description = "$perkdesc_graham_map",
