@@ -15,4 +15,9 @@
         name="$graham_prayerstatue_intro0"
     ></InteractableComponent>
 
+    <VariableStorageComponent
+        name="graham_prayerstatue_uses"
+        value_int="0"
+    ></VariableStorageComponent>
+
 </Entity>

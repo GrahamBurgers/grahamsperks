@@ -1696,6 +1696,40 @@ local to_insert = {
 			add_projectile("mods/grahamsperks/files/spells/invisible.xml")
 		end,
 	},
+	{
+		id                = "GRAHAM_VIBRANT_BULB",
+		name              = "$graham_name_vibrantbulb",
+		description       = "$graham_desc_vibrantbulb",
+		sprite            = "mods/grahamsperks/files/spells/vibrantbulb.png",
+		type              = ACTION_TYPE_PASSIVE,
+		spawn_level       = "0,1,2,3,4",
+		spawn_probability = "1,1,0.3,0.3,0.3",
+		price             = 40,
+		mana              = 8,
+		custom_xml_file   = "mods/grahamsperks/files/spells/vibrantbulb.xml",
+		action            = function()
+			-- does nothing to the projectiles
+			current_reload_time = current_reload_time - 6
+			draw_actions(1, true)
+		end,
+	},
+	{
+		id                = "GRAHAM_DIM_BULB",
+		name              = "$graham_name_dimbulb",
+		description       = "$graham_desc_dimbulb",
+		sprite            = "mods/grahamsperks/files/spells/dimbulb.png",
+		type              = ACTION_TYPE_PASSIVE,
+		spawn_level       = "0,1,2,3,4",
+		spawn_probability = "1,1,0.3,0.3,0.3",
+		price             = 40,
+		mana              = 8,
+		custom_xml_file   = "mods/grahamsperks/files/spells/dimbulb.xml",
+		action            = function()
+			-- does nothing to the projectiles
+			current_reload_time = current_reload_time - 6
+			draw_actions(1, true)
+		end,
+	},
 }
 for i, v in ipairs(to_insert) do
 	table.insert(actions, v)

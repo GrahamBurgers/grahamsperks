@@ -28,6 +28,7 @@ for i = 1, #comp do
             EntityAddTag(j, sprite)
             EntityAddComponent2(j, "VariableStorageComponent", {
                 _tags="graham_spelltype",
+                name="graham_spelltype",
                 value_string=sprite
             })
         end
