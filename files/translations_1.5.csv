@@ -54,7 +54,7 @@ graham_desc_mixup,"Decreases recharge time if the wand has more projectiles than
 graham_name_sliceshield,Segmented Shield,,,,,,,,,,,,
 graham_desc_sliceshield,An energy shield made of eight different segments,,,,,,,,,,,,
 graham_name_intensify,Intensify,,,,,,,,,,,,
-graham_desc_intensify,A projectile will create twice as many materials from trails and other effects,,,,,,,,,,,,
+graham_desc_intensify,A projectile will create twice as much material from trails and other effects,,,,,,,,,,,,
 graham_name_invisible,Invisibolt,,,,,,,,,,,,
 graham_desc_invisible,An entirely invisible projectile,,,,,,,,,,,,
 graham_name_vibrantbulb,Vibrant Bulb,,,,,,,,,,,,
