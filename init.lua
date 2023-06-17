@@ -102,7 +102,6 @@ content = content:gsub("<mBufferedPixelScenes>", [[<mBufferedPixelScenes>
   <PixelScene pos_x="4532" pos_y="13081" just_load_an_entity="mods/grahamsperks/files/entities/perk_spawners/map_spawner.xml" />
   <PixelScene pos_x="785" pos_y="-1231" just_load_an_entity="mods/grahamsperks/files/entities/perk_spawners/map2_spawner.xml" />
   <PixelScene pos_x="15090" pos_y="-3333" just_load_an_entity="mods/grahamsperks/files/entities/perk_spawners/ll_spawner.xml" />
-  <PixelScene pos_x="16382" pos_y="-1991" just_load_an_entity="mods/grahamsperks/files/pixelscenes/snake.xml" />
   <PixelScene pos_x="14241" pos_y="16284" just_load_an_entity="mods/grahamsperks/files/entities/forge_item_check.xml" />
   <PixelScene pos_x="4692" pos_y="652" just_load_an_entity="mods/grahamsperks/files/entities/tear_secret.xml" />
   <PixelScene pos_x="14271" pos_y="16324" just_load_an_entity="mods/grahamsperks/files/pixelscenes/hand.xml" />
@@ -274,19 +273,24 @@ function OnPlayerSpawned(player)
 		local eid = EntityCreateNew()
 		EntityAddTag(eid, "graham_midas_curse")
 		EntityAddChild(GameGetWorldStateEntity(), eid)
+
+		EntityAddComponent(player, "LuaComponent", {
+			script_source_file="mods/grahamsperks/files/entities/unlockcheck.lua",
+			execute_every_n_frame="5",
+		})
 	end
 end
 
 function OnMagicNumbersAndWorldSeedInitialized()
-	SetRandomSeed(100, 100)
-	local year, month, day = GameGetDateAndTimeLocal()
+	local year, month, day, hour, minute, second = GameGetDateAndTimeLocal()
+	SetRandomSeed(100 + hour, 100 + second)
 	if ( month == 11 ) and ( day == 11 ) then
 		ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_birthday.lua" )
 	elseif (Random(1, 100) == 1) or ModSettingGet("grahamsperks.birthday") == "yes" then
 		ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_birthday.lua" )
 	end
 	
-	SetRandomSeed(10, 10)
+	SetRandomSeed(10 + minute, 10 + year)
 	if (Random(1, 30) == 1) then
 		ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_secret.lua" )
 	end
