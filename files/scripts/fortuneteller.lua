@@ -3,7 +3,7 @@ local player = EntityGetRootEntity(me)
 local comp = EntityGetFirstComponent(player, "ControlsComponent")
 local interact = EntityGetFirstComponentIncludingDisabled(me, "InteractableComponent") or 0
 if comp == nil then return end
-if ComponentGetValue2(comp, "mButtonDownRight") or ComponentGetValue2(comp, "mButtonDownLeft") or ComponentGetValue2(comp, "mButtonDownDown") or ComponentGetValue2(comp, "mButtonDownUp") == true then
+if (tonumber(GlobalsGetValue("graham_fortuneteller_frame", "0")) > GameGetFrameNum() - 60) or (ComponentGetValue2(comp, "mButtonDownRight") or ComponentGetValue2(comp, "mButtonDownLeft") or ComponentGetValue2(comp, "mButtonDownDown") or ComponentGetValue2(comp, "mButtonDownUp")) == true then
     EntitySetComponentIsEnabled(me, interact, false)
     return
 end

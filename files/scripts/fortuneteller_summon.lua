@@ -9,6 +9,7 @@ function interacting( player, me )
         EntityLoad("mods/grahamsperks/files/pickups/crystal_ball.xml", x, y)
         GamePlaySound("data/audio/Desktop/event_cues.bank", "event_cues/goldnugget/create", x, y)
         GamePrint("$graham_fortuneteller_log")
+        GlobalsSetValue("graham_fortuneteller_frame", tostring(GameGetFrameNum()))
     else
         GamePlaySound("data/audio/Desktop/ui.bank", "ui/button_denied", x, y)
         GamePrint("$graham_fortuneteller_cant")
