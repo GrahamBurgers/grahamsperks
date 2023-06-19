@@ -48,12 +48,12 @@ ModLuaFileAppend( "data/scripts/perks/perk.lua", "mods/grahamsperks/files/add_on
 ModLuaFileAppend( "data/scripts/biome_scripts.lua", "mods/grahamsperks/files/biome_scripts_append.lua" )
 ModLuaFileAppend( "data/scripts/biomes/temple_altar.lua", "mods/grahamsperks/files/scripts/temple_altar_append.lua")
 ModLuaFileAppend( "data/scripts/biomes/boss_arena.lua", "mods/grahamsperks/files/scripts/temple_altar_append.lua")
-ModLuaFileAppend( "data/scripts/gun/gun_extra_modifiers.lua", "mods/grahamsperks/files/scripts/gun_extra_effects.lua")
 ModLuaFileAppend( "data/scripts/buildings/forge_item_convert.lua", "mods/grahamsperks/files/scripts/anvil_append.lua")
 ModLuaFileAppend( "data/scripts/perks/perk.lua", "mods/grahamsperks/files/scripts/perk_append_test.lua")
 ModLuaFileAppend( "data/scripts/items/heart_fullhp.lua", "mods/grahamsperks/files/scripts/blood_orb_fullheal.lua")
 ModLuaFileAppend( "data/scripts/items/heart_fullhp_temple.lua", "mods/grahamsperks/files/scripts/blood_orb_fullheal.lua")
 ModLuaFileAppend( "data/scripts/magic/fungal_shift.lua", "mods/grahamsperks/files/scripts/fungal_shift_append.lua")
+ModLuaFileAppend( "data/scripts/items/potion_starting.lua", "mods/grahamsperks/files/scripts/potion_starting_append.lua")
 
 local biome_path = "data/biome/_pixel_scenes.xml"
 if ModIsEnabled("noitavania") then biome_path = "mods/noitavania/data/biome/_pixel_scenes.xml" end
@@ -161,7 +161,7 @@ ModTextFileSetContent(path, content)
 -- put glow dart in starting wands
 path = "data/scripts/gun/procedural/starting_wand.lua"
 content = ModTextFileGetContent(path)
-content = content:gsub("\"SPITTER\"", "\"SPITTER\",\"GRAHAM_GLOW_DART\"")
+content = content:gsub("\"SPITTER\"", "\"SPITTER\",\"GRAHAM_GLOW_DART\",\"GRAHAM_BRAMBALL\"")
 ModTextFileSetContent(path, content)
 
 -- temple altar append
