@@ -94,7 +94,7 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
 				if remainder == 1 then
 					GamePrint("$graham_1killleft" )
 				else
-					GameTextGet("$graham_killsleft", tostring(remainder))
+					GamePrint(GameTextGet("$graham_killsleft", tostring(remainder)))
 				end
 			end
 			

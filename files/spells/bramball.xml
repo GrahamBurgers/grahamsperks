@@ -10,8 +10,8 @@
 
   <ProjectileComponent 
     _enabled="1" 
-	speed_min="150"
-	speed_max="180"
+	speed_min="180"
+	speed_max="220"
 	bounces_left="3"
 	bounce_energy="0.7"
 	bounce_at_any_angle="1"

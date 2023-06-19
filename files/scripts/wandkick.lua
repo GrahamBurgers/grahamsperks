@@ -52,7 +52,8 @@ function kick( entity_who_kicked )
                         local poof = EntityGetInRadiusWithTag(x2, y2, 150, "wand")
                         for q = 1, #poof do
                             if EntityGetFirstComponent(poof[q], "ItemCostComponent") ~= nil and BiomeMapGetName(EntityGetTransform(poof[q])) == "$biome_holymountain" then
-                                EntityLoad("data/entities/particles/poof_blue.xml", EntityGetTransform(poof[q]))
+                                local x3, y3 = EntityGetTransform(poof[q])
+                                EntityLoad("data/entities/particles/poof_blue.xml", x3, y3)
                                 EntityKill(poof[q])
                             end
                         end
