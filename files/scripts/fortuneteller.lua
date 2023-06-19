@@ -1,9 +1,12 @@
 local me = GetUpdatedEntityID()
 local player = EntityGetRootEntity(me)
 local comp = EntityGetFirstComponent(player, "ControlsComponent")
+local velocity = EntityGetFirstComponent(player, "VelocityComponent") or 0
+local vx, vy = ComponentGetValue2(velocity, "mVelocity")
 local interact = EntityGetFirstComponentIncludingDisabled(me, "InteractableComponent") or 0
+local amount = math.abs(vx) + math.abs(vy)
 if comp == nil then return end
-if (tonumber(GlobalsGetValue("graham_fortuneteller_frame", "0")) > GameGetFrameNum() - 30) or (ComponentGetValue2(comp, "mButtonDownRight") or ComponentGetValue2(comp, "mButtonDownLeft") or ComponentGetValue2(comp, "mButtonDownDown") or ComponentGetValue2(comp, "mButtonDownUp")) == true then
+if (amount) > 0.1 or (tonumber(GlobalsGetValue("graham_fortuneteller_frame", "0")) > GameGetFrameNum() - 30) or (ComponentGetValue2(comp, "mButtonDownRight") or ComponentGetValue2(comp, "mButtonDownLeft") or ComponentGetValue2(comp, "mButtonDownDown") or ComponentGetValue2(comp, "mButtonDownUp")) == true then
     EntitySetComponentIsEnabled(me, interact, false)
     return
 end
