@@ -168,6 +168,7 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 			})
 			local comp = EntityGetFirstComponentIncludingDisabled(eid, "GenomeDataComponent") or 0
 			ComponentSetValue2(comp, "herd_id", StringToHerdId("player"))
+			EntityLoadToEntity("mods/grahamsperks/files/entities/charm_light.xml", eid)
 		end
 	end
 
