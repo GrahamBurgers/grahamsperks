@@ -7,10 +7,15 @@ function interacting( player, me )
     if money >= price then
         ComponentSetValue2(wallet, "money", money - price)
         EntityLoad("data/entities/particles/poof_blue.xml", x, y)
-        shoot_projectile( player, "mods/grahamsperks/files/pickups/crystal_ball.xml", x, y, 0, 0, false )
+        local eid = shoot_projectile( player, "mods/grahamsperks/files/pickups/crystal_ball.xml", x, y, 0, 0, false )
         GamePlaySound("data/audio/Desktop/event_cues.bank", "event_cues/goldnugget/create", x, y)
         GamePrint("$graham_fortuneteller_log")
         GlobalsSetValue("graham_fortuneteller_frame", tostring(GameGetFrameNum()))
+        -- scale explosion damage
+        local proj = EntityGetFirstComponent(eid, "ProjectileComponent") or 0
+        local hp = EntityGetFirstComponent(player, "DamageModelComponent") or 0
+        local damage = ComponentGetValue2(hp, "max_hp") / 4
+        ComponentObjectSetValue2(proj, "config_explosion", "damage", damage)
     else
         GamePlaySound("data/audio/Desktop/ui.bank", "ui/button_denied", x, y)
         GamePrint("$graham_fortuneteller_cant")

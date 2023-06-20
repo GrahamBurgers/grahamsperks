@@ -342,7 +342,7 @@ local to_insert = {
 		--max_uses = 50,
 		custom_xml_file   = "data/entities/misc/custom_cards/electric_charge.xml",
 		action            = function()
-			c.damage_projectile_add = c.damage_projectile_add - 0.32
+			c.damage_projectile_add = c.damage_projectile_add - 0.16
 			c.damage_fire_add = c.damage_fire_add + 0.04
 			c.damage_ice_add = c.damage_ice_add + 0.04
 			c.damage_slice_add = c.damage_slice_add + 0.04
@@ -1466,7 +1466,7 @@ local to_insert = {
 		related_projectiles = { "mods/grahamsperks/files/spells/bramball.xml" },
 		action              = function()
 			add_projectile("mods/grahamsperks/files/spells/bramball.xml")
-			c.fire_rate_wait = c.fire_rate_wait + 4
+			c.fire_rate_wait = c.fire_rate_wait + 10
 		end,
 	},
 	{
@@ -1482,7 +1482,7 @@ local to_insert = {
 		related_projectiles = { "mods/grahamsperks/files/spells/bramball.xml" },
 		action              = function()
 			add_projectile_trigger_hit_world("mods/grahamsperks/files/spells/bramball.xml", 1)
-			c.fire_rate_wait = c.fire_rate_wait + 4
+			c.fire_rate_wait = c.fire_rate_wait + 10
 		end,
 	},
 	{

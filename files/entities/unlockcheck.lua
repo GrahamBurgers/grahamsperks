@@ -47,3 +47,15 @@ for i, child in ipairs(children) do
     break
 	end
 end
+
+local spells = EntityGetWithTag("card_action")
+for i, j in ipairs(spells) do
+	if not EntityHasTag(j, "graham_type_found") then
+		EntityAddComponent2(j, "LuaComponent", {
+			execute_on_added=true,
+			remove_after_executed=true,
+			execute_every_n_frame=-1,
+			script_source_file="mods/grahamsperks/files/scripts/add_action_type.lua",
+		})
+	end
+end

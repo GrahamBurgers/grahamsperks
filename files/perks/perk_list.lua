@@ -664,7 +664,11 @@ local to_insert = {
     perk_pickup_event("LUKKI")
     add_lukkiness_level(entity_who_picked)
   end,
+  func_remove = function( entity_who_picked )
+    reset_perk_pickup_event("LUKKI")
+  end,
 },
+
 {
   id = "GRAHAM_WAND_KICK",
   ui_name = "$perkname_graham_wandkick",

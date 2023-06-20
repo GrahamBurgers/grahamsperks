@@ -30,7 +30,7 @@
       <damage_by_type
       melee="0"
       projectile="0"
-      explosion="3"
+      explosion="0"
       electricity="0"
       healing="0"
       fire="0"
@@ -70,18 +70,12 @@
 
 	<HomingComponent
     _tags="enabled_in_world"
-		homing_targeting_coeff="5.0"
-		homing_velocity_multiplier="1"
-		detect_distance="100"
-	>
-	</HomingComponent>
-
-  <BookComponent>
-	</BookComponent>
+    just_rotate_towards_target="1"
+	></HomingComponent>
   
   <PhysicsThrowableComponent
-    max_throw_speed="30"
-    throw_force_coeff="0.2"
+    max_throw_speed="170"
+    throw_force_coeff="1.5"
   ></PhysicsThrowableComponent>
 
   <VelocityComponent

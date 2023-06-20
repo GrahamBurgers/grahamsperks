@@ -25,6 +25,7 @@ for i = 1, #comp do
             sprite = sprite:gsub("data/ui_gfx/inventory/item_bg_", "")
             sprite = sprite:gsub(".png", "")
             sprite = "graham_spelltype_" .. sprite
+            EntityAddTag(j, "graham_type_found")
             EntityAddTag(j, sprite)
             EntityAddComponent2(j, "VariableStorageComponent", {
                 _tags="graham_spelltype",
