@@ -124,6 +124,27 @@ ModTextFileSetContent(biome_path, content)
 
 dofile_once("data/scripts/perks/perk.lua")
 
+--[[
+    Copi: this taggening hurts, consider using:
+    
+local patches = {
+    {
+        path    = "data/entities/misc/hitfx_toxic_charm.xml",
+        from    = "condition_status",
+        to      = "condition_effect",
+    }
+}
+
+for i=1, #patches do
+    local patch = patches[i]
+    local content = ModTextFileGetContent(patch.path)
+    content = content:gsub(patch.from, patch.to)
+    ModTextFileSetContent(patch.path, content)
+end
+
+]]
+
+
 -- prepare for the taggening (to make my life easier)
 local path = ""
 local content = ""
