@@ -81,7 +81,7 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 	end
 
 	-- CHEST DROPS GO HERE (Welcome to elseif hell)
-	local count = 1
+	local count = 2
 	while( count > 0 ) do
 		count = count - 1
 		local rnd = Random(1,100)
@@ -110,12 +110,7 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 			table.insert(entities, { "data/entities/projectiles/bomb_holy.xml" })
 			good_item_dropped = false
 		elseif rnd <= 60 then
-			-- 5%: Eye
-			EntityLoad("mods/grahamsperks/files/entities/eye/blood_orb.xml", x-10, y)
-			EntityLoad("mods/grahamsperks/files/entities/eye/blood_orb.xml", x+10, y)
-			good_item_dropped = false
-		elseif rnd <= 65 then
-			-- 5%: Bunch of wands and ghosts
+			-- 10%: Bunch of wands and ghosts
 			for i = 1, Random(2, 6) do
 				table.insert(entities, { "data/entities/animals/wand_ghost_charmed.xml" })
 				if Random(1, 2) == 1 then
@@ -205,6 +200,8 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 		local comp = EntityGetFirstComponentIncludingDisabled(eid, "ProjectileComponent")
 		if comp ~= nil and entity[1] == "data/entities/projectiles/bomb_holy.xml" then
 			ComponentSetValue2(comp, "lifetime", 400)
+			ComponentObjectSetValue2(comp, "config_explosion", "create_cell_material", "gold")
+			ComponentObjectSetValue2(comp, "config_explosion", "create_cell_probability", Random(2, 4))
 		end
 	end
 

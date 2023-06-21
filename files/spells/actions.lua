@@ -1466,7 +1466,7 @@ local to_insert = {
 		related_projectiles = { "mods/grahamsperks/files/spells/bramball.xml" },
 		action              = function()
 			add_projectile("mods/grahamsperks/files/spells/bramball.xml")
-			c.fire_rate_wait = c.fire_rate_wait + 10
+			c.fire_rate_wait = c.fire_rate_wait + 14
 		end,
 	},
 	{
@@ -1482,7 +1482,7 @@ local to_insert = {
 		related_projectiles = { "mods/grahamsperks/files/spells/bramball.xml" },
 		action              = function()
 			add_projectile_trigger_hit_world("mods/grahamsperks/files/spells/bramball.xml", 1)
-			c.fire_rate_wait = c.fire_rate_wait + 10
+			c.fire_rate_wait = c.fire_rate_wait + 14
 		end,
 	},
 	{
