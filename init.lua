@@ -20,20 +20,17 @@ ModLuaFileAppend( "data/scripts/items/potion_aggressive.lua", "mods/grahamsperks
 if ModIsEnabled("more-stuff") then
 	ModMaterialsFileAdd("mods/grahamsperks/files/materials/reactions_morestuff.xml")
 end
-
 if ModIsEnabled("anvil_of_destiny") then
   ModLuaFileAppend("mods/anvil_of_destiny/files/scripts/modded_content.lua", "mods/grahamsperks/files/scripts/aod_compat.lua")
 end
 
-if ModSettingGet("grahamsperks.spells") == "yes" then
+if ModSettingGet("grahamsperks.Spells") then
 	ModLuaFileAppend("data/scripts/gun/gun_actions.lua", "mods/grahamsperks/files/spells/actions.lua")
 end
-
-if ModSettingGet("grahamsperks.creepy") == "yes" then
+if ModSettingGet("grahamsperks.Creepy") then
 	ModMaterialsFileAdd("mods/grahamsperks/files/materials/reactions_creepy.xml")
 end
-
-if ModSettingGet("grahamsperks.perks") == "yes" then
+if ModSettingGet("grahamsperks.Perks") then
 	ModLuaFileAppend("data/scripts/perks/perk_list.lua", "mods/grahamsperks/files/perks/perk_list.lua")
 end
 
@@ -128,6 +125,27 @@ add_scene({
 })
 
 dofile_once("data/scripts/perks/perk.lua")
+
+--[[
+    Copi: this taggening hurts, consider using:
+    
+local patches = {
+    {
+        path    = "data/entities/misc/hitfx_toxic_charm.xml",
+        from    = "condition_status",
+        to      = "condition_effect",
+    }
+}
+
+for i=1, #patches do
+    local patch = patches[i]
+    local content = ModTextFileGetContent(patch.path)
+    content = content:gsub(patch.from, patch.to)
+    ModTextFileSetContent(patch.path, content)
+end
+
+]]
+
 
 -- prepare for the taggening (to make my life easier)
 local path = ""
@@ -227,9 +245,8 @@ function OnPlayerSpawned(player)
 	GlobalsSetValue( "GRAHAM_TOGGLE", "null" )
 	GlobalsSetValue( "GRAHAM_TOGGLE2", "null" )
 
-	local message = ModSettingGet("grahamsperks.message2")
-	if message == "yes" then
-	GamePrint("$graham_settings_check")
+	if ModSettingGet("grahamsperks.SettingsReminder") then
+	    GamePrint("$graham_settings_check")
 	end
 	
 	if GameHasFlagRun("spawned_lifelottery") == false then
