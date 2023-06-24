@@ -29,7 +29,7 @@ for _,id in pairs(EntityGetInRadiusWithName(pos_x, pos_y, 70, "$graham_magmacore
 	end
 end
 
-for _,id in pairs(EntityGetInRadiusWithTag(pos_x, pos_y, 70, "graham_cybereye")) do
+for _,id in pairs(EntityGetInRadiusWithTag(pos_x, pos_y, 70, "cybereye_forgeable")) do
 	-- make sure item is not carried in inventory or wand
 	if EntityGetRootEntity(id) == id then
 		local x,y = EntityGetTransform(id)

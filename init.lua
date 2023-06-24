@@ -126,117 +126,95 @@ add_scene({
 
 dofile_once("data/scripts/perks/perk.lua")
 
---[[
-    Copi: this taggening hurts, consider using:
-    
 local patches = {
     {
         path    = "data/entities/misc/hitfx_toxic_charm.xml",
         from    = "condition_status",
         to      = "condition_effect",
-    }
+    },
+	    {
+        path    = "data/entities/projectiles/deck/xray.xml",
+        from    = "tags=\"projectile_player\"",
+        to      = "tags=\"projectile_player,graham_ase\"",
+    },
+		{
+        path    = "data/entities/items/pickup/moon.xml",
+        from    = "tags=\"hittable,",
+        to      = "tags=\"hittable,forgeable,bloodmoon_forgeable,",
+    },
+		{
+        path    = "data/entities/items/pickup/evil_eye.xml",
+        from    = "tags=\"hittable,",
+        to      = "tags=\"hittable,forgeable,cybereye_forgeable,",
+    },
+		{
+        path    = "data/scripts/gun/procedural/starting_bomb_wand.lua",
+        from    = "\"GRENADE\"",
+        to      = "\"GRENADE\",\"GRAHAM_BARREL\"",
+    },
+		{
+        path    = "data/scripts/gun/procedural/starting_wand.lua",
+        from    = "\"SPITTER\"",
+        to      = "\"SPITTER\",\"GRAHAM_GLOW_DART\",\"GRAHAM_BRAMBALL\"",
+    },
+	{
+        path    = "data/entities/animals/boss_centipede/ending/ending_sampo_spot_mountain.xml",
+        from    = "</Entity>",
+        to      = [[
+			<LuaComponent 
+				_enabled="1" 
+				execute_every_n_frame="240"
+				script_source_file="mods/grahamsperks/files/scripts/altar_append.lua" 
+			>
+			</LuaComponent>
+		</Entity>
+		]],
+    },
+	{
+        path    = "data/entities/base_humanoid.xml",
+        from    = "<GameStatsComponent />",
+        to      = [[
+			<GameStatsComponent />
+			<LuaComponent
+			execute_on_added="0"
+			execute_every_n_frame="2"
+			remove_after_executed="1"
+			script_source_file="mods/grahamsperks/files/scripts/midas_kill.lua"
+			></LuaComponent>
+		]],
+    },
 }
+
+if ModIsEnabled("noita_together") then
+	table.insert(patches, {
+		{
+			path    = "mods/noita-together/files/scripts/perks.lua",
+			from    = "EXTRA_MONEY=true,",
+			to      = "EXTRA_MONEY=true,GRAHAM_HEALTHY_HEARTS=true,GRAHAM_LUCKY_CLOVER=true,GRAHAM_CAMPFIRE=true,",
+		},
+	})
+end
+
+if HasFlagPersistent("graham_death_hp_boost") then
+	table.insert(patches, {
+		{
+			path    = "data/items_gfx/bomb_wand.xml",
+			from    = "data/items_gfx/bomb_wand.png",
+			to      = "mods/grahamsperks/files/wands/bomb_wand.png",
+		},
+		{
+			path    = "data/items_gfx/handgun.xml",
+			from    = "data/items_gfx/handgun.png",
+			to      = "mods/grahamsperks/files/wands/handgun.png",
+		},
+	})
+end
 
 for i=1, #patches do
     local patch = patches[i]
     local content = ModTextFileGetContent(patch.path)
     content = content:gsub(patch.from, patch.to)
     ModTextFileSetContent(patch.path, content)
-end
-
-]]
-
-
--- prepare for the taggening (to make my life easier)
-local path = ""
-local content = ""
-
--- make charm on toxic work with toxic material spell
-path = "data/entities/misc/hitfx_toxic_charm.xml"
-content = ModTextFileGetContent(path)
-content = content:gsub("condition_status", "condition_effect")
-ModTextFileSetContent(path, content)
-
--- add tag to all-seeing eye
-path = "data/entities/projectiles/deck/xray.xml"
-content = ModTextFileGetContent(path)
-content = content:gsub("tags=\"projectile_player\"", "tags=\"projectile_player,graham_ase\"")
-ModTextFileSetContent(path, content)
-
--- add tag to kuu
-path = "data/entities/items/pickup/moon.xml"
-content = ModTextFileGetContent(path)
-content = content:gsub("tags=\"hittable,teleportable_NOT,item_pickup,moon_energy\"", "tags=\"hittable,teleportable_NOT,item_pickup,moon_energy,forgeable,bloodmoon_forgeable\"")
-ModTextFileSetContent(path, content)
-
--- add tag to evil eye
-path = "data/entities/items/pickup/evil_eye.xml"
-content = ModTextFileGetContent(path)
-content = content:gsub("tags=\"hittable,teleportable_NOT,item_physics,item_pickup,evil_eye\"", "tags=\"hittable,teleportable_NOT,item_physics,item_pickup,evil_eye,forgeable,cybereye_forgeable\"")
-ModTextFileSetContent(path, content)
-
--- put barrel in starting wands
-path = "data/scripts/gun/procedural/starting_bomb_wand.lua"
-content = ModTextFileGetContent(path)
-content = content:gsub("\"GRENADE\"", "\"GRENADE\",\"GRAHAM_BARREL\"")
-ModTextFileSetContent(path, content)
-
--- put glow dart in starting wands
-path = "data/scripts/gun/procedural/starting_wand.lua"
-content = ModTextFileGetContent(path)
-content = content:gsub("\"SPITTER\"", "\"SPITTER\",\"GRAHAM_GLOW_DART\",\"GRAHAM_BRAMBALL\"")
-ModTextFileSetContent(path, content)
-
--- temple altar append
-path = "data/entities/animals/boss_centipede/ending/ending_sampo_spot_mountain.xml"
-content = ModTextFileGetContent(path)
-content = content:gsub("</Entity>", [[
-	<LuaComponent 
-		_enabled="1" 
-		execute_every_n_frame="240"
-		script_source_file="mods/grahamsperks/files/scripts/altar_append.lua" 
-	>
-	</LuaComponent>
-</Entity>
-]])
-ModTextFileSetContent(path, content)
-
--- midas curse
-path = "data/entities/base_humanoid.xml"
-content = ModTextFileGetContent(path)
-content = content:gsub("<GameStatsComponent />", [[
-	<GameStatsComponent />
-	<LuaComponent
-	execute_on_added="0"
-	execute_every_n_frame="2"
-	remove_after_executed="1"
-	script_source_file="mods/grahamsperks/files/scripts/midas_kill.lua"
-	></LuaComponent>
-]])
-ModTextFileSetContent(path, content)
-
--- noita together perk compat
-if ModIsEnabled("noita_together") then
-	path = "mods/noita-together/files/scripts/perks.lua"
-	content = ModTextFileGetContent(path)
-	content = content:gsub("EXTRA_MONEY=true,", "EXTRA_MONEY=true,GRAHAM_HEALTHY_HEARTS=true,GRAHAM_LUCKY_CLOVER=true,GRAHAM_CAMPFIRE=true,")
-	ModTextFileSetContent(path, content)
-end
-
--- Golden starting wands
--- Stole this code from copi (thanks copi)
-if HasFlagPersistent("graham_death_hp_boost") then
-	path = "data/items_gfx/bomb_wand.xml"
-	content = ModTextFileGetContent(path)
-	content = content:gsub("data/items_gfx/bomb_wand.png", "mods/grahamsperks/files/wands/bomb_wand.png")
-	ModTextFileSetContent(path, content)
-end
-
-if HasFlagPersistent("graham_death_hp_boost") then
-	path = "data/items_gfx/handgun.xml"
-	content = ModTextFileGetContent(path)
-	content = content:gsub("data/items_gfx/handgun.png", "mods/grahamsperks/files/wands/handgun.png")
-	ModTextFileSetContent(path, content)
 end
 
 function OnPlayerSpawned(player)

@@ -29,8 +29,8 @@ for i = 1, #entities do
 				end
 			end
 			
-			if math.floor(GameGetFrameNum()) == math.floor(GameGetFrameNum() / 12) * 12 then
-				EntityInflictDamage(entities[i], 0.024,  "DAMAGE_SLICE", "$graham_name_bramball", "NONE", 0, 0, shooter)
+			if GameGetFrameNum() % 12 == 0 then
+				EntityInflictDamage(entities[i], 0.024, "DAMAGE_SLICE", "$graham_name_bramball", "NONE", 0, 0, shooter)
 			end
 		else
 			EntityAddComponent2(entities[i], "VariableStorageComponent", {
@@ -41,6 +41,10 @@ for i = 1, #entities do
 				name="graham_brambles_y",
 				value_int=ey,
 			})
+		end
+	else
+		if GameGetFrameNum() % 12 == 0 and shooter ~= entities[i] then
+			EntityInflictDamage(entities[i], 0.024, "DAMAGE_SLICE", "$graham_name_bramball", "NONE", 0, 0, shooter)
 		end
 	end
 end
