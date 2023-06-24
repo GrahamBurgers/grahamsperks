@@ -137,6 +137,7 @@ local settings = {
         txt  = "[Reset All]",
         desc = "Click here to reset all progress for this mod. This cannot be undone!",
         type = "custom",
+        lock = true,
         func = function(lmb, rmb)
             if lmb then
                 for i = 1, #progress do
@@ -151,6 +152,7 @@ local settings = {
         txt  = "[Unlock All]",
         desc = "Click here to unlock all progress for this mod. This cannot be undone!",
         type = "custom",
+        lock = true,
         func = function(lmb, rmb)
             if lmb then
                 for i = 1, #progress do
@@ -210,7 +212,6 @@ function ModSettingsGui(gui, in_main_menu)
             local curr_setting = settings[i]
             local length = GuiGetTextDimensions(gui, curr_setting.name)
             longest = math.max(longest, length)
-            print("grahamsperks." .. curr_setting.id)
             mod_settings[len + i] = {
                 ---@diagnostic disable-next-line: undefined-global
                 scope = MOD_SETTING_SCOPE_RUNTIME_RESTART,
@@ -228,7 +229,7 @@ function ModSettingsGui(gui, in_main_menu)
                     local old = ModSettingGet(setting.id)
                     if old == nil then old = setting.default_value end
                     local lmb, rmb = GuiButton(gui2, im_id, (longest + 2) - length, 0, old and "[True]" or "[False]")
-                    GuiTooltip(gui, setting.ui_name, setting.ui_description)
+                    GuiTooltip(gui2, setting.ui_name, setting.ui_description)
                     if lmb then
                         ModSettingSet(setting.id, not old)
                     elseif rmb then
@@ -244,7 +245,7 @@ function ModSettingsGui(gui, in_main_menu)
                     local old = ModSettingGet(setting.id)
                     if old == nil then old = setting.default_value end
                     local lmb, rmb = GuiButton(gui2, im_id, (longest + 2) - length, 0, table.concat{"[",curr_setting.values[old],"]"})
-                    GuiTooltip(gui, setting.ui_name, setting.ui_description)
+                    GuiTooltip(gui2, setting.ui_name, setting.ui_description)
                     if lmb then
                         ModSettingSet(setting.id, (old%#curr_setting.values)+1)
                     elseif rmb then
@@ -257,9 +258,15 @@ function ModSettingsGui(gui, in_main_menu)
                     GuiLayoutBeginHorizontal(gui2, 0, 0)
                     GuiColorSetForNextWidget(gui2, 0.6, 0.6, 0.6, 0.8)
                     GuiText(gui2, 0, 0, setting.ui_name .. ": ")
-                    local lmb, rmb = GuiButton(gui2, im_id, (longest + 2) - length, 0, curr_setting.txt)
-                    GuiTooltip(gui, setting.ui_name, setting.ui_description)
-                    curr_setting.func(lmb, rmb)
+                    if curr_setting.lock and not in_main_menu2 then
+                        GuiColorSetForNextWidget(gui2, 0.6, 0.4, 0.4, 0.8)
+                        GuiText(gui2, (longest + 2) - length, 0, "[Setting Locked]" )
+                        GuiTooltip(gui2, setting.ui_name, "This setting is locked in-game.")
+                    else
+                        local lmb, rmb = GuiButton(gui2, im_id, (longest + 2) - length, 0, curr_setting.txt)
+                        curr_setting.func(lmb, rmb)
+                        GuiTooltip(gui2, setting.ui_name, setting.ui_description)
+                    end
                     GuiLayoutEnd(gui2)
                 end
             end
