@@ -1,16 +1,5 @@
 dofile("data/scripts/lib/mod_settings.lua")
 
-function mod_setting_bool_custom(mod_id, gui, in_main_menu, im_id, setting)
-    local value = ModSettingGetNextValue(mod_setting_get_id(mod_id, setting))
-    local text = setting.ui_name .. " - " .. GameTextGet(value and "$option_on" or "$option_off")
-
-    if GuiButton(gui, im_id, mod_setting_group_x_offset, 0, text) then
-        ModSettingSetNextValue(mod_setting_get_id(mod_id, setting), not value, false)
-    end
-
-    mod_setting_tooltip(mod_id, gui, in_main_menu, setting)
-end
-
 function mod_setting_change_callback(mod_id, gui, in_main_menu, setting, old_value, new_value)
     print(tostring(new_value))
 end
@@ -25,9 +14,6 @@ local progress = {
     "graham_minimimic_killed",   -- mini perk spells
     "graham_bloodymimic_killed", -- magic skin
 }
-
-
-
 
 function reset_all_data()
     RemoveFlagPersistent("graham_progress_hunger")      -- demise
@@ -58,7 +44,7 @@ local longest = 0
 local initialized = false     -- COPI: Prevent re-initialization. Used for padding settings and stuff.
 mod_settings_version = 1      -- This is a magic global that can be used to migrate settings to new mod versions. call mod_settings_get_version() before mod_settings_update() to get the old value.
 mod_settings =
-{
+{   -- DO NOT ADD TO THIS UNLESS YOU KNOW WHAT YOU'RE DOING. SETTINGS GO BELOW IN THE LOCAL settings TABLE
     {
         id = "info",
         not_setting = true,
@@ -72,8 +58,9 @@ mod_settings =
         not_setting = true,
         ui_fn = function(mod_id2, gui, in_main_menu, im_id, setting)
             local lmb, rmb = GuiButton(gui, im_id, 0, 0, "[DEBUG: RE-INIT] (TODO:REMOVETHIS)")
-            if lmb then
+            if lmb then -- Skip first two
                 for i=3,#mod_settings do
+                    -- Wipe settings and uninit
                     mod_settings[i]=nil
                     initialized = false
                 end
@@ -117,11 +104,11 @@ local settings = {
         desc    = "Should Bloody Bonus tell you how many kills you have left?",
         type    = "enum",
         values  = {
-            [0] = "On every kill",
-            [1] = "Every 5 kills",
-            [2] = "Never",
+            [1] = "On every kill",
+            [2] = "Every 5 kills",
+            [3] = "Never",
         },
-        default = 1,
+        default = 2,
     },
     --[[
     {
@@ -131,7 +118,7 @@ local settings = {
         type    = "boolean",
         default = true,
     },
-		]] --
+    ]] --
     {
         id      = "LuckyClover",
         name    = "Lucky Clover GTCs",
@@ -143,7 +130,7 @@ local settings = {
         id      = "LuckyDay",
         name    = "Lucky Day Message",
         desc    = "Should Lucky Day inform you when you dodged an attack?",
-        type    = "boolean",
+        type    = "enum",
         values  = {
             [1] = "Yes, show percentage",
             [2] = "Yes",
@@ -244,6 +231,7 @@ function ModSettingsGui(gui, in_main_menu)
             local curr_setting = settings[i]
             local length = GuiGetTextDimensions(gui, curr_setting.name)
             longest = math.max(longest, length)
+            print("grahamsperks." .. curr_setting.id)
             mod_settings[len + i] = {
                 ---@diagnostic disable-next-line: undefined-global
                 scope = MOD_SETTING_SCOPE_RUNTIME_RESTART,
@@ -259,10 +247,11 @@ function ModSettingsGui(gui, in_main_menu)
                     GuiColorSetForNextWidget(gui2, 0.6, 0.6, 0.6, 0.8)
                     GuiText(gui2, 0, 0, setting.ui_name .. ": ")
                     local old = ModSettingGet(setting.id)
-                    local lmb, rmb = GuiButton(gui2, im_id, (longest + 2) - length, 0, (old or setting.default_value) and "[True ]" or "[False]")
+                    if old == nil then old = setting.default_value end
+                    local lmb, rmb = GuiButton(gui2, im_id, (longest + 2) - length, 0, old and "[True ]" or "[False]")
                     GuiTooltip(gui, setting.ui_name, setting.ui_description)
                     if lmb then
-                        ModSettingSet(setting.id, not (old or setting.default_value))
+                        ModSettingSet(setting.id, not old)
                     elseif rmb then
                         ModSettingSet(setting.id, setting.default_value)
                     end
@@ -274,7 +263,8 @@ function ModSettingsGui(gui, in_main_menu)
                     GuiColorSetForNextWidget(gui2, 0.6, 0.6, 0.6, 0.8)
                     GuiText(gui2, 0, 0, setting.ui_name .. ": ")
                     local old = ModSettingGet(setting.id)
-                    local lmb, rmb = GuiButton(gui2, im_id, (longest + 2) - length, 0, curr_setting.values[old or setting.default_value])
+                    if old == nil then old = setting.default_value end
+                    local lmb, rmb = GuiButton(gui2, im_id, (longest + 2) - length, 0, table.concat{"[",curr_setting.values[old],"]"})
                     GuiTooltip(gui, setting.ui_name, setting.ui_description)
                     if lmb then
                         ModSettingSet(setting.id, (old%#curr_setting.values)+1)
@@ -288,7 +278,6 @@ function ModSettingsGui(gui, in_main_menu)
                     GuiLayoutBeginHorizontal(gui2, 0, 0)
                     GuiColorSetForNextWidget(gui2, 0.6, 0.6, 0.6, 0.8)
                     GuiText(gui2, 0, 0, setting.ui_name .. ": ")
-                    local old = ModSettingGet(setting.id)
                     local lmb, rmb = GuiButton(gui2, im_id, (longest + 2) - length, 0, curr_setting.txt)
                     GuiTooltip(gui, setting.ui_name, setting.ui_description)
                     curr_setting.func(lmb, rmb)

@@ -22,20 +22,17 @@ ModLuaFileAppend( "data/scripts/items/potion_aggressive.lua", "mods/grahamsperks
 if ModIsEnabled("more-stuff") then
 	ModMaterialsFileAdd("mods/grahamsperks/files/materials/reactions_morestuff.xml")
 end
-
 if ModIsEnabled("anvil_of_destiny") then
   ModLuaFileAppend("mods/anvil_of_destiny/files/scripts/modded_content.lua", "mods/grahamsperks/files/scripts/aod_compat.lua")
 end
 
-if ModSettingGet("grahamsperks.spells") == "yes" then
+if ModSettingGet("grahamsperks.Spells") then
 	ModLuaFileAppend("data/scripts/gun/gun_actions.lua", "mods/grahamsperks/files/spells/actions.lua")
 end
-
-if ModSettingGet("grahamsperks.creepy") == "yes" then
+if ModSettingGet("grahamsperks.Creepy") then
 	ModMaterialsFileAdd("mods/grahamsperks/files/materials/reactions_creepy.xml")
 end
-
-if ModSettingGet("grahamsperks.perks") == "yes" then
+if ModSettingGet("grahamsperks.Perks") then
 	ModLuaFileAppend("data/scripts/perks/perk_list.lua", "mods/grahamsperks/files/perks/perk_list.lua")
 end
 
@@ -242,9 +239,8 @@ function OnPlayerSpawned(player)
 	GlobalsSetValue( "GRAHAM_TOGGLE", "null" )
 	GlobalsSetValue( "GRAHAM_TOGGLE2", "null" )
 
-	local message = ModSettingGet("grahamsperks.message2")
-	if message == "yes" then
-	GamePrint("$graham_settings_check")
+	if ModSettingGet("grahamsperks.SettingsReminder") then
+	    GamePrint("$graham_settings_check")
 	end
 	
 	if GameHasFlagRun("spawned_lifelottery") == false then
