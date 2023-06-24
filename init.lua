@@ -203,7 +203,7 @@ if HasFlagPersistent("graham_death_hp_boost") then
         path    = "data/items_gfx/handgun.xml",
         from    = "data/items_gfx/handgun.png",
         to      = "mods/grahamsperks/files/wands/handgun.png",
-    },)
+    })
 end
 
 for i=1, #patches do
