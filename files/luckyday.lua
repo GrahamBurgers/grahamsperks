@@ -33,7 +33,7 @@ function damage_about_to_be_received( damage, x, y, ent_thats_responsible, crit_
 		if EntityHasTag(player, "player_unit") then
             local enum = ModSettingGet("grahamsperks.LuckyDay")
 			if enum == 1 then
-				GamePrint(GameTextGetTranslatedOrNot("$graham_lucky") .. " (" .. tostring(math.ceil(cutoff)) .. "%)")
+				GamePrint(GameTextGet("$graham_lucky_chance", tostring(math.ceil(cutoff))))
             elseif enum == 2 then
 				GamePrint("$graham_lucky")
 			end
