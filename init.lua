@@ -132,27 +132,27 @@ local patches = {
         from    = "condition_status",
         to      = "condition_effect",
     },
-	    {
+    {
         path    = "data/entities/projectiles/deck/xray.xml",
         from    = "tags=\"projectile_player\"",
         to      = "tags=\"projectile_player,graham_ase\"",
     },
-		{
+    {
         path    = "data/entities/items/pickup/moon.xml",
         from    = "tags=\"hittable,",
         to      = "tags=\"hittable,forgeable,bloodmoon_forgeable,",
     },
-		{
+    {
         path    = "data/entities/items/pickup/evil_eye.xml",
         from    = "tags=\"hittable,",
         to      = "tags=\"hittable,forgeable,cybereye_forgeable,",
     },
-		{
+    {
         path    = "data/scripts/gun/procedural/starting_bomb_wand.lua",
         from    = "\"GRENADE\"",
         to      = "\"GRENADE\",\"GRAHAM_BARREL\"",
     },
-		{
+    {
         path    = "data/scripts/gun/procedural/starting_wand.lua",
         from    = "\"SPITTER\"",
         to      = "\"SPITTER\",\"GRAHAM_GLOW_DART\",\"GRAHAM_BRAMBALL\"",
@@ -187,27 +187,23 @@ local patches = {
 
 if ModIsEnabled("noita_together") then
 	table.insert(patches, {
-		{
-			path    = "mods/noita-together/files/scripts/perks.lua",
-			from    = "EXTRA_MONEY=true,",
-			to      = "EXTRA_MONEY=true,GRAHAM_HEALTHY_HEARTS=true,GRAHAM_LUCKY_CLOVER=true,GRAHAM_CAMPFIRE=true,",
-		},
+        path    = "mods/noita-together/files/scripts/perks.lua",
+        from    = "EXTRA_MONEY=true,",
+        to      = "EXTRA_MONEY=true,GRAHAM_HEALTHY_HEARTS=true,GRAHAM_LUCKY_CLOVER=true,GRAHAM_CAMPFIRE=true,",
 	})
 end
 
 if HasFlagPersistent("graham_death_hp_boost") then
 	table.insert(patches, {
-		{
-			path    = "data/items_gfx/bomb_wand.xml",
-			from    = "data/items_gfx/bomb_wand.png",
-			to      = "mods/grahamsperks/files/wands/bomb_wand.png",
-		},
-		{
-			path    = "data/items_gfx/handgun.xml",
-			from    = "data/items_gfx/handgun.png",
-			to      = "mods/grahamsperks/files/wands/handgun.png",
-		},
-	})
+        path    = "data/items_gfx/bomb_wand.xml",
+        from    = "data/items_gfx/bomb_wand.png",
+        to      = "mods/grahamsperks/files/wands/bomb_wand.png",
+    })
+	table.insert(patches, {
+        path    = "data/items_gfx/handgun.xml",
+        from    = "data/items_gfx/handgun.png",
+        to      = "mods/grahamsperks/files/wands/handgun.png",
+    },)
 end
 
 for i=1, #patches do
