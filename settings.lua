@@ -10,34 +10,11 @@ local progress = {
     "graham_progress_robot",     -- technical prowess
     "graham_progress_lucky",     -- lucky day
     "graham_progress_tech",      -- materialist
+    "graham_progress_lukki",      -- lukki mount
     "graham_progress_immunity",  -- immmunity aura
     "graham_minimimic_killed",   -- mini perk spells
     "graham_bloodymimic_killed", -- magic skin
 }
-
-function reset_all_data()
-    RemoveFlagPersistent("graham_progress_hunger")      -- demise
-    RemoveFlagPersistent("graham_progress_sheep")       -- sheepification
-    RemoveFlagPersistent("graham_progress_robot")       -- technical prowess
-    RemoveFlagPersistent("graham_progress_lucky")       -- lucky day
-    RemoveFlagPersistent("graham_progress_tech")        -- materialist
-    RemoveFlagPersistent("graham_progress_lukki")       -- lukki mount
-    RemoveFlagPersistent("graham_progress_immunity")    -- immmunity aura
-    RemoveFlagPersistent("graham_minimimic_killed")     -- mini perk spells
-    RemoveFlagPersistent("graham_bloodymimic_killed")   -- magic skin
-end
-
-function unlock_all_data()
-    AddFlagPersistent("graham_progress_hunger")      -- demise
-    AddFlagPersistent("graham_progress_sheep")       -- sheepification
-    AddFlagPersistent("graham_progress_robot")       -- technical prowess
-    AddFlagPersistent("graham_progress_lucky")       -- lucky day
-    AddFlagPersistent("graham_progress_tech")        -- materialist
-    AddFlagPersistent("graham_progress_lukki")       -- lukki mount
-    AddFlagPersistent("graham_progress_immunity")    -- immmunity aura
-    AddFlagPersistent("graham_minimimic_killed")     -- mini perk spells
-    AddFlagPersistent("graham_bloodymimic_killed")   -- magic skin
-end
 
 local mod_id = "grahamsperks" -- This should match the name of your mod's folder.
 local longest = 0
@@ -53,6 +30,7 @@ mod_settings =
             GuiText(gui, 0, 0, [[Confused or want more info? Check out the mod's wiki page at noita.wiki.gg/Mods!]])
         end
     },
+    --[[
     {
         id = "DEBUG_reset",
         not_setting = true,
@@ -67,19 +45,20 @@ mod_settings =
             end
         end
     },
+    ]]--
 }
 
 local settings = {
     {
         id      = "SettingsReminder",
-        name    = "Settings Reminder",
+        name    = "Settings reminder",
         desc    = "Should this mod pester you about its settings?",
         type    = "boolean",
         default = true,
     },
     {
         id      = "PacifistChest",
-        name    = "Pacifist Chest Replacement",
+        name    = "Pacifist chest replacement",
         desc    = "Should the pacifist chest always be replaced with a Mini Treasure Chest?",
         type    = "boolean",
         default = true,
@@ -93,14 +72,14 @@ local settings = {
     },
     {
         id      = "Perks",
-        name    = "Add New Perks",
+        name    = "Add new perks",
         desc    = "Should the mod add new perks? \n(Disabling WILL break some things!)",
         type    = "boolean",
         default = true,
     },
     {
         id      = "BloodyBonus",
-        name    = "Bloody Bonus Message",
+        name    = "Bloody Bonus message",
         desc    = "Should Bloody Bonus tell you how many kills you have left?",
         type    = "enum",
         values  = {
@@ -121,14 +100,14 @@ local settings = {
     ]] --
     {
         id      = "LuckyClover",
-        name    = "Lucky Clover GTCs",
+        name    = "Lucky Clover Great Chests",
         desc    = "Should Lucky Clover increase the chances of finding a Great Chest?",
         type    = "boolean",
         default = false,
     },
     {
         id      = "LuckyDay",
-        name    = "Lucky Day Message",
+        name    = "Lucky Day message",
         desc    = "Should Lucky Day inform you when you dodged an attack?",
         type    = "enum",
         values  = {
@@ -140,23 +119,23 @@ local settings = {
     },
     {
         id      = "Birthday",
-        name    = "Force Birthday Materials",
+        name    = "Force birthday materials",
         desc    = "Should Copium and Birthday Magic show up, even if it's not 11/11?",
         type    = "boolean",
         default = false,
     },
     {
         id      = "Creepy",
-        name    = "Aggressive Material Spreading",
+        name    = "Aggressive material spreading",
         desc    = "Should Creepy Polymorphine and Dried Fungus spread through air?",
         type    = "boolean",
         default = false,
     },
     {
         id   = "Reset",
-        name = "Reset Progress",
+        name = "Reset progress",
         txt  = "[Reset All]",
-        desc = "Should Creepy Polymorphine and Dried Fungus spread through air?",
+        desc = "Click here to reset all progress for this mod. This cannot be undone!",
         type = "custom",
         func = function(lmb, rmb)
             if lmb then
@@ -168,9 +147,9 @@ local settings = {
     },
     {
         id   = "Unlock",
-        name = "Unlock Progress",
+        name = "Unlock progress",
         txt  = "[Unlock All]",
-        desc = "Should Creepy Polymorphine and Dried Fungus spread through air?",
+        desc = "Click here to unlock all progress for this mod. This cannot be undone!",
         type = "custom",
         func = function(lmb, rmb)
             if lmb then
@@ -248,7 +227,7 @@ function ModSettingsGui(gui, in_main_menu)
                     GuiText(gui2, 0, 0, setting.ui_name .. ": ")
                     local old = ModSettingGet(setting.id)
                     if old == nil then old = setting.default_value end
-                    local lmb, rmb = GuiButton(gui2, im_id, (longest + 2) - length, 0, old and "[True ]" or "[False]")
+                    local lmb, rmb = GuiButton(gui2, im_id, (longest + 2) - length, 0, old and "[True]" or "[False]")
                     GuiTooltip(gui, setting.ui_name, setting.ui_description)
                     if lmb then
                         ModSettingSet(setting.id, not old)
