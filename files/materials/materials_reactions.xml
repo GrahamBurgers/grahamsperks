@@ -687,4 +687,11 @@
 </ExplosionConfig>
   </Reaction>
 
+  <Reaction probability="100"
+    input_cell1="graham_purplebrick"     input_cell2="[corrodible]"
+    output_cell1="graham_purplebrick"     output_cell2="material_darkness"
+    blob_radius1="4"
+    blob_radius2="4"
+	></Reaction>
+
 </Materials>

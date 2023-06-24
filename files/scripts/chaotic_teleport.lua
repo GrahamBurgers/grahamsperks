@@ -22,4 +22,8 @@ end
 
 -- chaos, chaos!
 local comp = GetUpdatedComponentID()
-ComponentSetValue2(comp, "execute_every_n_frame", Random(20, 150))
+if Random(1, 4) == 4 then
+    ComponentSetValue2(comp, "execute_every_n_frame", Random(1, 5))
+else
+    ComponentSetValue2(comp, "execute_every_n_frame", Random(20, 150))
+end

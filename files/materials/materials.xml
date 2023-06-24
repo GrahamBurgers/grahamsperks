@@ -1428,4 +1428,65 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/love.png">
 </StatusEffects>
 </CellDataChild>
 
+  <CellDataChild
+  	_parent="templerock_static"
+  	_inherit_reactions="1"
+  	name="graham_purplebrick" 
+	ui_name="$graham_mat_purplebrick"
+	tags="[static],[solid],[alchemy],[earth]"
+	hp="200000"
+	durability="10"
+	gfx_glow="200"
+	audio_physics_material_wall="metalwall"
+	audio_physics_material_solid="metalhollow"
+	wang_color="ffa160fa">
+  	<Graphics
+		texture_file="mods/grahamsperks/files/materials/materials_gfx/purplebrick.png"
+		color="ffa160fa" >
+		<Edge>
+			  <EdgeGraphics 
+				color="ffa160fa" 
+				overwrite="1" 
+				percent="1" 
+				require_same_material="0" 
+				require_same_material_type="0" 
+				type="NORMAL_BASED" 
+				z="1" >
+				<Images>
+				<Image 
+					do_only_horizontal_stripe="1" 
+					do_only_vertical_stripe="0" 
+					filename="mods/grahamsperks/files/materials/materials_gfx/edge_purplebrick_hor.png"
+					min_angle="45" 
+					max_angle="135" />
+				  <Image 
+					do_only_horizontal_stripe="0" 
+					do_only_vertical_stripe="1" 
+					filename="mods/grahamsperks/files/materials/materials_gfx/edge_purplebrick_ver.png"
+					min_angle="135" 
+					max_angle="235" />
+				  <Image 
+					do_only_horizontal_stripe="1" 
+					do_only_vertical_stripe="0" 
+					filename="mods/grahamsperks/files/materials/materials_gfx/edge_purplebrick_hor.png"
+					min_angle="235" 
+					max_angle="315" />
+				  <Image 
+					do_only_horizontal_stripe="0" 
+					do_only_vertical_stripe="1" 
+					filename="mods/grahamsperks/files/materials/materials_gfx/edge_purplebrick_ver.png"
+					min_angle="315" 
+					max_angle="360" />
+				  <Image 
+					do_only_horizontal_stripe="0" 
+					do_only_vertical_stripe="1" 
+					filename="mods/grahamsperks/files/materials/materials_gfx/edge_purplebrick_ver.png"
+					min_angle="0" 
+					max_angle="45" />
+				</Images>
+			  </EdgeGraphics>
+		</Edge>
+    </Graphics>
+  </CellDataChild>
+
 </Materials>

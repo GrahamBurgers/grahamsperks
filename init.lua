@@ -11,8 +11,6 @@ if translations ~= nil then
 	ModTextFileSetContent( "data/translations/common.csv", translations );
 end
 
--- Polytools isn't necessary any more! thank you petri, you are a wonderful man
-
 ModMaterialsFileAdd("mods/grahamsperks/files/materials/materials.xml")
 ModMaterialsFileAdd("mods/grahamsperks/files/materials/materials_reactions.xml")
 ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_append.lua" )
@@ -55,72 +53,79 @@ ModLuaFileAppend( "data/scripts/items/heart_fullhp_temple.lua", "mods/grahamsper
 ModLuaFileAppend( "data/scripts/magic/fungal_shift.lua", "mods/grahamsperks/files/scripts/fungal_shift_append.lua")
 ModLuaFileAppend( "data/scripts/items/potion_starting.lua", "mods/grahamsperks/files/scripts/potion_starting_append.lua")
 
-local biome_path = "data/biome/_pixel_scenes.xml"
-if ModIsEnabled("noitavania") then biome_path = "mods/noitavania/data/biome/_pixel_scenes.xml" end
-local content = ModTextFileGetContent(biome_path)
-content = content:gsub("<mBufferedPixelScenes>", [[<mBufferedPixelScenes>
-  <PixelScene pos_x="-2379" pos_y="6646" just_load_an_entity="mods/grahamsperks/files/entities/books/cookbook.xml" />
-  <PixelScene pos_x="9953" pos_y="-1167" just_load_an_entity="mods/grahamsperks/files/entities/books/polybook.xml" />
-  <PixelScene pos_x="-3811" pos_y="10113" just_load_an_entity="mods/grahamsperks/files/entities/books/lonelybook.xml" />
-  <PixelScene pos_x="-16268" pos_y="-7093" just_load_an_entity="mods/grahamsperks/files/entities/books/timebook.xml" />
-  <PixelScene pos_x="-1933" pos_y="-59" just_load_an_entity="mods/grahamsperks/files/entities/books/anvilbook.xml" />
-  <PixelScene pos_x="4379" pos_y="895" just_load_an_entity="mods/grahamsperks/files/pickups/chest_bloody.xml" />
-  <PixelScene pos_x="-12340" pos_y="420" just_load_an_entity="mods/grahamsperks/files/pickups/chest_bloody.xml" />
-  <PixelScene pos_x="-3367" pos_y="3346" just_load_an_entity="mods/grahamsperks/files/pickups/chest_bloody.xml" />
-  <PixelScene pos_x="2945" pos_y="12316" just_load_an_entity="mods/grahamsperks/files/pickups/chest_bloody.xml" />
-  <PixelScene pos_x="11480" pos_y="-4864" just_load_an_entity="mods/grahamsperks/files/wands/candyheart.xml" />
-  <PixelScene pos_x="10050" pos_y="-736" just_load_an_entity="mods/grahamsperks/files/wands/rotting.xml" />
-  <PixelScene pos_x="16090" pos_y="10000" just_load_an_entity="mods/grahamsperks/files/wands/coffee.xml" />
-  <PixelScene pos_x="2520" pos_y="7440" just_load_an_entity="mods/grahamsperks/files/wands/petworm.xml" />
-  <PixelScene pos_x="4135" pos_y="12964" just_load_an_entity="mods/grahamsperks/files/wands/gluestick.xml" />
-  <PixelScene pos_x="16161" pos_y="3333" just_load_an_entity="mods/grahamsperks/files/wands/experimental.xml" />
-  <PixelScene pos_x="1487" pos_y="6085" just_load_an_entity="mods/grahamsperks/files/entities/books/unlockbook.xml" />
-  <PixelScene pos_x="3435" pos_y="936" just_load_an_entity="mods/grahamsperks/files/pickups/vial.xml" />
-  <PixelScene pos_x="-2111" pos_y="2722" just_load_an_entity="mods/grahamsperks/files/pickups/balloon.xml" />
-  <PixelScene pos_x="-1908" pos_y="-56" just_load_an_entity="mods/grahamsperks/files/pixelscenes/text.xml" />
-  <PixelScene pos_x="-1864" pos_y="-53" just_load_an_entity="data/entities/items/pickup/moon.xml" />
-  <PixelScene pos_x="2372" pos_y="530" just_load_an_entity="mods/grahamsperks/files/pixelscenes/hands.xml" />
-  <PixelScene pos_x="2382" pos_y="550" just_load_an_entity="mods/grahamsperks/files/entities/goldblood.xml" />
-  <PixelScene pos_x="-2221" pos_y="2564" just_load_an_entity="mods/grahamsperks/files/pixelscenes/hellblood.xml" />
-  <PixelScene pos_x="-2490" pos_y="6480" just_load_an_entity="mods/grahamsperks/files/pixelscenes/transmutatium.xml" />
-  <PixelScene pos_x="3921" pos_y="3100" just_load_an_entity="mods/grahamsperks/files/entities/forge_item_check.xml" />
-  <PixelScene pos_x="3951" pos_y="3140" just_load_an_entity="mods/grahamsperks/files/pixelscenes/hand.xml" />
-  <PixelScene pos_x="-14638" pos_y="13031" just_load_an_entity="mods/grahamsperks/files/entities/forge_item_check.xml" />
-  <PixelScene pos_x="-14608" pos_y="13071" just_load_an_entity="mods/grahamsperks/files/pixelscenes/hand.xml" />
-  <PixelScene pos_x="4573" pos_y="528" just_load_an_entity="mods/grahamsperks/files/pixelscenes/eye.xml" />
-  <PixelScene pos_x="2000" pos_y="1735" just_load_an_entity="mods/grahamsperks/files/pixelscenes/closedeye.xml" />
-  <PixelScene pos_x="2319" pos_y="1868" just_load_an_entity="mods/grahamsperks/files/entities/eyechecker.xml" />
-  <PixelScene pos_x="-5302" pos_y="575" just_load_an_entity="mods/grahamsperks/files/pixelscenes/materials.xml" />
-  <PixelScene pos_x="-6760" pos_y="7424" just_load_an_entity="mods/grahamsperks/files/pixelscenes/yinyang.xml" />
-  <PixelScene pos_x="-6693" pos_y="7515" just_load_an_entity="mods/grahamsperks/files/entities/halo_checker.xml" />
-  <PixelScene pos_x="11537" pos_y="9956" just_load_an_entity="mods/grahamsperks/files/pixelscenes/water.xml" />
-  <PixelScene pos_x="11537" pos_y="9986" just_load_an_entity="mods/grahamsperks/files/pickups/chest_immunity.xml" />
-  <PixelScene pos_x="-317" pos_y="-1673" just_load_an_entity="mods/grahamsperks/files/pixelscenes/island.xml" />
-  <PixelScene pos_x="-278" pos_y="-1580" just_load_an_entity="mods/grahamsperks/files/entities/fireplace_worse.xml" />
-  <PixelScene pos_x="-46" pos_y="-1550" just_load_an_entity="mods/grahamsperks/files/entities/books/cozybook.xml" />
-  <PixelScene pos_x="4046" pos_y="12977" just_load_an_entity="mods/grahamsperks/files/pixelscenes/secret.xml" />
-  <PixelScene pos_x="4532" pos_y="13081" just_load_an_entity="mods/grahamsperks/files/entities/perk_spawners/map_spawner.xml" />
-  <PixelScene pos_x="785" pos_y="-1231" just_load_an_entity="mods/grahamsperks/files/entities/perk_spawners/map2_spawner.xml" />
-  <PixelScene pos_x="15090" pos_y="-3333" just_load_an_entity="mods/grahamsperks/files/entities/perk_spawners/ll_spawner.xml" />
-  <PixelScene pos_x="14241" pos_y="16284" just_load_an_entity="mods/grahamsperks/files/entities/forge_item_check.xml" />
-  <PixelScene pos_x="4692" pos_y="652" just_load_an_entity="mods/grahamsperks/files/entities/tear_secret.xml" />
-  <PixelScene pos_x="14271" pos_y="16324" just_load_an_entity="mods/grahamsperks/files/pixelscenes/hand.xml" />
-  <PixelScene pos_x="-16295" pos_y="-7140" just_load_an_entity="mods/grahamsperks/files/pixelscenes/home.xml" />
-  <PixelScene pos_x="-16238" pos_y="-6987" just_load_an_entity="data/entities/props/furniture_bed.xml" />
-  <PixelScene pos_x="-16116" pos_y="-7004" just_load_an_entity="data/entities/props/furniture_wood_table.xml" />
-  <PixelScene pos_x="-16016" pos_y="-7068" just_load_an_entity="mods/grahamsperks/files/pickups/chest_lost.xml" />
-  <PixelScene pos_x="-16117" pos_y="-7015" just_load_an_entity="mods/grahamsperks/files/pickups/chest_mini.xml" />
-  <PixelScene pos_x="-16038" pos_y="-7010" just_load_an_entity="mods/grahamsperks/files/entities/fireplace_worse.xml" />
-  <PixelScene pos_x="7412" pos_y="6175" just_load_an_entity="mods/grahamsperks/files/pixelscenes/heart.xml" />
-  <PixelScene pos_x="12055" pos_y="2700" just_load_an_entity="mods/grahamsperks/files/pixelscenes/wealth.xml" />
-  <PixelScene pos_x="12055" pos_y="2730" just_load_an_entity="mods/grahamsperks/files/entities/midas_curse.xml" />
-  <PixelScene pos_x="1800" pos_y="6600" just_load_an_entity="mods/grahamsperks/files/pixelscenes/egg.xml" />
-  <PixelScene pos_x="1800" pos_y="6600" just_load_an_entity="mods/grahamsperks/files/pickups/egg.xml" />
-  <PixelScene pos_x="1800" pos_y="6600" just_load_an_entity="mods/grahamsperks/files/entities/books/eggbook.xml" />
-  <PixelScene pos_x="0" pos_y="100000" just_load_an_entity="mods/grahamsperks/files/pixelscenes/cat.xml" />
-  <PixelScene pos_x="0" pos_y="-100000" just_load_an_entity="mods/grahamsperks/files/pixelscenes/cat2.xml" />
-]])
-ModTextFileSetContent(biome_path, content)
+local function add_scene(table)
+	local biome_path = ModIsEnabled("noitavania") and "mods/noitavania/data/biome/_pixel_scenes.xml" or "data/biome/_pixel_scenes.xml"
+	local content = ModTextFileGetContent(biome_path)
+	local string = "<mBufferedPixelScenes>"
+	for i = 1, #table do
+		string = string .. [[<PixelScene pos_x="]] .. table[i][1] .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
+	end
+	print(string)
+	content = content:gsub("<mBufferedPixelScenes>", string)
+	ModTextFileSetContent(biome_path, content)
+end
+
+add_scene({
+	{-2379, 6646, "mods/grahamsperks/files/entities/books/cookbook.xml"},
+	{9953, -1167, "mods/grahamsperks/files/entities/books/polybook.xml"},
+	{-3811, 10113, "mods/grahamsperks/files/entities/books/lonelybook.xml"},
+	{-16268, -7093, "mods/grahamsperks/files/entities/books/timebook.xml"},
+	{-1933, -59, "mods/grahamsperks/files/entities/books/anvilbook.xml"},
+	{4379, 895, "mods/grahamsperks/files/pickups/chest_bloody.xml"},
+	{-12340, 420, "mods/grahamsperks/files/pickups/chest_bloody.xml"},
+	{-3367, 3346, "mods/grahamsperks/files/pickups/chest_bloody.xml"},
+	{2945, 12316, "mods/grahamsperks/files/pickups/chest_bloody.xml"},
+	{11480, -4864, "mods/grahamsperks/files/wands/candyheart.xml"},
+	{10050, -736, "mods/grahamsperks/files/wands/rotting.xml"},
+	{16090, 10000, "mods/grahamsperks/files/wands/coffee.xml"},
+	{2520, 7440, "mods/grahamsperks/files/wands/petworm.xml"},
+	{4135, 12964, "mods/grahamsperks/files/wands/gluestick.xml"},
+	{16161, 3333, "mods/grahamsperks/files/wands/experimental.xml"},
+	{1487, 6085, "mods/grahamsperks/files/entities/books/unlockbook.xml"},
+	{3435, 936, "mods/grahamsperks/files/pickups/vial.xml"},
+	{-2111, 2722, "mods/grahamsperks/files/pickups/balloon.xml"},
+	{-1908, -56, "mods/grahamsperks/files/pixelscenes/text.xml"},
+	{-1864, -53, "data/entities/items/pickup/moon.xml"},
+	{2372, 530, "mods/grahamsperks/files/pixelscenes/hands.xml"},
+	{2382, 550, "mods/grahamsperks/files/entities/goldblood.xml"},
+	{-2221, 2564, "mods/grahamsperks/files/pixelscenes/hellblood.xml"},
+	{-2490, 6480, "mods/grahamsperks/files/pixelscenes/transmutatium.xml"},
+	{3921, 3100, "mods/grahamsperks/files/entities/forge_item_check.xml"},
+	{3951, 3140, "mods/grahamsperks/files/pixelscenes/hand.xml"},
+	{-14638, 13031, "mods/grahamsperks/files/entities/forge_item_check.xml"},
+	{-14608, 13071, "mods/grahamsperks/files/pixelscenes/hand.xml"},
+	{4573, 528, "mods/grahamsperks/files/pixelscenes/eye.xml"},
+	{2000, 1735, "mods/grahamsperks/files/pixelscenes/closedeye.xml"},
+	{-5302, 575, "mods/grahamsperks/files/pixelscenes/materials.xml"},
+	{-6760, 7424, "mods/grahamsperks/files/pixelscenes/yinyang.xml"},
+	{-6693, 7515, "mods/grahamsperks/files/entities/halo_checker.xml"},
+	{11537, 9956, "mods/grahamsperks/files/pixelscenes/water.xml"},
+	{11537, 9986, "mods/grahamsperks/files/pickups/chest_immunity.xml"},
+	{-317, -1673, "mods/grahamsperks/files/pixelscenes/island.xml"},
+	{-278, -1580, "mods/grahamsperks/files/entities/fireplace_worse.xml"},
+	{-46, -1550, "mods/grahamsperks/files/entities/books/cozybook.xml"},
+	{4046, 12977, "mods/grahamsperks/files/pixelscenes/secret.xml"},
+	{4532, 13081, "mods/grahamsperks/files/entities/perk_spawners/map_spawner.xml"},
+	{785, -1231, "mods/grahamsperks/files/entities/perk_spawners/map2_spawner.xml"},
+	{15090, -3333, "mods/grahamsperks/files/entities/perk_spawners/ll_spawner.xml"},
+	{14241, 16284, "mods/grahamsperks/files/entities/forge_item_check.xml"},
+	{4692, 652, "mods/grahamsperks/files/entities/tear_secret.xml"},
+	{14271, 16324, "mods/grahamsperks/files/pixelscenes/hand.xml"},
+	{-16295, -7140, "mods/grahamsperks/files/pixelscenes/home.xml"},
+	{-16238, -6987, "data/entities/props/furniture_bed.xml"},
+	{-16116, -7004, "data/entities/props/furniture_wood_table.xml"},
+	{-16016, -7068, "mods/grahamsperks/files/pickups/chest_lost.xml"},
+	{-16117, -7015, "mods/grahamsperks/files/pickups/chest_mini.xml"},
+	{-16038, -7010, "mods/grahamsperks/files/entities/fireplace_worse.xml"},
+	{7412, 6175, "mods/grahamsperks/files/pixelscenes/heart.xml"},
+	{12055, 2700, "mods/grahamsperks/files/pixelscenes/wealth.xml"},
+	{12055, 2730, "mods/grahamsperks/files/entities/midas_curse.xml"},
+	{1800, 6600, "mods/grahamsperks/files/pixelscenes/egg.xml"},
+	{1800, 6600, "mods/grahamsperks/files/pickups/egg.xml"},
+	{1800, 6600, "mods/grahamsperks/files/entities/books/eggbook.xml"},
+	{0, 100000, "mods/grahamsperks/files/pixelscenes/cat.xml"},
+	{0, -100000, "mods/grahamsperks/files/pixelscenes/cat2.xml"}
+})
 
 dofile_once("data/scripts/perks/perk.lua")
 
@@ -217,6 +222,7 @@ if HasFlagPersistent("graham_death_hp_boost") then
 end
 
 function OnPlayerSpawned(player)
+	local x, y = EntityGetTransform(player)
 	
 	GlobalsSetValue( "GRAHAM_TOGGLE", "null" )
 	GlobalsSetValue( "GRAHAM_TOGGLE2", "null" )
@@ -245,6 +251,50 @@ function OnPlayerSpawned(player)
 			script_source_file="mods/grahamsperks/files/entities/unlockcheck.lua",
 			execute_every_n_frame="5",
 		})
+
+		EntityAddComponent(player, "LuaComponent", {
+			script_death="mods/grahamsperks/files/scripts/death.lua",
+			execute_every_n_frame="-1",
+		})
+
+		if not HasFlagPersistent("graham_death_is_ok") then
+			RemoveFlagPersistent("graham_deathquest_01")
+			RemoveFlagPersistent("graham_deathquest_02")
+			RemoveFlagPersistent("graham_deathquest_03")
+		end
+		RemoveFlagPersistent("graham_death_is_ok")
+
+		if HasFlagPersistent("graham_deathquest_03") then
+			-- death quest complete
+			EntityAddTag(player, "polymorphable_NOT")
+			local comp = EntityGetComponent(player, "DamageModelComponent") or {}
+			for i = 1, #comp do
+				EntityRemoveComponent(player, comp[i])
+			end
+			comp = EntityGetComponent(player, "CharacterDataComponent") or {}
+			for i = 1, #comp do
+				ComponentSetValue2(comp[i], "flying_needs_recharge", false)
+			end
+			comp = EntityGetComponent(player, "WalletComponent") or {}
+			for i = 1, #comp do
+				EntityRemoveComponent(player, comp[i])
+			end
+
+			EntityAddComponent2(player, "CellEaterComponent", {
+				radius=8,
+				eat_probability=1,
+			})
+
+			local worldstate = EntityGetFirstComponent(GameGetWorldStateEntity(), "WorldStateComponent") or 0
+			ComponentSetValue2(worldstate, "global_genome_relations_modifier", 200)
+			ComponentSetValue2(worldstate, "intro_weather", true)
+			GameAddFlagRun("graham_gold_all_enemies")
+
+			EntityAddComponent2(player, "LuaComponent", {
+				script_source_file="mods/grahamsperks/files/scripts/delete_all.lua",
+				execute_every_n_frame="5",
+			})
+		end
 	end
 end
 
