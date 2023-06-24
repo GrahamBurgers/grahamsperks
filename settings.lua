@@ -133,7 +133,7 @@ local settings = {
     },
     {
         id   = "Reset",
-        name = "Reset progress",
+        name = "Reset all progress",
         txt  = "[Reset All]",
         desc = "Click here to reset all progress for this mod. This cannot be undone!",
         type = "custom",
@@ -148,7 +148,7 @@ local settings = {
     },
     {
         id   = "Unlock",
-        name = "Unlock progress",
+        name = "Unlock all progress",
         txt  = "[Unlock All]",
         desc = "Click here to unlock all progress for this mod. This cannot be undone!",
         type = "custom",
@@ -260,8 +260,8 @@ function ModSettingsGui(gui, in_main_menu)
                     GuiText(gui2, 0, 0, setting.ui_name .. ": ")
                     if curr_setting.lock and not in_main_menu2 then
                         GuiColorSetForNextWidget(gui2, 0.6, 0.4, 0.4, 0.8)
-                        GuiText(gui2, (longest + 2) - length, 0, "[Setting Locked]" )
-                        GuiTooltip(gui2, setting.ui_name, "This setting is locked in-game.")
+                        GuiText(gui2, (longest + 2) - length, 0, "[Locked]" )
+                        GuiTooltip(gui2, setting.ui_name, "You can't use this while in a run.")
                     else
                         local lmb, rmb = GuiButton(gui2, im_id, (longest + 2) - length, 0, curr_setting.txt)
                         curr_setting.func(lmb, rmb)
