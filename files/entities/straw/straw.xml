@@ -1,4 +1,4 @@
-<Entity tags="graham_sillystraw,potion,hittable" name="$perkname_graham_straw" >
+<Entity tags="graham_sillystraw,potion,hittable,perk_entity" name="$perkname_graham_straw" >
 
   <!-- physical presence -->
   <MaterialSuckerComponent 
@@ -29,10 +29,19 @@
 
   <SpriteComponent
     _enabled="0"
-    offset_x="16"
-    offset_y="0"
+    offset_x="20"
+    offset_y="2"
     alpha="0.8"
     image_file=""
     has_special_scale="1"
+  ></SpriteComponent>
+
+  <SpriteComponent
+    _enabled="1"
+    offset_x="6"
+    offset_y="6"
+    alpha="0.05"
+    image_file="data/particles/discbullet_trail.png"
+    has_special_scale="0"
   ></SpriteComponent>
 </Entity>

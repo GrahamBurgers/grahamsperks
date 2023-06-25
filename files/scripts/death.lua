@@ -13,6 +13,7 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
         GameScreenshake(100, x, y)
         AddFlagPersistent("graham_deathquest_03")
         AddFlagPersistent("graham_death_is_ok")
+        AddFlagPersistent("graham_progress_deathquest")
     else
         -- step 2
         if HasFlagPersistent("graham_deathquest_01") and damage_message == "$damage_radioactive" then

@@ -1,4 +1,4 @@
-local DISTANCE = 16
+local DISTANCE = 20
 local player = GetUpdatedEntityID()
 local inv2comp = EntityGetFirstComponentIncludingDisabled(player, "Inventory2Component")
 local activeitem = 0
@@ -32,9 +32,13 @@ if activeitem ~= 0 and EntityGetComponent(activeitem, "MaterialInventoryComponen
 				ComponentSetValue2(comp, "special_scale_y", 1)
 			end
 
+			local suck1 = EntityGetFirstComponent(child, "MaterialSuckerComponent") or 0
+			local suck2 = EntityGetFirstComponent(activeitem, "MaterialSuckerComponent") or 0
+			ComponentSetValue2(suck1, "material_type", ComponentGetValue2(suck2, "material_type"))
+
 			local mat_inv = EntityGetFirstComponent(child, "MaterialInventoryComponent") or 0
 			local mats_list = ComponentGetValue2(mat_inv, "count_per_material_type")
-			local suck = EntityGetComponent(activeitem,"MaterialSuckerComponent")[1]
+			local suck = EntityGetFirstComponent(activeitem,"MaterialSuckerComponent") or 0
 			local size = ComponentGetValue2(suck,"barrel_size")
 			for k, material_count in ipairs(mats_list) do
 				local index = k - 1
