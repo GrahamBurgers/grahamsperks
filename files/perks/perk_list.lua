@@ -723,6 +723,22 @@ func_remove = function( entity_who_picked )
 end,
 },
 {
+  id = "GRAHAM_SILLY_STRAW",
+  ui_name = "$perkname_graham_straw",
+  ui_description = "$perkdesc_graham_straw",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/straw.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/straw.png",
+  usable_by_enemies = false,
+  not_in_default_perk_pool = false,
+  stackable = STACKABLE_NO,
+  func = function( entity_perk_item, entity_who_picked, item_name )
+    EntityAddComponent(entity_who_picked, "LuaComponent", {
+      script_source_file="mods/grahamsperks/files/entities/straw/straw.lua",
+      execute_every_n_frame="1",
+    })
+  end,
+},
+{
   id = "GRAHAM_MAP",
   ui_name = "$perkname_graham_map",
   ui_description = "$perkdesc_graham_map",
