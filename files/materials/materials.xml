@@ -230,7 +230,7 @@ color="FF622d9a">
     density="0.145"
     stickyness="0.3"
     gfx_glow="155"
-    gfx_glow_color="FF505050"
+    gfx_glow_color="FFb32222"
     >
 	  <StatusEffects>
 	    <Stains>
@@ -262,26 +262,13 @@ color="FFe4003c">
 color="FF62cfb7"
 texture_file="mods/grahamsperks/files/materials/materials_gfx/yum.png">
 </Graphics>
+<StatusEffects>
+	<Ingestion>
+		<StatusEffect type="HP_REGENERATION" amount="0.03" />
+	</Ingestion>
+</StatusEffects>
 
   </CellData> 
-
-  <CellData 
-    name="graham_yumgas"
-    ui_name="$material_graham_yum"
-    wang_color="FfFfF5f6"
-    cell_type="gas"
-    burnable="0"
-    lifetime="1200"
-    audio_physics_material_wall="glass"
-    >
-
-<Graphics
-color="FF62cfb7"
-texture_file="mods/grahamsperks/files/materials/materials_gfx/yum.png">
-</Graphics>
-
-  </CellData> 
- 
 
   <CellData 
     name="graham_hellblood"
