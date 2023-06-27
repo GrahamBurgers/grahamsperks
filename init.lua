@@ -120,6 +120,7 @@ add_scene({
 	{1800, 6600, "mods/grahamsperks/files/pixelscenes/egg.xml"},
 	{1800, 6600, "mods/grahamsperks/files/pickups/egg.xml"},
 	{1800, 6600, "mods/grahamsperks/files/entities/books/eggbook.xml"},
+	{-11695, 600, "mods/grahamsperks/files/pixelscenes/stargazer.xml"},
 	{0, 100000, "mods/grahamsperks/files/pixelscenes/cat.xml"},
 	{0, -100000, "mods/grahamsperks/files/pixelscenes/cat2.xml"}
 })
