@@ -739,6 +739,18 @@ end,
   end,
 },
 {
+  id = "GRAHAM_TRICK_BETRAYAL",
+  ui_name = "$perkname_graham_betrayal",
+  ui_description = "$perkdesc_graham_betrayal",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/betrayal.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/betrayal.png",
+  usable_by_enemies = false,
+  not_in_default_perk_pool = false,
+  stackable = STACKABLE_NO,
+  func = function( entity_perk_item, entity_who_picked, item_name )
+  end,
+},
+{
   id = "GRAHAM_MAP",
   ui_name = "$perkname_graham_map",
   ui_description = "$perkdesc_graham_map",

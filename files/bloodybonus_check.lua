@@ -1,10 +1,16 @@
 local orig_death = death
+
 function death(damage_type_bit_field, damage_message, entity_thats_responsible, drop_items)
-	orig_death(damage_type_bit_field, damage_message, entity_thats_responsible, drop_items)
+	local me = GetUpdatedEntityID()
+	local x, y = EntityGetTransform(me)
+	if GameHasFlagRun("PERK_PICKED_GRAHAM_TRICK_BETRAYAL") and EntityHasTag(entity_thats_responsible, "player_unit") == false and entity_thats_responsible ~= 0 then
+		local stacks = math.min(5, GameGetGameEffectCount(EntityGetClosestWithTag(x, y, "player_unit"), "EXTRA_MONEY_TRICK_KILL"))
+		do_money_drop( 2 * (2 ^ stacks), true )
+	else
+		orig_death(damage_type_bit_field, damage_message, entity_thats_responsible, drop_items)
+	end
 
 	if GameHasFlagRun("PERK_PICKED_GRAHAM_REPOSSESSION") then
-		local me = GetUpdatedEntityID()
-		local x, y = EntityGetTransform(me)
 		-- find nearby projectiles
 		local projectiles = EntityGetInRadiusWithTag(x, y, 500, "projectile") or {}
 		for i = 1, #projectiles do
