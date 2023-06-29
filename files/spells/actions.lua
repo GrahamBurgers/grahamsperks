@@ -133,6 +133,23 @@ local to_insert = {
 		sprite              = "mods/grahamsperks/files/spells/orb_blue.png",
 		type                = ACTION_TYPE_PROJECTILE,
 		spawn_level         = "1,2,3,4,5",
+		spawn_probability   = "0.4,0.5,0.6,0.7,1.8",
+		price               = 140,
+		mana                = 10,
+		--max_uses = 100,
+		related_projectiles = { "mods/grahamsperks/files/spells/orb_blue.xml" },
+		action              = function()
+			c.fire_rate_wait = c.fire_rate_wait + 9
+			add_projectile("mods/grahamsperks/files/spells/orb_blue.xml")
+		end,
+	},
+	{
+		id                  = "GRAHAM_ORB_BLUE_TIMER",
+		name                = "$graham_name_orb_blue_timer",
+		description         = "$graham_desc_orb_blue_timer",
+		sprite              = "mods/grahamsperks/files/spells/orb_blue_timer.png",
+		type                = ACTION_TYPE_PROJECTILE,
+		spawn_level         = "1,2,3,4,5",
 		spawn_probability   = "0.6,0.7,0.8,0.9,1.0",
 		price               = 140,
 		mana                = 15,
