@@ -730,12 +730,22 @@ end,
   perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/straw.png",
   usable_by_enemies = false,
   not_in_default_perk_pool = false,
-  stackable = STACKABLE_NO,
+  stackable_maximum = 5,
+  stackable = STACKABLE_YES,
   func = function( entity_perk_item, entity_who_picked, item_name )
-    EntityAddComponent(entity_who_picked, "LuaComponent", {
-      script_source_file="mods/grahamsperks/files/entities/straw/straw.lua",
-      execute_every_n_frame="1",
-    })
+      local length = tonumber(GlobalsGetValue("graham_silly_straw_length", "0") or "0")
+      if length < 1 then
+        EntityAddComponent(entity_who_picked, "LuaComponent", {
+          script_source_file="mods/grahamsperks/files/entities/straw/straw.lua",
+          execute_every_n_frame="1",
+        })
+        GlobalsSetValue("graham_silly_straw_length", "1")
+      else
+        GlobalsSetValue("graham_silly_straw_length", tostring(length + 1))
+      end
+  end,
+  func_remove = function( entity_who_picked )
+    GlobalsSetValue("graham_silly_straw_length", "0")
   end,
 },
 {

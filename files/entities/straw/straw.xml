@@ -29,11 +29,13 @@
 
   <SpriteComponent
     _enabled="0"
-    offset_x="20"
+    offset_x="25"
     offset_y="2"
     alpha="0.8"
     image_file=""
     has_special_scale="1"
+    special_scale_x="1"
+    special_scale_y="1"
   ></SpriteComponent>
 
   <SpriteComponent

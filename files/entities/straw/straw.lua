@@ -1,4 +1,7 @@
-local DISTANCE = 20
+local length = math.min(5, tonumber(GlobalsGetValue("graham_silly_straw_length", "0") or "0"))
+-- an infinitely long straw is hysterical, but it should really be capped
+local multiplier = 1.2 -- the amount that stacking increases length by
+local DISTANCE = 25 * (multiplier ^ length)
 local player = GetUpdatedEntityID()
 local inv2comp = EntityGetFirstComponentIncludingDisabled(player, "Inventory2Component")
 local activeitem = 0
@@ -31,6 +34,8 @@ if activeitem ~= 0 and EntityGetComponent(activeitem, "MaterialInventoryComponen
 			else
 				ComponentSetValue2(comp, "special_scale_y", 1)
 			end
+			-- ComponentSetValue2(comp, "offset_x", DISTANCE)
+			ComponentSetValue2(comp, "special_scale_x", 1 * (multiplier ^ length))
 
 			local suck1 = EntityGetFirstComponent(child, "MaterialSuckerComponent") or 0
 			local suck2 = EntityGetFirstComponent(activeitem, "MaterialSuckerComponent") or 0
