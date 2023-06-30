@@ -2,9 +2,9 @@ dofile( "data/scripts/game_helpers.lua" )
 dofile_once("data/scripts/lib/utilities.lua")
 dofile( "data/scripts/perks/perk.lua" )
 
-local entity_id = GetUpdatedEntityID()
-local x, y = EntityGetTransform(entity_id)
-local player = EntityGetClosestWithTag(x, y, "player_unit")
+local player = GetUpdatedEntityID()
+local x, y = EntityGetTransform(player)
+if EntityHasTag(player, "polymorphed") or #EntityGetInRadiusWithTag(x, y, 2, "player_unit") == 0 then return end
 
 local count = 1
 while count > 0 do
