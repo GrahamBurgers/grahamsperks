@@ -1,4 +1,5 @@
 dofile_once("data/scripts/perks/perk.lua")
+dofile_once("data/scripts/lib/utilities.lua")
 
 local x, y = EntityGetTransform( GetUpdatedEntityID() )
 local books = EntityGetWithTag( "graham_book" )
@@ -95,3 +96,31 @@ if ( #books > 0 ) then
 		end
 	end
 end
+
+-- efficient(?) code
+local function new_chest_rain(type)
+	if( GlobalsGetValue("GRAHAM_" .. string.upper(type) .. "_CHEST_RAIN") ~= "1" ) then
+		local chests = EntityGetInRadiusWithName(x, y, 56, "$graham_chest_" .. type)
+		for i = 1, #chests do
+			GamePrintImportant( "$log_altar_magic", "" )
+			local cx, cy = EntityGetTransform(chests[i])
+			EntityLoad("data/entities/particles/image_emitters/chest_effect.xml", cx, cy)
+
+			local player = EntityGetClosestWithTag(x, y, "player_unit")
+			EntityKill(chests[i])
+
+			local eid = EntityLoad("mods/grahamsperks/files/entities/custom_chest_rain.xml", cx, cy)
+			EntityAddChild( player, eid )
+			local comp = get_variable_storage_component(eid, "graham_chest_type")
+			ComponentSetValue2(comp, "value_string", "mods/grahamsperks/files/pickups/chest_" .. type .. ".xml")
+			GlobalsSetValue("GRAHAM_" .. string.upper(type) .. "_CHEST_RAIN", "1" )
+			break
+		end
+	end
+end
+
+new_chest_rain("bloody")
+new_chest_rain("mini")
+new_chest_rain("lost")
+new_chest_rain("tech")
+new_chest_rain("immunity") -- in case you just need a lot of flummoxium, for some reason

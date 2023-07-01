@@ -1,6 +1,6 @@
-<Entity name="$graham_chest_SMALLER" tags="teleportable_NOT,item_physics,item_pickup,effectable_prop,grahams_things">
+<Entity name="$graham_chest_tech" tags="teleportable_NOT,item_physics,item_pickup,effectable_prop">
 	<UIInfoComponent
-		name="$graham_chest_SMALLER"
+		name="$graham_chest_tech"
 		>
 	</UIInfoComponent>
 
@@ -23,12 +23,12 @@
   <PhysicsImageShapeComponent 
     body_id="1"
     centered="1"
-    image_file="mods/grahamsperks/files/pickups/chest_SMALLER.png"
+    image_file="mods/grahamsperks/files/pickups/chest_tech.png"
     material="wood_prop"
   ></PhysicsImageShapeComponent>
 
   <ItemComponent
-    item_name="$graham_chest_SMALLER"
+    item_name="$graham_chest_tech"
     play_spinning_animation="0"
     stats_count_as_item_pick_up="0"
     custom_pickup_string="$itempickup_open"
@@ -36,13 +36,13 @@
   </ItemComponent>
 
   <LuaComponent 
-    script_physics_body_modified="mods/grahamsperks/files/pickups/chest_mini.lua" 
+    script_physics_body_modified="mods/grahamsperks/files/pickups/chest_tech.lua" 
     execute_times="1"
 	>
   </LuaComponent>
   
   <LuaComponent 
-    script_item_picked_up="mods/grahamsperks/files/pickups/chest_mini.lua" >
+    script_item_picked_up="mods/grahamsperks/files/pickups/chest_tech.lua"  >
   </LuaComponent>
 
   <LightComponent 
