@@ -9,8 +9,7 @@ if chest == "none" then return end
 
 SetRandomSeed( GameGetFrameNum(), pos_x + pos_y + entity_id )
 
--- double payouts; you deserve it
-local count = Random(2,6)
+local count = Random(1,3)
 
 for i=1,count do
 	EntityLoad( chest, pos_x + Random( -360, 360 ), pos_y - 300 )

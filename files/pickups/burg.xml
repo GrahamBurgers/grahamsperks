@@ -1,4 +1,4 @@
-<Entity tags="hittable,teleportable_NOT,item_physics,item_pickup,grahams_things" >
+<Entity name="$item_burger" tags="hittable,teleportable_NOT,item_physics,item_pickup,grahams_things" >
   <Base file="data/entities/base_item_projectile.xml">
     <ProjectileComponent>
       <damage_by_type>
