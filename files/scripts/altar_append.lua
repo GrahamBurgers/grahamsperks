@@ -114,6 +114,7 @@ local function new_chest_rain(type)
 			local comp = get_variable_storage_component(eid, "graham_chest_type")
 			ComponentSetValue2(comp, "value_string", "mods/grahamsperks/files/pickups/chest_" .. type .. ".xml")
 			GlobalsSetValue("GRAHAM_" .. string.upper(type) .. "_CHEST_RAIN", "1" )
+			AddFlagPersistent("graham_progress_" .. type .. "_chest_rain")
 			break
 		end
 	end
@@ -166,7 +167,7 @@ local function spell_is_unlocked(id)
 	end
 end
 
-local function custom_wand_spells(entity, filepath, spells)
+local function custom_wand_spells(entity, filepath, spells, flag)
 	local name = EntityGetFilename(entity)
 	name = string.gsub(name, "\\", "/")
 	name = string.match(name, "(mods/.*)")
@@ -192,15 +193,16 @@ local function custom_wand_spells(entity, filepath, spells)
 
 		GamePrintImportant( "$log_altar_magic", "" )
 		EntityLoad("data/entities/particles/image_emitters/chest_effect.xml", cx, cy)
+		AddFlagPersistent("graham_progress_" .. flag .. "_exchange")
 	end
 end
 
 local wands = EntityGetInRadiusWithTag(x, y, 56, "wand")
 for i = 1, #wands do
-	custom_wand_spells(wands[i], "mods/grahamsperks/files/wands/candyheart.xml", {"ZERO_DAMAGE", "PROJECTILE_TRANSMUTATION_FIELD", "LIGHT_SHOT", "HITFX_TOXIC_CHARM", "GRAHAM_GUARDIAN_SHOT", "RAINBOW_TRAIL", "GRAHAM_GOLDEN", "GRAHAM_MATERIAL_RADIOACTIVE"})
-	custom_wand_spells(wands[i], "mods/grahamsperks/files/wands/coffee.xml", {"SPEED", "CHAOTIC_ARC", "ACCELERATING_SHOT", "DAMAGE", "GRAHAM_CIRCLE_ANGY", "GRAHAM_FOAMARMOR", "GRAHAM_SNUB", "GRAHAM_STASIS"})
-	custom_wand_spells(wands[i], "mods/grahamsperks/files/wands/experimental.xml", {"GRAHAM_TOGGLER_ALT", "GRAHAM_TOGGLER2_ALT", "GRAHAM_TOGGLER3_ALT", "LIGHT", "SPELLS_TO_POWER", "CHAINSAW", "TRANSMUTATION", "CHAIN_SHOT"})
-	custom_wand_spells(wands[i], "mods/grahamsperks/files/wands/gluestick.xml", {"BOUNCE", "BOUNCE_HOLE", "BOUNCE_LARPA", "BOUNCE_PLASMA", "REMOVE_BOUNCE", "BOUNCE_SMALL_EXPLOSION", "BOUNCE_EXPLOSION", "BOUNCE_LIGHTNING"})
-	custom_wand_spells(wands[i], "mods/grahamsperks/files/wands/petworm.xml", {"WORM_SHOT", "GRAHAM_MINI_DISSOLVEPOWDERS", "DIGGER", "SLOW_BULLET", "METEOR", "SWARM_WASP", "VACUUM_POWDER", "ORBIT_LARPA"})
-	custom_wand_spells(wands[i], "mods/grahamsperks/files/wands/rotting.xml", {"GRAHAM_MINI_MIDASMEAT", "DISC_BULLET_BIGGER", "PIPE_BOMB_DETONATION", "BLOOD_MAGIC", "MATERIAL_BLOOD", "BLOODLUST", "HITFX_PETRIFY", "ESSENCE_TO_POWER"})
+	custom_wand_spells(wands[i], "mods/grahamsperks/files/wands/candyheart.xml", {"ZERO_DAMAGE", "PROJECTILE_TRANSMUTATION_FIELD", "LIGHT_SHOT", "HITFX_TOXIC_CHARM", "GRAHAM_GUARDIAN_SHOT", "RAINBOW_TRAIL", "GRAHAM_GOLDEN", "GRAHAM_MATERIAL_RADIOACTIVE"}, "candyheart")
+	custom_wand_spells(wands[i], "mods/grahamsperks/files/wands/coffee.xml", {"SPEED", "CHAOTIC_ARC", "ACCELERATING_SHOT", "DAMAGE", "GRAHAM_CIRCLE_ANGY", "GRAHAM_FOAMARMOR", "GRAHAM_SNUB", "GRAHAM_STASIS"}, "coffee")
+	custom_wand_spells(wands[i], "mods/grahamsperks/files/wands/experimental.xml", {"GRAHAM_TOGGLER_ALT", "GRAHAM_TOGGLER2_ALT", "GRAHAM_TOGGLER3_ALT", "LIGHT", "SPELLS_TO_POWER", "CHAINSAW", "TRANSMUTATION", "CHAIN_SHOT"}, "experimental")
+	custom_wand_spells(wands[i], "mods/grahamsperks/files/wands/gluestick.xml", {"BOUNCE", "BOUNCE_HOLE", "BOUNCE_LARPA", "BOUNCE_PLASMA", "REMOVE_BOUNCE", "BOUNCE_SMALL_EXPLOSION", "BOUNCE_EXPLOSION", "BOUNCE_LIGHTNING"}, "gluestick")
+	custom_wand_spells(wands[i], "mods/grahamsperks/files/wands/petworm.xml", {"WORM_SHOT", "GRAHAM_MINI_DISSOLVEPOWDERS", "DIGGER", "SLOW_BULLET", "METEOR", "SWARM_WASP", "VACUUM_POWDER", "ORBIT_LARPA"}, "petworm")
+	custom_wand_spells(wands[i], "mods/grahamsperks/files/wands/rotting.xml", {"GRAHAM_MINI_MIDASMEAT", "DISC_BULLET_BIGGER", "PIPE_BOMB_DETONATION", "BLOOD_MAGIC", "MATERIAL_BLOOD", "BLOODLUST", "HITFX_PETRIFY", "ESSENCE_TO_POWER"}, "rotting")
 end

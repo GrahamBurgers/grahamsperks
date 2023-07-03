@@ -12,7 +12,7 @@ function on_open( entity_item )
 		rand_y = tonumber(ComponentGetValue( position_comp, "pos_y") ) or y
 	end
 
-    SetRandomSeed( rand_x, rand_y )
+    SetRandomSeed( rand_x + GameGetFrameNum(), rand_y + x)
 
     local to_be_spawned = {}
     local spells_random = {
@@ -40,7 +40,8 @@ function on_open( entity_item )
     if Random(1, 10) == 1 then table.insert(spells_random, "SUMMON_WANDGHOST") end
 
     local length = #spells_random
-    for i = 1, #spells_random do
+    for i = 1, length do
+        SetRandomSeed(i + GameGetFrameNum() + 34, x + y)
         if Random(1, i) == 1 then
             table.insert(to_be_spawned, spells_random[Random(1, #spells_random)])
         end

@@ -108,6 +108,7 @@ add_scene({
 	{4532, 13081, "mods/grahamsperks/files/entities/perk_spawners/map_spawner.xml"},
 	{785, -1231, "mods/grahamsperks/files/entities/perk_spawners/map2_spawner.xml"},
 	{15090, -3333, "mods/grahamsperks/files/entities/perk_spawners/ll_spawner.xml"},
+	{3546, 13100, "mods/grahamsperks/files/entities/perk_spawners/slots_spawner.xml"},
 	{14241, 16284, "mods/grahamsperks/files/entities/forge_item_check.xml"},
 	{4692, 652, "mods/grahamsperks/files/entities/tear_secret.xml"},
 	{14271, 16324, "mods/grahamsperks/files/pixelscenes/hand.xml"},
@@ -264,7 +265,7 @@ function OnPlayerSpawned(player)
 			EntityAddTag(player, "polymorphable_NOT")
 			local comp = EntityGetComponent(player, "DamageModelComponent") or {}
 			for i = 1, #comp do
-				EntityRemoveComponent(player, comp[i])
+				EntitySetComponentIsEnabled(player, comp[i], false)
 			end
 			comp = EntityGetComponent(player, "CharacterDataComponent") or {}
 			for i = 1, #comp do
@@ -287,7 +288,7 @@ function OnPlayerSpawned(player)
 
 			EntityAddComponent2(player, "LuaComponent", {
 				script_source_file="mods/grahamsperks/files/scripts/delete_all.lua",
-				execute_every_n_frame="5",
+				execute_every_n_frame=5,
 			})
 		end
 	end

@@ -1398,6 +1398,7 @@ local to_insert = {
 		name                = "$graham_name_rollout",
 		description         = "$graham_desc_rollout",
 		sprite              = "mods/grahamsperks/files/spells/rollout.png",
+		custom_xml_file     = "mods/grahamsperks/files/spells/rollout_card.xml",
 		type                = ACTION_TYPE_PROJECTILE,
 		spawn_level         = "0,2,3,4",
 		spawn_probability   = "0.4,1,0.5,1",

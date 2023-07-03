@@ -605,7 +605,7 @@ local to_insert = {
   usable_by_enemies = false,
   not_in_default_perk_pool = false,
   stackable = STACKABLE_YES,
-  stackable_max = 5,
+  stackable_maximum = 5,
   func = function( entity_perk_item, entity_who_picked, item_name )
     local amount = GlobalsGetValue( "GRAHAM_REFRESHER_COUNT", 0 )
     GlobalsSetValue( "GRAHAM_REFRESHER_COUNT", amount + 1 )
@@ -680,6 +680,7 @@ local to_insert = {
   stackable = STACKABLE_NO,
   func = function( entity_perk_item, entity_who_picked, item_name )
     EntityAddComponent(entity_who_picked, "LuaComponent", {
+      _tags = "perk_component",
       script_kick="mods/grahamsperks/files/scripts/wandkick.lua",
       execute_every_n_frame="-1",
     })
@@ -706,7 +707,7 @@ local to_insert = {
   usable_by_enemies = false,
   not_in_default_perk_pool = false,
   stackable = STACKABLE_YES,
-  stackable_max = 5,
+  stackable_maximum = 5,
   stackable_is_rare = true,
   func = function( entity_perk_item, entity_who_picked, item_name )
 
@@ -736,6 +737,7 @@ end,
       local length = tonumber(GlobalsGetValue("graham_silly_straw_length", "0") or "0")
       if length < 1 then
         EntityAddComponent(entity_who_picked, "LuaComponent", {
+          _tags = "perk_component",
           script_source_file="mods/grahamsperks/files/entities/straw/straw.lua",
           execute_every_n_frame="1",
         })
@@ -852,7 +854,7 @@ end,
   usable_by_enemies = false,
   not_in_default_perk_pool = not HasFlagPersistent("graham_progress_tech"),
   stackable = STACKABLE_YES,
-  stackable_max = 3,
+  stackable_maximum = 3,
   func = function( entity_perk_item, entity_who_picked, item_name )
     local x, y = EntityGetTransform( entity_who_picked )
     local entity_id = EntityLoad( "mods/grahamsperks/files/entities/oil.xml", x, y )
@@ -939,7 +941,35 @@ end,
     local count = tonumber(GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" ))
     GlobalsSetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" )
   end,
-}
+},
+{
+  id = "GRAHAM_EXTRA_SLOTS",
+  ui_name = "$perkname_graham_extraslots",
+  ui_description = "$perkdesc_graham_extraslots",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/extraslots.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/extraslots.png",
+  usable_by_enemies = false,
+  not_in_default_perk_pool = not HasFlagPersistent("graham_progress_deathquest"),
+  stackable = STACKABLE_YES,
+  stackable_is_rare="1",
+  stackable_maximum = 5,
+  func = function( entity_perk_item, entity_who_picked, item_name )
+    local amount = tonumber(GlobalsGetValue("graham_extra_slots_amount", "0") or "0")
+    if amount < 1 then
+      EntityAddComponent(entity_who_picked, "LuaComponent", {
+        _tags = "perk_component",
+        script_source_file="mods/grahamsperks/files/scripts/extra_slots.lua",
+        execute_every_n_frame="5",
+      })
+      GlobalsSetValue("graham_extra_slots_amount", "1")
+    else
+      GlobalsSetValue("graham_extra_slots_amount", tostring(amount + 1))
+    end
+end,
+func_remove = function( entity_who_picked )
+  GlobalsSetValue("graham_extra_slots_amount", "0")
+end,
+},
 
 }
 for i,v in ipairs(to_insert) do

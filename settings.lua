@@ -11,9 +11,23 @@ local progress = {
     "graham_progress_lucky",     -- lucky day
     "graham_progress_tech",      -- materialist
     "graham_progress_lukki",      -- lukki mount
-    "graham_progress_immunity",  -- immmunity aura
+    "graham_progress_immunity",  -- immunity aura
     "graham_minimimic_killed",   -- mini perk spells
     "graham_bloodymimic_killed", -- magic skin
+    "graham_progress_deathquest",
+    -- chest rains
+    "graham_progress_bloody_chest_rain",
+    "graham_progress_mini_chest_rain",
+    "graham_progress_lost_chest_rain",
+    "graham_progress_tech_chest_rain",
+    "graham_progress_immunity_chest_rain",
+    -- wand exchange
+    "graham_progress_candyheart_exchange",
+    "graham_progress_coffee_exchange",
+    "graham_progress_experimental_exchange",
+    "graham_progress_gluestick_exchange",
+    "graham_progress_petworm_exchange",
+    "graham_progress_rotting_exchange",
 }
 
 local mod_id = "grahamsperks" -- This should match the name of your mod's folder.

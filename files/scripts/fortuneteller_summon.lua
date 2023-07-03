@@ -16,6 +16,7 @@ function interacting( player, me )
         local hp = EntityGetFirstComponent(player, "DamageModelComponent") or 0
         local damage = ComponentGetValue2(hp, "max_hp") / 4
         ComponentObjectSetValue2(proj, "config_explosion", "damage", damage)
+        ComponentObjectSetValue2(proj, "damage_by_type", "explosion", damage)
     else
         GamePlaySound("data/audio/Desktop/ui.bank", "ui/button_denied", x, y)
         GamePrint("$graham_fortuneteller_cant")
