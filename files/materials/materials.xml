@@ -1482,6 +1482,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/love.png">
   	name="graham_purplebrick_lessglow" 
 	ui_name="$graham_mat_purplebrick"
 	gfx_glow="20"
+	wang_color="ffa160fb"
   ></CellDataChild>
 
 </Materials>

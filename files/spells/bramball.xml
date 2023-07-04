@@ -97,11 +97,23 @@
         aabb_max_y="5" >
     </HitboxComponent>
 
-  <AudioComponent
+  	<AudioComponent
 		file="data/audio/Desktop/projectiles.bank"
 		event_root="projectiles/bullet_arrow">
 	</AudioComponent>
+
+	<LuaComponent
+		execute_on_added="0"
+		remove_after_executed="1"
+		script_source_file="mods/grahamsperks/files/scripts/bramball_lifetime.lua"
+	></LuaComponent>
   
+	<VariableStorageComponent
+		name="bramball_lifetime"
+		value_int="0"
+		>
+	</VariableStorageComponent>
+
 	<VariableStorageComponent
 		name="projectile_file"
 		value_string="mods/grahamsperks/files/spells/bramball.xml"
