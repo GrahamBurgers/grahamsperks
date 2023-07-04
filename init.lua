@@ -24,13 +24,13 @@ if ModIsEnabled("anvil_of_destiny") then
   ModLuaFileAppend("mods/anvil_of_destiny/files/scripts/modded_content.lua", "mods/grahamsperks/files/scripts/aod_compat.lua")
 end
 
-if ModSettingGet("grahamsperks.Spells") then
+if ModSettingGet("grahamsperks.Spells") ~= false then
 	ModLuaFileAppend("data/scripts/gun/gun_actions.lua", "mods/grahamsperks/files/spells/actions.lua")
 end
-if ModSettingGet("grahamsperks.Creepy") then
+if ModSettingGet("grahamsperks.Creepy") ~= false then
 	ModMaterialsFileAdd("mods/grahamsperks/files/materials/reactions_creepy.xml")
 end
-if ModSettingGet("grahamsperks.Perks") then
+if ModSettingGet("grahamsperks.Perks") ~= false then
 	ModLuaFileAppend("data/scripts/perks/perk_list.lua", "mods/grahamsperks/files/perks/perk_list.lua")
 end
 
@@ -126,7 +126,8 @@ add_scene({
 	{1800, 6600, "mods/grahamsperks/files/entities/books/eggbook.xml"},
 	{-11695, 600, "mods/grahamsperks/files/pixelscenes/stargazer.xml"},
 	{0, 100000, "mods/grahamsperks/files/pixelscenes/cat.xml"},
-	{0, -100000, "mods/grahamsperks/files/pixelscenes/cat2.xml"}
+	{0, -100000, "mods/grahamsperks/files/pixelscenes/cat2.xml"},
+	{3331, 1616, "mods/grahamsperks/files/entities/progress/progress.xml"},
 })
 
 dofile_once("data/scripts/perks/perk.lua")

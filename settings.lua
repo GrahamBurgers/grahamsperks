@@ -15,6 +15,8 @@ local progress = {
     "graham_minimimic_killed",   -- mini perk spells
     "graham_bloodymimic_killed", -- magic skin
     "graham_progress_deathquest",
+    -- burger
+    "graham_progress_appeased",
     -- chest rains
     "graham_progress_bloody_chest_rain",
     "graham_progress_mini_chest_rain",
@@ -156,6 +158,7 @@ local settings = {
             if lmb then
                 for i = 1, #progress do
                     RemoveFlagPersistent(progress[i])
+                    RemoveFlagPersistent("graham_used_unlock_all")
                 end
             end
         end
@@ -171,6 +174,7 @@ local settings = {
             if lmb then
                 for i = 1, #progress do
                     AddFlagPersistent(progress[i])
+                    AddFlagPersistent("graham_used_unlock_all")
                 end
             end
         end

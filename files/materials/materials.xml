@@ -1476,4 +1476,12 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/love.png">
     </Graphics>
   </CellDataChild>
 
+  <CellDataChild
+  	_parent="graham_purplebrick"
+  	_inherit_reactions="1"
+  	name="graham_purplebrick_lessglow" 
+	ui_name="$graham_mat_purplebrick"
+	gfx_glow="20"
+  ></CellDataChild>
+
 </Materials>

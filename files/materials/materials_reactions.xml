@@ -664,4 +664,16 @@
     blob_radius2="4"
 	></Reaction>
 
+  <Reaction probability="20" 
+    input_cell1="graham_tele_chaotic" 		input_cell2="graham_mundane"  
+    output_cell1="magic_liquid_teleportation" 				output_cell2="magic_liquid_teleportation"
+    >
+  </Reaction>
+
+  <Reaction probability="21" 
+    input_cell1="magic_liquid_teleportation" 					input_cell2="radioactive_liquid"  
+    output_cell1="graham_tele_chaotic" 			output_cell2="radioactive_liquid"
+    >
+  </Reaction>
+
 </Materials>

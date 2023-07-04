@@ -22,3 +22,6 @@ for i = 1, #comp do
     ComponentSetValue2(comp[i], "flying_needs_recharge", true)
     ComponentSetValue2(comp[i], "fly_time_max", 0)
 end
+
+GamePrint( "$graham_perk_unlock" )
+GamePrint( "$graham_perk_unlock_wandslots" )
