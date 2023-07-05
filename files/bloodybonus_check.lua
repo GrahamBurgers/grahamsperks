@@ -107,7 +107,7 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
 
 			if ( enum == 1 ) then
                 cond = true
-            elseif enum == 2 and (remainder % 5 or remainder < 5) then
+            elseif enum == 2 and (remainder % 5 == 0 or remainder < 5) then
                 cond = true
             end
 
