@@ -1748,6 +1748,22 @@ local to_insert = {
 			draw_actions(1, true)
 		end,
 	},
+	{
+		id                  = "GRAHAM_TOXIC_POTION",
+		name                = "$graham_name_toxic_potion",
+		description         = "$graham_desc_toxic_potion",
+		sprite              = "mods/grahamsperks/files/spells/toxic_potion.png",
+		type                = ACTION_TYPE_PROJECTILE,
+		spawn_level         = "1,2,3,4,5",
+		spawn_probability   = "1,1,1,1,1",
+		price               = 80,
+		mana                = 30,
+		related_projectiles = { "mods/grahamsperks/files/spells/toxic_potion.xml" },
+		action              = function()
+			current_reload_time = current_reload_time + 30
+			add_projectile("mods/grahamsperks/files/spells/toxic_potion.xml")
+		end,
+	},
 }
 for i, v in ipairs(to_insert) do
 	table.insert(actions, v)

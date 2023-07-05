@@ -1,0 +1,67 @@
+<Entity name="$projectile_default" tags="projectile_player,projectile" >
+	<VelocityComponent
+		gravity_y="0"
+		air_friction="0"
+		mass="0.00"
+		>
+	</VelocityComponent> 
+		
+	<ParticleEmitterComponent 
+		emitted_material_name="radioactive_liquid"
+		offset.x="0"
+		offset.y="0"
+		area_circle_radius.min="1"
+        area_circle_radius.max="20"
+		count_min="10"
+		count_max="10"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="1"
+		emit_cosmetic_particles="1"
+        lifetime_min="1"
+        lifetime_max="2"
+        gravity.x="0"
+        gravity.y="0"
+        velocity_always_away_from_center="1"
+        collide_with_grid="0"
+        collide_with_gas_and_fire="0"
+		create_real_particles="0" >
+	</ParticleEmitterComponent>
+	
+	<ProjectileComponent 
+    _enabled="1" 
+	lob_min="0"
+  	lob_max="0"
+  	speed_min="0"
+  	speed_max="0"
+    die_on_low_velocity="0"
+    on_death_explode="0"
+    on_death_gfx_leave_sprite="0" 
+    on_lifetime_out_explode="0"
+	explosion_dont_damage_shooter="1"
+    damage="0"
+    on_collision_die="0"
+    lifetime="200" 
+	knockback_force="0"
+	damage_every_x_frames="999"
+	collide_with_entities="0"
+	penetrate_world="1"
+	penetrate_world_velocity_coeff="1"
+	>
+  </ProjectileComponent>
+
+  <LuaComponent
+	execute_every_n_frame="25"
+	script_source_file="mods/grahamsperks/files/scripts/toxic_potion_gas.lua"
+  ></LuaComponent>
+  
+  <AudioComponent
+      file="data/audio/Desktop/projectiles.bank"
+      event_root="player_projectiles/mist">
+  </AudioComponent>
+  
+  <AudioLoopComponent
+		file="data/audio/Desktop/projectiles.bank"
+		event_name="player_projectiles/mist/loop"
+		auto_play="1">
+	</AudioLoopComponent>
+</Entity>
