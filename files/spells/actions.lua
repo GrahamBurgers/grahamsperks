@@ -225,7 +225,7 @@ local to_insert = {
 					EntityAddComponent2(me, "LuaComponent", {
 						_tags="mana_debt_script,enabled_in_hand,enabled_in_world,enabled_in_inventory",
 						script_source_file = "mods/grahamsperks/files/scripts/mana_heartbreak.lua",
-						execute_every_n_frame = 30,
+						execute_every_n_frame = 15,
 					})
 				end
 

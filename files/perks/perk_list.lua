@@ -657,10 +657,14 @@ local to_insert = {
   perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/lukkimount.png",
   usable_by_enemies = false,
   not_in_default_perk_pool = not HasFlagPersistent("graham_progress_lukki"),
-  stackable = STACKABLE_YES,
+  stackable = STACKABLE_NO,
   func = function( entity_perk_item, entity_who_picked, item_name )
-    local x, y = EntityGetTransform(entity_who_picked)
-    EntityLoad("mods/grahamsperks/files/entities/lukki_mount/lukki_mount.xml", x, y)
+    EntityAddComponent(entity_who_picked, "LuaComponent", {
+      _tags = "perk_component",
+      execute_on_added=true,
+      script_source_file="mods/grahamsperks/files/scripts/lukki_mount_spawn.lua",
+      execute_every_n_frame=1,
+    })
     perk_pickup_event("LUKKI")
     add_lukkiness_level(entity_who_picked)
   end,
