@@ -26,28 +26,26 @@ function on_open( entity_item )
     "SWAPPER_PROJECTILE", "TEMPORARY_PLATFORM", "TRANSMUTATION",
     "MATERIAL_BLOOD", "ALCOHOL_BLAST", "HITFX_CRITICAL_BLOOD"}
 
-        dofile_once( "data/scripts/perks/perk.lua" )
-        local pid = perk_spawn_random( x, y - 20, true )
-        EntityAddComponent(pid, "LuaComponent", {
-            script_item_picked_up="mods/grahamsperks/files/scripts/magic_skin_curse.lua"
-        })
-        EntityAddComponent(pid, "SpriteComponent", {
-            image_file="mods/grahamsperks/files/entities/skin_perk.png",
-            offset_x = "8",
-            offset_y = "8",
-            update_transform = "1" ,
-            update_transform_rotation = "0",
-            z_index="0.8",
-        })
+    dofile_once( "data/scripts/perks/perk.lua" )
+    local pid = perk_spawn_random( x, y - 20, true )
+    EntityAddComponent(pid, "LuaComponent", {
+        script_item_picked_up="mods/grahamsperks/files/scripts/magic_skin_curse.lua"
+    })
+    EntityAddComponent(pid, "SpriteComponent", {
+        image_file="mods/grahamsperks/files/entities/skin_perk.png",
+        offset_x = "8",
+        offset_y = "8",
+        update_transform = "1" ,
+        update_transform_rotation = "0",
+        z_index="0.8",
+    })
 
-    if Random(1, 100 - 10 * count) == 1 then table.insert(spells_random, "SUMMON_WANDGHOST") end
+    if math.max(Random(1, 100 - 10 * count), 2) == 1 then table.insert(spells_random, "SUMMON_WANDGHOST") end
 
-    local length = #spells_random
+    local length = 2 + count
     for i = 1, length do
         SetRandomSeed(i + GameGetFrameNum() + 34, x + y)
-        if Random(1, i) == 1 then
-            table.insert(to_be_spawned, spells_random[Random(1, #spells_random)])
-        end
+        table.insert(to_be_spawned, spells_random[Random(1, #spells_random)])
     end
 
     local x2 = x - ((#to_be_spawned - 1) * 7.5)
