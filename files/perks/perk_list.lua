@@ -650,30 +650,6 @@ local to_insert = {
   end,
 },]]--
 {
-  id = "GRAHAM_LUKKI_MOUNT",
-  ui_name = "$perkname_graham_lukkimount",
-  ui_description = "$perkdesc_graham_lukkimount",
-  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/lukkimount.png",
-  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/lukkimount.png",
-  usable_by_enemies = false,
-  not_in_default_perk_pool = not HasFlagPersistent("graham_progress_lukki"),
-  stackable = STACKABLE_NO,
-  func = function( entity_perk_item, entity_who_picked, item_name )
-    EntityAddComponent(entity_who_picked, "LuaComponent", {
-      _tags = "perk_component",
-      execute_on_added=true,
-      script_source_file="mods/grahamsperks/files/scripts/lukki_mount_spawn.lua",
-      execute_every_n_frame=1,
-    })
-    perk_pickup_event("LUKKI")
-    add_lukkiness_level(entity_who_picked)
-  end,
-  func_remove = function( entity_who_picked )
-    reset_perk_pickup_event("LUKKI")
-  end,
-},
-
-{
   id = "GRAHAM_WAND_KICK",
   ui_name = "$perkname_graham_wandkick",
   ui_description = "$perkdesc_graham_wandkick",
@@ -944,6 +920,29 @@ end,
   func_remove = function( entity_who_picked )
     local count = tonumber(GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" ))
     GlobalsSetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" )
+  end,
+},
+{
+  id = "GRAHAM_LUKKI_MOUNT",
+  ui_name = "$perkname_graham_lukkimount",
+  ui_description = "$perkdesc_graham_lukkimount",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/lukkimount.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/lukkimount.png",
+  usable_by_enemies = false,
+  not_in_default_perk_pool = not HasFlagPersistent("graham_progress_lukki"),
+  stackable = STACKABLE_NO,
+  func = function( entity_perk_item, entity_who_picked, item_name )
+    EntityAddComponent(entity_who_picked, "LuaComponent", {
+      _tags = "perk_component",
+      execute_on_added=true,
+      script_source_file="mods/grahamsperks/files/scripts/lukki_mount_spawn.lua",
+      execute_every_n_frame=1,
+    })
+    perk_pickup_event("LUKKI")
+    add_lukkiness_level(entity_who_picked)
+  end,
+  func_remove = function( entity_who_picked )
+    reset_perk_pickup_event("LUKKI")
   end,
 },
 {

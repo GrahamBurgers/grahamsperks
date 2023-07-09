@@ -26,8 +26,8 @@
 
 	<AreaDamageComponent
 		_tags="enabled_in_world"
-		circle_radius="18"
-		damage_per_frame="0.16"
+		circle_radius="30"
+		damage_per_frame="0.12"
 		damage_type="DAMAGE_MELEE"
 		entity_responsible="0"
 		death_cause="$graham_lukkimount_name"
@@ -178,6 +178,7 @@
 		is_emitting="1" >
 	</ParticleEmitterComponent>
 
+	<Entity>  <Base file="mods/grahamsperks/files/entities/lukki_mount/legs/lukki_limb_long.xml" />  </Entity>
 	<Entity>  <Base file="mods/grahamsperks/files/entities/lukki_mount/legs/lukki_limb_long.xml" />  </Entity>
 	<Entity>  <Base file="mods/grahamsperks/files/entities/lukki_mount/legs/lukki_limb_long.xml" />  </Entity>
 	<Entity>  <Base file="mods/grahamsperks/files/entities/lukki_mount/legs/lukki_limb_long.xml" />  </Entity>

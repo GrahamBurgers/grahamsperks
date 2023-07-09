@@ -17,7 +17,11 @@ for i = 1, #enemies do
         local genome = EntityGetFirstComponent(enemies[i], "GenomeDataComponent") or 0
         local enemyfaction = ComponentGetValue2(genome, "herd_id")
         if faction ~= enemyfaction then
-            EntityInflictDamage(enemies[i], radius * 0.008, "DAMAGE_RADIOACTIVE", "$damage_radioactivity", "NORMAL", 0, 0, whoshot)
+            if GameGetGameEffectCount(enemies[i], "ALLERGY_RADIOACTIVE") == 0 then
+                EntityInflictDamage(enemies[i], radius * 0.006, "DAMAGE_RADIOACTIVE", "$damage_radioactivity", "NORMAL", 0, 0, whoshot)
+            else
+                EntityInflictDamage(enemies[i], radius * 0.012, "DAMAGE_RADIOACTIVE", "$damage_radioactivity", "NORMAL", 0, 0, whoshot)
+            end
         end
     end
 end

@@ -12,6 +12,9 @@ function on_open( entity_item )
 		rand_y = tonumber(ComponentGetValue( position_comp, "pos_y") ) or y
 	end
 
+    local count = GlobalsGetValue( "GRAHAM_TECH_CHEST_COUNT_OPENED", "0" )
+    GlobalsSetValue( "GRAHAM_TECH_CHEST_COUNT_OPENED", count + 1 )
+
     SetRandomSeed( rand_x + GameGetFrameNum(), rand_y + x)
 
     local to_be_spawned = {}
@@ -37,7 +40,7 @@ function on_open( entity_item )
             z_index="0.8",
         })
 
-    if Random(1, 10) == 1 then table.insert(spells_random, "SUMMON_WANDGHOST") end
+    if Random(1, 100 - 10 * count) == 1 then table.insert(spells_random, "SUMMON_WANDGHOST") end
 
     local length = #spells_random
     for i = 1, length do

@@ -50,6 +50,7 @@
   </ProjectileComponent>
 
   <LuaComponent
+  	execute_on_added="1"
 	execute_every_n_frame="25"
 	script_source_file="mods/grahamsperks/files/scripts/toxic_potion_gas.lua"
   ></LuaComponent>
