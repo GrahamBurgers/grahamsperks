@@ -35,6 +35,7 @@ if ModSettingGet("grahamsperks.Perks") ~= false then
 end
 
 ModLuaFileAppend( "data/scripts/items/heart.lua", "mods/grahamsperks/files/healthyheart.lua" )
+ModLuaFileAppend( "data/scripts/items/heart_evil.lua", "mods/grahamsperks/files/healthyheart.lua" )
 ModLuaFileAppend( "data/scripts/items/heart_better.lua", "mods/grahamsperks/files/healthyheart_better.lua" )
 ModLuaFileAppend( "data/scripts/items/spell_refresh.lua", "mods/grahamsperks/files/scripts/spell_refresh_append.lua" )
 ModLuaFileAppend( "data/scripts/status_effects/status_list.lua", "mods/grahamsperks/files/effects/status_effects.lua" )
@@ -65,7 +66,6 @@ local function add_scene(table)
 			string = string .. [[<PixelScene pos_x="]] .. table[i][1] - 71680 .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
 		end
 	end
-	print(string)
 	content = content:gsub("<mBufferedPixelScenes>", string)
 	ModTextFileSetContent(biome_path, content)
 end
