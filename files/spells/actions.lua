@@ -1443,6 +1443,7 @@ local to_insert = {
 		related_projectiles = { "mods/grahamsperks/files/spells/translocation.xml" },
 		action              = function()
 			add_projectile("mods/grahamsperks/files/spells/translocation.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 15
 		end,
 	},
 	{
