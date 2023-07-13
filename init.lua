@@ -200,13 +200,26 @@ local patches = {
 			></LuaComponent>
 		]],
     },
+	{
+        path    = "data/entities/items/books/base_book.xml",
+        from    = "</Entity>",
+        to      = [[
+			<LuaComponent
+			execute_on_added="1"
+			execute_every_n_frame="-1"
+			remove_after_executed="1"
+			script_source_file="mods/grahamsperks/files/scripts/book.lua"
+			></LuaComponent>
+			</Entity>
+		]],
+    },
 }
 
-if ModIsEnabled("noita_together") then
+if ModIsEnabled("noita-together") then
 	table.insert(patches, {
         path    = "mods/noita-together/files/scripts/perks.lua",
         from    = "EXTRA_MONEY=true,",
-        to      = "EXTRA_MONEY=true,GRAHAM_HEALTHY_HEARTS=true,GRAHAM_LUCKY_CLOVER=true,GRAHAM_CAMPFIRE=true,",
+        to      = "EXTRA_MONEY=true,GRAHAM_HEALTHY_HEARTS=true,GRAHAM_LUCKY_CLOVER=true,GRAHAM_CAMPFIRE=true,GRAHAM_REFRESHER=true,GRAHAM_EXTRA_SLOTS=true,",
 	})
 end
 
