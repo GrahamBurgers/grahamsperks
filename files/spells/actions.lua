@@ -204,13 +204,13 @@ local to_insert = {
 		spawn_level       = "1,2,3,4,5,6",
 		spawn_probability = "1,1,0.6,0.6,1,1",
 		price             = 200,
-		mana              = -120,
+		mana              = -240,
 		action            = function()
 			current_reload_time = current_reload_time + 10
 			draw_actions(1, true)
 			if reflecting then return end
 
-			local AMOUNT = 40
+			local AMOUNT = 60
 
 			local me = GetUpdatedEntityID()
 			local inv_comp = EntityGetFirstComponentIncludingDisabled(me, "Inventory2Component")
