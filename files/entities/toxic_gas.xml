@@ -21,7 +21,7 @@
         lifetime_max="2"
         gravity.x="0"
         gravity.y="0"
-        velocity_always_away_from_center="1"
+        velocity_always_away_from_center="2.5"
         collide_with_grid="0"
         collide_with_gas_and_fire="0"
 		create_real_particles="0" >

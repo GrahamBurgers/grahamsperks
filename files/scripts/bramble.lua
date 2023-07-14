@@ -9,5 +9,5 @@ if comp ~= nil then
     ComponentSetValue2(comp2, "mWhoShot", ComponentGetValue2(comp, "mWhoShot"))
     -- inherit lifetime modifiers
     local var = EntityGetFirstComponent(bramble, "VariableStorageComponent") or 0
-    ComponentSetValue2(comp2, "lifetime", ComponentGetValue2(var, "value_int") + 160)
+    ComponentSetValue2(comp2, "lifetime", ComponentGetValue2(var, "value_int") + 40)
 end

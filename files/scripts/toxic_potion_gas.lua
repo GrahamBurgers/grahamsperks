@@ -11,12 +11,15 @@ if whoshot ~= 0 then
     faction = ComponentGetValue2(genome, "herd_id")
 end
 
+local new = EntityGetFirstComponent(GetUpdatedEntityID(), "ProjectileComponent") or 0
+local friendlyfire = ComponentGetValue2(new, "friendly_fire")
+
 for i = 1, #enemies do
-    if enemies[i] ~= whoshot and GameGetGameEffectCount(enemies[i], "PROTECTION_RADIOACTIVITY") == 0 then
+    if GameGetGameEffectCount(enemies[i], "PROTECTION_RADIOACTIVITY") == 0 then
         -- prevent player from killing their own friendlies (hopefully)
         local genome = EntityGetFirstComponent(enemies[i], "GenomeDataComponent") or 0
         local enemyfaction = ComponentGetValue2(genome, "herd_id")
-        if faction ~= enemyfaction then
+        if (faction ~= enemyfaction and enemies[i] ~= whoshot and GameGetGameEffect( enemies[i], "CHARM" ) == 0) or friendlyfire == true then
             if GameGetGameEffectCount(enemies[i], "ALLERGY_RADIOACTIVE") == 0 then
                 EntityInflictDamage(enemies[i], radius * 0.006, "DAMAGE_RADIOACTIVE", "$damage_radioactivity", "NORMAL", 0, 0, whoshot)
             else
