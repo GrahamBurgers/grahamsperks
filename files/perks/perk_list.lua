@@ -743,6 +743,86 @@ end,
   end,
 },
 {
+  id = "GRAHAM_BUYBACK",
+  ui_name = "$perkname_graham_buyback",
+  ui_description = "$perkdesc_graham_buyback",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/buyback.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/buyback.png",
+  usable_by_enemies = false,
+  not_in_default_perk_pool = false,
+  stackable = STACKABLE_YES,
+  one_off_effect = true,
+  func = function( entity_perk_item, entity_who_picked, item_name )
+    local function boop_spell(eid, cost)
+      EntitySetComponentsWithTagEnabled(eid, "enabled_in_world", true)
+      EntitySetComponentsWithTagEnabled(eid, "enabled_in_hand", false)
+      EntitySetComponentsWithTagEnabled(eid, "enabled_in_inventory", false)
+      -- boop
+      local velcomp = EntityGetFirstComponentIncludingDisabled(eid, "VelocityComponent") or 0
+      ComponentSetValue2(velcomp, "mVelocity", Random(-100, 100), Random(-50, -100))
+
+      -- this is normal shop script
+      local offsetx = 6
+      local text = tostring(cost)
+      local textwidth = 0
+      
+      for j=1,#text do
+        if ( string.sub( text, j, j ) ~= "1" ) then
+          textwidth = textwidth + 6
+        else
+          textwidth = textwidth + 3
+        end
+      end
+      offsetx = textwidth * 0.5 - 0.5
+
+      EntityAddComponent2( eid, "SpriteComponent", {
+        _tags="shop_cost,enabled_in_world",
+        image_file="data/fonts/font_pixel_white.xml",
+        is_text_sprite=true,
+        offset_x=offsetx,
+        offset_y=25,
+        update_transform=true,
+        update_transform_rotation=false,
+        text=tostring(cost),
+        z_index=-1,
+        } )
+      EntityAddComponent2( eid, "ItemCostComponent", {
+        _tags="shop_cost,enabled_in_world",
+        cost=cost,
+        stealable=false
+        } )
+      EntityAddComponent2( eid, "LuaComponent", {
+        script_item_picked_up="data/scripts/items/shop_effect.lua",
+        } )
+      end
+      
+    local nothing = true
+    local x, y = EntityGetTransform(entity_who_picked)
+    local items = GameGetAllInventoryItems(entity_who_picked) or {}
+    for i = 1, #items do
+      if EntityHasTag(items[i], "card_action") then
+        EntityRemoveFromParent(items[i])
+        EntityApplyTransform(items[i], x, y, 0)
+
+        local comp = EntityGetFirstComponentIncludingDisabled(items[i], "ItemActionComponent") or 0
+        local id = ComponentGetValue2(comp, "action_id")
+        local entity = CreateItemActionEntity( id, x, y )
+        SetRandomSeed(x + GameGetFrameNum(), y + comp)
+        local cardcost = 25 * Random(4, 10) -- not sure how to balance this properly
+        boop_spell(items[i], cardcost)
+        boop_spell(entity, cardcost)
+        nothing = false
+      end
+    end
+
+    if nothing then
+      x, y = EntityGetTransform(entity_perk_item)
+      EntityLoad("mods/grahamsperks/files/entities/snub.xml", x, y)
+      EntityLoad("mods/grahamsperks/files/entities/eye/blood_orb.xml", x, y)
+    end
+  end,
+},
+{
   id = "GRAHAM_MAP",
   ui_name = "$perkname_graham_map",
   ui_description = "$perkdesc_graham_map",
