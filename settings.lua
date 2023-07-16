@@ -156,9 +156,9 @@ local settings = {
         lock = true,
         func = function(lmb, rmb)
             if lmb then
+                RemoveFlagPersistent("graham_used_unlock_all")
                 for i = 1, #progress do
                     RemoveFlagPersistent(progress[i])
-                    RemoveFlagPersistent("graham_used_unlock_all")
                 end
             end
         end
@@ -172,9 +172,9 @@ local settings = {
         lock = true,
         func = function(lmb, rmb)
             if lmb then
+                AddFlagPersistent("graham_used_unlock_all")
                 for i = 1, #progress do
                     AddFlagPersistent(progress[i])
-                    AddFlagPersistent("graham_used_unlock_all")
                 end
             end
         end

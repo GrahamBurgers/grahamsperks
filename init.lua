@@ -105,6 +105,7 @@ add_scene({
 	{3951, 3140, "mods/grahamsperks/files/pixelscenes/hand.xml", true},
 	{-14638, 13031, "mods/grahamsperks/files/entities/forge_item_check.xml", true},
 	{-14608, 13071, "mods/grahamsperks/files/pixelscenes/hand.xml", true},
+	{2318, 1870, "mods/grahamsperks/files/entities/eyechecker.xml", true},
 	{4573, 528, "mods/grahamsperks/files/pixelscenes/eye.xml", true},
 	{2000, 1735, "mods/grahamsperks/files/pixelscenes/closedeye.xml", true},
 	{-5302, 575, "mods/grahamsperks/files/pixelscenes/materials.xml"},
