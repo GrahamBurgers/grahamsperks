@@ -89,15 +89,15 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 			-- 10%: Random potions
 			table.insert(entities, { "data/entities/items/pickup/potion_random_material.xml" })
 			table.insert(entities, { "data/entities/items/pickup/potion_random_material.xml" })
-		elseif rnd <= 20 then
-			-- 10%: Large extra max health
+		elseif rnd <= 30 then
+			-- 20%: Large extra max health
 			if Random(1, 50) == 50 then
 				table.insert( entities, { "data/entities/animals/illusions/dark_alchemist.xml" } )
 			else
 				table.insert( entities, { "data/entities/items/pickup/heart_better.xml" })
 			end
 		elseif rnd <= 40 then
-			-- 20%: Identical lost chest
+			-- 10%: Identical lost chest
 			-- Load it directly here to avoid rng wackiness
 			EntityLoad("mods/grahamsperks/files/pickups/chest_lost.xml", x + 1, y - 1)
 		elseif rnd <= 45 then
@@ -136,6 +136,10 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 				"10",
 				"10",
 				"10",
+				"10",
+				"10",
+				"10",
+				"50",
 				"50",
 				"50",
 				"50",
@@ -161,8 +165,8 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 		elseif rnd <= 88 then
 			-- 2%: Midas
 			EntityConvertToMaterial(GetUpdatedEntityID(), "midas_precursor")
-		elseif rnd <= 90 then
-			-- 2%: Wacky items
+		elseif rnd <= 95 then
+			-- 7%: Wacky items
 			drops = {
 				"data/entities/items/pickup/physics_greed_die.xml",
 				"data/entities/items/pickup/physics_gold_orb_greed.xml",
@@ -173,8 +177,7 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 			table.insert(entities, { drops[Random(1, #drops)] })
 			table.insert(entities, { drops[Random(1, #drops)] })
 		else
-			-- 10%: Double roll
-			-- No triple roll because the double roll chance is 10% anyway
+			-- 5%: Double roll
 			count = count + 2
 		end
 	end
@@ -202,6 +205,8 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 			ComponentSetValue2(comp, "lifetime", 400)
 			ComponentObjectSetValue2(comp, "config_explosion", "create_cell_material", "gold")
 			ComponentObjectSetValue2(comp, "config_explosion", "create_cell_probability", Random(2, 4))
+			local health = EntityGetFirstComponent(eid, "DamageModelComponent") or 0
+			ComponentSetValue2(health, "hp", ComponentGetValue2(health, "hp") * 5)
 		end
 	end
 
