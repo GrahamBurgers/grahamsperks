@@ -52,7 +52,7 @@ ModLuaFileAppend( "data/scripts/magic/fungal_shift.lua", "mods/grahamsperks/file
 ModLuaFileAppend( "data/scripts/items/potion_starting.lua", "mods/grahamsperks/files/scripts/potion_starting_append.lua")
 
 -- enemies
-local enemies = {"coalmine_alt", "snowcave", "snowcastle", "sandcave"}
+local enemies = {"coalmine_alt", "excavationsite", "snowcave", "snowcastle", "sandcave"}
 for i = 1, #enemies do
 	ModLuaFileAppend( "data/scripts/biomes/" .. enemies[i] .. ".lua", "mods/grahamsperks/files/scripts/enemies_" .. enemies[i] .. ".lua" )
 end

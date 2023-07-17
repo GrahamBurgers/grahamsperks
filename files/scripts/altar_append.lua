@@ -180,6 +180,10 @@ local function custom_wand_spells(entity, filepath, spells, flag)
 		for i = 1, #children do
 			if EntityHasTag(children[i], "card_action") then
 				bump_spell(children[i], cx, cy)
+				local comp = EntityGetComponentIncludingDisabled(children[i], "ItemComponent") or {}
+				for j = 1, #comp do
+					ComponentSetValue2(comp[j], "permanently_attached", false)
+				end
 			end
 		end
 		EntityKill(entity)
