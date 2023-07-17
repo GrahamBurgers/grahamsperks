@@ -36,6 +36,8 @@ if ( #eggs > 0) then
 				GamePlaySound("data/audio/Desktop/animals.bank", "animals/lukki_eggs/destroy", x2, y2)
 				for p = 1, Random(5, 10) do
 					local eid = EntityLoad("data/entities/animals/lukki/lukki_tiny.xml", x2, y2)
+					EntityLoadToEntity("mods/grahamsperks/files/entities/charm_light.xml", eid)
+					EntityLoad("data/entities/particles/image_emitters/chest_effect.xml", x2, y2)
 					EntityAddComponent2(eid, "LuaComponent", {
 						script_source_file="mods/grahamsperks/files/scripts/tank_teleport.lua"
 					})

@@ -1,5 +1,11 @@
 <Entity name="$graham_lukkiegg" tags="hittable,teleportable_NOT,item_physics,item_pickup,grahams_things" >
   <Base file="data/entities/base_item_projectile.xml">
+    <ProjectileComponent>
+      <damage_by_type
+      melee="0.5"
+      >
+      </damage_by_type>
+    </ProjectileComponent>
   </Base>
 
   <!-- physical presence -->

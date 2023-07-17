@@ -51,6 +51,12 @@ ModLuaFileAppend( "data/scripts/items/heart_fullhp_temple.lua", "mods/grahamsper
 ModLuaFileAppend( "data/scripts/magic/fungal_shift.lua", "mods/grahamsperks/files/scripts/fungal_shift_append.lua")
 ModLuaFileAppend( "data/scripts/items/potion_starting.lua", "mods/grahamsperks/files/scripts/potion_starting_append.lua")
 
+-- enemies
+local enemies = {"coalmine_alt", "snowcave", "snowcastle", "sandcave"}
+for i = 1, #enemies do
+	ModLuaFileAppend( "data/scripts/biomes/" .. enemies[i] .. ".lua", "mods/grahamsperks/files/scripts/enemies_" .. enemies[i] .. ".lua" )
+end
+
 local function add_scene(table)
 	local biome_path = ModIsEnabled("noitavania") and "mods/noitavania/data/biome/_pixel_scenes.xml" or "data/biome/_pixel_scenes.xml"
 	local content = ModTextFileGetContent(biome_path)

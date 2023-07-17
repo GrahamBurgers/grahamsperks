@@ -20,11 +20,21 @@ for i = 1, #enemies do
         local genome = EntityGetFirstComponent(enemies[i], "GenomeDataComponent") or 0
         local enemyfaction = ComponentGetValue2(genome, "herd_id")
         if (faction ~= enemyfaction and enemies[i] ~= whoshot and GameGetGameEffect( enemies[i], "CHARM" ) == 0) or friendlyfire == true then
+            local damage = radius * 0.006
             if GameGetGameEffectCount(enemies[i], "ALLERGY_RADIOACTIVE") == 0 then
-                EntityInflictDamage(enemies[i], radius * 0.006, "DAMAGE_RADIOACTIVE", "$damage_radioactivity", "NORMAL", 0, 0, whoshot)
+                local health = ComponentGetValue2(EntityGetFirstComponentIncludingDisabled(enemies[i], "DamageModelComponent") or 0, "hp")
+                if health > damage or true then
+                    -- deal normal damage if they can survive it (unused)
+                    damage = radius * 0.006
+                else
+                    -- leave them on 1 HP if possible
+                    damage = health - 0.04
+                end
             else
-                EntityInflictDamage(enemies[i], radius * 0.012, "DAMAGE_RADIOACTIVE", "$damage_radioactivity", "NORMAL", 0, 0, whoshot)
+                -- deal double damage and ignore their HP
+                damage = radius * 0.012
             end
+            EntityInflictDamage(enemies[i], damage, "DAMAGE_RADIOACTIVE", "$damage_radioactivity", "NORMAL", 0, 0, whoshot)
         end
     end
 end
