@@ -79,6 +79,7 @@ local settings = {
         type    = "boolean",
         default = true,
     },
+    --[[
     {
         id      = "Spells",
         name    = "Add new spells",
@@ -90,6 +91,21 @@ local settings = {
         id      = "Perks",
         name    = "Add new perks",
         desc    = "Should the mod add new perks? \n(Disabling WILL break some things!)",
+        type    = "boolean",
+        default = true,
+    },
+    ]]--
+    {
+        id      = "Enemies",
+        name    = "Add new enemies",
+        desc    = "Should the mod add new enemies?\n(This excludes mimics, which are always enabled.)",
+        type    = "boolean",
+        default = true,
+    },
+    {
+        id      = "StartingItems",
+        name    = "Add new starting items",
+        desc    = "Should you be able to start with new spells or potions at the start of a run?",
         type    = "boolean",
         default = true,
     },

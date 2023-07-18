@@ -24,14 +24,11 @@ if ModIsEnabled("anvil_of_destiny") then
   ModLuaFileAppend("mods/anvil_of_destiny/files/scripts/modded_content.lua", "mods/grahamsperks/files/scripts/aod_compat.lua")
 end
 
-if ModSettingGet("grahamsperks.Spells") ~= false then
-	ModLuaFileAppend("data/scripts/gun/gun_actions.lua", "mods/grahamsperks/files/spells/actions.lua")
-end
+ModLuaFileAppend("data/scripts/gun/gun_actions.lua", "mods/grahamsperks/files/spells/actions.lua")
+ModLuaFileAppend("data/scripts/perks/perk_list.lua", "mods/grahamsperks/files/perks/perk_list.lua")
+
 if ModSettingGet("grahamsperks.Creepy") ~= false then
 	ModMaterialsFileAdd("mods/grahamsperks/files/materials/reactions_creepy.xml")
-end
-if ModSettingGet("grahamsperks.Perks") ~= false then
-	ModLuaFileAppend("data/scripts/perks/perk_list.lua", "mods/grahamsperks/files/perks/perk_list.lua")
 end
 
 ModLuaFileAppend( "data/scripts/items/heart.lua", "mods/grahamsperks/files/healthyheart.lua" )
@@ -49,12 +46,14 @@ ModLuaFileAppend( "data/scripts/perks/perk.lua", "mods/grahamsperks/files/script
 ModLuaFileAppend( "data/scripts/items/heart_fullhp.lua", "mods/grahamsperks/files/scripts/blood_orb_fullheal.lua")
 ModLuaFileAppend( "data/scripts/items/heart_fullhp_temple.lua", "mods/grahamsperks/files/scripts/blood_orb_fullheal.lua")
 ModLuaFileAppend( "data/scripts/magic/fungal_shift.lua", "mods/grahamsperks/files/scripts/fungal_shift_append.lua")
-ModLuaFileAppend( "data/scripts/items/potion_starting.lua", "mods/grahamsperks/files/scripts/potion_starting_append.lua")
 
--- enemies
-local enemies = {"coalmine_alt", "excavationsite", "snowcave", "snowcastle", "sandcave"}
-for i = 1, #enemies do
-	ModLuaFileAppend( "data/scripts/biomes/" .. enemies[i] .. ".lua", "mods/grahamsperks/files/scripts/enemies_" .. enemies[i] .. ".lua" )
+if ModSettingGet("grahamsperks.Enemies") ~= false then
+	-- enemies
+	local enemies = {"coalmine_alt", "excavationsite", "snowcave", "snowcastle", "sandcave"}
+	for i = 1, #enemies do
+		ModLuaFileAppend( "data/scripts/biomes/" .. enemies[i] .. ".lua", "mods/grahamsperks/files/scripts/enemies_" .. enemies[i] .. ".lua" )
+	end
+	PolymorphTableAddEntity( "data/entities/animals/graham_miner_gasser.xml", false )
 end
 
 local function add_scene(table)
@@ -171,16 +170,6 @@ local patches = {
         from    = "tags=\"hittable,",
         to      = "tags=\"hittable,forgeable,cybereye_forgeable,",
     },
-    {
-        path    = "data/scripts/gun/procedural/starting_bomb_wand.lua",
-        from    = "\"GRENADE\"",
-        to      = "\"GRENADE\",\"GRAHAM_BARREL\"",
-    },
-    {
-        path    = "data/scripts/gun/procedural/starting_wand.lua",
-        from    = "\"SPITTER\"",
-        to      = "\"SPITTER\",\"GRAHAM_GLOW_DART\",\"GRAHAM_BRAMBALL\"",
-    },
 	{
         path    = "data/entities/animals/boss_centipede/ending/ending_sampo_spot_mountain.xml",
         from    = "</Entity>",
@@ -221,6 +210,20 @@ local patches = {
 		]],
     },
 }
+
+if ModSettingGet("grahamsperks.StartingItems") ~= false then
+	ModLuaFileAppend( "data/scripts/items/potion_starting.lua", "mods/grahamsperks/files/scripts/potion_starting_append.lua")
+	table.insert(patches, {
+		path    = "data/scripts/gun/procedural/starting_wand.lua",
+        from    = "\"SPITTER\"",
+        to      = "\"SPITTER\",\"GRAHAM_GLOW_DART\",\"GRAHAM_BRAMBALL\"",
+	})
+	table.insert(patches, {
+        path    = "data/scripts/gun/procedural/starting_bomb_wand.lua",
+        from    = "\"GRENADE\"",
+        to      = "\"GRENADE\",\"GRAHAM_BARREL\"",
+	})
+end
 
 if ModIsEnabled("noita-together") then
 	table.insert(patches, {
