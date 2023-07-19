@@ -196,10 +196,26 @@ local to_insert = {
 		end
 	},
 	{
-		id                = "GRAHAM_MANAHEART",
-		name              = "$graham_name_manaheart",
-		description       = "$graham_desc_manaheart",
-		sprite            = "mods/grahamsperks/files/spells/manaheart.png",
+		id          = "GRAHAM_MANAHEART",
+		name 		= "$graham_name_manaheart",
+		description = "$graham_desc_manaheart",
+		sprite 		= "mods/grahamsperks/files/spells/manaheart.png",
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "1,2,3,4,5,6",
+		spawn_probability                 = "0.5,0.5,0.3,0.3,0.5,0.5",
+		price = 200,
+		mana = -10,
+		action 		= function()
+			c.fire_rate_wait = c.fire_rate_wait - 3
+			current_reload_time = current_reload_time - 6
+			draw_actions( 1, true )
+		end,
+	},
+	{
+		id                = "GRAHAM_MANAHEARTBREAK",
+		name              = "$graham_name_manaheartbreak",
+		description       = "$graham_desc_manaheartbreak",
+		sprite            = "mods/grahamsperks/files/spells/manaheartbreak.png",
 		type              = ACTION_TYPE_MODIFIER,
 		spawn_level       = "1,2,3,4,5,6",
 		spawn_probability = "1,1,0.6,0.6,1,1",
