@@ -1,5 +1,5 @@
 <Sprite
- filename="mods/grahamsperks/files/entities/mini_mimic.png"
+ filename="data/enemies_gfx/mini_mimic.png"
  offset_x="12"
  offset_y="16"
   default_animation="stand" >

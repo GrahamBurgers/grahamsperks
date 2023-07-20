@@ -1,5 +1,6 @@
 <Sprite
  filename="data/enemies_gfx/graham_fuzz.png"
+ hotspots_filename="data/enemies_gfx/graham_fuzz_hotspots.png"
  offset_x="9"
  offset_y="9"
  default_animation="stand" >
