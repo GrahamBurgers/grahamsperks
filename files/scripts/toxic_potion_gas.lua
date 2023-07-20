@@ -34,7 +34,7 @@ for i = 1, #enemies do
                 -- deal double damage and ignore their HP
                 damage = radius * 0.012
             end
-            EntityInflictDamage(enemies[i], damage, "DAMAGE_RADIOACTIVE", "$damage_radioactivity", "NORMAL", 0, 0, whoshot)
+            EntityInflictDamage(enemies[i], damage, "DAMAGE_RADIOACTIVE", "$damage_radioactive", "NORMAL", 0, 0, whoshot)
         end
     end
 end

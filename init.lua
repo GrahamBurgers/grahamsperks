@@ -49,11 +49,12 @@ ModLuaFileAppend( "data/scripts/magic/fungal_shift.lua", "mods/grahamsperks/file
 
 if ModSettingGet("grahamsperks.Enemies") ~= false then
 	-- enemies
-	local enemies = {"coalmine_alt", "excavationsite", "snowcave", "snowcastle", "sandcave"}
+	local enemies = {"coalmine_alt", "excavationsite", "snowcave", "snowcastle", "sandcave", "vault"}
 	for i = 1, #enemies do
 		ModLuaFileAppend( "data/scripts/biomes/" .. enemies[i] .. ".lua", "mods/grahamsperks/files/scripts/enemies_" .. enemies[i] .. ".lua" )
 	end
 	PolymorphTableAddEntity( "data/entities/animals/graham_miner_gasser.xml", false )
+	PolymorphTableAddEntity( "data/entities/animals/graham_fuzz.xml", false )
 end
 
 local function add_scene(table)

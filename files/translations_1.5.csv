@@ -58,7 +58,7 @@ graham_desc_toggler3_alt,"When you right click, disables all toggle requirement 
 graham_name_echo_bubble,Echo Bubble,,,,,,,,,,,,
 graham_desc_echo_bubble,A shining bubble that echoes the position of its caster,,,,,,,,,,,,
 graham_name_passives,Active Passives,,,,,,,,,,,,
-graham_desc_passives,This wand regenerates mana 10% faster for every other passive spell on this wand,,,,,,,,,,,,
+graham_desc_passives,This wand regenerates mana 10% faster for every passive spell on this wand,,,,,,,,,,,,
 graham_name_diversify,Diversify,,,,,,,,,,,,
 graham_desc_diversify,Decreases recharge time by 0.50 if you have 4 or more different spell types on this wand,,,,,,,,,,,,
 graham_name_divebomb,Dive-bomb,,,,,,,,,,,,
@@ -159,7 +159,8 @@ graham_deathcomplete_6,"No, of course you're not. I expected as much.",,,,,,,,,,
 graham_deathcomplete_7,"Fortunately, I have another reward prepared.",,,,,,,,,,,,
 graham_deathcomplete_8,"Claim your real reward, then.",,,,,,,,,,,,
 OTHER,,,,,,,,,,,,
-graham_miner_gasser,"Suojapukuhiisi",,,,,,,,,,,,
+animal_graham_miner_gasser,"Suojapukuhiisi",,,,,,,,,,,,doesn't need to be translated
+animal_graham_fuzz,"Hankaussähkö",,,,,,,,,,,,doesn't need to be translated
 graham_bookbook_name,"Book",,,,,,,,,,,,
 graham_chest_tech,Technical Treasure Chest,,,,,,,,,,,,
 material_graham_yum,Satiation,,,,,,,,,,,,

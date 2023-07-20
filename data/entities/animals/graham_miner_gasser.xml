@@ -1,4 +1,4 @@
-<Entity name="$graham_miner_gasser" >
+<Entity name="$animal_graham_miner_gasser" >
   
 	<Base file="data/entities/base_enemy_basic.xml" >
 		<ItemChestComponent level="1" > </ItemChestComponent>
