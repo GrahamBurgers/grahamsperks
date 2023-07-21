@@ -1629,7 +1629,7 @@ local to_insert = {
 		spawn_level            = "0,3,5",
 		spawn_probability      = "0.6,1,1",
 		price                  = 150,
-		mana                   = 18,
+		mana                   = 8,
 		related_extra_entities = { "mods/grahamsperks/files/spells/divebomb.xml," },
 		action                 = function()
 			c.fire_rate_wait = c.fire_rate_wait + 8
@@ -1689,7 +1689,7 @@ local to_insert = {
 		spawn_level       = "1,2,3,4",
 		spawn_probability = "0.8,1,0.4,0.4",
 		price             = 120,
-		mana              = 20,
+		mana              = 8,
 		custom_xml_file   = "mods/grahamsperks/files/spells/sliceshield.xml",
 		action            = function()
 			-- does nothing to the projectiles
