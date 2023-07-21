@@ -43,7 +43,7 @@
             materials_create_messages="0"
 			ragdoll_filenames_file="data/ragdolls/graham_fuzz/filenames.txt"
 			materials_damage="0"
-			fire_probability_of_ignition="0"
+			fire_probability_of_ignition="1"
 			blood_material="blood_cold_vapour"
     		blood_spray_material="blood_cold"
             blood_spray_create_some_cosmetic="1"
