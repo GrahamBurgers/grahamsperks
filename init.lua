@@ -1,14 +1,12 @@
 local translations = ModTextFileGetContent( "data/translations/common.csv" );
-local new_translations
 if translations ~= nil then
 	while translations:find("\r\n\r\n") do
-		translations = translations:gsub("\r\n\r\n","\r\n");
+		translations = translations:gsub("\r\n\r\n","\r\n")
 	end
-	new_translations = ModTextFileGetContent( "mods/grahamsperks/files/translations.csv" );
-	translations = translations .. new_translations;
-	new_translations = ModTextFileGetContent( "mods/grahamsperks/files/translations_1.5.csv" );
-	translations = translations .. new_translations;
-	ModTextFileSetContent( "data/translations/common.csv", translations );
+	translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations.csv" )
+	translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_1.5.csv" )
+	translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/entities/books/corrupt/.csv" )
+	ModTextFileSetContent( "data/translations/common.csv", translations )
 end
 
 ModMaterialsFileAdd("mods/grahamsperks/files/materials/materials.xml")
@@ -21,7 +19,7 @@ if ModIsEnabled("more-stuff") then
 	ModMaterialsFileAdd("mods/grahamsperks/files/materials/reactions_morestuff.xml")
 end
 if ModIsEnabled("anvil_of_destiny") then
-  ModLuaFileAppend("mods/anvil_of_destiny/files/scripts/modded_content.lua", "mods/grahamsperks/files/scripts/aod_compat.lua")
+	ModLuaFileAppend("mods/anvil_of_destiny/files/scripts/modded_content.lua", "mods/grahamsperks/files/scripts/aod_compat.lua")
 end
 
 ModLuaFileAppend("data/scripts/gun/gun_actions.lua", "mods/grahamsperks/files/spells/actions.lua")
@@ -222,7 +220,7 @@ if ModSettingGet("grahamsperks.StartingItems") ~= false then
 	table.insert(patches, {
         path    = "data/scripts/gun/procedural/starting_bomb_wand.lua",
         from    = "\"GRENADE\"",
-        to      = "\"GRENADE\",\"GRAHAM_BARREL\"",
+        to      = "\"GRENADE\",\"GRAHAM_BARREL\",\"GRAHAM_PANIC_BOMB\"",
 	})
 end
 

@@ -21,7 +21,7 @@ if player_riding ~= 0 then
         return
     end
     local x2, y2 = EntityGetTransform(player_riding)
-    local distance = math.abs( x - x2 ) + math.abs( y - y2)
+    local distance = math.sqrt((x2 - x)^2 + (y2 - y)^2)
     if distance < 50 then
         EntityApplyTransform(player_riding, x, y - 4)
         local chomp = EntityGetFirstComponent(player_riding, "CharacterDataComponent")

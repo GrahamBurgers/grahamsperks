@@ -66,7 +66,7 @@ if ( #books > 0 ) then
 		tx, ty = EntityGetTransform( tablet_id )
 
 		if in_world then
-			local distance = math.abs(x - tx) + math.abs(y - ty)
+			local distance =  math.sqrt((tx - x)^2 + (ty - y)^2)
 		
 			if ( distance < 56 ) then
 				if EntityHasTag( tablet_id, "grahamhungry" ) then

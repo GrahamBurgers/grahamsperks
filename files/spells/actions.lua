@@ -1781,6 +1781,23 @@ local to_insert = {
 			add_projectile("mods/grahamsperks/files/spells/toxic_potion.xml")
 		end,
 	},
+	{
+		id                  = "GRAHAM_PANIC_BOMB",
+		name                = "$graham_name_panicbomb",
+		description         = "$graham_desc_panicbomb",
+		sprite              = "mods/grahamsperks/files/spells/panic_bomb.png",
+		related_projectiles = { "mods/grahamsperks/files/spells/panic_bomb.xml" },
+		type                = ACTION_TYPE_PROJECTILE,
+		spawn_level         = "0,1,2,3,4",
+		spawn_probability   = "1,1,1,1,0.5",
+		price               = 80,
+		mana                = 45,
+		max_uses    = 6,
+		action 		= function()
+			add_projectile("mods/grahamsperks/files/spells/panic_bomb.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 70
+		end,
+	},
 }
 for i, v in ipairs(to_insert) do
 	table.insert(actions, v)

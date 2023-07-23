@@ -18,7 +18,7 @@ for i = 1, #entities do
 			bx = ComponentGetValue2(cx, "value_int")
 			by = ComponentGetValue2(cy, "value_int")
 
-			if (math.abs( x - bx ) + math.abs( y - by)) > 18 then
+			if  math.sqrt((bx - x)^2 + (by - y)^2) > 18 then
 				ComponentSetValue2(cx, "value_int", x)
 				ComponentSetValue2(cy, "value_int", y)
 			else
