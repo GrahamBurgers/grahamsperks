@@ -1798,7 +1798,25 @@ local to_insert = {
 			c.fire_rate_wait = c.fire_rate_wait + 70
 		end,
 	},
+	{
+		id          = "GRAHAM_TOXIC_CRIT",
+		name 		= "$graham_name_toxic_crit",
+		description = "$graham_desc_toxic_crit",
+		sprite              = "mods/grahamsperks/files/spells/toxic_crit.png",
+		related_projectiles = { "mods/grahamsperks/files/spells/toxic_crit.xml" },
+		type 		= ACTION_TYPE_MODIFIER,
+		spawn_level                       = "1,3,4,5", -- HITFX_CRITICAL_BLOOD
+		spawn_probability                 = "0.2,0.2,0.2,0.4", -- HITFX_CRITICAL_BLOOD
+		price = 70,
+		mana = 15,
+		--max_uses = 50,
+		action 		= function()
+			c.extra_entities = c.extra_entities .. "mods/grahamsperks/files/spells/toxic_crit.xml,"
+			draw_actions( 1, true )
+		end,
+	},
 }
+
 for i, v in ipairs(to_insert) do
 	table.insert(actions, v)
 end

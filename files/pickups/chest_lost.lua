@@ -121,9 +121,8 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 			end
 			good_item_dropped = false
 		elseif rnd <= 70 then
-			-- 5%: Mini mimic
-			table.insert(entities, { "data/entities/animals/mini_mimic.xml" })
-			good_item_dropped = false
+			-- 5%: Good wand
+			table.insert(entities, { "data/entities/items/wand_level_05.xml" })
 		elseif rnd <= 75 then
 			-- 5%: Gourds
 			for i = 1, Random(1, 3) do
@@ -202,7 +201,8 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 
 		local comp = EntityGetFirstComponentIncludingDisabled(eid, "ProjectileComponent")
 		if comp ~= nil and entity[1] == "data/entities/projectiles/bomb_holy.xml" then
-			ComponentSetValue2(comp, "lifetime", 400)
+			ComponentSetValue2(comp, "lifetime", 300)
+			ComponentSetValue2(comp, "damage", 150)
 			ComponentObjectSetValue2(comp, "config_explosion", "create_cell_material", "gold")
 			ComponentObjectSetValue2(comp, "config_explosion", "create_cell_probability", Random(2, 4))
 			local health = EntityGetFirstComponent(eid, "DamageModelComponent") or 0
