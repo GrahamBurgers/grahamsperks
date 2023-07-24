@@ -4,4 +4,3 @@ if material == "graham_graymatter_liquid" then
     local x, y = EntityGetTransform(GetUpdatedEntityID())
     EntityLoad("data/entities/items/pickup/potion_empty.xml", x, y)
 end
-GamePrint(material)
