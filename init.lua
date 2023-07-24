@@ -208,6 +208,19 @@ local patches = {
 			</Entity>
 		]],
     },
+	{
+        path    = "data/entities/items/pickup/potion.xml",
+        from    = "</Entity>",
+        to      = [[
+			<LuaComponent 
+				_enabled="1" 
+				remove_after_executed="1"
+				script_source_file="mods/grahamsperks/files/scripts/angry.lua" 
+			>
+			</LuaComponent>
+		</Entity>
+		]],
+    },
 }
 
 if ModSettingGet("grahamsperks.StartingItems") ~= false then

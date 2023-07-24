@@ -20,17 +20,17 @@
       speed_max="130"
       ><config_explosion
         never_cache="0" 
-        damage="1.6"
+        damage="4.8"
         camera_shake="50"
         explosion_radius="80" 
         explosion_sprite="data/particles/explosion_128.xml" 
         explosion_sprite_lifetime="0" 
         load_this_entity="data/entities/misc/explosion_was_here.xml"
         create_cell_material="smoke"
-        create_cell_probability="15" 
+        create_cell_probability="8" 
         hole_destroy_liquid="1" 
         hole_enabled="1"
-        ray_energy="3000000"
+        ray_energy="1000000"
         particle_effect="1" 
         damage_mortals="1"
         physics_explosion_power.min="2.2" 
@@ -42,7 +42,7 @@
         sparks_enabled="1" 
         stains_enabled="1" 
         stains_radius="15" 
-		    max_durability_to_destroy="14" >
+		    max_durability_to_destroy="11" >
       </config_explosion>
     </ProjectileComponent>
 
