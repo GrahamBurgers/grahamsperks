@@ -1816,6 +1816,23 @@ local to_insert = {
 			draw_actions( 1, true )
 		end,
 	},
+	{
+		id          = "GRAHAM_CLOUD_HAIL",
+		name 		= "$graham_name_cloud_hail",
+		description = "$graham_desc_cloud_hail",
+		sprite              = "mods/grahamsperks/files/spells/cloud_hail.png",
+		related_projectiles = { "mods/grahamsperks/files/spells/cloud_hail.xml" },
+		type 		= ACTION_TYPE_STATIC_PROJECTILE,
+		spawn_level                       = "0,1,2,3,4,5",
+		spawn_probability                 = "0.4,0.4,0.2,0.2,0.3,0.2",
+		price = 200,
+		mana = 50,
+		max_uses = 8,
+		action 		= function()
+			add_projectile("mods/grahamsperks/files/spells/cloud_hail.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 25
+		end,
+	},
 }
 
 for i, v in ipairs(to_insert) do
