@@ -5,7 +5,7 @@ if translations ~= nil then
 	end
 	translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations.csv" )
 	translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_1.5.csv" )
-	translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/entities/books/corrupt/.csv" )
+	translations = translations .. (ModTextFileGetContent( "mods/grahamsperks/files/entities/books/corrupt/.csv" ) or "")
 	ModTextFileSetContent( "data/translations/common.csv", translations )
 end
 
