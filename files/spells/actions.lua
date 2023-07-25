@@ -1777,7 +1777,7 @@ local to_insert = {
 		mana                = 30,
 		related_projectiles = { "mods/grahamsperks/files/spells/toxic_potion.xml" },
 		action              = function()
-			current_reload_time = current_reload_time + 30
+			current_reload_time = current_reload_time + 10
 			add_projectile("mods/grahamsperks/files/spells/toxic_potion.xml")
 		end,
 	},
