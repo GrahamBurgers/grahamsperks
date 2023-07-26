@@ -51,8 +51,11 @@ if ModSettingGet("grahamsperks.Enemies") ~= false then
 	for i = 1, #enemies do
 		ModLuaFileAppend( "data/scripts/biomes/" .. enemies[i] .. ".lua", "mods/grahamsperks/files/scripts/enemies_" .. enemies[i] .. ".lua" )
 	end
-	PolymorphTableAddEntity( "data/entities/animals/graham_miner_gasser.xml", false )
-	PolymorphTableAddEntity( "data/entities/animals/graham_fuzz.xml", false )
+
+	if PolymorphTableAddEntity ~= nil then
+		PolymorphTableAddEntity( "data/entities/animals/graham_miner_gasser.xml", false )
+		PolymorphTableAddEntity( "data/entities/animals/graham_fuzz.xml", false )
+	end
 end
 
 local function add_scene(table)

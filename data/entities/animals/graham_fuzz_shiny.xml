@@ -54,6 +54,7 @@
 				projectile="0.5"
 				melee="4"
 				physics_hit="0"
+				explosion="0.8"
 			></damage_multipliers>
 		</DamageModelComponent>
 
@@ -222,12 +223,6 @@
 	<Entity>
 		<GameEffectComponent 
 			effect="PROTECTION_ELECTRICITY"
-			frames="-1"
-		></GameEffectComponent>
-	</Entity>
-	<Entity>
-		<GameEffectComponent 
-			effect="PROTECTION_EXPLOSION"
 			frames="-1"
 		></GameEffectComponent>
 	</Entity>

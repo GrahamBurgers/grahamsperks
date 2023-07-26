@@ -1,5 +1,5 @@
 local comps = EntityGetComponent(GetUpdatedEntityID(), "ProjectileComponent") or {}
-local multiplier = 25
+local multiplier = 35
 local size = 25
 local damagetypes = {"projectile", "electricity", "explosion", "fire", "melee", "slice", "slice", "ice", "healing", "physics_hit", "radioactive", "poison", "overeating", "curse"}
 for i = 1, #comps do
