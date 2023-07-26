@@ -22,15 +22,24 @@ if calculateDistance(x, y, x2, y2) > radius + 180 then
     return
 end
 
+-- hopefully will not cause lag
+local multiplier = ((GameGetGameEffectCount(me, "MOVEMENT_FASTER") + GameGetGameEffectCount(me, "MOVEMENT_FASTER_2X") * 2) - (GameGetGameEffectCount(me, "SLIMY") + GameGetGameEffectCount(me, "MOVEMENT_SLOWER") + GameGetGameEffectCount(me, "MOVEMENT_SLOWER_2X") * 2))
+
 if calculateDistance(x, y, x2, y2) > radius + 3 then
     local distance = calculateDistance(x, y, x2, y2)
     local dx = (x - x2) / distance
     local dy = (y - y2) / distance
-    x2 = x2 + dx * 1
-    y2 = y2 + dy * 1
+    local speed = 1.5
+    if GameGetGameEffectCount(me, "CONFUSION") > 0 then speed = -1.5 end
+    x2 = x2 + dx * speed ^ multiplier
+    y2 = y2 + dy * speed ^ multiplier
 else
+    local speed = 0.02
+    if GameGetGameEffectCount(me, "CONFUSION") > 0 then speed = -0.02 end
+    speed = speed * 1.5 ^ multiplier
+
     local angle = math.atan2(y - y2, x - x2)
-    angle = math.pi + angle + 0.02
+    angle = math.pi + angle + speed
     x2 = x + math.cos(angle) * radius
     y2 = y + math.sin(angle) * radius
     ComponentSetValue2(ai, "attack_ranged_enabled", true)

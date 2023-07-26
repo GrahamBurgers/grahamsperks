@@ -98,7 +98,7 @@ local settings = {
     {
         id      = "Enemies",
         name    = "Add new enemies",
-        desc    = "Should the mod add new enemies?\n(This excludes mimics, which are always enabled.)",
+        desc    = "Should the mod add new enemies?\nThis excludes mimics, which are always enabled.\nNote: Having enemies disabled will make it impossible to get 100%\nenemy progress unless you've already killed the enemies previously.\n(Sorry, technical limitations and such.)",
         type    = "boolean",
         default = true,
     },
