@@ -15,7 +15,7 @@ local radius = ComponentObjectGetValue2(comp, "config_explosion", "explosion_rad
 ComponentSetValue2(particles, "area_circle_radius", radius, radius)
 if whoshot == 0 or x2 == nil or y2 == nil then
     -- if we can't find who shot it, turn the particle emitter green and don't shrink it
-    ComponentSetValue2(particles, "emitted_material_name", "radioactive_liquid")
+    ComponentSetValue2(particles, "emitted_material_name", "graham_ia_green")
     ComponentSetValue2(comp, "lifetime", 180)
     EntityRemoveComponent(me, GetUpdatedComponentID())
     return

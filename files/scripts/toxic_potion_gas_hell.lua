@@ -13,14 +13,14 @@ for i = 1, #enemies do
     if GameGetGameEffectCount(enemies[i], "PROTECTION_RADIOACTIVITY") == 0 then
         -- prevent player from killing their own friendlies (hopefully)
         if EntityGetHerdRelation( whoshot, enemies[i] ) <= 60 or friendlyfire == true then
-            local damage = radius * 0.006
+            local damage = radius * 0.008
             if GameGetGameEffectCount(enemies[i], "ALLERGY_RADIOACTIVE") == 0 then
-                damage = radius * 0.006
+                damage = radius * 0.008
             else
                 -- deal double damage
-                damage = radius * 0.012
+                damage = radius * 0.016
             end
-            EntityInflictDamage(enemies[i], damage, "DAMAGE_RADIOACTIVE", "$damage_radioactive", "NORMAL", 0, 0, whoshot)
+            EntityInflictDamage(enemies[i], damage, "DAMAGE_CURSE", "$damage_curse", "NORMAL", 0, 0, whoshot)
         end
     end
 end

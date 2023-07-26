@@ -47,7 +47,7 @@ ModLuaFileAppend( "data/scripts/magic/fungal_shift.lua", "mods/grahamsperks/file
 
 if ModSettingGet("grahamsperks.Enemies") ~= false then
 	-- enemies
-	local enemies = {"coalmine_alt", "excavationsite", "snowcave", "snowcastle", "sandcave", "vault"}
+	local enemies = {"coalmine_alt", "excavationsite", "snowcave", "snowcastle", "sandcave", "vault", "meat"}
 	for i = 1, #enemies do
 		ModLuaFileAppend( "data/scripts/biomes/" .. enemies[i] .. ".lua", "mods/grahamsperks/files/scripts/enemies_" .. enemies[i] .. ".lua" )
 	end

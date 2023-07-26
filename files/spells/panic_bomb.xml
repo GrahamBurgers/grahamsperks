@@ -20,7 +20,7 @@
       speed_max="130"
       ><config_explosion
         never_cache="0" 
-        damage="4.8"
+        damage="3.8"
         camera_shake="50"
         explosion_radius="80" 
         explosion_sprite="data/particles/explosion_128.xml" 
@@ -30,7 +30,7 @@
         create_cell_probability="8" 
         hole_destroy_liquid="1" 
         hole_enabled="1"
-        ray_energy="1000000"
+        ray_energy="900000"
         particle_effect="1" 
         damage_mortals="1"
         physics_explosion_power.min="2.2" 
@@ -57,7 +57,7 @@
   ></LuaComponent>
 
 	<ParticleEmitterComponent
-		emitted_material_name="blood"
+		emitted_material_name="graham_ia_red"
 		gravity.y="0.0"
 		lifetime_min="0.2"
 		lifetime_max="0.2"
