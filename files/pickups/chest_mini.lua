@@ -88,8 +88,8 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 		if rnd <= 15 then
 			-- 15%: Healthy Heart
 			table.insert( entities, { "mods/grahamsperks/files/pickups/heart_healthy.xml" })
-		elseif rnd <= 25 then
-			-- 10%: Goobers
+		elseif rnd <= 22 then
+			-- 8%: Goobers
 			table.insert( entities, { "mods/grahamsperks/files/entities/mini_tanks/tank.xml" })
 			if Random(1, 2) == 1 then
 				table.insert( entities, { "mods/grahamsperks/files/entities/mini_tanks/tank_rocket.xml" })
@@ -97,8 +97,11 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 				table.insert( entities, { "mods/grahamsperks/files/entities/mini_tanks/tank_super.xml" })
 			end
 			table.insert( entities, { "mods/grahamsperks/files/entities/mini_tanks/toasterbot.xml" })
+		elseif rnd <= 30 then
+			-- 7%: Lovely die
+			table.insert( entities, { "mods/grahamsperks/files/pickups/lovely_die.xml" })
 		elseif rnd <= 35 then
-			-- 10%: Soapstone
+			-- 5%: Soapstone
 			table.insert( entities, { "mods/grahamsperks/files/pickups/soapstone.xml" })
 		elseif rnd <= 40 then
 			-- 5%: Book

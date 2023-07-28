@@ -37,13 +37,14 @@ local to_insert = {
       EntityLoad("data/entities/items/pickup/powder_stash.xml", x + 15, y)
       EntityLoad("data/entities/items/wand_level_03.xml", x, y - 30)
       SetRandomSeed(x + y, GameGetFrameNum())
-      local rockrandom = Random(1, 6)
+      local rockrandom = Random(1, 7)
       if ( rockrandom == 1) then EntityLoad("data/entities/items/pickup/thunderstone.xml", x - 15, y) end
       if ( rockrandom == 2) then EntityLoad("data/entities/items/pickup/brimstone.xml", x - 15, y) end
       if ( rockrandom == 3) then EntityLoad("data/entities/items/pickup/waterstone.xml", x - 15, y) end
       if ( rockrandom == 4) then EntityLoad("data/entities/items/pickup/stonestone.xml", x - 15, y) end
       if ( rockrandom == 5) then EntityLoad("data/entities/items/pickup/safe_haven.xml", x - 15, y) end
       if ( rockrandom == 6) then EntityLoad("mods/grahamsperks/files/pickups/soapstone.xml", x - 15, y) end
+      if ( rockrandom == 7) then EntityLoad("mods/grahamsperks/files/pickups/lovely_die.xml", x - 15, y) end
     end,
 },
 {
@@ -271,7 +272,7 @@ local to_insert = {
     stackable = STACKABLE_NO,
     func = function( entity_perk_item, entity_who_picked, item_name )
 	
-		EntityAddComponent( entity_who_picked, "LuaComponent", 
+		EntityAddComponent2( entity_who_picked, "LuaComponent", 
 		{
 			_tags = "perk_component",
 			script_damage_received = "mods/grahamsperks/files/revenge_freeze.lua",
@@ -306,11 +307,11 @@ local to_insert = {
     remove_other_perks = {"PROTECTION_MELEE"},
     func = function( entity_perk_item, entity_who_picked, item_name )
 
-		EntityAddComponent( entity_who_picked, "LuaComponent", 
+		EntityAddComponent2( entity_who_picked, "LuaComponent", 
 		{
 			_tags = "perk_component",
 			script_damage_about_to_be_received = "mods/grahamsperks/files/zaptap.lua",
-			execute_every_n_frame = "-1",
+			execute_every_n_frame = -1,
 		} )
 
     local var_comp = get_variable_storage_component(entity_who_picked, "zap_tap_radius")
@@ -389,11 +390,11 @@ local to_insert = {
     not_in_default_perk_pool = false,
     stackable = STACKABLE_NO,
     func = function( entity_perk_item, entity_who_picked, item_name )
-      EntityAddComponent( entity_who_picked, "LuaComponent", 
+      EntityAddComponent2( entity_who_picked, "LuaComponent", 
       {
         _tags = "perk_component",
         script_source_file = "mods/grahamsperks/files/entities/breadcrumb_create.lua",
-        execute_every_n_frame = "1",
+        execute_every_n_frame = 1,
       } )
     end,
 },
@@ -419,11 +420,11 @@ local to_insert = {
   func = function( entity_perk_item, entity_who_picked, item_name )
     -- this one is safe exploration, by the way
   
-    EntityAddComponent( entity_who_picked, "LuaComponent", 
+    EntityAddComponent2( entity_who_picked, "LuaComponent", 
     {
       _tags = "perk_component",
       script_source_file = "mods/grahamsperks/files/scripts/protection.lua",
-      execute_every_n_frame = "30",
+      execute_every_n_frame = 30,
     })
   end,
 },
@@ -481,11 +482,11 @@ local to_insert = {
       end
     end
 
-    EntityAddComponent( entity_who_picked, "LuaComponent",
+    EntityAddComponent2( entity_who_picked, "LuaComponent",
 		{
 			_tags = "perk_component",
 			script_damage_about_to_be_received = "mods/grahamsperks/files/effects/damagedouble.lua",
-			execute_every_n_frame = "-1",
+			execute_every_n_frame = -1,
 		} )
   end,
 
@@ -511,11 +512,11 @@ local to_insert = {
     -- technically this should work perfectly fine when used by enemies, which would be really funny
     -- wouldn't apply to the player, or exclude the entity that has it, though
     -- if i fix those later, i'll turn it on
-  EntityAddComponent( entity_who_picked, "LuaComponent",
+  EntityAddComponent2( entity_who_picked, "LuaComponent",
   {
     _tags = "perk_component",
     script_source_file = "mods/grahamsperks/files/scripts/bleeding_edge.lua",
-    execute_every_n_frame = "1",
+    execute_every_n_frame = 1,
   } )
   end,
 },
@@ -552,7 +553,7 @@ local to_insert = {
         local orbs = ComponentGetValue2(varsto, "value_int") + 1
         ComponentSetValue2(varsto, "value_int", orbs)
 
-        EntityAddComponent(child_id, "VariableStorageComponent", {
+        EntityAddComponent2(child_id, "VariableStorageComponent", {
           _tags="wizard_orb_id",
           name="wizard_orb_id",
           value_int=orbs,
@@ -563,7 +564,7 @@ local to_insert = {
           value_int=1,
         })
 
-        EntityAddComponent(child_id, "VariableStorageComponent", {
+        EntityAddComponent2(child_id, "VariableStorageComponent", {
           _tags="wizard_orb_id",
           name="wizard_orb_id",
           value_int=1,
@@ -659,10 +660,10 @@ local to_insert = {
   not_in_default_perk_pool = false,
   stackable = STACKABLE_NO,
   func = function( entity_perk_item, entity_who_picked, item_name )
-    EntityAddComponent(entity_who_picked, "LuaComponent", {
+    EntityAddComponent2(entity_who_picked, "LuaComponent", {
       _tags = "perk_component",
       script_kick="mods/grahamsperks/files/scripts/wandkick.lua",
-      execute_every_n_frame="-1",
+      execute_every_n_frame=-1,
     })
   end,
 },
@@ -712,23 +713,23 @@ end,
   usable_by_enemies = false,
   not_in_default_perk_pool = false,
   stackable_maximum = 5,
-  stackable = STACKABLE_YES,
+  stackable = STACKABLE_NO,
   func = function( entity_perk_item, entity_who_picked, item_name )
-      local length = tonumber(GlobalsGetValue("graham_silly_straw_length", "0") or "0")
-      if length < 1 then
-        EntityAddComponent(entity_who_picked, "LuaComponent", {
-          _tags = "perk_component",
-          script_source_file="mods/grahamsperks/files/entities/straw/straw.lua",
-          execute_every_n_frame="1",
-        })
-        GlobalsSetValue("graham_silly_straw_length", "1")
-      else
-        GlobalsSetValue("graham_silly_straw_length", tostring(length + 1))
-      end
-  end,
-  func_remove = function( entity_who_picked )
-    GlobalsSetValue("graham_silly_straw_length", "0")
-  end,
+    local length = tonumber(GlobalsGetValue("graham_silly_straw_length", "0") or "0")
+    if length < 1 then
+      EntityAddComponent2(entity_who_picked, "LuaComponent", {
+        _tags = "perk_component",
+        script_source_file="mods/grahamsperks/files/entities/straw/straw.lua",
+        execute_every_n_frame=1,
+      })
+      GlobalsSetValue("graham_silly_straw_length", "1")
+    else
+      GlobalsSetValue("graham_silly_straw_length", tostring(length + 1))
+    end
+end,
+func_remove = function( entity_who_picked )
+  GlobalsSetValue("graham_silly_straw_length", "0")
+end,
 },
 {
   id = "GRAHAM_TRICK_BETRAYAL",
@@ -897,11 +898,11 @@ end,
   not_in_default_perk_pool = not HasFlagPersistent("graham_progress_lucky"),
   stackable = STACKABLE_NO,
   func = function( entity_perk_item, entity_who_picked, item_name )
-  EntityAddComponent( entity_who_picked, "LuaComponent", 
+  EntityAddComponent2( entity_who_picked, "LuaComponent", 
   {
     _tags = "perk_component",
     script_damage_about_to_be_received = "mods/grahamsperks/files/luckyday.lua",
-    execute_every_n_frame = "-1",
+    execute_every_n_frame = -1,
   } )
   end,
 },
@@ -944,11 +945,11 @@ end,
   func = function( entity_perk_item, entity_who_picked, item_name )
   AddFlagPersistent("graham_death_hp_boost")
   add_halo_level(entity_who_picked, -1)
-  EntityAddComponent( entity_who_picked, "LuaComponent", 
+  EntityAddComponent2( entity_who_picked, "LuaComponent", 
   {
     _tags = "perk_component",
     script_damage_received = "mods/grahamsperks/files/demise.lua",
-    execute_every_n_frame = "-1",
+    execute_every_n_frame = -1,
   } )
   end,
 func_remove = function( entity_who_picked )
@@ -992,10 +993,6 @@ end,
 
     local value = GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" ) + 1
     GlobalsSetValue( "GRAHAM_MAGIC_SKIN_COUNTER", value )
-
-    local comp = EntityGetFirstComponent(entity_who_picked, "DamageModelComponent") or 0
-    GamePrint(GameTextGet("$graham_magicskin", math.ceil(ComponentGetValue2(comp, "max_hp") * 5)))
-    ComponentSetValue2(comp, "max_hp", ComponentGetValue2(comp, "max_hp") * 0.8)
   end,
   func_remove = function( entity_who_picked )
     local count = tonumber(GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" ))
@@ -1012,7 +1009,7 @@ end,
   not_in_default_perk_pool = not HasFlagPersistent("graham_progress_lukki"),
   stackable = STACKABLE_NO,
   func = function( entity_perk_item, entity_who_picked, item_name )
-    EntityAddComponent(entity_who_picked, "LuaComponent", {
+    EntityAddComponent2(entity_who_picked, "LuaComponent", {
       _tags = "perk_component",
       execute_on_added=true,
       script_source_file="mods/grahamsperks/files/scripts/lukki_mount_spawn.lua",
@@ -1039,10 +1036,10 @@ end,
   func = function( entity_perk_item, entity_who_picked, item_name )
     local amount = tonumber(GlobalsGetValue("graham_extra_slots_amount", "0") or "0")
     if amount < 1 then
-      EntityAddComponent(entity_who_picked, "LuaComponent", {
+      EntityAddComponent2(entity_who_picked, "LuaComponent", {
         _tags = "perk_component",
         script_source_file="mods/grahamsperks/files/scripts/extra_slots.lua",
-        execute_every_n_frame="5",
+        execute_every_n_frame=5,
       })
       GlobalsSetValue("graham_extra_slots_amount", "1")
     else
