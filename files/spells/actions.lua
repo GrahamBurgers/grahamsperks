@@ -1833,6 +1833,23 @@ local to_insert = {
 			c.fire_rate_wait = c.fire_rate_wait + 25
 		end,
 	},
+	{
+		id                  = "GRAHAM_SHOCK_DART",
+		name                = "$graham_name_shockdart",
+		description         = "$graham_desc_shockdart",
+		sprite              = "mods/grahamsperks/files/spells/shock_dart.png",
+		custom_xml_file     = "data/entities/misc/custom_cards/electric_charge.xml",
+		type                = ACTION_TYPE_PROJECTILE,
+		spawn_level         = "1,2,3,4",
+		spawn_probability   = "0.8,0.1,0.1,0.8",
+		price               = 300,
+		mana                = 12,
+		related_projectiles = { "mods/grahamsperks/files/spells/shock_dart.xml" },
+		action              = function()
+			add_projectile("mods/grahamsperks/files/spells/shock_dart.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 12
+		end,
+	},
 }
 
 for i, v in ipairs(to_insert) do

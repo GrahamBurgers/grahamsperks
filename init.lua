@@ -61,15 +61,16 @@ local function add_scene(table)
 	local biome_path = ModIsEnabled("noitavania") and "mods/noitavania/data/biome/_pixel_scenes.xml" or "data/biome/_pixel_scenes.xml"
 	local content = ModTextFileGetContent(biome_path)
 	local string = "<mBufferedPixelScenes>"
+	local worldsize = ModTextFileGetContent("data/compatibilitydata/worldsize.txt") or 35840
 	for i = 1, #table do
 		string = string .. [[<PixelScene pos_x="]] .. table[i][1] .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
 		if table[i][4] == true then
 			-- make things show up in first 2 parallel worlds
 			-- hopefully this won't cause too much lag when starting a run
-			string = string .. [[<PixelScene pos_x="]] .. table[i][1] + 35840 .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
-			string = string .. [[<PixelScene pos_x="]] .. table[i][1] - 35840 .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
-			string = string .. [[<PixelScene pos_x="]] .. table[i][1] + 71680 .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
-			string = string .. [[<PixelScene pos_x="]] .. table[i][1] - 71680 .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
+			string = string .. [[<PixelScene pos_x="]] .. table[i][1] + worldsize .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
+			string = string .. [[<PixelScene pos_x="]] .. table[i][1] - worldsize .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
+			string = string .. [[<PixelScene pos_x="]] .. table[i][1] + worldsize * 2 .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
+			string = string .. [[<PixelScene pos_x="]] .. table[i][1] - worldsize * 2 .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
 		end
 	end
 	content = content:gsub("<mBufferedPixelScenes>", string)
