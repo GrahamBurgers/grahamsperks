@@ -1,4 +1,4 @@
-local length = math.min(5, tonumber(GlobalsGetValue("graham_silly_straw_length", "0") or "0"))
+local length = math.min(10, tonumber(GlobalsGetValue("graham_silly_straw_length", "0") or "0"))
 -- an infinitely long straw is hysterical, but it should really be capped
 local multiplier = 1.2 -- the amount that stacking increases length by
 local DISTANCE = 25 * (multiplier ^ length)

@@ -1485,4 +1485,23 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/love.png">
 	wang_color="ffa160fb"
   ></CellDataChild>
 
+  <CellDataChild
+  	_parent="meat"
+	name="graham_meat_healthy"
+	ui_name="$graham_mat_meat_healthy"
+	wang_color="ffc3a079"
+	solid_on_collision_material="blood"
+	solid_break_to_type="blood"
+	audio_physics_material_wall="meat"
+	audio_physics_material_solid="meat"
+	audio_is_soft="1"
+	show_in_creative_mode="1"
+	>
+	<StatusEffects>
+		<Ingestion>
+			<StatusEffect type="GRAHAM_HEALTHYMEAL" amount="5" />
+		</Ingestion>
+	</StatusEffects>
+  </CellDataChild>
+
 </Materials>
