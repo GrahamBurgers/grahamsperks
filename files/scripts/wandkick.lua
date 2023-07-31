@@ -2,6 +2,20 @@ function kick( entity_who_kicked )
 
     local x, y = EntityGetTransform(entity_who_kicked)
     local wands = EntityGetInRadiusWithTag(x, y, 10, "wand") or 0
+    -- bags of many support
+    local helditem = EntityGetFirstComponent(entity_who_kicked, "Inventory2Component") or 0
+    if helditem ~= 0 then
+        local item = ComponentGetValue2(helditem, "mActiveItem") or 0
+        if item ~= 0 then
+            local varsto = EntityGetComponentIncludingDisabled(item, "VariableStorageComponent") or {}
+            for i = 1, #varsto do
+                if ComponentGetValue2(varsto[i], "name") == "bags_of_many_positions" then
+                    return
+                end
+            end
+        end
+    end
+
     for i = 1, #wands do
         local x2, y2 = EntityGetTransform(wands[i])
         if EntityGetRootEntity(wands[i]) == wands[i] then
@@ -41,7 +55,7 @@ function kick( entity_who_kicked )
                             GlobalsSetValue( "TEMPLE_SPAWN_GUARDIAN", "1" )
                         end
 
-                        if tonumber(GlobalsGetValue("STEVARI_DEATHS", 0)) < 3 then
+                        if tonumber(GlobalsGetValue("STEVARI_DEATHS", "0")) < 3 then
                             GamePrintImportant( "$logdesc_temple_spawn_guardian", "" )
                         else
                             GamePrintImportant( "$logdesc_gods_are_very_angry", "" )

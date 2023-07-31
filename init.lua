@@ -172,6 +172,11 @@ local patches = {
         from    = "tags=\"hittable,",
         to      = "tags=\"hittable,forgeable,cybereye_forgeable,",
     },
+    {
+        path    = "data/entities/items/pickup/physics_die.xml",
+        from    = "tags=\"hittable,",
+        to      = "tags=\"hittable,forgeable,lovelydie_forgeable,",
+    },
 	{
         path    = "data/entities/animals/boss_centipede/ending/ending_sampo_spot_mountain.xml",
         from    = "</Entity>",

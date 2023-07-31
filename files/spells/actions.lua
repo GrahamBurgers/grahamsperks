@@ -314,20 +314,21 @@ local to_insert = {
 		description         = "$graham_desc_circle_dulled",
 		sprite              = "mods/grahamsperks/files/spells/circle_dulled.png",
 		type                = ACTION_TYPE_MATERIAL,
-		spawn_level         = "1,2,3,4",
-		spawn_probability   = "0.2,0.2,0.6,0.2",
+		spawn_level         = "10",
+		spawn_probability   = "0",
 		price               = 160,
 		mana                = 120,
 		max_uses            = 2,
 		related_projectiles = { "mods/grahamsperks/files/spells/circle_dulled.xml" },
 		action              = function()
+			c.fire_rate_wait = c.fire_rate_wait + 80
+			if reflecting then return end
 			SetRandomSeed(GameGetFrameNum(), GameGetFrameNum())
 			if Random(1, 2) == 1 then
 				add_projectile("mods/grahamsperks/files/spells/circle_lava.xml")
 			else
 				add_projectile("mods/grahamsperks/files/spells/circle_acid.xml")
 			end
-			c.fire_rate_wait = c.fire_rate_wait + 80
 		end,
 	},
 	{

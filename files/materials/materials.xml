@@ -229,7 +229,7 @@ color="FF622d9a">
     liquid_sprite_stain_shaken_drop_chance="255"
     density="0.145"
     stickyness="0.3"
-    gfx_glow="155"
+    gfx_glow="40"
     gfx_glow_color="FFb32222"
     >
 	  <StatusEffects>

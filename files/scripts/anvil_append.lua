@@ -1,6 +1,3 @@
-dofile_once("data/scripts/lib/utilities.lua")
-dofile( "data/scripts/gun/gun_actions.lua" )
-
 local entity_id    = GetUpdatedEntityID()
 local pos_x, pos_y = EntityGetTransform( entity_id )
 
@@ -45,6 +42,17 @@ for _,id in pairs(EntityGetInRadiusWithTag(pos_x, pos_y, 70, "bloodmoon_forgeabl
 	if EntityGetRootEntity(id) == id then
 		local x,y = EntityGetTransform(id)
 		EntityLoad("mods/grahamsperks/files/pickups/bloodmoon.xml", x, y - 5)
+		EntityLoad("data/entities/projectiles/explosion.xml", x, y - 10)
+		EntityKill(id)
+		converted2 = true
+	end
+end
+
+for _,id in pairs(EntityGetInRadiusWithTag(pos_x, pos_y, 70, "lovelydie_forgeable")) do
+	-- make sure item is not carried in inventory or wand
+	if EntityGetRootEntity(id) == id then
+		local x,y = EntityGetTransform(id)
+		EntityLoad("mods/grahamsperks/files/pickups/lovely_die.xml", x, y - 5)
 		EntityLoad("data/entities/projectiles/explosion.xml", x, y - 10)
 		EntityKill(id)
 		converted2 = true

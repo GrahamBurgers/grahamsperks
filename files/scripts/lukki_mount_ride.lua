@@ -14,7 +14,9 @@ if player_riding ~= 0 then
         EntitySetComponentsWithTagEnabled(me, "graham_lukki_mount", false)
         EntitySetComponentsWithTagEnabled(me, "graham_lukki_dismount", true)
         ComponentSetValue2(varsto, "value_int", 0)
-        ComponentSetValue2(kick, "player_kickforce", 28)
+        if kick ~= 0 then
+            ComponentSetValue2(kick, "player_kickforce", 28)
+        end
         EntityLoad( "data/entities/particles/teleportation_source.xml", x, y )
         EntityLoad( "data/entities/particles/teleportation_target.xml", x2, y2 )
         EntityApplyTransform(me, x2, y2)
@@ -43,7 +45,7 @@ if player_riding ~= 0 then
         local xv, yv = PhysicsGetComponentVelocity(me, EntityGetFirstComponent(me, "PhysicsBodyComponent") or 0)
         xv = xv * -0.1
         yv = yv * -0.1
-        yv = yv - 0.3 --stop falling
+        yv = yv - 0.30159 --stop falling
         if ComponentGetValue2(comp, "mButtonDownRight") then xv = xv + 1 end
         if ComponentGetValue2(comp, "mButtonDownLeft") then xv = xv - 1 end
         if ComponentGetValue2(comp, "mButtonDownDown") then yv = yv + 1.2 end
