@@ -1,4 +1,4 @@
-<Entity tags="teleportable_NOT,item_physics,chest,item_pickup,effectable_prop">
+<Entity name="$graham_chest_bloody" tags="teleportable_NOT,item_physics,item_pickup,effectable_prop,grahams_things">
 	<UIInfoComponent
 		name="$graham_chest_bloody"
 		>

@@ -1,0 +1,29 @@
+<Entity>
+	
+	<Base file="data/entities/base_custom_card.xml" > 
+		<SpriteComponent 
+			image_file="mods/grahamsperks/files/spells/toggler3_alt.png" 
+			>
+		</SpriteComponent>
+		
+		<ItemActionComponent 
+			_tags="enabled_in_world"
+			action_id="GRAHAM_TOGGLER3_ALT" >
+		</ItemActionComponent>
+	</Base>
+
+	<InheritTransformComponent
+		_tags="enabled_in_world,enabled_in_hand" >
+	</InheritTransformComponent>
+
+	<LuaComponent 
+		_tags="enabled_in_hand"
+		script_source_file="mods/grahamsperks/files/scripts/toggler_alts.lua"
+		execute_every_n_frame="1" >
+	</LuaComponent>
+
+	<VariableStorageComponent
+		value_string="GRAHAM_TOGGLER3_ALT">
+	</VariableStorageComponent>
+	
+</Entity>

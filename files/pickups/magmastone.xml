@@ -1,4 +1,4 @@
-<Entity tags="hittable,teleportable_NOT,item_physics,item_pickup,brimstone,thunderstone,forgeable,magmastone,grahams_things" >
+<Entity name="$graham_magmacore_name" tags="hittable,teleportable_NOT,item_physics,item_pickup,grahams_things,forgeable" >
   <Base file="data/entities/base_item_projectile.xml">
     <ProjectileComponent>
       <damage_by_type

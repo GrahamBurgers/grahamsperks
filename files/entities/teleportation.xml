@@ -9,7 +9,7 @@
     </InheritTransformComponent>
 
     <LuaComponent
-        execute_every_n_frame="60"
+        execute_every_n_frame="5"
         script_source_file="mods/grahamsperks/files/scripts/chaotic_teleport.lua"
     ></LuaComponent>
 
@@ -17,5 +17,9 @@
         effect="CUSTOM"
     >
 	</GameEffectComponent >
+
+    <LifetimeComponent
+        lifetime="120"
+    ></LifetimeComponent>
 
 </Entity>

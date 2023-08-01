@@ -1,0 +1,21 @@
+<Entity tags="perk_entity">
+
+    <InheritTransformComponent>
+    </InheritTransformComponent>
+
+    <LuaComponent
+        script_source_file = "mods/grahamsperks/files/scripts/fortuneteller.lua"
+        execute_every_n_frame = "1"
+    ></LuaComponent>
+
+    <LuaComponent
+        script_interacting = "mods/grahamsperks/files/scripts/fortuneteller_summon.lua"
+        execute_every_n_frame = "-1"
+    ></LuaComponent>
+
+    <InteractableComponent
+        radius="2"
+        ui_text="null"
+    ></InteractableComponent>
+
+</Entity>

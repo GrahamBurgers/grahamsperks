@@ -1,0 +1,4 @@
+data/ragdolls/graham_wizard_familiar/torso.png
+data/ragdolls/graham_wizard_familiar/hand.png
+data/ragdolls/graham_wizard_familiar/feet.png
+data/ragdolls/graham_wizard_familiar/head.png

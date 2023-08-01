@@ -339,42 +339,18 @@
 	blob_radius1="2"	blob_radius2="2" >
   </Reaction>
   
-  <Reaction probability="1000"
-	input_cell1="graham_yum" 			input_cell2="graham_graymatter_liquid"
-	output_cell1="graham_yum" 			output_cell2="graham_yumgas"
-	blob_radius1="5"	blob_radius2="5" >
+  <Reaction probability="90"
+  input_cell1="sand"     input_cell2="[slime]"
+  output_cell1="graham_lavaglass"	output_cell2="air"
+  blob_radius1="4" >
   </Reaction>
 
-  <Reaction probability="1000"
-	input_cell1="graham_yumgas" 			input_cell2="graham_graymatter_liquid"
-	output_cell1="graham_yum" 			output_cell2="graham_yumgas"
-	blob_radius1="5"	blob_radius2="5" >
-  </Reaction>
-  
-  <Reaction probability="1000"
-	input_cell1="graham_yum" 			input_cell2="graham_graymatter_liquid"
-	output_cell1="graham_yum" 			output_cell2="graham_yum"
-	blob_radius1="2"	blob_radius2="2" >
-  </Reaction>
-  
-  <Reaction probability="20"
-	input_cell1="graham_yum" 			input_cell2="air"
-	output_cell1="air" 			output_cell2="air"
-	blob_radius1="2"	blob_radius2="2" >
+  <Reaction probability="90"
+  input_cell1="sand_surface"     input_cell2="[slime]"
+  output_cell1="graham_lavaglass"	output_cell2="air"
+  blob_radius1="4" >
   </Reaction>
 
-  <Reaction probability="40"
-	input_cell1="graham_yumgas" 			input_cell2="air"
-	output_cell1="air" 			output_cell2="air"
-	blob_radius1="2"	blob_radius2="2" >
-  </Reaction>
-
-   <Reaction probability="90"
-   input_cell1="lava"     input_cell2="[slime]"
-   output_cell1="graham_lavaglass"	output_cell2="graham_lavaglass"
-   blob_radius1="2" >
-   </Reaction>
-	
    <Reaction probability="90"
    input_cell1="magic_liquid_protection_all"     input_cell2="graham_lavaglass"
    output_cell1="graham_statium"	output_cell2="graham_statium"
@@ -685,6 +661,25 @@
   ray_energy="1150000"
   >
 </ExplosionConfig>
+  </Reaction>
+
+  <Reaction probability="100"
+    input_cell1="graham_purplebrick"     input_cell2="[corrodible]"
+    output_cell1="graham_purplebrick"     output_cell2="material_darkness"
+    blob_radius1="4"
+    blob_radius2="4"
+	></Reaction>
+
+  <Reaction probability="20" 
+    input_cell1="graham_tele_chaotic" 		input_cell2="graham_mundane"  
+    output_cell1="magic_liquid_teleportation" 				output_cell2="magic_liquid_teleportation"
+    >
+  </Reaction>
+
+  <Reaction probability="21" 
+    input_cell1="magic_liquid_teleportation" 					input_cell2="radioactive_liquid"  
+    output_cell1="graham_tele_chaotic" 			output_cell2="radioactive_liquid"
+    >
   </Reaction>
 
 </Materials>

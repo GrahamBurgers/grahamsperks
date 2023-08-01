@@ -1,14 +1,5 @@
-<Entity tags="scroll,forgeable,book_reforgeable">
-	<Base file="data/entities/items/books/base_book.xml">
-		<BookComponent
-			_enabled="0"
-			>
-		</BookComponent>
-
-		<ParticleEmitterComponent 
-			_enabled="0"
-			>
-		</ParticleEmitterComponent>
+<Entity name="$graham_unlockbook_name" tags="scroll,graham_book,forgeable">
+	<Base file="mods/grahamsperks/files/entities/books/base_book.xml">
 		
 		<PhysicsImageShapeComponent 
 			image_file="mods/grahamsperks/files/entities/book_blue_inhand.png"

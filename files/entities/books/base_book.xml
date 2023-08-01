@@ -1,0 +1,85 @@
+<Entity tags="scroll">
+
+	<UIInfoComponent
+		name="$booktitle01"
+	></UIInfoComponent>
+
+	<PhysicsBodyComponent 
+		_tags="enabled_in_world"
+		uid="1" 
+		allow_sleep="1" 
+		angular_damping="0" 
+		fixed_rotation="0" 
+		is_bullet="1" 
+		linear_damping="0"
+		auto_clean="1"
+		hax_fix_going_through_ground="1"
+		on_death_leave_physics_body="0"
+		on_death_really_leave_body="0"
+	></PhysicsBodyComponent>
+
+	<PhysicsImageShapeComponent 
+		body_id="1"
+		centered="1"
+		image_file="data/items_gfx/emerald_tablet.png"
+		material="rock_box2d_hard"
+	></PhysicsImageShapeComponent>
+
+	<PhysicsThrowableComponent
+		max_throw_speed="130"
+		throw_force_coeff="1.5"
+	></PhysicsThrowableComponent>
+
+	<VelocityComponent
+		_tags="enabled_in_world"
+	></VelocityComponent>
+	
+	<ItemComponent
+		_tags="enabled_in_world"
+		max_child_items="0"
+		is_pickable="1"
+		is_equipable_forced="1"
+		ui_sprite="data/ui_gfx/items/emerald_tablet.png"
+		preferred_inventory="QUICK"
+		item_name="$booktitle01"
+		ui_description="$bookdesc01"
+	></ItemComponent>
+  
+	<SpriteComponent
+		_tags="enabled_in_hand"
+		_enabled="0"
+		offset_x="4"
+		offset_y="4"
+		image_file="data/items_gfx/in_hand/emerald_tablet_in_hand.png"
+	></SpriteComponent>
+
+	<HitboxComponent 
+		_tags="enabled_in_world"
+		aabb_min_x="-3" 
+		aabb_max_x="3" 
+		aabb_min_y="-5" 
+		aabb_max_y="0" >
+	</HitboxComponent>
+
+	<LightComponent 
+		_tags="enabled_in_world"
+		_enabled="1" 
+		r="255"
+		g="255"
+		b="255"
+		radius="64"
+		fade_out_time="0.75" >
+	</LightComponent>
+	
+	<AbilityComponent
+		ui_name="$booktitle01"
+		throw_as_item="1"
+		><gun_config
+			deck_capacity="0"
+		></gun_config>
+	</AbilityComponent>
+
+	<BookComponent>
+	</BookComponent>
+
+</Entity>

@@ -1,9 +1,8 @@
-grahamburger_func = item_pickup
--- old item_pickup is now named grahamburger_func (Make sure you try to be creative with these names)
+local grahamburger_func = item_pickup
 
 function item_pickup( entity_item, entity_who_picked, name )
 
-    local damagemodel = EntityGetFirstComponent( entity_who_picked, "DamageModelComponent" )
+    local damagemodel = EntityGetFirstComponent( entity_who_picked, "DamageModelComponent" ) or 0
     local multiplier = tonumber( GlobalsGetValue( "HEARTS_MORE_EXTRA_HP_MULTIPLIER", "1" ) ) 
     local second_mult = GlobalsGetValue( "HEALTHY_HEARTS_HP_MULTIPLIER", "1" )
     -- to scale with stronger hearts perk
@@ -15,4 +14,12 @@ function item_pickup( entity_item, entity_who_picked, name )
     end
     grahamburger_func( entity_item, entity_who_picked, name ) --Call old function so max_hp is applied
     ComponentSetValue2( damagemodel, "hp", hp ) --Set hp
+
+    local robots = GlobalsGetValue( "GRAHAM_ROBOTS_COUNT", "0" )
+    local x, y = EntityGetTransform(GetUpdatedEntityID())
+    local options = {"tank.xml", "tank_rocket.xml", "tank_super.xml", "toasterbot.xml"}
+    for i = 1, robots do
+        SetRandomSeed(entity_item + x, y + i)
+        EntityLoad("mods/grahamsperks/files/entities/mini_tanks/" .. options[Random(1, #options)], x, y)
+    end
 end
