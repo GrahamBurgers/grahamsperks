@@ -210,7 +210,6 @@ end
 
 function item_pickup( entity_item, entity_who_picked, name )
 	GamePrintImportant( "$log_chest", "" )
-
 	-- GameTriggerMusicCue( "item" )
 
 	--if (remove_entity == false) then
