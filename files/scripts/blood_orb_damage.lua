@@ -11,7 +11,7 @@ function damage_received( dmg, msg, source )
 		local max_hp = ComponentGetValue2(damage, "max_hp")
 		local hp = ComponentGetValue2(damage, "hp") - dmg
 
-		if source == EntityGetParent(me) then dmg = dmg * 0.2 end
+		if source == EntityGetParent(me) then dmg = 0 end
 		
 		if ( source ~= nil ) and ( source ~= NULL_ENTITY ) and ( source ~= me ) then
 			local hm = EntityGetTransform( source )
