@@ -17,9 +17,13 @@ y = y or y2 + 9000
 
 local radius = 40
 if calculateDistance(x, y, x2, y2) > radius + 180 then
-    local comp = EntityGetFirstComponent(me, "VariableStorageComponent") or 0
-    ComponentSetValue2(comp, "value_int", 0)
-    return
+    enemy = EntityGetClosestWithTag(x2, y2, "player_unit")
+    x, y = EntityGetTransform(enemy)
+    if calculateDistance(x, y, x2, y2) > radius + 280 then
+        local comp = EntityGetFirstComponent(me, "VariableStorageComponent") or 0
+        ComponentSetValue2(comp, "value_int", 0)
+        return
+    end
 end
 
 -- hopefully will not cause lag
@@ -54,6 +58,11 @@ else
             end
         end
         ComponentSetValue2(ai, "attack_ranged_offset_y", y - y2)
+        local genome1 = EntityGetFirstComponent(me, "GenomeDataComponent")
+        local genome2 = EntityGetFirstComponent(enemy, "GenomeDataComponent")
+        if genome1 ~= nil and genome2 ~= nil then
+            ComponentSetValue2(genome1, "herd_id", ComponentGetValue2(genome2, "herd_id"))
+        end
     end
 end
 

@@ -34,7 +34,6 @@
     shoot_light_flash_b="10"
     shoot_light_flash_radius="60"
     bounces_left="0"
-    dont_collide_with_tag="enemy"
     penetrate_world="0"
     >
     <config_explosion

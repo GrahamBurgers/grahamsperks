@@ -93,23 +93,22 @@
 	    </CharacterDataComponent>
 	</Base>
 	
-	<ItemPickUpperComponent
-    	is_in_npc="1">
-    </ItemPickUpperComponent>
-	
 	<SpriteComponent 
 		_tags="character" 
 		_enabled="1" 
 		alpha="1" 
-		image_file="data/enemies_gfx/wizard_tele_emissive.xml"
+		image_file="data/enemies_gfx/graham_wizard_familiar_emissive.xml"
 		offset_x="0" 
 		offset_y="0"
 		emissive="1"
-		additive="1"
+        additive="1"
 		next_rect_animation="" 
-		rect_animation="walk" 
-		>
+		rect_animation="walk" >
 	</SpriteComponent>
+	
+	<ItemPickUpperComponent
+    	is_in_npc="1">
+    </ItemPickUpperComponent>
 	
 	<HotspotComponent
         _tags="cape_root"

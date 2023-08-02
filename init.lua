@@ -36,7 +36,6 @@ ModLuaFileAppend( "data/scripts/items/spell_refresh.lua", "mods/grahamsperks/fil
 ModLuaFileAppend( "data/scripts/status_effects/status_list.lua", "mods/grahamsperks/files/effects/status_effects.lua" )
 ModLuaFileAppend( "data/scripts/items/drop_money.lua", "mods/grahamsperks/files/bloodybonus_check.lua" )
 ModLuaFileAppend( "data/scripts/perks/perk.lua", "mods/grahamsperks/files/add_oneoffs.lua" )
-ModLuaFileAppend( "data/scripts/biome_scripts.lua", "mods/grahamsperks/files/biome_scripts_append.lua" )
 ModLuaFileAppend( "data/scripts/biomes/temple_altar.lua", "mods/grahamsperks/files/scripts/temple_altar_append.lua")
 ModLuaFileAppend( "data/scripts/biomes/boss_arena.lua", "mods/grahamsperks/files/scripts/temple_altar_append.lua")
 ModLuaFileAppend( "data/scripts/buildings/forge_item_convert.lua", "mods/grahamsperks/files/scripts/anvil_append.lua")
@@ -243,6 +242,52 @@ local patches = {
 		</Entity>
 		]],
     },
+	{
+        path    = "data/scripts/biome_scripts.lua",
+        from    = [[elseif %(r > 0.3%) then]],
+        to      = [[elseif %(r > 0.3%) or %(r > 0.1 and GameHasFlagRun%("PERK_PICKED_GRAHAM_LUCKY_CLOVER"%)%) then]],
+    },
+	{
+        path    = "data/scripts/biome_scripts.lua",
+        from    = [[if %(r > heart_spawn_percent%) then]],
+        to      = [[if GameHasFlagRun%("PERK_PICKED_GRAHAM_LUCKY_CLOVER"%) then heart_spawn_percent = heart_spawn_percent - 0.1 end
+		if %(r > heart_spawn_percent%) then]],
+    },
+	{
+        path    = "data/scripts/biome_scripts.lua",
+        from    = [[local entity = EntityLoad%( "data/entities/items/pickup/chest_random.xml", x, y%)]],
+        to      = [[
+			if GameHasFlagRun%("PERK_PICKED_GRAHAM_LUCKY_CLOVER"%) then rnd = rnd + %(%(1000 - rnd%) * 0.3%) end
+			if %(rnd >= 900 %) then
+				local entity = EntityLoad%( "mods/grahamsperks/files/pickups/chest_lost.xml", x, y%)
+			elseif %(rnd >= 850 %) then
+				SetRandomSeed%( GameGetFrameNum%(%), GameGetFrameNum%(%) %)
+				if Random%(1, 3%) == 3 then
+					local entity = EntityLoad%( "data/entities/animals/mini_mimic.xml", x, y%)
+				else
+					local entity = EntityLoad%( "mods/grahamsperks/files/pickups/chest_mini.xml", x, y%)
+				end
+			elseif %(rnd >= 775 %) or %(rnd >= 725 and %(BiomeMapGetName%(x, y%):gsub%("$biome_", ""%) == "vault"%)%) then
+				local entity = EntityLoad%( "mods/grahamsperks/files/pickups/safe.xml", x, y%)
+			else
+				local entity = EntityLoad%( "data/entities/items/pickup/chest_random.xml", x, y%)
+			end
+		]],
+    },
+	{
+        path    = "data/scripts/biome_scripts.lua",
+        from    = [[local entity = EntityLoad%( "data/entities/items/pickup/heart.xml", x, y%)]],
+        to      = [[SetRandomSeed%( x + 2594884, y + 485398 %)
+		local rnd =  Random%( 1, 5 %)
+
+		if GameHasFlagRun%("PERK_PICKED_GRAHAM_LUCKY_CLOVER"%) then rnd = Random%( 1, 6 %) end
+
+		if %( rnd >= 5 %) and not GameHasFlagRun%("PERK_PICKED_GRAHAM_HEALTHY_HEARTS"%) then
+			local entity = EntityLoad%( "mods/grahamsperks/files/pickups/heart_healthy.xml", x, y%)
+		else
+			local entity = EntityLoad%( "data/entities/items/pickup/heart.xml", x, y%)
+		end]],
+    },
 }
 
 if ModSettingGet("grahamsperks.StartingItems") ~= false then
@@ -285,6 +330,7 @@ for i=1, #patches do
     local content = ModTextFileGetContent(patch.path)
     content = content:gsub(patch.from, patch.to)
     ModTextFileSetContent(patch.path, content)
+	print(content)
 end
 
 function OnPlayerSpawned(player)

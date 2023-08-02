@@ -129,7 +129,6 @@ local settings = {
         type    = "boolean",
         default = true,
     },
-    ]] --
     {
         id      = "LuckyClover",
         name    = "Lucky Clover Great Chests",
@@ -137,6 +136,7 @@ local settings = {
         type    = "boolean",
         default = false,
     },
+    ]]--
     {
         id      = "LuckyDay",
         name    = "Lucky Day message",
