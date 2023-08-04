@@ -237,7 +237,7 @@ color="FF622d9a">
 	      <StatusEffect type="GRAHAM_CONSUMED" />
 	    </Stains>
 	    <Ingestion>
-	      <StatusEffect type="POISONED" amount="0.3" />
+	      <StatusEffect type="GRAHAM_STARVING" amount="0.3" />
 	    </Ingestion>
 	  </StatusEffects>
 	<Graphics 
