@@ -93,12 +93,8 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
                 ["crypt"]           = 40,
             })[BiomeMapGetName(x, y):sub(8,-1)] or 0
 
-			if GameHasFlagRun("PERK_PICKED_GLOBAL_GORE") then kills_needed = kills_needed * 0.8 end
-			if GameHasFlagRun("PERK_PICKED_GENOME_MORE_HATRED") then kills_needed = kills_needed * 0.8 end
-			if GameHasFlagRun("PERK_PICKED_ANGRY_GHOST") then kills_needed = kills_needed * 0.8 end
-			if GameHasFlagRun("PERK_PICKED_VAMPIRISM") then kills_needed = kills_needed * 0.8 end
-
-			kills_needed = math.floor(kills_needed) - 1
+			kills_needed = kills_needed * (0.8 ^ (tonumber(( 1 + GlobalsGetValue( "PLAYER_HALO_LEVEL", "0" )) * -1)))
+			kills_needed = math.floor(kills_needed) - 1 -- I forget what this part is supposed to do
 
 			local remainder = kills_needed - enemies_killed
 

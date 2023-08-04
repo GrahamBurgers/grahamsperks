@@ -53,6 +53,10 @@ if ModSettingGet("grahamsperks.Enemies") ~= false then
 	if PolymorphTableAddEntity ~= nil then
 		PolymorphTableAddEntity( "data/entities/animals/graham_miner_gasser.xml", false )
 		PolymorphTableAddEntity( "data/entities/animals/graham_fuzz.xml", false )
+		PolymorphTableAddEntity( "data/entities/animals/graham_gasser_hell.xml", false )
+		PolymorphTableAddEntity( "data/entities/animals/graham_wizard_familiar.xml", false )
+		if HasFlagPersistent("graham_minimimic_killed") then PolymorphTableAddEntity( "data/entities/animals/mini_mimic.xml", false ) end
+		if HasFlagPersistent("graham_bloodymimic_killed") then PolymorphTableAddEntity( "data/entities/animals/bloody_mimic.xml", false ) end
 	end
 end
 

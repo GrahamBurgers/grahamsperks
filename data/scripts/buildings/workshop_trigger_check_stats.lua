@@ -70,12 +70,8 @@ function collision_trigger()
                 ["crypt"]           = 40,
             })[current_biome] or 100
 
-            if GameHasFlagRun("PERK_PICKED_GLOBAL_GORE") then kills_needed = kills_needed * 0.8 end
-            if GameHasFlagRun("PERK_PICKED_GENOME_MORE_HATRED") then kills_needed = kills_needed * 0.8 end
-            if GameHasFlagRun("PERK_PICKED_ANGRY_GHOST") then kills_needed = kills_needed * 0.8 end
-            if GameHasFlagRun("PERK_PICKED_VAMPIRISM") then kills_needed = kills_needed * 0.8 end
-
-            kills_needed = math.floor(kills_needed) - 1
+			kills_needed = kills_needed * (0.8 ^ (tonumber(( 1 + GlobalsGetValue( "PLAYER_HALO_LEVEL", "0" )) * -1)))
+			kills_needed = math.floor(kills_needed) - 1 -- I forget what this part is supposed to do
 
             if (enemies_killed >= kills_needed) then
                 local sx, sy = x, y

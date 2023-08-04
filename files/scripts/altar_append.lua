@@ -169,12 +169,9 @@ local function spell_is_unlocked(id)
 	end
 end
 
-local function custom_wand_spells(entity, filepath, spells, flag)
-	local name = EntityGetFilename(entity)
-	name = string.gsub(name, "\\", "/")
-	name = string.match(name, "(mods/.*)")
+local function custom_wand_spells(entity, name, spells, flag)
 
-	if name == filepath and EntityGetRootEntity(entity) == entity then
+	if EntityGetName(entity) == name and EntityGetRootEntity(entity) == entity then
 		local cx, cy = EntityGetTransform(entity)
 		local children = EntityGetAllChildren(entity) or {}
 		for i = 1, #children do
@@ -205,10 +202,10 @@ end
 
 local wands = EntityGetInRadiusWithTag(x, y, 56, "wand")
 for i = 1, #wands do
-	custom_wand_spells(wands[i], "mods/grahamsperks/files/wands/candyheart.xml", {"ZERO_DAMAGE", "PROJECTILE_TRANSMUTATION_FIELD", "LIGHT_SHOT", "HITFX_TOXIC_CHARM", "GRAHAM_GUARDIAN_SHOT", "RAINBOW_TRAIL", "GRAHAM_GOLDEN", "GRAHAM_MATERIAL_RADIOACTIVE"}, "candyheart")
-	custom_wand_spells(wands[i], "mods/grahamsperks/files/wands/coffee.xml", {"SPEED", "CHAOTIC_ARC", "ACCELERATING_SHOT", "DAMAGE", "GRAHAM_CIRCLE_ANGY", "GRAHAM_FOAMARMOR", "GRAHAM_SNUB", "GRAHAM_STASIS"}, "coffee")
-	custom_wand_spells(wands[i], "mods/grahamsperks/files/wands/experimental.xml", {"GRAHAM_TOGGLER_ALT", "GRAHAM_TOGGLER2_ALT", "GRAHAM_TOGGLER3_ALT", "LIGHT", "SPELLS_TO_POWER", "CHAINSAW", "TRANSMUTATION", "CHAIN_SHOT"}, "experimental")
-	custom_wand_spells(wands[i], "mods/grahamsperks/files/wands/gluestick.xml", {"BOUNCE", "BOUNCE_HOLE", "BOUNCE_LARPA", "BOUNCE_PLASMA", "REMOVE_BOUNCE", "BOUNCE_SMALL_EXPLOSION", "BOUNCE_EXPLOSION", "BOUNCE_LIGHTNING"}, "gluestick")
-	custom_wand_spells(wands[i], "mods/grahamsperks/files/wands/petworm.xml", {"WORM_SHOT", "GRAHAM_MINI_DISSOLVEPOWDERS", "DIGGER", "SLOW_BULLET", "METEOR", "SWARM_WASP", "VACUUM_POWDER", "ORBIT_LARPA"}, "petworm")
-	custom_wand_spells(wands[i], "mods/grahamsperks/files/wands/rotting.xml", {"GRAHAM_MINI_MIDASMEAT", "DISC_BULLET_BIGGER", "PIPE_BOMB_DETONATION", "BLOOD_MAGIC", "MATERIAL_BLOOD", "BLOODLUST", "HITFX_PETRIFY", "ESSENCE_TO_POWER"}, "rotting")
+	custom_wand_spells(wands[i], "$graham_wand_heart", {"ZERO_DAMAGE", "PROJECTILE_TRANSMUTATION_FIELD", "LIGHT_SHOT", "HITFX_TOXIC_CHARM", "GRAHAM_GUARDIAN_SHOT", "RAINBOW_TRAIL", "GRAHAM_GOLDEN", "GRAHAM_MATERIAL_RADIOACTIVE"}, "candyheart")
+	custom_wand_spells(wands[i], "$graham_wand_coffee", {"SPEED", "CHAOTIC_ARC", "ACCELERATING_SHOT", "DAMAGE", "GRAHAM_CIRCLE_ANGY", "GRAHAM_FOAMARMOR", "GRAHAM_SNUB", "GRAHAM_STASIS"}, "coffee")
+	custom_wand_spells(wands[i], "$graham_wand_experimental" , {"GRAHAM_TOGGLER_ALT", "GRAHAM_TOGGLER2_ALT", "GRAHAM_TOGGLER3_ALT", "LIGHT", "SPELLS_TO_POWER", "CHAINSAW", "TRANSMUTATION", "CHAIN_SHOT"}, "experimental")
+	custom_wand_spells(wands[i], "$graham_wand_glue", {"BOUNCE", "BOUNCE_HOLE", "BOUNCE_LARPA", "BOUNCE_PLASMA", "REMOVE_BOUNCE", "BOUNCE_SMALL_EXPLOSION", "BOUNCE_EXPLOSION", "BOUNCE_LIGHTNING"}, "gluestick")
+	custom_wand_spells(wands[i], "$graham_wand_worm", {"WORM_SHOT", "GRAHAM_MINI_DISSOLVEPOWDERS", "DIGGER", "SLOW_BULLET", "METEOR", "SWARM_WASP", "VACUUM_POWDER", "ORBIT_LARPA"}, "petworm")
+	custom_wand_spells(wands[i], "$graham_wand_rot", {"GRAHAM_MINI_MIDASMEAT", "DISC_BULLET_BIGGER", "PIPE_BOMB_DETONATION", "BLOOD_MAGIC", "MATERIAL_BLOOD", "BLOODLUST", "HITFX_PETRIFY", "ESSENCE_TO_POWER"}, "rotting")
 end
