@@ -29,6 +29,7 @@
 			ragdoll_filenames_file="data/ragdolls/graham_wizard_familiar/filenames.txt"
 			blood_material="honey"
 			blood_spray_create_some_cosmetic="1"
+			blood_multiplier="0.5"
 			>
 		<damage_multipliers
 			melee="0.2"

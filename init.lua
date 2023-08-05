@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local translations = ModTextFileGetContent( "data/translations/common.csv" );
 if translations ~= nil then
 	while translations:find("\r\n\r\n") do
@@ -48,6 +49,16 @@ if ModSettingGet("grahamsperks.Enemies") ~= false then
 	local enemies = {"coalmine_alt", "excavationsite", "snowcave", "snowcastle", "sandcave", "vault", "meat"}
 	for i = 1, #enemies do
 		ModLuaFileAppend( "data/scripts/biomes/" .. enemies[i] .. ".lua", "mods/grahamsperks/files/scripts/enemies_" .. enemies[i] .. ".lua" )
+	end
+
+	if ModIsEnabled("biome-plus") then
+		-- vanilla biomes
+		local input = {"excavationsite", "snowcave", "snowcastle", "sandcave", "vault"}
+		-- alternate biomes
+		local output = {"blast_pit", "frozen_passages", "snowvillage", "tomb", "robofactory"}
+		for i = 1, #input do
+			ModLuaFileAppend( "data/scripts/biomes/mod/" .. output[i] .. ".lua", "mods/grahamsperks/files/scripts/enemies_" .. input[i] .. ".lua" )
+		end
 	end
 
 	if PolymorphTableAddEntity ~= nil then
