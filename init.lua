@@ -334,10 +334,10 @@ for i=1, #patches do
     local content = ModTextFileGetContent(patch.path)
     content = content:gsub(patch.from, patch.to)
     ModTextFileSetContent(patch.path, content)
-	print(content)
 end
 
 function OnPlayerSpawned(player)
+	EntitySetDamageFromMaterial(player, "graham_purplebrick_lessglow", 0.00012)
 	local x, y = EntityGetTransform(player)
 	
 	GlobalsSetValue( "GRAHAM_TOGGLE", "null" )

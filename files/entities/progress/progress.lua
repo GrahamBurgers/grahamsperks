@@ -1,5 +1,4 @@
 local x, y = EntityGetTransform(GetUpdatedEntityID())
-EntityLoad("mods/grahamsperks/files/entities/progress/progress_shape.xml", x, y)
 local flags = {
     "graham_progress_tech_chest_rain", "graham_progress_mini_chest_rain", "graham_progress_lost_chest_rain", "graham_progress_bloody_chest_rain",
     "graham_progress_gluestick_exchange", "graham_progress_coffee_exchange", "graham_progress_experimental_exchange", "graham_progress_rotting_exchange", "graham_progress_petworm_exchange", "graham_progress_candyheart_exchange",
