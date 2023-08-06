@@ -1851,6 +1851,24 @@ local to_insert = {
 			c.fire_rate_wait = c.fire_rate_wait + 12
 		end,
 	},
+	{
+		id                  = "GRAHAM_SHIELD_DRONE",
+		name                = "$graham_name_shielddrone",
+		description         = "$graham_desc_shielddrone",
+		sprite              = "mods/grahamsperks/files/spells/shield_drone.png",
+		type                = ACTION_TYPE_PROJECTILE,
+		spawn_level         = "1,2,3,4",
+		spawn_probability   = "0.6,0.8,1.0,1.5",
+		price               = 80,
+		mana                = 120,
+		max_uses            = 3,
+		related_projectiles = { "mods/grahamsperks/files/spells/shield_drone.xml" },
+		action              = function()
+			current_reload_time = current_reload_time + 60
+			add_projectile("mods/grahamsperks/files/spells/shield_drone.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 60
+		end,
+	},
 }
 
 for i, v in ipairs(to_insert) do

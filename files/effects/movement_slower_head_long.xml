@@ -4,7 +4,7 @@
     
     <GameEffectComponent 
     	effect="MOVEMENT_SLOWER_2X"
-    	frames="60"
+    	frames="180"
     >
 	</GameEffectComponent >
 	

@@ -29,7 +29,7 @@ end
 -- hopefully will not cause lag
 local multiplier = ((GameGetGameEffectCount(me, "MOVEMENT_FASTER") + GameGetGameEffectCount(me, "MOVEMENT_FASTER_2X") * 2) - (GameGetGameEffectCount(me, "SLIMY") + GameGetGameEffectCount(me, "MOVEMENT_SLOWER") + GameGetGameEffectCount(me, "MOVEMENT_SLOWER_2X") * 2))
 
-if calculateDistance(x, y, x2, y2) > radius + 3 then
+if calculateDistance(x, y, x2, y2) > radius + 8 then
     local distance = calculateDistance(x, y, x2, y2)
     local dx = (x - x2) / distance
     local dy = (y - y2) / distance

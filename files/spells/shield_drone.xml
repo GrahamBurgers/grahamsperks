@@ -1,0 +1,92 @@
+<Entity name="$graham_shielddrone" tags="teleportable_NOT,projectile,item_physics,item_pickup,hittable">
+	<Base file="mods/grahamsperks/files/entities/base_drone.xml" >
+        <UIInfoComponent
+            name="$graham_shielddrone"
+        ></UIInfoComponent>
+        
+        <AbilityComponent
+            ui_name="$graham_shielddrone"
+        ></AbilityComponent>
+
+		<PhysicsImageShapeComponent
+			image_file="mods/grahamsperks/files/projectiles_gfx/shield_drone_body.png"
+		></PhysicsImageShapeComponent>
+
+		<SpriteComponent
+			image_file="mods/grahamsperks/files/projectiles_gfx/shield_drone_body.png"
+		></SpriteComponent>
+
+		<ItemComponent
+			item_name="$graham_shielddrone"
+			ui_description="$graham_shielddrone_desc"
+			ui_sprite="mods/grahamsperks/files/projectiles_gfx/shield_drone_inv.png"
+		></ItemComponent>
+	</Base>
+
+    <SpriteComponent
+        _tags="enabled_in_world"
+        image_file="mods/grahamsperks/files/projectiles_gfx/shield_drone.xml"
+        update_transform_rotation="0"
+    ></SpriteComponent>
+	
+	<EnergyShieldComponent 
+        _tags="enabled_in_world"
+        recharge_speed="0.5" 
+		max_energy="1"
+		radius="18"
+		energy_required_to_shield="1"
+		energy="1"
+		>
+    </EnergyShieldComponent>
+
+	<AudioComponent
+		file="data/audio/Desktop/projectiles.bank"
+		event_root="player_projectiles/shield"
+		set_latest_event_position="1" >
+	</AudioComponent>
+
+	<ParticleEmitterComponent
+        _tags="enabled_in_world,shield_ring"
+		emitted_material_name="plasma_fading"
+		gravity.y="0.0"
+		lifetime_min="0.02"
+		lifetime_max="0.05"
+		count_min="100"
+		count_max="100"
+		render_on_grid="1"
+		fade_based_on_lifetime="0"
+		area_circle_radius.min="18"
+		area_circle_radius.max="18"
+		cosmetic_force_create="0"
+		airflow_force="0.3"
+		airflow_time="0.01"
+		airflow_scale="0.05"
+		emission_interval_min_frames="0"
+		emission_interval_max_frames="0"
+		emit_cosmetic_particles="1"
+		is_emitting="1" >
+	</ParticleEmitterComponent>
+
+	<ParticleEmitterComponent
+		_tags="enabled_in_world,shield_hit"
+		emitted_material_name="plasma_fading"
+		gravity.y="0.0"
+		lifetime_min="0.3"
+		lifetime_max="1"
+		count_min="200"
+		count_max="200"
+		render_on_grid="1"
+		fade_based_on_lifetime="0"
+		area_circle_radius.min="18"
+		area_circle_radius.max="18"
+		cosmetic_force_create="0"
+		airflow_force="2.8"
+		airflow_time="0.03"
+		airflow_scale="0.8"
+		emission_interval_min_frames="0"
+		emission_interval_max_frames="0"
+		emit_cosmetic_particles="1"
+		is_emitting="0" >
+	</ParticleEmitterComponent>
+
+</Entity>
