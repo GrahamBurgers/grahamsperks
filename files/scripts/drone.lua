@@ -5,5 +5,6 @@ function enabled_changed(me)
     if body == 0 or imageshape == 0 then return end
     ComponentSetValue2(body, "uid", ComponentGetValue2(imageshape, "body_id"))
     ComponentSetValue2(body, "uid", ComponentGetValue2(imageshape, "body_id"))
+    if ai == 0 then return end
     ComponentSetValue2(ai, "mMainBodyFound", false)
 end

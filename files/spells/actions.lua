@@ -1863,9 +1863,48 @@ local to_insert = {
 		mana                = 120,
 		max_uses            = 3,
 		related_projectiles = { "mods/grahamsperks/files/spells/shield_drone.xml" },
+		never_unlimited     = true,
 		action              = function()
 			current_reload_time = current_reload_time + 60
 			add_projectile("mods/grahamsperks/files/spells/shield_drone.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 60
+		end,
+	},
+	{
+		id                  = "GRAHAM_ATTACK_DRONE",
+		name                = "$graham_name_attackdrone",
+		description         = "$graham_desc_attackdrone",
+		sprite              = "mods/grahamsperks/files/spells/attack_drone.png",
+		type                = ACTION_TYPE_PROJECTILE,
+		spawn_level         = "1,2,3,4",
+		spawn_probability   = "0.6,0.8,1.0,1.5",
+		price               = 80,
+		mana                = 120,
+		max_uses            = 3,
+		related_projectiles = { "mods/grahamsperks/files/spells/attack_drone.xml" },
+		never_unlimited     = true,
+		action              = function()
+			current_reload_time = current_reload_time + 60
+			add_projectile("mods/grahamsperks/files/spells/attack_drone.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 60
+		end,
+	},
+	{
+		id                  = "GRAHAM_SUPPORT_DRONE",
+		name                = "$graham_name_supportdrone",
+		description         = "$graham_desc_supportdrone",
+		sprite              = "mods/grahamsperks/files/spells/support_drone.png",
+		type                = ACTION_TYPE_PROJECTILE,
+		spawn_level         = "1,2,3,4",
+		spawn_probability   = "0.6,0.8,1.0,1.5",
+		price               = 80,
+		mana                = 120,
+		max_uses            = 1,
+		related_projectiles = { "mods/grahamsperks/files/spells/support_drone.xml" },
+		never_unlimited     = true,
+		action              = function()
+			current_reload_time = current_reload_time + 60
+			add_projectile("mods/grahamsperks/files/spells/support_drone.xml")
 			c.fire_rate_wait = c.fire_rate_wait + 60
 		end,
 	},

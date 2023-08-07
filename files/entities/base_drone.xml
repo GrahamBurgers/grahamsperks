@@ -20,7 +20,7 @@
 		_tags="enabled_in_world,enabled_in_hand,enabled_in_inventory"
 		body_id="50"
 		centered="1"
-		material="rock_box2d_nohit_hard" >
+		material="graham_aluminium" >
 	</PhysicsImageShapeComponent>
 
 	<PhysicsThrowableComponent
@@ -37,7 +37,7 @@
 		homing_targeting_coeff="4"
 	></HomingComponent>
 
-	<AnimalAIComponent 
+	<AnimalAIComponent
 		_tags="enabled_in_world"
 		_enabled="1" 
 		preferred_job="JobDefault"
@@ -47,7 +47,6 @@
 		creature_detection_range_y="250"
 		attack_ranged_min_distance="0" 
 		attack_ranged_max_distance="100"
-		tries_to_ranged_attack_friends="1"
 		food_material="blood"
 		needs_food="0"
 		sense_creatures="1"
@@ -91,7 +90,8 @@
 		>
 	</CharacterDataComponent>
 		
-	<HitboxComponent 
+	<HitboxComponent
+		_tags="enabled_in_world"
 		_enabled="1" 
 		aabb_min_x="-3" 
 		aabb_max_x="3" 
@@ -101,9 +101,16 @@
 
 	<DamageModelComponent 
 		_tags="enabled_in_world"
-		hp="6"
+		hp="2"
 		fire_probability_of_ignition="0"
+		wait_for_kill_flag_on_death="1"
+		create_ragdoll="0"
 	></DamageModelComponent>
+
+	<LuaComponent
+		_tags="enabled_in_world"
+		script_source_file="mods/grahamsperks/files/scripts/drone_death.lua"
+	></LuaComponent>
 
 	<PathFindingComponent
 		_tags="enabled_in_world"
@@ -120,7 +127,7 @@
 	<GenomeDataComponent 
 		_tags="enabled_in_world"
 		herd_id="player"
-		food_chain_rank="5"
+		food_chain_rank="30"
 		is_predator="1" >
 	</GenomeDataComponent>
 
@@ -136,7 +143,32 @@
 		penetrate_entities="1"
 		damage="0.0"
 		never_hit_player="1"
-	></ProjectileComponent>
+		on_death_explode="1"
+	><config_explosion 
+		explosion_dont_damage_shooter="1"
+		never_cache="0"
+		damage="5"
+		camera_shake="20" 
+		explosion_radius="12"
+		explosion_sprite="data/particles/explosion_032.xml" 
+		explosion_sprite_lifetime="0"
+		create_cell_probability="70"
+		hole_destroy_liquid="0" 
+		hole_enabled="0" 
+		ray_energy="180000"
+		particle_effect="1" 
+		damage_mortals="1"
+		physics_explosion_power.min="1.1"
+		physics_explosion_power.max="1.7" 
+		physics_throw_enabled="1"
+		shake_vegetation="1" 
+		sparks_count_min="10" 
+		sparks_count_max="15" 
+		sparks_enabled="1" 
+		stains_enabled="1" 
+		stains_radius="15"
+	></config_explosion>
+</ProjectileComponent>
 
 	<AudioLoopComponent
 		_tags="enabled_in_world"
@@ -162,7 +194,7 @@
 	<ItemComponent
 		_tags="enabled_in_world"
 		item_name="$graham_basedrone"
-		ui_description="$graham_basedrone_desc"
+		ui_description="$graham_drone_desc"
 		ui_sprite="mods/grahamsperks/files/pickups/burg.png"
 		max_child_items="0"
 		is_pickable="1"
@@ -188,5 +220,11 @@
 		script_enabled_changed="mods/grahamsperks/files/scripts/drone.lua"
 		execute_every_n_frame="-1"
 	></LuaComponent>
+
+    <SpriteComponent
+        _tags="enabled_in_world,disable_on_death"
+        image_file="mods/grahamsperks/files/projectiles_gfx/drone_wings.xml"
+        update_transform_rotation="0"
+    ></SpriteComponent>
 
 </Entity>

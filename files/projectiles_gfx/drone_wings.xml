@@ -1,6 +1,6 @@
 <Sprite 
   default_animation="fly" 
-  filename="mods/grahamsperks/files/projectiles_gfx/shield_drone.png" 
+  filename="mods/grahamsperks/files/projectiles_gfx/drone_wings.png" 
   offset_x="8" 
   offset_y="6" >
 

@@ -1504,4 +1504,23 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/love.png">
 	</StatusEffects>
   </CellDataChild>
 
+	<CellDataChild
+		_parent="aluminium"
+		_inherit_reactions="1"
+		tags="[box2d],[corrodible],[alchemy],[solid],[earth]"
+		name="graham_aluminium" 
+		ui_name="$mat_aluminium"
+		wang_color="ff3c2d3e"
+		audio_physics_material_wall="gravel"
+		audio_physics_material_solid="metalhollow"
+		electrical_conductivity="1"
+		durability="10"
+		hp="1000000"
+		>
+		<Graphics
+		texture_file="data/materials_gfx/steel.png"
+		color="ff43a34b" >
+		</Graphics>
+	</CellDataChild>
+
 </Materials>

@@ -1,0 +1,43 @@
+<Entity name="$graham_supportdrone">
+	<Base file="mods/grahamsperks/files/entities/base_drone.xml" >
+        <UIInfoComponent
+            name="$graham_supportdrone"
+        ></UIInfoComponent>
+        
+        <AbilityComponent
+            ui_name="$graham_supportdrone"
+        ></AbilityComponent>
+
+		<PhysicsImageShapeComponent
+			image_file="mods/grahamsperks/files/projectiles_gfx/support_drone_body.png"
+		></PhysicsImageShapeComponent>
+
+		<SpriteComponent
+			image_file="mods/grahamsperks/files/projectiles_gfx/support_drone_body.png"
+		></SpriteComponent>
+
+		<ItemComponent
+			item_name="$graham_supportdrone"
+			ui_description="$graham_drone_desc"
+			ui_sprite="mods/grahamsperks/files/projectiles_gfx/support_drone_inv.png"
+		></ItemComponent>
+
+		<ProjectileComponent>
+		<config_explosion 
+			damage="0"
+			load_this_entity="mods/grahamsperks/files/spells/circle_sweet.xml"
+		></config_explosion>
+		</ProjectileComponent>
+
+		<AnimalAIComponent 
+			tries_to_ranged_attack_friends="1"
+			sense_creatures="1"
+			attack_ranged_enabled="1"
+			attack_ranged_entity_file="data/entities/projectiles/healshot_slow.xml"
+			attack_ranged_frames_between="60"
+			attack_ranged_offset_y="8"
+			>
+		</AnimalAIComponent>
+	</Base>
+
+</Entity>

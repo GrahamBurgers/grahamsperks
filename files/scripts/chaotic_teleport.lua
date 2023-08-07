@@ -16,8 +16,10 @@ for i = 1, 80 do
         local item = ComponentGetValue2(comp, "mActiveItem")
         if item ~= nil then
             local _, _, dir = EntityGetTransform(item)
-            x2 = x2 - (math.cos(dir) * 50)
-            y2 = y2 - (math.sin(dir) * 50)
+            if dir ~= nil then
+                x2 = x2 - (math.cos(dir) * 50)
+                y2 = y2 - (math.sin(dir) * 50)
+            end
         end
     end
     local power = Random(0.4, 0.8)

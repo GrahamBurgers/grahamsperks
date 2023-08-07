@@ -1,0 +1,35 @@
+<Entity name="$graham_attackdrone">
+	<Base file="mods/grahamsperks/files/entities/base_drone.xml" >
+        <UIInfoComponent
+            name="$graham_attackdrone"
+        ></UIInfoComponent>
+        
+        <AbilityComponent
+            ui_name="$graham_attackdrone"
+        ></AbilityComponent>
+
+		<PhysicsImageShapeComponent
+			image_file="mods/grahamsperks/files/projectiles_gfx/attack_drone_body.png"
+		></PhysicsImageShapeComponent>
+
+		<SpriteComponent
+			image_file="mods/grahamsperks/files/projectiles_gfx/attack_drone_body.png"
+		></SpriteComponent>
+
+		<ItemComponent
+			item_name="$graham_attackdrone"
+			ui_description="$graham_drone_desc"
+			ui_sprite="mods/grahamsperks/files/projectiles_gfx/attack_drone_inv.png"
+		></ItemComponent>
+
+		<AnimalAIComponent
+			sense_creatures="1"
+			attack_ranged_enabled="1"
+			attack_ranged_entity_file="data/entities/projectiles/machinegun_bullet_slower.xml"
+			attack_ranged_frames_between="20"
+			attack_ranged_offset_y="8"
+			>
+		</AnimalAIComponent>
+	</Base>
+
+</Entity>

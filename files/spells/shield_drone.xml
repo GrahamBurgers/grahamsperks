@@ -1,4 +1,4 @@
-<Entity name="$graham_shielddrone" tags="teleportable_NOT,projectile,item_physics,item_pickup,hittable">
+<Entity name="$graham_shielddrone">
 	<Base file="mods/grahamsperks/files/entities/base_drone.xml" >
         <UIInfoComponent
             name="$graham_shielddrone"
@@ -18,19 +18,13 @@
 
 		<ItemComponent
 			item_name="$graham_shielddrone"
-			ui_description="$graham_shielddrone_desc"
+			ui_description="$graham_drone_desc"
 			ui_sprite="mods/grahamsperks/files/projectiles_gfx/shield_drone_inv.png"
 		></ItemComponent>
 	</Base>
-
-    <SpriteComponent
-        _tags="enabled_in_world"
-        image_file="mods/grahamsperks/files/projectiles_gfx/shield_drone.xml"
-        update_transform_rotation="0"
-    ></SpriteComponent>
 	
 	<EnergyShieldComponent 
-        _tags="enabled_in_world"
+        _tags="enabled_in_world,disable_on_death"
         recharge_speed="0.5" 
 		max_energy="1"
 		radius="18"
@@ -46,7 +40,7 @@
 	</AudioComponent>
 
 	<ParticleEmitterComponent
-        _tags="enabled_in_world,shield_ring"
+        _tags="enabled_in_world,shield_ring,disable_on_death"
 		emitted_material_name="plasma_fading"
 		gravity.y="0.0"
 		lifetime_min="0.02"
@@ -68,7 +62,7 @@
 	</ParticleEmitterComponent>
 
 	<ParticleEmitterComponent
-		_tags="enabled_in_world,shield_hit"
+		_tags="enabled_in_world,shield_hit,disable_on_death"
 		emitted_material_name="plasma_fading"
 		gravity.y="0.0"
 		lifetime_min="0.3"
