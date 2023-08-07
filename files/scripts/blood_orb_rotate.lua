@@ -24,3 +24,16 @@ if ( comp ~= nil ) then
 	
 	EntitySetTransform( entity_id, nx, ny )
 end
+
+-- inherit some immunities
+local immunities = {"PROTECTION_FIRE", "PROTECTION_RADIOACTIVITY", "PROTECTION_EXPLOSION", "PROTECTION_MELEE", "PROTECTION_ELECTRICITY", "PROTECTION_FREEZE", "PROTECTION_ALL"}
+for i = 1, #immunities do
+	if GameGetGameEffectCount(EntityGetRootEntity(entity_id), immunities[i]) > 0 then
+		local entity = EntityCreateNew()
+		EntityAddComponent2(entity, "GameEffectComponent", {
+			frames=5,
+			effect=immunities[i],
+		})
+		EntityAddChild(entity_id, entity)
+	end
+end

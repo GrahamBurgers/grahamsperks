@@ -12,6 +12,16 @@
 		</ItemActionComponent>
 	</Base>
 
+	<VariableStorageComponent
+		name="parent_gameeffect"
+		value_string="PROTECTION_FREEZE"
+	></VariableStorageComponent>
+
+	<LuaComponent
+		_tags="enabled_in_hand"
+		script_source_file="mods/grahamsperks/files/scripts/parent_gameeffect.lua"
+	></LuaComponent>
+
 	<InheritTransformComponent
 		_tags="enabled_in_world,enabled_in_hand" >
 	  <Transform 

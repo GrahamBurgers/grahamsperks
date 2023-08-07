@@ -303,6 +303,21 @@ local patches = {
 			local entity = EntityLoad%( "data/entities/items/pickup/heart.xml", x, y%)
 		end]],
     },
+	{
+        path    = "data/scripts/items/chest_random.lua",
+        from    = "\"metal\"",
+        to      = "\"metal\", \"graham_phase\"",
+    },
+	{
+        path    = "data/scripts/items/utility_box.lua",
+        from    = "\"metal\"",
+        to      = "\"metal\", \"graham_phase\"",
+    },
+	{
+        path    = "data/scripts/item_spawnlists.lua",
+        from    = "\"metal\"",
+        to      = "\"metal\", \"graham_phase\"",
+    },
 }
 
 if ModSettingGet("grahamsperks.StartingItems") ~= false then
