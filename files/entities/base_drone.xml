@@ -38,7 +38,7 @@
 	></HomingComponent>
 
 	<AnimalAIComponent
-		_tags="enabled_in_world"
+		_tags="enabled_in_world,enabled_in_hand,enabled_in_inventory"
 		_enabled="1" 
 		preferred_job="JobDefault"
 		escape_if_damaged_probability="60"
