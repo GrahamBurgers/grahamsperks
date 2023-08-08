@@ -35,7 +35,7 @@
 			attack_ranged_enabled="1"
 			attack_ranged_entity_file="data/entities/projectiles/healshot_slow.xml"
 			attack_ranged_frames_between="60"
-			attack_ranged_offset_y="-5"
+			attack_ranged_offset_y="5"
 			>
 		</AnimalAIComponent>
 	</Base>
