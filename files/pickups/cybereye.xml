@@ -1,4 +1,4 @@
-<Entity name="$graham_cybereye_name" tags="hittable,teleportable_NOT,item_physics,item_pickup,evil_eye,grahams_things,forgeable" >
+<Entity name="$graham_cybereye_name" tags="hittable,teleportable_NOT,item_physics,item_pickup,evil_eye,grahams_things" >
 	<Base file="data/entities/base_item_projectile.xml" />
 
 	<!-- physical presence -->

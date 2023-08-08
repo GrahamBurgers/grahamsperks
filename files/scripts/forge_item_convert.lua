@@ -16,7 +16,6 @@ for _, id in pairs(EntityGetInRadiusWithTag(pos_x, pos_y, 70, "grahams_things"))
 		-- thank you very very much to Copi and Conga (and Pyry!) for helping me debug
 		local base_options = {
 		  "bloodmoon.xml",
-		  "burg.xml",
 		  "cybereye.xml",
 		  "safe.xml",
 		  "magmastone.xml",
