@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 dofile("data/scripts/lib/mod_settings.lua")
 
 function mod_setting_change_callback(mod_id, gui, in_main_menu, setting, old_value, new_value)
@@ -32,6 +33,38 @@ local progress = {
     "graham_progress_rotting_exchange",
 }
 
+local currentLang = GameTextGetTranslatedOrNot("$current_language")
+local translations
+if currentLang == "简体中文" then
+    translations = {
+        {"Settings reminder", "Should this mod pester you about its settings?"},
+        {"Pacifist chest replacement", "Should the pacifist chest always be replaced with a Mini Treasure Chest?"},
+        {"Add new enemies", "Should the mod add new enemies?\nThis excludes mimics, which are always enabled.\nNote: Having enemies disabled will make it impossible to get 100%\nenemy progress unless you've already killed the enemies previously.\n(Sorry, technical limitations and such.)"},
+        {"Add new starting items", "Should you be able to start with new spells or potions at the start of a run?"},
+        {"Bloody Bonus message", "Should the Bloody Bonus perk tell you how many kills you have left?", "On every kill", "Every 5 kills", "Never"},
+        {"Lucky Day message", "Should Lucky Day inform you when you dodged an attack?", "Yes, show percentage", "Yes", "No, never"},
+        {"Force birthday materials", "Should Copium and Birthday Magic show up, even if it's not 11/11?"},
+        {"Aggressive material spreading", "Should Creepy Polymorphine and Dried Fungus spread through air?"},
+        {"Reset all progress", "[Reset All]", "Click here to reset all progress for this mod. This cannot be undone!"},
+        {"Unlock all progress", "[Unlock All]", "Click here to unlock all progress for this mod. This cannot be undone!"},
+        {"[True]", "[False]", "[Locked]", "You can't use this while in a run.", "Confused or want more info? Check out the mod's wiki page at noita.wiki.gg/Mods!"}
+    }
+else -- default to english
+    translations = {
+        {"Settings reminder", "Should this mod pester you about its settings?"},
+        {"Pacifist chest replacement", "Should the pacifist chest always be replaced with a Mini Treasure Chest?"},
+        {"Add new enemies", "Should the mod add new enemies?\nThis excludes mimics, which are always enabled.\nNote: Having enemies disabled will make it impossible to get 100%\nenemy progress unless you've already killed the enemies previously.\n(Sorry, technical limitations and such.)"},
+        {"Add new starting items", "Should you be able to start with new spells or potions at the start of a run?"},
+        {"Bloody Bonus message", "Should the Bloody Bonus perk tell you how many kills you have left?", "On every kill", "Every 5 kills", "Never"},
+        {"Lucky Day message", "Should Lucky Day inform you when you dodged an attack?", "Yes, show percentage", "Yes", "No, never"},
+        {"Force birthday materials", "Should Copium and Birthday Magic show up, even if it's not 11/11?"},
+        {"Aggressive material spreading", "Should Creepy Polymorphine and Dried Fungus spread through air?"},
+        {"Reset all progress", "[Reset All]", "Click here to reset all progress for this mod. This cannot be undone!"},
+        {"Unlock all progress", "[Unlock All]", "Click here to unlock all progress for this mod. This cannot be undone!"},
+        {"[True]", "[False]", "[Locked]", "You can't use this while in a run.", "Confused or want more info? Check out the mod's wiki page at noita.wiki.gg/Mods!"}
+    }
+end
+
 local mod_id = "grahamsperks" -- This should match the name of your mod's folder.
 local longest = 0
 local initialized = false     -- COPI: Prevent re-initialization. Used for padding settings and stuff.
@@ -43,131 +76,83 @@ mod_settings =
         not_setting = true,
         ui_fn = function(mod_id2, gui, in_main_menu, im_id, setting)
             GuiColorSetForNextWidget(gui, 0.6, 0.6, 0.6, 0.8)
-            GuiText(gui, 0, 0, [[Confused or want more info? Check out the mod's wiki page at noita.wiki.gg/Mods!]])
+            GuiText(gui, 0, 0, translations[11][5])
         end
     },
-    --[[
-    {
-        id = "DEBUG_reset",
-        not_setting = true,
-        ui_fn = function(mod_id2, gui, in_main_menu, im_id, setting)
-            local lmb, rmb = GuiButton(gui, im_id, 0, 0, "[DEBUG: RE-INIT] (TODO:REMOVETHIS)")
-            if lmb then -- Skip first two
-                for i=3,#mod_settings do
-                    -- Wipe settings and uninit
-                    mod_settings[i]=nil
-                    initialized = false
-                end
-            end
-        end
-    },
-    ]]--
 }
 
 local settings = {
     {
         id      = "SettingsReminder",
-        name    = "Settings reminder",
-        desc    = "Should this mod pester you about its settings?",
+        name    = translations[1][1],
+        desc    = translations[1][2],
         type    = "boolean",
         default = true,
     },
     {
         id      = "PacifistChest",
-        name    = "Pacifist chest replacement",
-        desc    = "Should the pacifist chest always be replaced with a Mini Treasure Chest?",
+        name    = translations[2][1],
+        desc    = translations[2][2],
         type    = "boolean",
         default = true,
     },
-    --[[
-    {
-        id      = "Spells",
-        name    = "Add new spells",
-        desc    = "Should the mod add new spells? \n(Disabling WILL break some things!)",
-        type    = "boolean",
-        default = true,
-    },
-    {
-        id      = "Perks",
-        name    = "Add new perks",
-        desc    = "Should the mod add new perks? \n(Disabling WILL break some things!)",
-        type    = "boolean",
-        default = true,
-    },
-    ]]--
     {
         id      = "Enemies",
-        name    = "Add new enemies",
-        desc    = "Should the mod add new enemies?\nThis excludes mimics, which are always enabled.\nNote: Having enemies disabled will make it impossible to get 100%\nenemy progress unless you've already killed the enemies previously.\n(Sorry, technical limitations and such.)",
+        name    = translations[3][1],
+        desc    = translations[3][2],
         type    = "boolean",
         default = true,
     },
     {
         id      = "StartingItems",
-        name    = "Add new starting items",
-        desc    = "Should you be able to start with new spells or potions at the start of a run?",
+        name    = translations[4][1],
+        desc    = translations[4][2],
         type    = "boolean",
         default = true,
     },
     {
         id      = "BloodyBonus",
-        name    = "Bloody Bonus message",
-        desc    = "Should Bloody Bonus tell you how many kills you have left?",
+        name    = translations[5][1],
+        desc    = translations[5][2],
         type    = "enum",
         values  = {
-            [1] = "On every kill",
-            [2] = "Every 5 kills",
-            [3] = "Never",
+            [1] = translations[5][3],
+            [2] = translations[5][4],
+            [3] = translations[5][5],
         },
         default = 2,
     },
-    --[[
-    {
-        id      = "LifeLottery",
-        name    = "Life Lottery Alt GFX",
-        desc    = "Should Life Lottery spawn with a random appearance?",
-        type    = "boolean",
-        default = true,
-    },
-    {
-        id      = "LuckyClover",
-        name    = "Lucky Clover Great Chests",
-        desc    = "Should Lucky Clover increase the chances of finding a Great Chest?",
-        type    = "boolean",
-        default = false,
-    },
-    ]]--
     {
         id      = "LuckyDay",
-        name    = "Lucky Day message",
-        desc    = "Should Lucky Day inform you when you dodged an attack?",
+        name    = translations[6][1],
+        desc    = translations[6][2],
         type    = "enum",
         values  = {
-            [1] = "Yes, show percentage",
-            [2] = "Yes",
-            [3] = "No, never",
+            [1] = translations[6][3],
+            [2] = translations[6][4],
+            [3] = translations[6][5],
         },
         default = 1,
     },
     {
         id      = "Birthday",
-        name    = "Force birthday materials",
-        desc    = "Should Copium and Birthday Magic show up, even if it's not 11/11?",
+        name    = translations[7][1],
+        desc    = translations[7][2],
         type    = "boolean",
         default = false,
     },
     {
         id      = "Creepy",
-        name    = "Aggressive material spreading",
-        desc    = "Should Creepy Polymorphine and Dried Fungus spread through air?",
+        name    = translations[8][1],
+        desc    = translations[8][2],
         type    = "boolean",
         default = false,
     },
     {
         id   = "Reset",
-        name = "Reset all progress",
-        txt  = "[Reset All]",
-        desc = "Click here to reset all progress for this mod. This cannot be undone!",
+        name = translations[9][1],
+        txt  = translations[9][2],
+        desc = translations[9][3],
         type = "custom",
         lock = true,
         func = function(lmb, rmb)
@@ -181,9 +166,9 @@ local settings = {
     },
     {
         id   = "Unlock",
-        name = "Unlock all progress",
-        txt  = "[Unlock All]",
-        desc = "Click here to unlock all progress for this mod. This cannot be undone!",
+        name = translations[10][1],
+        txt  = translations[10][2],
+        desc = translations[10][3],
         type = "custom",
         lock = true,
         func = function(lmb, rmb)
@@ -262,7 +247,7 @@ function ModSettingsGui(gui, in_main_menu)
                     GuiText(gui2, 0, 0, setting.ui_name .. ": ")
                     local old = ModSettingGet(setting.id)
                     if old == nil then old = setting.default_value end
-                    local lmb, rmb = GuiButton(gui2, im_id, (longest + 2) - length, 0, old and "[True]" or "[False]")
+                    local lmb, rmb = GuiButton(gui2, im_id, (longest + 2) - length, 0, old and translations[11][1] or translations[11][2])
                     GuiTooltip(gui2, setting.ui_name, setting.ui_description)
                     if lmb then
                         ModSettingSet(setting.id, not old)
@@ -294,8 +279,8 @@ function ModSettingsGui(gui, in_main_menu)
                     GuiText(gui2, 0, 0, setting.ui_name .. ": ")
                     if curr_setting.lock and not in_main_menu2 then
                         GuiColorSetForNextWidget(gui2, 0.6, 0.4, 0.4, 0.8)
-                        GuiText(gui2, (longest + 2) - length, 0, "[Locked]" )
-                        GuiTooltip(gui2, setting.ui_name, "You can't use this while in a run.")
+                        GuiText(gui2, (longest + 2) - length, 0, translations[11][3] )
+                        GuiTooltip(gui2, setting.ui_name, translations[11][4])
                     else
                         local lmb, rmb = GuiButton(gui2, im_id, (longest + 2) - length, 0, curr_setting.txt)
                         curr_setting.func(lmb, rmb)

@@ -1,12 +1,23 @@
 ---@diagnostic disable: undefined-global
+local currentLang = GameTextGetTranslatedOrNot("$current_language")
 local translations = ModTextFileGetContent( "data/translations/common.csv" );
 if translations ~= nil then
 	while translations:find("\r\n\r\n") do
 		translations = translations:gsub("\r\n\r\n","\r\n")
 	end
-	translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations.csv" )
-	translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_1.5.csv" )
-	translations = translations .. (ModTextFileGetContent( "mods/grahamsperks/files/entities/books/corrupt/.csv" ) or "")
+	if currentLang == "简体中文" then
+		if ModIsEnabled("better_chinese") then
+			translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/chinese_translations_withbooks.csv")
+		else
+			translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/chinese_translations_withoutbooks.csv")
+		end
+		translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/chinese_translations_1.5.csv")
+		translations = translations .. (ModTextFileGetContent( "mods/grahamsperks/files/entities/books/corrupt/c.csv" ) or "")
+	else -- default to english
+		translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations.csv" )
+		translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_1.5.csv" )
+		translations = translations .. (ModTextFileGetContent( "mods/grahamsperks/files/entities/books/corrupt/e.csv" ) or "")
+	end
 	ModTextFileSetContent( "data/translations/common.csv", translations )
 end
 
