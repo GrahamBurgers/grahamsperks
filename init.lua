@@ -26,12 +26,22 @@ ModMaterialsFileAdd("mods/grahamsperks/files/materials/materials_reactions.xml")
 ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_append.lua" )
 ModLuaFileAppend( "data/scripts/items/potion_aggressive.lua", "mods/grahamsperks/files/materials/potion_aggressive.lua" )
 
-	-- Extra mod compatibility
+-- Extra mod compatibility
 if ModIsEnabled("more-stuff") then
 	ModMaterialsFileAdd("mods/grahamsperks/files/materials/reactions_morestuff.xml")
 end
 if ModIsEnabled("anvil_of_destiny") then
 	ModLuaFileAppend("mods/anvil_of_destiny/files/scripts/modded_content.lua", "mods/grahamsperks/files/scripts/aod_compat.lua")
+end
+if ModIsEnabled("raksa") then
+	ModLuaFileAppend(
+		"mods/raksa/files/scripts/lists/entity_categories.lua",
+		"mods/grahamsperks/files/conjurer/entities.lua"
+	)
+	ModLuaFileAppend(
+		"mods/raksa/files/scripts/lists/entity_categories.lua",
+		"mods/grahamsperks/files/conjurer/materials.lua"
+	)
 end
 
 ModLuaFileAppend("data/scripts/gun/gun_actions.lua", "mods/grahamsperks/files/spells/actions.lua")
@@ -108,16 +118,16 @@ add_scene({
 	{-3811, 10113, "mods/grahamsperks/files/entities/books/lonelybook.xml", true},
 	{-16268, -7093, "mods/grahamsperks/files/entities/books/timebook.xml", true},
 	{-1933, -59, "mods/grahamsperks/files/entities/books/anvilbook.xml"},
-	{4379, 895, "mods/grahamsperks/files/pickups/chest_tech.xml"},
-	{-12340, 420, "mods/grahamsperks/files/pickups/chest_tech.xml"},
-	{-3367, 3346, "mods/grahamsperks/files/pickups/chest_tech.xml"},
-	{2945, 12316, "mods/grahamsperks/files/pickups/chest_tech.xml"},
-	{12336, -4642, "mods/grahamsperks/files/pickups/chest_tech.xml"},
-	{-1707, -742, "mods/grahamsperks/files/pickups/chest_tech.xml"},
-	{9654, 9186, "mods/grahamsperks/files/pickups/chest_tech.xml"},
-	{3372, 1876, "mods/grahamsperks/files/pickups/chest_tech.xml"},
-	{-4324, 3968, "mods/grahamsperks/files/pickups/chest_tech.xml"},
-	{4413, 13087, "mods/grahamsperks/files/pickups/chest_tech.xml"},
+	{4379, 895, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
+	{-12340, 420, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
+	{-3367, 3346, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
+	{2945, 12316, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
+	{12336, -4642, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
+	{-1707, -742, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
+	{9654, 9186, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
+	{3372, 1876, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
+	{-4324, 3968, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
+	{4413, 13087, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
 	{11480, -4864, "mods/grahamsperks/files/wands/candyheart.xml", true},
 	{10050, -736, "mods/grahamsperks/files/wands/rotting.xml", true},
 	{16090, 10000, "mods/grahamsperks/files/wands/coffee.xml", true},

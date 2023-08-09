@@ -12,8 +12,8 @@ function on_open( entity_item )
 		rand_y = tonumber(ComponentGetValue( position_comp, "pos_y") ) or y
 	end
 
-    local count = GlobalsGetValue( "GRAHAM_TECH_CHEST_COUNT_OPENED", "0" )
-    GlobalsSetValue( "GRAHAM_TECH_CHEST_COUNT_OPENED", count + 1 )
+    local count = tonumber(GlobalsGetValue( "GRAHAM_TECH_CHEST_COUNT_OPENED", "0" ))
+    GlobalsSetValue( "GRAHAM_TECH_CHEST_COUNT_OPENED", tostring(count + 1) )
 
     SetRandomSeed( rand_x + GameGetFrameNum(), rand_y + x)
 
@@ -25,6 +25,10 @@ function on_open( entity_item )
     "NOLLA", "LIFETIME", "LIFETIME_DOWN",
     "SWAPPER_PROJECTILE", "TEMPORARY_PLATFORM", "TRANSMUTATION",
     "MATERIAL_BLOOD", "ALCOHOL_BLAST", "HITFX_CRITICAL_BLOOD"}
+    local requirements = {
+        "IF_PROJECTILE", "IF_HP", "IF_ENEMY", "IF_HALF", "IF_ELSE", "IF_END"
+    }
+    table.insert(to_be_spawned, requirements[Random(1, #requirements)])
 
     dofile_once( "data/scripts/perks/perk.lua" )
     local pid = perk_spawn_random( x, y - 20, true )
@@ -40,13 +44,13 @@ function on_open( entity_item )
         z_index="0.8",
     })
 
-    if math.max(Random(1, 100 - 10 * count), 2) == 1 then table.insert(spells_random, "SUMMON_WANDGHOST") end
-
-    local length = 2 + count
+    local length = math.min(3 + count, 10)
     for i = 1, length do
-        SetRandomSeed(i + GameGetFrameNum() + 34, x + y)
         table.insert(to_be_spawned, spells_random[Random(1, #spells_random)])
     end
+
+    if count == 7 then table.insert(to_be_spawned, "SUMMON_WANDGHOST") end
+    if count == 19 then table.insert(to_be_spawned, "REGENERATION_FIELD") end
 
     local x2 = x - ((#to_be_spawned - 1) * 7.5)
     for i = 1, #to_be_spawned do
