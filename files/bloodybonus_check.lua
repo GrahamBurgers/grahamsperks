@@ -3,9 +3,15 @@ local orig_death = death
 function death(damage_type_bit_field, damage_message, entity_thats_responsible, drop_items)
 	local me = GetUpdatedEntityID()
 	local x, y = EntityGetTransform(me)
-	if GameHasFlagRun("PERK_PICKED_GRAHAM_TRICK_BETRAYAL") and EntityHasTag(entity_thats_responsible, "player_unit") == false and entity_thats_responsible ~= 0 then
+	if GameHasFlagRun("PERK_PICKED_GRAHAM_TRICK_BETRAYAL") and EntityHasTag(entity_thats_responsible, "player_unit") == false and entity_thats_responsible ~= 0 and entity_thats_responsible ~= me then
 		local stacks = math.min(5, GameGetGameEffectCount(EntityGetClosestWithTag(x, y, "player_unit"), "EXTRA_MONEY_TRICK_KILL"))
 		do_money_drop( 2 * (2 ^ stacks + 1), true )
+		-- little light effect
+		local eid = EntityCreateNew()
+		EntityApplyTransform(eid, x, y)
+		EntityAddComponent2(eid, "MagicXRayComponent", {
+		radius=6,
+		})
 	else
 		orig_death(damage_type_bit_field, damage_message, entity_thats_responsible, drop_items)
 	end

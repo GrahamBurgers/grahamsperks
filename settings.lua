@@ -33,35 +33,36 @@ local progress = {
     "graham_progress_rotting_exchange",
 }
 
-local currentLang = GameTextGetTranslatedOrNot("$current_language")
-local translations
-if currentLang == "简体中文" then
+local currentLang = ModSettingGet("grahamsperks.Language")
+local translations = { -- default to English
+    {"Settings reminder", "Should this mod pester you about its settings?"},
+    {"Pacifist chest replacement", "Should the pacifist chest always be replaced with a Mini Treasure Chest?"},
+    {"Add new enemies", "Should the mod add new enemies?\nThis excludes mimics, which are always enabled.\nNote: Having enemies disabled will make it impossible to get 100%\nenemy progress unless you've already killed the enemies previously.\n(Sorry, technical limitations and such.)"},
+    {"Add new starting items", "Should you be able to start with new spells or potions at the start of a run?"},
+    {"Bloody Bonus message", "Should the Bloody Bonus perk tell you how many kills you have left?", "On every kill", "Every 5 kills", "No, never"},
+    {"Lucky Day message", "Should Lucky Day inform you when you dodged an attack?", "Yes, show percentage", "Yes", "No, never"},
+    {"Force birthday materials", "Should Copium and Birthday Magic show up, even if it's not 11/11?"},
+    {"Aggressive material spreading", "Should Creepy Polymorphine and Dried Fungus spread through air?"},
+    {"Reset all progress", "[Reset All]", "Click here to reset all progress for this mod. This cannot be undone!"},
+    {"Unlock all progress", "[Unlock All]", "Click here to unlock all progress for this mod. This cannot be undone!"},
+    {"[True]", "[False]", "[Locked]", "You can't use this while in a run.", "Confused or want more info? Check out the mod's wiki page at noita.wiki.gg/Mods!"},
+    {"Language", "What language do you want to play Graham's Things in?\nRestart the game after changing this setting."},
+}
+
+if currentLang == 2 then -- Chinese translations here
     translations = {
         {"Settings reminder", "Should this mod pester you about its settings?"},
         {"Pacifist chest replacement", "Should the pacifist chest always be replaced with a Mini Treasure Chest?"},
         {"Add new enemies", "Should the mod add new enemies?\nThis excludes mimics, which are always enabled.\nNote: Having enemies disabled will make it impossible to get 100%\nenemy progress unless you've already killed the enemies previously.\n(Sorry, technical limitations and such.)"},
         {"Add new starting items", "Should you be able to start with new spells or potions at the start of a run?"},
-        {"Bloody Bonus message", "Should the Bloody Bonus perk tell you how many kills you have left?", "On every kill", "Every 5 kills", "Never"},
+        {"Bloody Bonus message", "Should the Bloody Bonus perk tell you how many kills you have left?", "On every kill", "Every 5 kills", "No, never"},
         {"Lucky Day message", "Should Lucky Day inform you when you dodged an attack?", "Yes, show percentage", "Yes", "No, never"},
         {"Force birthday materials", "Should Copium and Birthday Magic show up, even if it's not 11/11?"},
         {"Aggressive material spreading", "Should Creepy Polymorphine and Dried Fungus spread through air?"},
         {"Reset all progress", "[Reset All]", "Click here to reset all progress for this mod. This cannot be undone!"},
         {"Unlock all progress", "[Unlock All]", "Click here to unlock all progress for this mod. This cannot be undone!"},
-        {"[True]", "[False]", "[Locked]", "You can't use this while in a run.", "Confused or want more info? Check out the mod's wiki page at noita.wiki.gg/Mods!"}
-    }
-else -- default to english
-    translations = {
-        {"Settings reminder", "Should this mod pester you about its settings?"},
-        {"Pacifist chest replacement", "Should the pacifist chest always be replaced with a Mini Treasure Chest?"},
-        {"Add new enemies", "Should the mod add new enemies?\nThis excludes mimics, which are always enabled.\nNote: Having enemies disabled will make it impossible to get 100%\nenemy progress unless you've already killed the enemies previously.\n(Sorry, technical limitations and such.)"},
-        {"Add new starting items", "Should you be able to start with new spells or potions at the start of a run?"},
-        {"Bloody Bonus message", "Should the Bloody Bonus perk tell you how many kills you have left?", "On every kill", "Every 5 kills", "Never"},
-        {"Lucky Day message", "Should Lucky Day inform you when you dodged an attack?", "Yes, show percentage", "Yes", "No, never"},
-        {"Force birthday materials", "Should Copium and Birthday Magic show up, even if it's not 11/11?"},
-        {"Aggressive material spreading", "Should Creepy Polymorphine and Dried Fungus spread through air?"},
-        {"Reset all progress", "[Reset All]", "Click here to reset all progress for this mod. This cannot be undone!"},
-        {"Unlock all progress", "[Unlock All]", "Click here to unlock all progress for this mod. This cannot be undone!"},
-        {"[True]", "[False]", "[Locked]", "You can't use this while in a run.", "Confused or want more info? Check out the mod's wiki page at noita.wiki.gg/Mods!"}
+        {"[True]", "[False]", "[Locked]", "You can't use this while in a run.", "Confused or want more info? Check out the mod's wiki page at noita.wiki.gg/Mods!"},
+        {"Language", "What language do you want to play Graham's Things in?\nRestart the game after changing this setting."},
     }
 end
 
@@ -82,6 +83,17 @@ mod_settings =
 }
 
 local settings = {
+    {
+        id      = "Language",
+        name    = translations[12][1],
+        desc    = translations[12][2],
+        type    = "enum",
+        values  = {
+            [1] = "English",
+            [2] = "Chinese",
+        },
+        default = 1,
+    },
     {
         id      = "SettingsReminder",
         name    = translations[1][1],
@@ -248,7 +260,7 @@ function ModSettingsGui(gui, in_main_menu)
                     local old = ModSettingGet(setting.id)
                     if old == nil then old = setting.default_value end
                     local lmb, rmb = GuiButton(gui2, im_id, (longest + 2) - length, 0, old and translations[11][1] or translations[11][2])
-                    GuiTooltip(gui2, setting.ui_name, setting.ui_description)
+                    GuiTooltip(gui2, setting.ui_description, "")
                     if lmb then
                         ModSettingSet(setting.id, not old)
                     elseif rmb then
@@ -264,7 +276,7 @@ function ModSettingsGui(gui, in_main_menu)
                     local old = ModSettingGet(setting.id)
                     if old == nil then old = setting.default_value end
                     local lmb, rmb = GuiButton(gui2, im_id, (longest + 2) - length, 0, table.concat{"[",curr_setting.values[old],"]"})
-                    GuiTooltip(gui2, setting.ui_name, setting.ui_description)
+                    GuiTooltip(gui2, setting.ui_description, "")
                     if lmb then
                         ModSettingSet(setting.id, (old%#curr_setting.values)+1)
                     elseif rmb then

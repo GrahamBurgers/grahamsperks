@@ -123,7 +123,7 @@ if ( variablestorages ~= nil ) then
 			local uses = ComponentGetValue2(uses_counter, "value_int")
 			uses = uses + 1
 			ComponentSetValue2(uses_counter, "value_int", uses)
-			if uses >= Random(4, 8) then
+			if uses >= Random(4, 8) + ((GameHasFlagRun("PERK_PICKED_GRAHAM_LUCKY_CLOVER") and 2) or 0) then
 				EntityLoad("data/entities/particles/poof_blue.xml", pos_x, pos_y)
 				GamePrint("$graham_lovely_die_poof")
 				EntityKill(entity_id)
