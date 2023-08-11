@@ -69,7 +69,9 @@ if ModSettingGet("grahamsperks.Enemies") ~= false then
 	-- enemies
 	local enemies = {"coalmine_alt", "excavationsite", "snowcave", "snowcastle", "sandcave", "vault", "meat"}
 	for i = 1, #enemies do
-		ModLuaFileAppend( "data/scripts/biomes/" .. enemies[i] .. ".lua", "mods/grahamsperks/files/scripts/enemies_" .. enemies[i] .. ".lua" )
+		if ModTextFileGetContent( "data/scripts/biomes/" .. enemies[i] .. ".lua") ~= nil then
+			ModLuaFileAppend( "data/scripts/biomes/" .. enemies[i] .. ".lua", "mods/grahamsperks/files/scripts/enemies_" .. enemies[i] .. ".lua" )
+		end
 	end
 
 	if ModIsEnabled("biome-plus") then
@@ -379,13 +381,18 @@ end
 for i=1, #patches do
     local patch = patches[i]
     local content = ModTextFileGetContent(patch.path)
-    content = content:gsub(patch.from, patch.to)
-    ModTextFileSetContent(patch.path, content)
+	if content ~= nil then
+		content = content:gsub(patch.from, patch.to)
+		ModTextFileSetContent(patch.path, content)
+	end
 end
 
 function OnPlayerSpawned(player)
 	EntitySetDamageFromMaterial(player, "graham_purplebrick_lessglow", 0.00012)
 	local x, y = EntityGetTransform(player)
+	if PolymorphTableAddEntity == nil then
+		EntityLoad("mods/grahamsperks/files/entities/books/bigbook.xml", x + 200, y)
+	end
 	
 	GlobalsSetValue( "GRAHAM_TOGGLE", "null" )
 	GlobalsSetValue( "GRAHAM_TOGGLE2", "null" )
