@@ -80,11 +80,11 @@ if ( variablestorages ~= nil ) then
 				anim = "rolled_" .. tostring( result )
 				
 				if ( result == 1 ) then
-					bullet_circle({"data/entities/items/pickup/egg_purple.xml", "data/entities/items/pickup/egg_monster.xml", "data/entities/items/pickup/egg_red.xml"}, 3, 20)
+					bullet_circle({"data/entities/projectiles/deck/duck.xml"}, 8, 480)
 				elseif ( result == 2 ) then
 					bullet_circle({"data/entities/projectiles/healshot.xml"}, 20, 120)
 				elseif ( result == 3 ) then
-					bullet_circle({"data/entities/projectiles/deck/duck.xml"}, 8, 480)
+					bullet_circle({"data/entities/items/pickup/egg_purple.xml", "data/entities/items/pickup/egg_monster.xml", "data/entities/items/pickup/egg_red.xml"}, 3, 20)
 				elseif ( result == 4 ) then
 					bullet_circle({"mods/grahamsperks/files/entities/potion_pheromone.xml"}, 4, 180)
 				elseif ( result == 5 ) then

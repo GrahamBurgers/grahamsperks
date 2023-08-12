@@ -308,6 +308,7 @@ local to_insert = {
 			c.fire_rate_wait = c.fire_rate_wait + 80
 		end,
 	},
+	--[[ 8/11/2023 - retired this spell
 	{
 		id                  = "GRAHAM_CIRCLE_DULLED",
 		name                = "$graham_name_circle_dulled",
@@ -331,6 +332,7 @@ local to_insert = {
 			end
 		end,
 	},
+	]]--
 	{
 		id                = "GRAHAM_UMBRELLA",
 		name              = "$graham_name_umbrella",

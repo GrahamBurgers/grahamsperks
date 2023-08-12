@@ -181,8 +181,8 @@ add_scene({
 	{1800, 6600, "mods/grahamsperks/files/pickups/egg.xml", true},
 	{1800, 6600, "mods/grahamsperks/files/entities/books/eggbook.xml", true},
 	{-11695, 600, "mods/grahamsperks/files/pixelscenes/stargazer.xml", true},
-	{0, 100000, "mods/grahamsperks/files/pixelscenes/cat.xml", true},
-	{0, -100000, "mods/grahamsperks/files/pixelscenes/cat2.xml", true},
+	{0, 20000, "mods/grahamsperks/files/pixelscenes/cat.xml", true},
+	{0, -20000, "mods/grahamsperks/files/pixelscenes/cat2.xml", true},
 	{3331, 1616, "mods/grahamsperks/files/entities/progress/progress.xml", true},
 })
 
@@ -469,14 +469,14 @@ end
 
 function OnMagicNumbersAndWorldSeedInitialized()
 	local year, month, day, hour, minute, second = GameGetDateAndTimeLocal()
-	SetRandomSeed(100 + hour, 100 + second)
+	SetRandomSeed(13548, 195430)
 	if ( month == 11 ) and ( day == 11 ) then
 		ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_birthday.lua" )
 	elseif (Random(1, 100) == 1) or ModSettingGet("grahamsperks.birthday") == "yes" then
 		ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_birthday.lua" )
 	end
 	
-	SetRandomSeed(10 + minute, 10 + year)
+	SetRandomSeed(823910, 145832)
 	if (Random(1, 30) == 1) then
 		ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_secret.lua" )
 	end

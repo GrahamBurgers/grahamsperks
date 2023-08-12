@@ -58,12 +58,12 @@ else
             end
         end
         ComponentSetValue2(ai, "attack_ranged_offset_y", y - y2)
-        local genome1 = EntityGetFirstComponent(me, "GenomeDataComponent")
-        local genome2 = EntityGetFirstComponent(enemy, "GenomeDataComponent")
-        if genome1 ~= nil and genome2 ~= nil then
-            ComponentSetValue2(genome1, "herd_id", ComponentGetValue2(genome2, "herd_id"))
-        end
     end
+end
+local genome1 = EntityGetFirstComponent(me, "GenomeDataComponent")
+local genome2 = EntityGetFirstComponent(enemy, "GenomeDataComponent")
+if genome1 ~= nil and genome2 ~= nil then
+    ComponentSetValue2(genome1, "herd_id", ComponentGetValue2(genome2, "herd_id"))
 end
 
 EntityApplyTransform(me, x2, y2, 0)
