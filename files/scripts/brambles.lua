@@ -10,7 +10,7 @@ if comp ~= nil then
 end
 
 for i = 1, #entities do
-	if shooter ~= entities[i] and not EntityHasTag(entities[i], "glue_NOT") and EntityGetComponent(entities[i], "PhysicsBodyComponent") == nil and EntityGetComponent(entities[i], "PhysicsBody2Component") == nil and EntityGetHerdRelation( shooter, entities[i] ) <= 60 then
+	if shooter ~= entities[i] and EntityGetHerdRelation( shooter, entities[i] ) <= 60 then
 		ex, ey = EntityGetTransform(entities[i])
 		cx = get_variable_storage_component( entities[i], "graham_brambles_x" )
 		cy = get_variable_storage_component( entities[i], "graham_brambles_y" )
@@ -18,14 +18,16 @@ for i = 1, #entities do
 			bx = ComponentGetValue2(cx, "value_int")
 			by = ComponentGetValue2(cy, "value_int")
 
-			if  math.sqrt((bx - x)^2 + (by - y)^2) > 18 then
-				ComponentSetValue2(cx, "value_int", x)
-				ComponentSetValue2(cy, "value_int", y)
-			else
-				EntityApplyTransform(entities[i], ex + (bx - ex) / 6, ey + (by - ey) / 4)
-				local velocity = EntityGetFirstComponentIncludingDisabled(entities[i], "CharacterDataComponent") or 0
-				if velocity ~= 0 then
-					ComponentSetValue2(velocity, "mVelocity", 0, 0)
+			if EntityGetComponent(entities[i], "PhysicsBodyComponent") == nil and EntityGetComponent(entities[i], "PhysicsBody2Component") == nil and not EntityHasTag(entities[i], "glue_NOT") then
+				if math.sqrt((bx - x)^2 + (by - y)^2) > 18 then
+					ComponentSetValue2(cx, "value_int", x)
+					ComponentSetValue2(cy, "value_int", y)
+				else
+					EntityApplyTransform(entities[i], ex + (bx - ex) / 6, ey + (by - ey) / 4)
+					local velocity = EntityGetFirstComponentIncludingDisabled(entities[i], "CharacterDataComponent") or 0
+					if velocity ~= 0 then
+						ComponentSetValue2(velocity, "mVelocity", 0, 0)
+					end
 				end
 			end
 			

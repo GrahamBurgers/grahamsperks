@@ -30,6 +30,16 @@
 			attack_ranged_offset_y="5"
 			>
 		</AnimalAIComponent>
+
+		<DamageModelComponent
+			hp="2" >
+			<damage_multipliers
+				melee="0"
+				explosion="1.5"
+				>
+			</damage_multipliers>
+		</DamageModelComponent>
+		
 	</Base>
 
 </Entity>

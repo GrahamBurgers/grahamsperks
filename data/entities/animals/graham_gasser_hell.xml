@@ -33,6 +33,7 @@
 		
 		<DamageModelComponent 
             hp="7.2"
+			ragdoll_material="plastic"
             materials_create_messages="1"
 			ragdoll_filenames_file="data/ragdolls/graham_gasser_hell/filenames.txt"
 			materials_damage="0"

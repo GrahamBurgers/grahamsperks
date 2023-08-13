@@ -28,6 +28,7 @@
     shoot_light_flash_radius="48"
 	knockback_force="1.0"
 	physics_impulse_coeff="2000"
+	explosion_dont_damage_shooter="1"
 	spawn_entity="mods/grahamsperks/files/entities/brambles.xml"
 	>
     <config_explosion

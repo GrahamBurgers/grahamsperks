@@ -17,6 +17,11 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
 	end
 
 	if GameHasFlagRun("PERK_PICKED_GRAHAM_REPOSSESSION") then
+		local genomecomp = EntityGetFirstComponent(entity_thats_responsible, "GenomeDataComponent")
+		local herd = 0
+		if genomecomp ~= nil then
+			herd = ComponentGetValue2(genomecomp, "herd_id")
+		end
 		-- find nearby projectiles
 		local projectiles = EntityGetInRadiusWithTag(x, y, 500, "projectile") or {}
 		for i = 1, #projectiles do
@@ -27,6 +32,7 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
 				if ComponentGetValue2(comps[j], "mWhoShot") == me then
 					ComponentSetValue2(comps[j], "explosion_dont_damage_shooter", true)
 					ComponentSetValue2(comps[j], "mWhoShot", entity_thats_responsible)
+					ComponentSetValue2(comps[j], "mShooterHerdId", herd)
 					ComponentSetValue2(comps[j], "never_hit_player", true)
 					-- don't die from acid balls
 					ComponentObjectSetValue2(comps[j], "config_explosion", "create_cell_probability", 0)

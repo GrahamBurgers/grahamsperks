@@ -33,7 +33,7 @@ function kick( entity_who_kicked )
                             EntitySetComponentsWithTagEnabled(spells[j], "enabled_in_hand", false)
                             EntitySetComponentsWithTagEnabled(spells[j], "enabled_in_inventory", false)
                             EntityRemoveFromParent(spells[j])
-                            EntityApplyTransform(spells[j], x2, y2, 0)
+                            EntitySetTransform(spells[j], x2, y2, 0)
                             local velcomp = EntityGetFirstComponentIncludingDisabled(spells[j], "VelocityComponent") or 0
                             ComponentSetValue2(velcomp, "mVelocity", Random(-100, 100), Random(-50, -100))
                             removed = true
