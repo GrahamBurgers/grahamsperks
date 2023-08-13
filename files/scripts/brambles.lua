@@ -10,7 +10,7 @@ if comp ~= nil then
 end
 
 for i = 1, #entities do
-	if shooter ~= entities[i] and not EntityHasTag(entities[i], "glue_NOT") and EntityGetComponent(entities[i], "PhysicsBody2Component") == nil then
+	if shooter ~= entities[i] and not EntityHasTag(entities[i], "glue_NOT") and EntityGetComponent(entities[i], "PhysicsBodyComponent") == nil and EntityGetComponent(entities[i], "PhysicsBody2Component") == nil and EntityGetHerdRelation( shooter, entities[i] ) <= 60 then
 		ex, ey = EntityGetTransform(entities[i])
 		cx = get_variable_storage_component( entities[i], "graham_brambles_x" )
 		cy = get_variable_storage_component( entities[i], "graham_brambles_y" )
