@@ -1,11 +1,8 @@
 ---@diagnostic disable: undefined-global
-local currentLang = ModSettingGet("grahamsperks.Language")
 local translations = ModTextFileGetContent( "data/translations/common.csv" );
 if translations ~= nil then
-	while translations:find("\r\n\r\n") do
-		translations = translations:gsub("\r\n\r\n","\r\n")
-	end
-	if currentLang == 2 then -- Chinese translations here
+	translations = translations:gsub("\r","")
+	if ModSettingGet("grahamsperks.Language") == 2 then -- Chinese translations here
 		if ModIsEnabled("better_chinese") then
 			translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/chinese_translations_withbooks.csv")
 		else
