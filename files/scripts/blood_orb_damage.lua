@@ -29,14 +29,10 @@ function damage_received( dmg, msg, source )
 			local current_sprite = ComponentGetValue2(spritecomp, "image_file")
 			local to_switch
 
-			local hitbox = EntityGetFirstComponentIncludingDisabled(me, "HitboxComponent")
-			local particles = EntityGetFirstComponentIncludingDisabled(me, "ParticleEmitterComponent")
-			local damagecomp = EntityGetFirstComponentIncludingDisabled(me, "DamageModelComponent")
-			local genome = EntityGetFirstComponentIncludingDisabled(me, "GenomeDataComponent")
-			EntitySetComponentIsEnabled(me, hitbox, true)
-			EntitySetComponentIsEnabled(me, particles, true)
-			EntitySetComponentIsEnabled(me, damagecomp, true)
-			EntitySetComponentIsEnabled(me, genome, true)
+			EntitySetComponentIsEnabled(me, EntityGetFirstComponentIncludingDisabled(me, "HitboxComponent") or 0, true)
+            EntitySetComponentIsEnabled(me, EntityGetFirstComponentIncludingDisabled(me, "ParticleEmitterComponent") or 0, true)
+            EntitySetComponentIsEnabled(me, EntityGetFirstComponentIncludingDisabled(me, "DamageModelComponent") or 0, true)
+            EntitySetComponentIsEnabled(me, EntityGetFirstComponentIncludingDisabled(me, "GenomeDataComponent") or 0, true)
 		
 			if hp > 0 then
 				-- damage immunity

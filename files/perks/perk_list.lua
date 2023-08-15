@@ -37,14 +37,13 @@ local to_insert = {
       EntityLoad("data/entities/items/pickup/powder_stash.xml", x + 15, y)
       EntityLoad("data/entities/items/wand_level_03.xml", x, y - 30)
       SetRandomSeed(x + y, GameGetFrameNum())
-      local rockrandom = Random(1, 7)
+      local rockrandom = Random(1, 6)
       if ( rockrandom == 1) then EntityLoad("data/entities/items/pickup/thunderstone.xml", x - 15, y) end
       if ( rockrandom == 2) then EntityLoad("data/entities/items/pickup/brimstone.xml", x - 15, y) end
       if ( rockrandom == 3) then EntityLoad("data/entities/items/pickup/waterstone.xml", x - 15, y) end
-      if ( rockrandom == 4) then EntityLoad("data/entities/items/pickup/stonestone.xml", x - 15, y) end
-      if ( rockrandom == 5) then EntityLoad("data/entities/items/pickup/safe_haven.xml", x - 15, y) end
-      if ( rockrandom == 6) then EntityLoad("mods/grahamsperks/files/pickups/soapstone.xml", x - 15, y) end
-      if ( rockrandom == 7) then EntityLoad("mods/grahamsperks/files/pickups/lovely_die.xml", x - 15, y) end
+      if ( rockrandom == 4) then EntityLoad("data/entities/items/pickup/safe_haven.xml", x - 15, y) end
+      if ( rockrandom == 5) then EntityLoad("mods/grahamsperks/files/pickups/soapstone.xml", x - 15, y) end
+      if ( rockrandom == 6) then EntityLoad("mods/grahamsperks/files/pickups/lovely_die.xml", x - 15, y) end
     end,
 },
 {
@@ -572,6 +571,7 @@ local to_insert = {
       end
       
       EntityAddChild(entity_who_picked, child_id)
+      if varsto ~= nil and i == 1 then break end
     end
   end,
   func_remove = function( entity_who_picked )

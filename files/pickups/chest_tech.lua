@@ -1,4 +1,43 @@
 dofile_once("data/scripts/lib/utilities.lua")
+local function make_random_card(x, y)
+    dofile_once( "data/scripts/gun/gun_actions.lua" )
+	SetRandomSeed( x, y )
+
+	local item = ""
+	local valid = false
+
+	while ( valid == false ) do
+		local itemno = Random( 1, #actions )
+		local thisitem = actions[itemno]
+		item = string.lower(thisitem.id)
+		
+		if ( thisitem.spawn_requires_flag ~= nil ) then
+			local flag_name = thisitem.spawn_requires_flag
+			local flag_status = HasFlagPersistent( flag_name )
+			
+			if flag_status then
+				valid = true
+			end
+
+			-- 
+			if( thisitem.spawn_probability == "0" ) then 
+				valid = false
+			end
+			
+		else
+			valid = true
+		end
+	end
+
+
+	if ( string.len(item) > 0 ) then
+        print("random: " .. item)
+		return item
+	else
+		print( "No valid action entity found!" )
+	end
+end
+
 function on_open( entity_item )
     local x, y = EntityGetTransform(entity_item)
     EntityLoad("data/entities/particles/image_emitters/chest_effect.xml", x, y)
@@ -51,6 +90,7 @@ function on_open( entity_item )
 
     if count == 7 then table.insert(to_be_spawned, "SUMMON_WANDGHOST") end
     if count == 19 then table.insert(to_be_spawned, "REGENERATION_FIELD") end
+    table.insert(to_be_spawned, make_random_card(x, y))
 
     local x2 = x - ((#to_be_spawned - 1) * 7.5)
     for i = 1, #to_be_spawned do

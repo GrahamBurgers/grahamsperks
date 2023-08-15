@@ -47,6 +47,7 @@ local translations = { -- default to English
     {"Unlock all progress", "[Unlock All]", "Click here to unlock all progress for this mod. This cannot be undone!"},
     {"[True]", "[False]", "[Locked]", "You can't use this while in a run.", "Confused or want more info? Check out the mod's wiki page at noita.wiki.gg/Mods!"},
     {"Language", "What language do you want to play Graham's Things in?\nRestart the game after changing this setting."},
+    {"Hide breadcrumbs", "Should Breadcrumbs from the perk be invisible?\nThis is just cosmetic. Enable this if the perk is causing too much visual clutter."}
 }
 
 if currentLang == 2 then -- Chinese translations here
@@ -63,6 +64,7 @@ if currentLang == 2 then -- Chinese translations here
         {"Unlock all progress", "[Unlock All]", "Click here to unlock all progress for this mod. This cannot be undone!"},
         {"[True]", "[False]", "[Locked]", "You can't use this while in a run.", "Confused or want more info? Check out the mod's wiki page at noita.wiki.gg/Mods!"},
         {"Language", "What language do you want to play Graham's Things in?\nRestart the game after changing this setting."},
+        {"Hide breadcrumbs", "Should Breadcrumbs from the perk be invisible?\nThis is just cosmetic. Enable this if the perk is causing too much visual clutter."}
     }
 end
 
@@ -145,6 +147,13 @@ local settings = {
             [3] = translations[6][5],
         },
         default = 1,
+    },
+    {
+        id      = "Breadcrumbs",
+        name    = translations[13][1],
+        desc    = translations[13][2],
+        type    = "boolean",
+        default = false,
     },
     {
         id      = "Birthday",

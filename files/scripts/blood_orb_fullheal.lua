@@ -35,14 +35,10 @@ function item_pickup( entity_item, entity_who_picked, name )
             })
         end
 
-        local hitbox = EntityGetFirstComponentIncludingDisabled(eyes[i], "HitboxComponent")
-        EntitySetComponentIsEnabled(eyes[i], hitbox, true)
-        local particles = EntityGetFirstComponentIncludingDisabled(eyes[i], "ParticleEmitterComponent")
-        EntitySetComponentIsEnabled(eyes[i], particles, true)
-        local damagecomp = EntityGetFirstComponentIncludingDisabled(eyes[i], "DamageModelComponent")
-        EntitySetComponentIsEnabled(eyes[i], damagecomp, true)
-        local genome = EntityGetFirstComponentIncludingDisabled(eyes[i], "GenomeDataComponent")
-        EntitySetComponentIsEnabled(eyes[i], genome, true)
+        EntitySetComponentIsEnabled(eyes[i], EntityGetFirstComponentIncludingDisabled(eyes[i], "HitboxComponent") or 0, true)
+        EntitySetComponentIsEnabled(eyes[i], EntityGetFirstComponentIncludingDisabled(eyes[i], "ParticleEmitterComponent") or 0, true)
+        EntitySetComponentIsEnabled(eyes[i], EntityGetFirstComponentIncludingDisabled(eyes[i], "DamageModelComponent") or 0, true)
+        EntitySetComponentIsEnabled(eyes[i], EntityGetFirstComponentIncludingDisabled(eyes[i], "GenomeDataComponent") or 0, true)
     end
 
     local robots = GlobalsGetValue( "GRAHAM_ROBOTS_COUNT", "0" )
