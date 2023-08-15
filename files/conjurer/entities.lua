@@ -13,7 +13,7 @@ table.insert(ALL_ENTITIES, {
         {
             name="$graham_bloodmoon_name",
             image="mods/grahamsperks/files/pickups/bloodmoon_ui.png",
-            path="mods/grahamsperks/files/pickups/bloodmoon_ui.xml",
+            path="mods/grahamsperks/files/pickups/bloodmoon.xml",
         },
         {
             name="$graham_cybereye_name",
