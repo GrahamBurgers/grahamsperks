@@ -3,7 +3,7 @@ local x, y = EntityGetTransform(entity)
 local x2, y2 = 123, 321
 
 SetRandomSeed(x + entity, y + GameGetFrameNum())
-if Random(1, 15) < 15 then return end
+if Random(1, 14) < 14 then return end
 
 -- try 80 times to teleport, do nothing if it fails
 for i = 1, 80 do

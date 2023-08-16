@@ -83,6 +83,7 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 	-- CHEST DROPS GO HERE (Welcome to elseif hell)
 	local count = 1
 	while( count > 0 ) do
+		chest_load_gold_entity( "data/entities/items/pickup/goldnugget_50.xml", x, y, false )
 		count = count - 1
 		local rnd = Random(1,100)
 		if rnd <= 15 then

@@ -2,7 +2,7 @@ dofile_once("data/scripts/lib/utilities.lua")
 local comp = EntityGetFirstComponent(GetUpdatedEntityID(), "VariableStorageComponent", "graham_toxic_potion") or 0
 local proj = EntityGetFirstComponent(GetUpdatedEntityID(), "ProjectileComponent") or 0
 local friendlyfire = ComponentGetValue2(proj, "friendly_fire")
-local size = 25
+local size = 5 -- default size if no damage is found
 if comp ~= 0 then
     size = math.max(5, ComponentGetValue2(comp, "value_int"))
 end

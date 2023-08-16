@@ -21,12 +21,27 @@ if activeitem ~= 0 and EntityGetComponent(activeitem, "MaterialInventoryComponen
 	local px, py, dir = EntityGetTransform(activeitem)
 	local nx = px + (math.cos(dir)) * DISTANCE
 	local ny = py + (math.sin(dir)) * DISTANCE
-	if #children == 0 then
+	local function make_new()
 		local new = EntityLoad("mods/grahamsperks/files/entities/straw/straw.xml", nx, ny)
 		EntitySetTransform(new, nx, ny, dir)
 		EntityAddChild(player, new)
+		EntityAddComponent2(new, "VariableStorageComponent", {
+			_tags="graham_sillystraw_entity",
+			name="graham_sillystraw_entity",
+			value_int=activeitem
+		})
+	end
+	if #children == 0 then
+		make_new()
 	else
 		for k, child in ipairs(children) do
+			local varsto = EntityGetFirstComponent(child, "VariableStorageComponent", "graham_sillystraw_entity")
+			if varsto ~= nil then
+				if activeitem ~= ComponentGetValue2(varsto, "value_int") then
+					EntityKill(child)
+					make_new()
+				end
+			end
 			EntitySetTransform(child, nx, ny, dir)
 			local comp = EntityGetFirstComponentIncludingDisabled(child, "SpriteComponent") or 0
 			if math.abs(dir) < math.pi / 2 then

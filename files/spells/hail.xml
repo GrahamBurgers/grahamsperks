@@ -23,7 +23,7 @@
     damage_game_effect_entities="mods/grahamsperks/files/effects/movement_slower_head_long.xml,"
   >
   <damage_by_type
-    ice="0.08"
+    ice="0.12"
     >
   </damage_by_type>
 <config_explosion

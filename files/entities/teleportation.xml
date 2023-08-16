@@ -9,7 +9,7 @@
     </InheritTransformComponent>
 
     <LuaComponent
-        execute_every_n_frame="5"
+        execute_every_n_frame="8"
         script_source_file="mods/grahamsperks/files/scripts/chaotic_teleport.lua"
     ></LuaComponent>
 
