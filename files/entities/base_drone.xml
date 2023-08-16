@@ -1,4 +1,4 @@
-<Entity tags="teleportable_NOT,projectile,item_physics,item_pickup,hittable">
+<Entity tags="teleportable_NOT,projectile,projectile_player,item_physics,item_pickup,hittable,summon_player,mortal">
 
 	<SpriteAnimatorComponent>
 	</SpriteAnimatorComponent>
@@ -52,6 +52,7 @@
 		sense_creatures="1"
 		attack_ranged_enabled="0"
 		attack_melee_enabled="0"
+		attack_ranged_entity_file=""
 		can_fly="1"  
 		can_walk="0" >
 	</AnimalAIComponent>
@@ -128,6 +129,7 @@
 		_tags="enabled_in_world"
 		herd_id="player"
 		food_chain_rank="30"
+		berserk_dont_attack_friends="1"
 		is_predator="1" >
 	</GenomeDataComponent>
 

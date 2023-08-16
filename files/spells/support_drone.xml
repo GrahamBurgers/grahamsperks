@@ -23,19 +23,17 @@
 		></ItemComponent>
 
 		<ProjectileComponent>
-		<config_explosion 
-			damage="0"
-			load_this_entity="mods/grahamsperks/files/spells/circle_sweet.xml"
-		></config_explosion>
+			<config_explosion 
+				load_this_entity="mods/grahamsperks/files/spells/circle_sweet.xml"
+			></config_explosion>
 		</ProjectileComponent>
 
 		<AnimalAIComponent 
 			tries_to_ranged_attack_friends="1"
 			sense_creatures="1"
 			attack_ranged_enabled="1"
-			attack_ranged_entity_file="data/entities/projectiles/healshot_slow.xml"
+			attack_ranged_entity_file="mods/grahamsperks/files/spells/support_drone_bullet.xml"
 			attack_ranged_frames_between="60"
-			attack_ranged_offset_y="5"
 			>
 		</AnimalAIComponent>
 

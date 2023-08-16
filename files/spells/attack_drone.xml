@@ -22,12 +22,17 @@
 			ui_sprite="mods/grahamsperks/files/projectiles_gfx/attack_drone_inv.png"
 		></ItemComponent>
 
+		<ProjectileComponent>
+			<config_explosion 
+				load_this_entity="mods/grahamsperks/files/spells/wood.xml"
+			></config_explosion>
+		</ProjectileComponent>
+
 		<AnimalAIComponent
 			sense_creatures="1"
 			attack_ranged_enabled="1"
-			attack_ranged_entity_file="data/entities/projectiles/machinegun_bullet_slower.xml"
+			attack_ranged_entity_file="mods/grahamsperks/files/spells/attack_drone_bullet.xml"
 			attack_ranged_frames_between="20"
-			attack_ranged_offset_y="5"
 			>
 		</AnimalAIComponent>
 

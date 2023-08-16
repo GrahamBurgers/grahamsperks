@@ -9,7 +9,7 @@ function enabled_changed(me, is_enabled)
     ComponentSetValue2(ai, "mMainBodyFound", false)
     local gun = EntityGetFirstComponent(me, "AnimalAIComponent") or 0
     if gun == 0 then return end
-    if is_enabled then
+    if is_enabled and ComponentGetValue2(gun, "attack_ranged_entity_file") ~= "" then
         ComponentSetValue2(gun, "attack_ranged_enabled", true)
     else
         ComponentSetValue2(gun, "attack_ranged_enabled", false)

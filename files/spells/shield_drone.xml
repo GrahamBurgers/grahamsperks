@@ -22,6 +22,12 @@
 			ui_sprite="mods/grahamsperks/files/projectiles_gfx/shield_drone_inv.png"
 		></ItemComponent>
 
+		<ProjectileComponent>
+			<config_explosion 
+				load_this_entity="data/entities/projectiles/deck/shield_field.xml"
+			></config_explosion>
+		</ProjectileComponent>
+		
 		<DamageModelComponent
 			hp="3" >
 			<damage_multipliers
