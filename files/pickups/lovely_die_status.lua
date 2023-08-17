@@ -98,7 +98,6 @@ if ( variablestorages ~= nil ) then
 				if ( result <= 3 ) then
 					textprint = textprint .. "bad"
 					anim = "rolled_bad"
-					EntityKill( entity_id )
 					dofile_once("data/scripts/perks/perk.lua")
 					local x, y = EntityGetTransform(players[1])
 					local perk = perk_spawn(x, y, "GENOME_MORE_HATRED") or 0

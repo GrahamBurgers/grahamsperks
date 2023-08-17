@@ -33,7 +33,7 @@
 			sense_creatures="1"
 			attack_ranged_enabled="1"
 			attack_ranged_entity_file="mods/grahamsperks/files/spells/support_drone_bullet.xml"
-			attack_ranged_frames_between="60"
+			attack_ranged_frames_between="40"
 			>
 		</AnimalAIComponent>
 

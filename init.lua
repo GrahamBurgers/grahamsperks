@@ -338,6 +338,11 @@ local patches = {
         from    = "\"metal\"",
         to      = "\"metal\", \"graham_phase\"",
     },
+	{
+        path    = "data/entities/items/pickup/runestones/runestone_base.xml",
+        from    = "item_physics,",
+        to      = "graham_runestone,item_physics,",
+    },
 }
 
 if ModSettingGet("grahamsperks.StartingItems") ~= false then
