@@ -1,4 +1,4 @@
-<Entity tags="teleportable_NOT,projectile,projectile_player,item_physics,item_pickup,hittable,summon_player,mortal">
+<Entity tags="teleportable_NOT,item_physics,item_pickup,hittable,summon_player,mortal,poopstone_immunity">
 
 	<SpriteAnimatorComponent>
 	</SpriteAnimatorComponent>
@@ -38,7 +38,7 @@
 	></HomingComponent>
 
 	<AnimalAIComponent
-		_tags="enabled_in_world,enabled_in_hand,enabled_in_inventory"
+		_tags="enabled_in_world,enabled_in_hand,enabled_in_inventory,disable_on_death"
 		_enabled="1" 
 		preferred_job="JobDefault"
 		escape_if_damaged_probability="60"
@@ -102,10 +102,17 @@
 
 	<DamageModelComponent 
 		_tags="enabled_in_world"
+		materials_that_damage="acid,lava,magic_liquid_mana_regeneration"
+		materials_how_much_damage="0.001,0.0007,0.001"
+		air_needed="0" 
 		hp="2"
 		fire_probability_of_ignition="0"
 		wait_for_kill_flag_on_death="1"
 		create_ragdoll="0"
+		blood_material="smoke"
+		blood_spray_material=""
+		blood_multiplier="0.5"
+		physics_objects_damage="0"
 	></DamageModelComponent>
 
 	<LuaComponent
@@ -201,6 +208,7 @@
 		max_child_items="0"
 		is_pickable="1"
 		is_equipable_forced="1"
+		play_spinning_animation="0"
 		preferred_inventory="QUICK"
 	></ItemComponent>
 

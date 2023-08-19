@@ -14,8 +14,12 @@ if hpcomp ~= nil then
             for i = 1, #comps do
                 if ComponentHasTag(comps[i], "disable_on_death") then
                     EntityRemoveComponent(me, comps[i])
+                elseif ComponentHasTag(comps[i], "lurker_data") then
+                    ComponentAddTag( comps[i], "enabled_in_world")
+                    ComponentAddTag( comps[i], "enabled_in_hand")
                 end
             end
+            EntitySetComponentsWithTagEnabled(me, "lurker_data", true)
             local physicsai = EntityGetFirstComponent(me, "PhysicsAIComponent") or 0
             ComponentSetValue2(physicsai, "force_coeff", 1)
             ComponentSetValue2(physicsai, "force_max", 1)

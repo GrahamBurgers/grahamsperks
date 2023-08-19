@@ -48,6 +48,39 @@
 			</damage_multipliers>
 		</DamageModelComponent>
 		
+    <SpriteComponent
+        image_file="mods/grahamsperks/files/projectiles_gfx/support_drone_wings.xml"
+    ></SpriteComponent>
+		
 	</Base>
+
+	<LightComponent 
+    	_tags="enabled_in_hand,item_identified,enabled_in_world"
+        _enabled="1" 
+        radius="80"
+        fade_out_time="1.5" 
+    	r="152"
+    	g="255"
+    	b="141" >
+	</LightComponent>
+
+    <SpriteComponent
+        _tags="enabled_in_world,disable_on_death,enabled_in_hand"
+	emissive="1"
+	additive="1"
+        image_file="mods/grahamsperks/files/projectiles_gfx/support_drone_emissive.xml"
+        update_transform_rotation="0"
+    ></SpriteComponent>
+
+    <SpriteComponent
+        _tags="lurker_data"
+	_enabled="0" 
+	emissive="1"
+	additive="1"
+        image_file="mods/grahamsperks/files/projectiles_gfx/support_drone_emissive.xml"
+        update_transform_rotation="1"
+	next_rect_animation="alarm" 
+	rect_animation="alarm"
+    ></SpriteComponent>
 
 </Entity>
