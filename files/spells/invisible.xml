@@ -33,7 +33,8 @@
     shoot_light_flash_g="0"
     shoot_light_flash_b="0"
     shoot_light_flash_radius="0" 
-	knockback_force="0"
+	  knockback_force="0"
+    damage_game_effect_entities="data/entities/misc/effect_disintegrated.xml,"
 	>
     <config_explosion
       never_cache="1" 

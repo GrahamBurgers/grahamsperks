@@ -40,7 +40,7 @@
 	<!-- main sprite -->
 	<SpriteComponent
 		image_file="mods/grahamsperks/files/projectiles_gfx/breadcrumb.xml"
-		alpha="0.2"
+		alpha="0.3"
 		additive="0"
 		emissive="0" >
 	</SpriteComponent>

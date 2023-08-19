@@ -166,7 +166,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/bubbly.png">
     warmth_melts_to_material="graham_creepypoly"
     crackability="60"
     solid_friction="0.05"
-    tags="[static],[solid],[unconsumable]"
+    tags="[static],[solid],[unconsumable],[freezable]"
     burnable="0"
     density="10"
     show_in_creative_mode="1"
@@ -476,10 +476,12 @@ color="FF13890d">
 	wang_color="ff1d5893"
 	fire_hp="9000"
 	solid_on_collision_material="oil"
+	tags="[corrodible],[alchemy],[solid],[earth],[food]"
 	solid_static_type="0"
     cell_type="liquid"
 	liquid_sand="1"
 	liquid_static="0"
+	density="1"
 	>
 	    <Graphics
 	texture_file="mods/grahamsperks/files/materials/materials_gfx/meatdone.png"
@@ -501,7 +503,7 @@ color="FF13890d">
     </Graphics>
 	<StatusEffects>
 		<Ingestion>
-			<StatusEffect type="MOVEMENT_FASTER_2X" amount="0.1" />
+			<StatusEffect type="MOVEMENT_FASTER_2X" amount="0.3" />
 		</Ingestion>
 	</StatusEffects>
   </CellDataChild>
@@ -651,6 +653,7 @@ color="FF13890d">
     <CellData
   	name="graham_meathealthy" 
 	ui_name="$material_graham_meathealthy"
+	tags="[corrodible],[alchemy],[solid],[earth],[food]"
 	wang_color="f1f0005c"
 	platform_type="0"
 	fire_hp="9000"
@@ -676,6 +679,7 @@ color="FF13890d">
       <CellData
   	name="graham_meatgreedy" 
 	ui_name="$material_graham_meatgreedy"
+	tags="[corrodible],[alchemy],[solid],[earth],[food]"
 	platform_type="0"
 	wang_color="f1f0d000"
 	fire_hp="9000"

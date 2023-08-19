@@ -35,7 +35,7 @@
 
 	<LuaComponent
 		script_source_file="mods/grahamsperks/files/scripts/protection_field.lua"
-		execute_every_n_frame="50"
+		execute_every_n_frame="5"
 		>
 	</LuaComponent>
 
@@ -85,11 +85,5 @@
 		emit_cosmetic_particles="1"
 		is_emitting="1" >
 	</ParticleEmitterComponent>
-
-	<AudioLoopComponent
-		file="data/audio/Desktop/animals.bank"
-		event_name="animals/tiny_ghost/movement_loop"
-		auto_play="1">
-	</AudioLoopComponent>
 
 </Entity>

@@ -4,7 +4,7 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
     if graham_death_old ~= nil then
         graham_death_old(damage_type_bit_field, damage_message, entity_thats_responsible, drop_items )
     end
-    if HasFlagPersistent("graham_progress_deathquest") then return end
+    if HasFlagPersistent("graham_progress_deathquest") or ModIsEnabled("noita-together") or ModIsEnabled("raksa") then return end
     local x, y = EntityGetTransform(GetUpdatedEntityID())
     -- check in reverse order
     -- step 3

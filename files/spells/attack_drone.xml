@@ -37,10 +37,11 @@
 		</AnimalAIComponent>
 
 		<DamageModelComponent
-			hp="2" >
+			hp="3"
+			max_hp="3"  >
 			<damage_multipliers
 				melee="0"
-				explosion="1.5"
+				explosion="0.2"
 				>
 			</damage_multipliers>
 		</DamageModelComponent>

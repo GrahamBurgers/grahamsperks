@@ -343,6 +343,52 @@ local patches = {
         from    = "item_physics,",
         to      = "graham_runestone,item_physics,",
     },
+	{
+        path    = "data/scripts/buildings/workshop_trigger_check_stats.lua",
+        from    = [[local eid = EntityLoad%( "data/entities/items/pickup/chest_random.xml", sx, sy %)]],
+        to      = [[local eid
+        if ModSettingGet%("grahamsperks.PacifistChest"%) then
+        if Random%(1, 12%) == 12 then eid = EntityLoad%("data/entities/animals/mini_mimic.xml", sx, sy%)
+        else eid = EntityLoad%("mods/grahamsperks/files/pickups/chest_mini.xml", sx, sy%) end
+        else eid = EntityLoad%("data/entities/items/pickup/chest_random.xml", sx, sy%) end]],
+    },
+	{
+        path    = "data/scripts/buildings/workshop_trigger_check_stats.lua",
+        from    = [[print%("KILLED ALL"%)]],
+        to      = [[print%("KILLED ALL"%)
+        if GameHasFlagRun%("PERK_PICKED_GRAHAM_BLOODY_EXTRA_PERK"%) then
+            local current_biome = BiomeMapGetName%(x, y - 500%):gsub%("$biome_", ""%)
+            if BiomeMapGetName%(x, y - 1000%):gsub%("$biome_", ""%) == "crypt" then current_biome = "crypt" end
+            local kills_needed = %({
+                ["coalmine"]        = 20,
+                ["coalmine_alt"]    = 20,
+                ["excavationsite"]  = 40,
+                ["fungicave"]       = 40,
+                ["snowcave"]        = 30,
+                ["wandcave"]        = 30,
+                ["snowcastle"]      = 40,
+                ["rainforest"]      = 30,
+                ["rainforest_open"] = 30,
+                ["vault"]           = 20,
+                ["crypt"]           = 40,
+            }%)[current_biome] or 100
+			kills_needed = kills_needed * %(0.8 ^ %(tonumber%(%( 1 + GlobalsGetValue%( "PLAYER_HALO_LEVEL", "0" %)%) * -1%)%)%)
+			kills_needed = math.floor%(kills_needed%) - 1 -- I forget what this part is supposed to do
+            if %(enemies_killed >= kills_needed%) then
+                local sx, sy = x, y
+
+                if %(reference_id ~= NULL_ENTITY%) then
+                    sx, sy = EntityGetTransform%(reference_id%)
+                end
+                local chance = 12
+                if HasFlagPersistent%("graham_bloodymimic_killed"%) == false then
+                    chance = 6
+                end
+                if Random%(1, chance%) == chance then local eid = EntityLoad%("data/entities/animals/bloody_mimic.xml", sx, sy%)
+                else local eid = EntityLoad%("mods/grahamsperks/files/pickups/chest_bloody.xml", sx, sy + 7%) end
+            end
+        end]],
+    },
 }
 
 if ModSettingGet("grahamsperks.StartingItems") ~= false then
@@ -363,7 +409,7 @@ if ModIsEnabled("noita-together") then
 	table.insert(patches, {
         path    = "mods/noita-together/files/scripts/perks.lua",
         from    = "EXTRA_MONEY=true,",
-        to      = "EXTRA_MONEY=true,GRAHAM_HEALTHY_HEARTS=true,GRAHAM_LUCKY_CLOVER=true,GRAHAM_CAMPFIRE=true,GRAHAM_REFRESHER=true,GRAHAM_EXTRA_SLOTS=true,",
+        to      = "EXTRA_MONEY=true,GRAHAM_HEALTHY_HEARTS=true,GRAHAM_LUCKY_CLOVER=true,GRAHAM_CAMPFIRE=true,GRAHAM_REFRESHER=true,GRAHAM_EXTRA_SLOTS=true,GRAHAM_REFRESHER=true,",
 	})
 end
 

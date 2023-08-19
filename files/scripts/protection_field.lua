@@ -11,7 +11,7 @@ local entities = EntityGetInRadiusWithTag(x, y, distance_full, "hittable")
 for _,id in ipairs(entities) do	
 	local comp = EntityGetFirstComponent( id, "DamageModelComponent" )
 	if ( comp ~= nil ) and (id ~= root_entity) then
-		local eid = EntityLoad( "data/entities/misc/effect_protection_all_ultrashort.xml", x, y )
+		local eid = EntityLoad( "mods/grahamsperks/files/effects/protection_all_superfast.xml", x, y )
 		EntityAddChild( id, eid )
 	end
 end

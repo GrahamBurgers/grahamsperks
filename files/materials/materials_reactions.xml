@@ -676,6 +676,13 @@
     >
   </Reaction>
 
+  <Reaction probability="100" 
+    input_cell1="[meat]" 		input_cell2="lava" 		input_cell3="lava"
+    output_cell1="graham_meatdone" 				output_cell2="graham_meatdone" 				output_cell3="graham_meatdone"
+    blob_radius1="2"
+    >
+  </Reaction>
+
   <Reaction probability="21" 
     input_cell1="magic_liquid_teleportation" 					input_cell2="radioactive_liquid"  
     output_cell1="graham_tele_chaotic" 			output_cell2="radioactive_liquid"

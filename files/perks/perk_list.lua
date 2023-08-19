@@ -716,6 +716,9 @@ end,
   stackable = STACKABLE_NO,
   func = function( entity_perk_item, entity_who_picked, item_name )
     local length = tonumber(GlobalsGetValue("graham_silly_straw_length", "0") or "0")
+    local x, y = EntityGetTransform(entity_who_picked)
+    EntityLoad("data/entities/items/pickup/powder_stash.xml", x + 5, y)
+    EntityLoad("mods/grahamsperks/files/pickups/balloon.xml", x - 5, y)
     if length < 1 then
       EntityAddComponent2(entity_who_picked, "LuaComponent", {
         _tags = "perk_component",

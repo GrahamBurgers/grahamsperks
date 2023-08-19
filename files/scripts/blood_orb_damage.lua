@@ -48,10 +48,10 @@ function damage_received( dmg, msg, source )
 				to_switch = "eye4"
 			else
 				to_switch = "eye5"
-				EntitySetComponentIsEnabled(me, hitbox, false)
-				EntitySetComponentIsEnabled(me, particles, false)
-				EntitySetComponentIsEnabled(me, damagecomp, false)
-				EntitySetComponentIsEnabled(me, genome, false)
+				EntitySetComponentIsEnabled(me, EntityGetFirstComponentIncludingDisabled(me, "HitboxComponent") or 0, false)
+				EntitySetComponentIsEnabled(me, EntityGetFirstComponentIncludingDisabled(me, "ParticleEmitterComponent") or 0, false)
+				EntitySetComponentIsEnabled(me, EntityGetFirstComponentIncludingDisabled(me, "DamageModelComponent") or 0, false)
+				EntitySetComponentIsEnabled(me, EntityGetFirstComponentIncludingDisabled(me, "GenomeDataComponent") or 0, false)
 			end
 
 			if GameHasFlagRun("PERK_PICKED_MPP_CYBORG_FRIENDS") then
