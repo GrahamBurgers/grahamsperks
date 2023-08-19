@@ -1912,6 +1912,7 @@ local to_insert = {
 	},
 }
 
-for i, v in ipairs(to_insert) do
-	table.insert(actions, v)
+local len = #actions
+for i=1, #to_insert do
+	actions[len+i] = to_insert[i]
 end
