@@ -1,7 +1,7 @@
 local wands = EntityGetWithTag("wand")
 for i = 1, #wands do
-    if not EntityHasTag(wands[i], "graham_wand_inelidgible") then
-        EntityAddTag(wands[i], "graham_wand_inelidgible")
+    if not EntityHasTag(wands[i], "graham_wand_ineligible") then
+        EntityAddTag(wands[i], "graham_wand_ineligible")
         local comp = EntityGetFirstComponentIncludingDisabled(wands[i], "AbilityComponent") or 0
         if comp ~= 0 then
             local capacity = ComponentObjectGetValue2(comp, "gun_config", "deck_capacity")
