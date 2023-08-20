@@ -1486,9 +1486,7 @@ local to_insert = {
 			EntityAddChild(entity_who_shot, entity_id)
 			add_projectile("mods/grahamsperks/files/entities/foamarmor.xml")
 
-			local comp = EntityGetFirstComponent(entity_who_shot, "DamageModelComponent") or 0
-			ComponentSetValue2(comp, "hp", ComponentGetValue2(comp, "hp") + 0.8)
-			ComponentSetValue2(comp, "max_hp", ComponentGetValue2(comp, "max_hp") + 0.8)
+			EntityInflictDamage(entity_who_shot, -0.8, "DAMAGE_HEALING", "$damage_healing", "NORMAL", 0, 0)
 		end,
 	},
 	{
@@ -1558,8 +1556,8 @@ local to_insert = {
 	},
 	{
 		id                  = "GRAHAM_TOGGLER2_ALT",
-		name                = "$graham_name_toggler_alt",
-		description         = "$graham_desc_toggler_alt",
+		name                = "$graham_name_toggler2_alt",
+		description         = "$graham_desc_toggler2_alt",
 		sprite              = "mods/grahamsperks/files/spells/toggler2_alt.png",
 		type                = ACTION_TYPE_PASSIVE,
 		spawn_level       = "10",

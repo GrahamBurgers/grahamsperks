@@ -2,7 +2,7 @@
 local translations = ModTextFileGetContent( "data/translations/common.csv" );
 if translations ~= nil then
 	translations = translations:gsub("\r","")
-	if ModSettingGet("grahamsperks.Language") == 2 then -- Chinese translations here
+	if ModSettingGet("grahamsperks.Language") == 2 and false then -- wait until the chinese translations are finished
 		if ModIsEnabled("better_chinese") then
 			translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/chinese_translations_withbooks.csv")
 		else

@@ -41,11 +41,8 @@
 			hp="1"
 			max_hp="1"  >
 			<damage_multipliers
-				melee="0"
 				electricity="1.5"
-				explosion="0.2"
-				>
-			</damage_multipliers>
+			></damage_multipliers>
 		</DamageModelComponent>
 		
     <SpriteComponent

@@ -113,7 +113,10 @@
 		blood_spray_material=""
 		blood_multiplier="0.5"
 		physics_objects_damage="0"
-	></DamageModelComponent>
+	><damage_multipliers
+		explosion="0.2"
+		>
+		</damage_multipliers></DamageModelComponent>
 
 	<LuaComponent
 		_tags="enabled_in_world"
@@ -231,10 +234,35 @@
 		execute_every_n_frame="-1"
 	></LuaComponent>
 
+	<LuaComponent
+		_tags="enabled_in_world"
+		script_source_file="mods/grahamsperks/files/scripts/drone_fix.lua"
+		execute_every_n_frame="1"
+	></LuaComponent>
+
     <SpriteComponent
         _tags="enabled_in_world,disable_on_death"
         image_file="mods/grahamsperks/files/projectiles_gfx/drone_wings.xml"
         update_transform_rotation="0"
     ></SpriteComponent>
+
+	<Entity>
+		<InheritTransformComponent />
+		
+	    <GameEffectComponent 
+	        effect="STUN_PROTECTION_FREEZE"
+	        frames="-1"
+	    ></GameEffectComponent >
+		<GameEffectComponent 
+			effect="STUN_PROTECTION_ELECTRICITY"
+			frames="-1"
+		></GameEffectComponent >
+		<GameEffectComponent 
+			effect="PROTECTION_MELEE"
+			frames="-1"
+		></GameEffectComponent >
+
+	</Entity>
+
 
 </Entity>

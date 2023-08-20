@@ -50,7 +50,7 @@ local translations = { -- default to English
     {"Hide breadcrumbs", "Should Breadcrumbs from the perk be invisible?\nThis is just cosmetic. Enable this if the perk is causing too much visual clutter."}
 }
 
-if currentLang == 2 then -- Chinese translations here
+if currentLang == 2 and false then -- wait until the chinese translations are finished
     translations = {
         {"Settings reminder", "Should this mod pester you about its settings?"},
         {"Pacifist chest replacement", "Should the pacifist chest always be replaced with a Mini Treasure Chest?"},
@@ -85,6 +85,7 @@ mod_settings =
 }
 
 local settings = {
+    --[[ can't change it for now
     {
         id      = "Language",
         name    = translations[12][1],
@@ -96,6 +97,7 @@ local settings = {
         },
         default = 1,
     },
+    ]]--
     {
         id      = "SettingsReminder",
         name    = translations[1][1],
