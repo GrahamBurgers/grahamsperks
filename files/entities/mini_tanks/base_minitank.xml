@@ -1,4 +1,4 @@
-<Entity tags="teleportable_NOT,robot" > 
+<Entity tags="teleportable_NOT,robot,graham_minitank" > 
 	<Base file="data/entities/base_humanoid.xml" >
 		<AnimalAIComponent 
 			preferred_job="JobDefault"

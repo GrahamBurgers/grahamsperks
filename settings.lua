@@ -50,21 +50,21 @@ local translations = { -- default to English
     {"Hide breadcrumbs", "Should Breadcrumbs from the perk be invisible?\nThis is just cosmetic. Enable this if the perk is causing too much visual clutter."}
 }
 
-if currentLang == 2 and false then -- wait until the chinese translations are finished
+if currentLang == 2 then -- Chinese translations here
     translations = {
-        {"Settings reminder", "Should this mod pester you about its settings?"},
-        {"Pacifist chest replacement", "Should the pacifist chest always be replaced with a Mini Treasure Chest?"},
-        {"Add new enemies", "Should the mod add new enemies?\nThis excludes mimics, which are always enabled.\nNote: Having enemies disabled will make it impossible to get 100%\nenemy progress unless you've already killed the enemies previously.\n(Sorry, technical limitations and such.)"},
-        {"Add new starting items", "Should you be able to start with new spells or potions at the start of a run?"},
-        {"Bloody Bonus message", "Should the Bloody Bonus perk tell you how many kills you have left?", "On every kill", "Every 5 kills", "No, never"},
-        {"Lucky Day message", "Should Lucky Day inform you when you dodged an attack?", "Yes, show percentage", "Yes", "No, never"},
-        {"Force birthday materials", "Should Copium and Birthday Magic show up, even if it's not 11/11?"},
-        {"Aggressive material spreading", "Should Creepy Polymorphine and Dried Fungus spread through air?"},
-        {"Reset all progress", "[Reset All]", "Click here to reset all progress for this mod. This cannot be undone!"},
-        {"Unlock all progress", "[Unlock All]", "Click here to unlock all progress for this mod. This cannot be undone!"},
-        {"[True]", "[False]", "[Locked]", "You can't use this while in a run.", "Confused or want more info? Check out the mod's wiki page at noita.wiki.gg/Mods!"},
-        {"Language", "What language do you want to play Graham's Things in?\nRestart the game after changing this setting."},
-        {"Hide breadcrumbs", "Should Breadcrumbs from the perk be invisible?\nThis is just cosmetic. Enable this if the perk is causing too much visual clutter."}
+        {"设置提醒", "这个模组是否应该在开始游戏时提示你进行模组设置？"},
+        {"和平主义者宝箱替换", "和平主义宝箱是否始终替换为迷你宝箱？"},
+        {"添加新敌人", "该模组是否应该添加新的敌人？\n这个设置不包括模仿者，因为模仿者始终处于启用状态。\n注意：禁用敌人将无法解锁100%图鉴，敌人的进展只展示\n你之前已经杀死过的敌人。\n（抱歉，这是因为技术上的限制。）"},
+        {"添加新的初始内容", "应该在新游戏开始时使用全新的法术和魔药吗？"},
+        {"血腥奖励提示", "血腥奖励天赋应该提示你还需要杀死多少敌人吗？", "每次击杀敌人时提示", "每5次击杀敌人时提示", "永不提示"},
+        {"幸运日提示", "当你规避攻击时幸运日天赋是否应该显示消息？", "提示，并显示概率百分比", "显示消息", "永不提示"},
+        {"老兵节材料", "即使不是11/11时,安慰剂和生日魔法是否应该出现？"},
+        {"侵蚀性材料扩散", "恐怖变形气体和蘑菇粉尘会通过空气传播吗？"},
+        {"重置所有进度", "[重置全部]", "单击此处重置此模组的所有进度。 这不能撤消！"},
+        {"解锁所有进度", "[解锁全部]", "单击此处解锁此模组的所有进度。 这不能撤消！"},
+        {"[是]", "[否]", "[锁定]", "你不能在进行游戏时修改这个选项。", "感到困惑或想了解更多信息？ 查看该模组的wiki页面：noita.wiki.gg/Mods！"},
+        {"语言", "你想用什么语言玩Graham's Things？\n更改此设置后需要重新启动游戏才能生效。"},
+        {"隐藏面包屑", "面包屑天赋产生的面包屑应该隐形吗？\n这只是装饰性的。如果面包屑天赋导致画面过于混乱，请启用此功能。"}
     }
 end
 
@@ -85,7 +85,6 @@ mod_settings =
 }
 
 local settings = {
-    --[[ can't change it for now
     {
         id      = "Language",
         name    = translations[12][1],
@@ -93,11 +92,10 @@ local settings = {
         type    = "enum",
         values  = {
             [1] = "English",
-            [2] = "Chinese",
+            [2] = "中文 (Chinese)",
         },
         default = 1,
     },
-    ]]--
     {
         id      = "SettingsReminder",
         name    = translations[1][1],

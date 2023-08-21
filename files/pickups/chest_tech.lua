@@ -82,14 +82,15 @@ function on_open( entity_item )
         update_transform_rotation = "0",
         z_index="0.8",
     })
+    EntityRemoveTag(pid, "perk")
 
-    local length = math.min(3 + count, 10)
+    local length = math.min(2 + count, 8)
     for i = 1, length do
         table.insert(to_be_spawned, spells_random[Random(1, #spells_random)])
     end
 
-    if count == 7 then table.insert(to_be_spawned, "SUMMON_WANDGHOST") end
-    if count == 19 then table.insert(to_be_spawned, "REGENERATION_FIELD") end
+    if count == 14 then table.insert(to_be_spawned, "SUMMON_WANDGHOST") end
+    if count == 24 then table.insert(to_be_spawned, "REGENERATION_FIELD") end
     table.insert(to_be_spawned, make_random_card(x, y))
 
     local x2 = x - ((#to_be_spawned - 1) * 7.5)

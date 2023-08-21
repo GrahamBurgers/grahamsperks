@@ -30,6 +30,7 @@ function spawn_hp( x, y )
             update_transform_rotation = "0",
             z_index="0.8",
         })
+        EntityRemoveTag(pid, "perk")
     end
     EntityLoad("mods/grahamsperks/files/entities/magic_skin_replacer.xml", x + 450, y)
 end

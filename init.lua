@@ -2,14 +2,16 @@
 local translations = ModTextFileGetContent( "data/translations/common.csv" );
 if translations ~= nil then
 	translations = translations:gsub("\r","")
-	if ModSettingGet("grahamsperks.Language") == 2 and false then -- wait until the chinese translations are finished
+	if ModSettingGet("grahamsperks.Language") == 2 then
 		if ModIsEnabled("better_chinese") then
-			translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/chinese_translations_withbooks.csv")
+			translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_chinese_books.csv")
+			translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_chinese_1.5_books.csv")
+			translations = translations .. (ModTextFileGetContent( "mods/grahamsperks/files/entities/books/corrupt/c.csv" ) or "")
 		else
-			translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/chinese_translations_withoutbooks.csv")
+			translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_chinese.csv")
+			translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_chinese_1.5.csv")
+			translations = translations .. (ModTextFileGetContent( "mods/grahamsperks/files/entities/books/corrupt/e.csv" ) or "")
 		end
-		translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/chinese_translations_1.5.csv")
-		translations = translations .. (ModTextFileGetContent( "mods/grahamsperks/files/entities/books/corrupt/c.csv" ) or "")
 	else -- default to english
 		translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations.csv" )
 		translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_1.5.csv" )

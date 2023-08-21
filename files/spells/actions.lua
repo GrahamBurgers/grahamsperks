@@ -1477,6 +1477,7 @@ local to_insert = {
 		price               = 320,
 		mana                = 140,
 		max_uses            = 2,
+		never_unlimited     = true,
 		related_projectiles = { "mods/grahamsperks/files/entities/foamarmor.xml" },
 		action              = function()
 			if reflecting then return end
