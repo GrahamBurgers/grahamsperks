@@ -254,7 +254,7 @@ color="FFe4003c">
     cell_type="liquid"
     burnable="0"
     density="0.146"
-    lifetime="1200"
+    lifetime="800"
     audio_physics_material_wall="glass"
     >
 
@@ -264,7 +264,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/yum.png">
 </Graphics>
 <StatusEffects>
 	<Ingestion>
-		<StatusEffect type="HP_REGENERATION" amount="0.03" />
+		<StatusEffect type="HP_REGENERATION" amount="0.06" />
 	</Ingestion>
 </StatusEffects>
 

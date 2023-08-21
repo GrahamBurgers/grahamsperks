@@ -42,8 +42,9 @@
     _enabled="1"
     offset_x="6"
     offset_y="6"
-    alpha="0.05"
+    alpha="0.10"
     image_file="data/particles/discbullet_trail.png"
     has_special_scale="0"
+    update_transform_rotation="0"
   ></SpriteComponent>
 </Entity>

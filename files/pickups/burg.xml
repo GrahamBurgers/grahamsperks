@@ -81,12 +81,53 @@
     b="255" >
   </LightComponent>
 
-  <!-- unfortunately checker barely works in world -->
 	<MaterialAreaCheckerComponent
     _enabled="1"
     _tags="enabled_in_hand,enabled_in_inventory,enabled_in_world"
 		area_aabb.min_x="0"
 		area_aabb.max_x="0"
+		area_aabb.min_y="-6"
+		area_aabb.max_y="-6"
+		update_every_x_frame="1"
+		material="graham_graymatter_liquid"
+    material2="graham_graymatter_liquid"
+		look_for_failure="0"
+		kill_after_message="1">
+	</MaterialAreaCheckerComponent>
+
+	<MaterialAreaCheckerComponent
+    _enabled="1"
+    _tags="enabled_in_hand,enabled_in_inventory,enabled_in_world"
+		area_aabb.min_x="6"
+		area_aabb.max_x="6"
+		area_aabb.min_y="0"
+		area_aabb.max_y="0"
+		update_every_x_frame="1"
+		material="graham_graymatter_liquid"
+    material2="graham_graymatter_liquid"
+		look_for_failure="0"
+		kill_after_message="1">
+	</MaterialAreaCheckerComponent>
+
+	<MaterialAreaCheckerComponent
+    _enabled="1"
+    _tags="enabled_in_hand,enabled_in_inventory,enabled_in_world"
+		area_aabb.min_x="0"
+		area_aabb.max_x="0"
+		area_aabb.min_y="6"
+		area_aabb.max_y="6"
+		update_every_x_frame="1"
+		material="graham_graymatter_liquid"
+    material2="graham_graymatter_liquid"
+		look_for_failure="0"
+		kill_after_message="1">
+	</MaterialAreaCheckerComponent>
+
+	<MaterialAreaCheckerComponent
+    _enabled="1"
+    _tags="enabled_in_hand,enabled_in_inventory,enabled_in_world"
+		area_aabb.min_x="-6"
+		area_aabb.max_x="-6"
 		area_aabb.min_y="0"
 		area_aabb.max_y="0"
 		update_every_x_frame="1"
