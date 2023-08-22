@@ -386,6 +386,7 @@ local patches = {
                 if HasFlagPersistent%("graham_bloodymimic_killed"%) == false then
                     chance = 6
                 end
+				SetRandomSeed%( sx - 2594884, sy - 485398 %)
                 if Random%(1, chance%) == chance then local eid = EntityLoad%("data/entities/animals/bloody_mimic.xml", sx, sy%)
                 else local eid = EntityLoad%("mods/grahamsperks/files/pickups/chest_bloody.xml", sx, sy + 7%) end
             end

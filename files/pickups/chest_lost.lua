@@ -81,7 +81,7 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 	end
 
 	-- CHEST DROPS GO HERE (Welcome to elseif hell)
-	local count = 2
+	local count = Random(1, 2)
 	while( count > 0 ) do
 		count = count - 1
 		local rnd = Random(1,100)
@@ -91,7 +91,7 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 			table.insert(entities, { "data/entities/items/pickup/potion_random_material.xml" })
 		elseif rnd <= 30 then
 			-- 20%: Large extra max health
-			if Random(1, 50) == 50 then
+			if Random(1, 200) == 200 then
 				table.insert( entities, { "data/entities/animals/illusions/dark_alchemist.xml" } )
 			else
 				table.insert( entities, { "data/entities/items/pickup/heart_better.xml" })
@@ -155,7 +155,7 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 				end
 			end
 
-		elseif rnd <= 82 then
+		elseif rnd <= 86 then
 			-- 6%: spells
 			local amount = Random(5,8)
 			for i=1,amount do
@@ -201,12 +201,30 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 
 		local comp = EntityGetFirstComponentIncludingDisabled(eid, "ProjectileComponent")
 		if comp ~= nil and entity[1] == "data/entities/projectiles/bomb_holy.xml" then
-			ComponentSetValue2(comp, "lifetime", 300)
+			ComponentSetValue2(comp, "lifetime", 400)
 			ComponentSetValue2(comp, "damage", 150)
 			ComponentObjectSetValue2(comp, "config_explosion", "create_cell_material", "gold")
 			ComponentObjectSetValue2(comp, "config_explosion", "create_cell_probability", Random(2, 4))
 			local health = EntityGetFirstComponent(eid, "DamageModelComponent") or 0
 			ComponentSetValue2(health, "hp", ComponentGetValue2(health, "hp") * 5)
+			EntityAddComponent2(eid, "SpriteComponent", {
+				_tags="enabled_in_hand",
+				alpha=0.8,
+				image_file="data/particles/fog_of_war_hole.xml",
+				smooth_filtering=true,
+				fog_of_war_hole=true,
+				has_special_scale=true,
+				special_scale_x=4,
+				special_scale_y=4,
+			})
+			EntityAddComponent2(eid, "LightComponent", {
+				_tags="enabled_in_hand",
+				_enabled=true,
+				radius=200,
+				r=255,
+				g=0,
+				b=0,
+			})
 		end
 	end
 
