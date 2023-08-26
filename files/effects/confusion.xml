@@ -14,15 +14,11 @@
     >
 	</GameEffectComponent >
 
-	<DrugEffectModifierComponent>
-		<fx_add
-			distortion_amount="0.2"
-			color_amount="4.5"
-			fractals_amount="0.2"
-			fractals_size="1.0"
-		/>
-	</DrugEffectModifierComponent>
-
+	<LuaComponent
+		execute_every_n_frame="10"
+		script_source_file="mods/grahamsperks/files/scripts/immunity_aura_vfx.lua"
+		script_death="mods/grahamsperks/files/scripts/immunity_aura_vfx.lua" 	
+	></LuaComponent>
 	<SpriteParticleEmitterComponent
 		sprite_file="data/particles/shine_confusion.xml"
 		delay="0"
