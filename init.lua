@@ -63,6 +63,7 @@ ModLuaFileAppend( "data/scripts/buildings/forge_item_convert.lua", "mods/grahams
 ModLuaFileAppend( "data/scripts/items/heart_fullhp.lua", "mods/grahamsperks/files/scripts/blood_orb_fullheal.lua")
 ModLuaFileAppend( "data/scripts/items/heart_fullhp_temple.lua", "mods/grahamsperks/files/scripts/blood_orb_fullheal.lua")
 ModLuaFileAppend( "data/scripts/magic/fungal_shift.lua", "mods/grahamsperks/files/scripts/fungal_shift_append.lua")
+--ModLuaFileAppend( "data/scripts/streaming_integration/event_list.lua", "mods/grahamsperks/files/streaming/_streaming_events.lua" )
 
 if ModSettingGet("grahamsperks.Enemies") ~= false then
 	-- enemies
@@ -349,6 +350,7 @@ local patches = {
         path    = "data/scripts/buildings/workshop_trigger_check_stats.lua",
         from    = [[local eid = EntityLoad%( "data/entities/items/pickup/chest_random.xml", sx, sy %)]],
         to      = [[local eid
+		SetRandomSeed%( sx + 894524, sy - 137501 %)
         if ModSettingGet%("grahamsperks.PacifistChest"%) then
         if Random%(1, 12%) == 12 then eid = EntityLoad%("data/entities/animals/mini_mimic.xml", sx, sy%)
         else eid = EntityLoad%("mods/grahamsperks/files/pickups/chest_mini.xml", sx, sy%) end
@@ -391,6 +393,126 @@ local patches = {
                 else local eid = EntityLoad%("mods/grahamsperks/files/pickups/chest_bloody.xml", sx, sy + 7%) end
             end
         end]],
+    },
+	{
+        path    = "data/entities/buildings/teleport_hourglass.xml",
+        from    = [[</Entity>]],
+        to      = [[
+		<MaterialAreaCheckerComponent
+			_tags="disabled_by_liquid"
+			area_aabb.min_x="-16" 
+			area_aabb.max_x="16" 
+			area_aabb.min_y="110"   
+			area_aabb.max_y="115"
+			update_every_x_frame="1"
+			material="graham_tele_chaotic"
+			material2="graham_tele_chaotic"
+			look_for_failure="0"
+			kill_after_message="0">
+		</MaterialAreaCheckerComponent>
+		</Entity>
+		]],
+    },
+	{
+        path    = "data/shaders/post_final.frag",
+        from    = [[varying vec2 tex_coord_fogofwar;]], -- mit licensed simplex noise so this is ok to be using, technically don't need to credit but that would be unfriendly.
+        to      = [[varying vec2 tex_coord_fogofwar; uniform vec4 grahams_perks_distortion_strength;
+		//	Simplex 3D Noise 
+		//	by Ian McEwan, Ashima Arts
+		//  https://github.com/ashima/webgl-noise/blob/master/LICENSE
+		vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
+		vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
+
+		float snoise(vec3 v){ 
+		const vec2  C = vec2(1.0/6.0, 1.0/3.0) ;
+		const vec4  D = vec4(0.0, 0.5, 1.0, 2.0);
+
+		// First corner
+		vec3 i  = floor(v + dot(v, C.yyy) );
+		vec3 x0 =   v - i + dot(i, C.xxx) ;
+
+		// Other corners
+		vec3 g = step(x0.yzx, x0.xyz);
+		vec3 l = 1.0 - g;
+		vec3 i1 = min( g.xyz, l.zxy );
+		vec3 i2 = max( g.xyz, l.zxy );
+
+		//  x0 = x0 - 0. + 0.0 * C 
+		vec3 x1 = x0 - i1 + 1.0 * C.xxx;
+		vec3 x2 = x0 - i2 + 2.0 * C.xxx;
+		vec3 x3 = x0 - 1. + 3.0 * C.xxx;
+
+		// Permutations
+		i = mod(i, 289.0 ); 
+		vec4 p = permute( permute( permute( 
+					i.z + vec4(0.0, i1.z, i2.z, 1.0 ))
+				+ i.y + vec4(0.0, i1.y, i2.y, 1.0 )) 
+				+ i.x + vec4(0.0, i1.x, i2.x, 1.0 ));
+
+		// Gradients
+		// ( N*N points uniformly over a square, mapped onto an octahedron.)
+		float n_ = 1.0/7.0; // N=7
+		vec3  ns = n_ * D.wyz - D.xzx;
+
+		vec4 j = p - 49.0 * floor(p * ns.z *ns.z);  //  mod(p,N*N)
+
+		vec4 x_ = floor(j * ns.z);
+		vec4 y_ = floor(j - 7.0 * x_ );    // mod(j,N)
+
+		vec4 x = x_ *ns.x + ns.yyyy;
+		vec4 y = y_ *ns.x + ns.yyyy;
+		vec4 h = 1.0 - abs(x) - abs(y);
+
+		vec4 b0 = vec4( x.xy, y.xy );
+		vec4 b1 = vec4( x.zw, y.zw );
+
+		vec4 s0 = floor(b0)*2.0 + 1.0;
+		vec4 s1 = floor(b1)*2.0 + 1.0;
+		vec4 sh = -step(h, vec4(0.0));
+
+		vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy ;
+		vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww ;
+
+		vec3 p0 = vec3(a0.xy,h.x);
+		vec3 p1 = vec3(a0.zw,h.y);
+		vec3 p2 = vec3(a1.xy,h.z);
+		vec3 p3 = vec3(a1.zw,h.w);
+
+		//Normalise gradients
+		vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2, p2), dot(p3,p3)));
+		p0 *= norm.x;
+		p1 *= norm.y;
+		p2 *= norm.z;
+		p3 *= norm.w;
+
+		// Mix final noise value
+		vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
+		m = m * m;
+		return 42.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1), 
+										dot(p2,x2), dot(p3,x3) ) );
+		}]],
+    },
+	{
+        path    = "data/shaders/post_final.frag",
+        from    = [[vec2 tex_coord = tex_coord_;]],
+        to      = [[vec2 tex_coord = tex_coord_;
+		tex_coord -= vec2(0.5);
+		tex_coord *= 2.0;
+		float grahams_perks_effect_strength = grahams_perks_distortion_strength.x; 
+		float grahams_perks_time_scale = grahams_perks_effect_strength * 3.0;
+		float grahams_perks_distance_weight = (length(tex_coord) * length(tex_coord)) * grahams_perks_effect_strength; 
+		for (int i = 0; i < 3; i++) // layer multiple simplex passes
+		{
+			float grahams_perks_sine_scale_inverse = float(i) + 5.0;
+			/*
+				sum 5-8
+					simplex(n*p)/n
+			*/
+			tex_coord += vec2(snoise(vec3(tex_coord,time + grahams_perks_sine_scale_inverse) * grahams_perks_sine_scale_inverse),snoise(vec3(tex_coord,time + 10.0 + grahams_perks_sine_scale_inverse) * grahams_perks_sine_scale_inverse)) / grahams_perks_sine_scale_inverse / grahams_perks_sine_scale_inverse;
+		}
+		tex_coord /= 2.0;
+		tex_coord += vec2(0.5);
+		tex_coord = (grahams_perks_distance_weight * grahams_perks_effect_strength * tex_coord + tex_coord_)/(1.0 + grahams_perks_distance_weight * grahams_perks_effect_strength);]],
     },
 }
 
@@ -467,14 +589,21 @@ function OnPlayerSpawned(player)
 		EntityAddTag(eid, "graham_midas_curse")
 		EntityAddChild(GameGetWorldStateEntity(), eid)
 
-		EntityAddComponent(player, "LuaComponent", {
+		EntityAddComponent2(player, "LuaComponent", {
 			script_source_file="mods/grahamsperks/files/entities/unlockcheck.lua",
-			execute_every_n_frame="5",
+			execute_every_n_frame=5,
 		})
-
-		EntityAddComponent(player, "LuaComponent", {
-			script_death="mods/grahamsperks/files/scripts/death.lua",
-			execute_every_n_frame="-1",
+		EntityAddComponent2(player, "LuaComponent", {
+			script_source_file="mods/grahamsperks/files/scripts/immunity_aura_vfx.lua",
+			execute_every_n_frame=1,
+		})
+		EntityAddComponent2(player, "LuaComponent", {
+			script_source_file="mods/grahamsperks/files/scripts/death.lua",
+			execute_every_n_frame=-1,
+		})
+		EntityAddComponent2(player, "VariableStorageComponent", {
+			_tags="graham_flum_shader",
+			value_int=0,
 		})
 
 		if not HasFlagPersistent("graham_death_is_ok") then
