@@ -9,6 +9,7 @@ if #EntityGetWithTag("graham_immunityaura") > 0 and #EntityGetWithTag("graham_im
 
         -- remove current immunity aura
         EntityKill(entity)
+		GameSetPostFxParameter("grahams_perks_distortion_strength", 0.0, 0.0, 0.0, 0.0)
 
         -- fx
         EntityRemoveIngestionStatusEffect( player, "CONFUSION" );
