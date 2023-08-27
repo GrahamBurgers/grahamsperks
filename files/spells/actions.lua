@@ -1504,6 +1504,7 @@ local to_insert = {
 		action              = function()
 			add_projectile("mods/grahamsperks/files/spells/bramball.xml")
 			c.fire_rate_wait = c.fire_rate_wait + 14
+			c.spread_degrees = c.spread_degrees + 11.0
 		end,
 	},
 	{

@@ -63,7 +63,7 @@ ModLuaFileAppend( "data/scripts/buildings/forge_item_convert.lua", "mods/grahams
 ModLuaFileAppend( "data/scripts/items/heart_fullhp.lua", "mods/grahamsperks/files/scripts/blood_orb_fullheal.lua")
 ModLuaFileAppend( "data/scripts/items/heart_fullhp_temple.lua", "mods/grahamsperks/files/scripts/blood_orb_fullheal.lua")
 ModLuaFileAppend( "data/scripts/magic/fungal_shift.lua", "mods/grahamsperks/files/scripts/fungal_shift_append.lua")
---ModLuaFileAppend( "data/scripts/streaming_integration/event_list.lua", "mods/grahamsperks/files/streaming/_streaming_events.lua" )
+ModLuaFileAppend( "data/scripts/streaming_integration/event_list.lua", "mods/grahamsperks/files/streaming/_streaming_events.lua" )
 
 if ModSettingGet("grahamsperks.Enemies") ~= false then
 	-- enemies
@@ -498,8 +498,8 @@ local patches = {
         to      = [[vec2 tex_coord = tex_coord_;
 		tex_coord -= vec2(0.5);
 		tex_coord *= 2.0;
-		float grahams_perks_effect_strength = grahams_perks_distortion_strength.x; 
-		float grahams_perks_time_scale = grahams_perks_effect_strength * 3.0;
+		float grahams_perks_effect_strength = grahams_perks_distortion_strength.x * 1.5; 
+		float grahams_perks_time_scale = 0.15;
 		float grahams_perks_distance_weight = (length(tex_coord) * length(tex_coord)) * grahams_perks_effect_strength; 
 		for (int i = 0; i < 3; i++) // layer multiple simplex passes
 		{
@@ -508,7 +508,7 @@ local patches = {
 				sum 5-8
 					simplex(n*p)/n
 			*/
-			tex_coord += vec2(snoise(vec3(tex_coord,time + grahams_perks_sine_scale_inverse) * grahams_perks_sine_scale_inverse),snoise(vec3(tex_coord,time + 10.0 + grahams_perks_sine_scale_inverse) * grahams_perks_sine_scale_inverse)) / grahams_perks_sine_scale_inverse / grahams_perks_sine_scale_inverse;
+			tex_coord += vec2(snoise(vec3(tex_coord,time * grahams_perks_time_scale + grahams_perks_sine_scale_inverse) * grahams_perks_sine_scale_inverse),snoise(vec3(tex_coord,time * grahams_perks_time_scale + 10.0 + grahams_perks_sine_scale_inverse) * grahams_perks_sine_scale_inverse)) / grahams_perks_sine_scale_inverse / grahams_perks_sine_scale_inverse;
 		}
 		tex_coord /= 2.0;
 		tex_coord += vec2(0.5);

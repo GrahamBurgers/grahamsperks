@@ -4,7 +4,7 @@ local entity = EntityGetWithTag("graham_midas_curse")[1]
 local me = GetUpdatedEntityID()
 local x, y = EntityGetTransform(me)
 local enemy = EntityGetInRadiusWithTag(x, y, 20, "graham_midas_curseable")[1] or 0
-if enemy ~= 0 and not EntityHasTag(enemy, "miniboss") and not EntityHasTag(enemy, "boss") and not EntityHasTag(enemy, "graham_minitank") then
+if enemy ~= 0 then
     local name = EntityGetName(enemy)
     EntityAddComponent2(entity, "VariableStorageComponent", {
         name = "graham_midas_curse",

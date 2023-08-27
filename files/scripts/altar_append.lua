@@ -45,6 +45,7 @@ if ( #eggs > 0) then
 					ComponentSetValue2(comp, "herd_id", StringToHerdId("player"))
 					comp = EntityGetFirstComponentIncludingDisabled(eid, "AreaDamageComponent") or 0
 					ComponentSetValue2(comp, "entities_with_tag", "enemy")
+					EntityRemoveTag(eid, "enemy")
 				end
 			end
 			EntityKill(egg_id)

@@ -6,11 +6,15 @@ local comp = EntityGetFirstComponent(GetUpdatedEntityID(), "ProjectileComponent"
 -- awful code but it actually works
 local shooter, bx, by, ex, ey, cx, cy
 if comp ~= nil then
-	shooter = ComponentGetValue2(comp, "mWhoShot") or 0
+	shooter = ComponentGetValue2(comp, "mWhoShot")
 end
 
 for i = 1, #entities do
-	if shooter ~= entities[i] and EntityGetHerdRelation( shooter, entities[i] ) <= 60 then
+	local go = true
+	if shooter ~= nil and shooter ~= 0 then
+		go = (shooter ~= entities[i] and EntityGetHerdRelation( shooter, entities[i] ) <= 60)
+	end
+	if go then
 		ex, ey = EntityGetTransform(entities[i])
 		cx = get_variable_storage_component( entities[i], "graham_brambles_x" )
 		cy = get_variable_storage_component( entities[i], "graham_brambles_y" )

@@ -1,4 +1,5 @@
 function obliterate(enemy)
+    if EntityHasTag(enemy, "miniboss") or EntityHasTag(enemy, "boss") or EntityHasTag(enemy, "graham_minitank") then return end
     local sprites = EntityGetComponent(enemy, "SpriteComponent") or 0
     if type(sprites) ~= "number" then
         if #sprites > 1 then

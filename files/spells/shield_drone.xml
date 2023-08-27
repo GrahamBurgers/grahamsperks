@@ -128,4 +128,21 @@
 		is_emitting="0" >
 	</ParticleEmitterComponent>
 
+	<Entity>
+		<InheritTransformComponent />
+		
+	    <GameEffectComponent 
+	        effect="STUN_PROTECTION_FREEZE"
+	        frames="-1"
+	    ></GameEffectComponent >
+		<GameEffectComponent 
+			effect="STUN_PROTECTION_ELECTRICITY"
+			frames="-1"
+		></GameEffectComponent >
+		<GameEffectComponent 
+			effect="PROTECTION_MELEE"
+			frames="-1"
+		></GameEffectComponent >
+
+	</Entity>
 </Entity>

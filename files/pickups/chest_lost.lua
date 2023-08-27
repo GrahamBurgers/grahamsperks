@@ -99,7 +99,7 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 		elseif rnd <= 40 then
 			-- 10%: Identical lost chest
 			-- Load it directly here to avoid rng wackiness
-			EntityLoad("mods/grahamsperks/files/pickups/chest_lost.xml", x + 1, y - 1)
+			EntityLoad("mods/grahamsperks/files/pickups/chest_lost.xml", x + 5, y - 5)
 		elseif rnd <= 45 then
 			-- 10%: Containers
 			table.insert(entities, { "mods/grahamsperks/files/pickups/balloon.xml" })

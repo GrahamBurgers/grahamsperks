@@ -695,4 +695,11 @@
     >
   </Reaction>
 
+  <Reaction probability="13"
+    input_cell1="graham_mundane" 	input_cell2="magic_liquid_invisibility"
+    output_cell1="graham_mundane" 	output_cell2="magic_liquid_mana_regeneration"
+    blob_radius2="2"
+    >
+  </Reaction>
+
 </Materials>
