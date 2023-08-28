@@ -49,6 +49,7 @@
 			blood_multiplier="0.2"
 			ragdoll_material="gold_box2d"
 			air_needed="0"
+			physics_objects_damage="0"
 			>
 			<damage_multipliers
 				projectile="0.5"

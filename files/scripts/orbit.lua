@@ -46,7 +46,6 @@ else
     angle = math.pi + angle + speed
     x2 = x + math.cos(angle) * radius
     y2 = y + math.sin(angle) * radius
-    ComponentSetValue2(ai, "attack_ranged_enabled", true)
     local prey = ComponentGetValue2(ai, "mGreatestPrey") or 0
     if prey ~= 0 then
         local x3, y3 = EntityGetTransform(prey)
@@ -58,6 +57,7 @@ else
             end
         end
         ComponentSetValue2(ai, "attack_ranged_offset_y", y - y2)
+        ComponentSetValue2(ai, "attack_ranged_enabled", true)
     end
 end
 local genome1 = EntityGetFirstComponent(me, "GenomeDataComponent")

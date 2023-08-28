@@ -690,7 +690,7 @@
   </Reaction>
 
   <Reaction probability="100" 
-    input_cell1="magic_liquid_unstable_teleportation" 					input_cell2="magic_liquid_unstable_teleportation" 					input_cell3="blood"
+    input_cell1="magic_liquid_unstable_teleportation" 					input_cell2="magic_liquid_unstable_teleportation" 					input_cell3="vomit"
     output_cell1="graham_tele_chaotic" 			output_cell2="graham_tele_chaotic" 			output_cell3="blood_cold_vapour"
     >
   </Reaction>

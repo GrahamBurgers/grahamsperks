@@ -563,9 +563,6 @@ end
 function OnPlayerSpawned(player)
 	EntitySetDamageFromMaterial(player, "graham_purplebrick_lessglow", 0.00012)
 	local x, y = EntityGetTransform(player)
-	if PolymorphTableAddEntity == nil then
-		EntityLoad("mods/grahamsperks/files/entities/books/bigbook.xml", x + 200, y)
-	end
 	
 	GlobalsSetValue( "GRAHAM_TOGGLE", "null" )
 	GlobalsSetValue( "GRAHAM_TOGGLE2", "null" )
@@ -575,6 +572,10 @@ function OnPlayerSpawned(player)
 	end
 	
 	if GameHasFlagRun("spawned_lifelottery") == false then
+		if PolymorphTableAddEntity == nil then
+			EntityLoad("mods/grahamsperks/files/entities/books/bigbook.xml", x + 200, y)
+		end
+		
 		GlobalsSetValue( "GRAHAM_ONEOFFS", "0" )
 		GameAddFlagRun("spawned_lifelottery")
 			
@@ -598,7 +599,7 @@ function OnPlayerSpawned(player)
 			execute_every_n_frame=1,
 		})
 		EntityAddComponent2(player, "LuaComponent", {
-			script_source_file="mods/grahamsperks/files/scripts/death.lua",
+			script_death="mods/grahamsperks/files/scripts/death.lua",
 			execute_every_n_frame=-1,
 		})
 		EntityAddComponent2(player, "VariableStorageComponent", {
