@@ -311,7 +311,7 @@ local to_insert = {
 		ui_description = "$perkdesc_graham_zaptap",
 		ui_icon = "mods/grahamsperks/files/perks/perks_gfx/gui/zaptap.png",
 		perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/zaptap.png",
-		usable_by_enemies = false,
+		usable_by_enemies = true,
 		not_in_default_perk_pool = false,
 		stackable = STACKABLE_YES,
 		stackable_maximum = 8,
@@ -335,10 +335,13 @@ local to_insert = {
 					name = "zap_tap_radius"
 				})
 			end
+
+			EntityAddTag(entity_who_picked, "zappity_tappity")
 		end,
 		func_remove = function(entity_who_picked)
 			local var_comp = get_variable_storage_component(entity_who_picked, "zap_tap_radius")
 			EntityRemoveComponent(entity_who_picked, var_comp)
+			EntityRemoveTag(entity_who_picked, "zappity_tappity")
 		end,
 	},
 	{
