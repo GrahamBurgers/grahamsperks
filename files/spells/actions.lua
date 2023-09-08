@@ -270,7 +270,7 @@ local to_insert = {
 		--max_uses = 50,
 		action            = function()
 			c.damage_critical_chance = c.damage_critical_chance - 50
-			c.damage_projectile_add = c.damage_projectile_add + 0.4
+			c.damage_projectile_add = c.damage_projectile_add + 0.32
 			draw_actions(1, true)
 		end,
 	},
