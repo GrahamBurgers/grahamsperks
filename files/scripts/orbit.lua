@@ -6,9 +6,17 @@ local me = GetUpdatedEntityID()
 local ai = EntityGetFirstComponentIncludingDisabled(me, "AnimalAIComponent") or 0
 ComponentSetValue2(ai, "attack_ranged_enabled", false)
 local x2, y2 = EntityGetTransform(me)
+
+local priority1 = "enemy"
+local priority2 = "player_unit"
+if GameGetGameEffectCount(me, "CHARM") > 0 then
+    priority2 = "enemy"
+    priority1 = "player_unit"
+end
+
 -- hax?
 EntityRemoveTag(me, "enemy")
-local enemy = EntityGetClosestWithTag(x2, y2, "enemy")
+local enemy = EntityGetClosestWithTag(x2, y2, priority1)
 EntityAddTag(me, "enemy")
 
 local x, y = EntityGetTransform(enemy)
@@ -17,7 +25,7 @@ y = y or y2 + 9000
 
 local radius = 40
 if calculateDistance(x, y, x2, y2) > radius + 180 then
-    enemy = EntityGetClosestWithTag(x2, y2, "player_unit")
+    enemy = EntityGetClosestWithTag(x2, y2, priority2)
     x, y = EntityGetTransform(enemy)
     if calculateDistance(x, y, x2, y2) > radius + 280 then
         local comp = EntityGetFirstComponent(me, "VariableStorageComponent") or 0

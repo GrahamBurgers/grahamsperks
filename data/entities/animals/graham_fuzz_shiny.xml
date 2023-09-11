@@ -31,7 +31,7 @@
 			attack_ranged_action_frame="1"
 			attack_ranged_entity_file="mods/grahamsperks/files/entities/gold_dart.xml"
 			attack_ranged_frames_between="15" 
-			attack_ranged_state_duration_frames="1"
+			attack_ranged_state_duration_frames="15"
 			hide_from_prey="1"
 			can_fly="0"
 			>
