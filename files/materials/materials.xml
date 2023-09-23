@@ -568,14 +568,19 @@ color="FF13890d">
     <CellData
   	name="graham_driedfungus" 
 	ui_name="$material_graham_driedfungus"
+	tags="[plant],[corrodible],[burnable],[alchemy],[earth],[fungus]"
 	wang_color="f1612150"
 	cell_type="liquid"
+	burnable="1"
 	liquid_sand="1"
 	gfx_glow="20"
 	gfx_glow_color="ff762d63"
 	color="ff762d63"
-        stickyness="6"
+    stickyness="6"
 	density="6.5"
+	temperature_of_fire="90" 
+	autoignition_temperature="25"
+	fire_hp="5"
 	>
 	    <Graphics
 	texture_file="mods/grahamsperks/files/materials/materials_gfx/driedfungus.png">
@@ -894,6 +899,7 @@ color="FF797e7e">
 	_parent="wood_static"
 	_inherit_reactions="1"
 	ui_name="$material_graham_wood_rot"
+	tags="[corrodible],[burnable],[alchemy],[solid],[earth],[impure]"
 	wang_color="ff14299"
 	lifetime="200"
 	name="graham_wood_rot"  >

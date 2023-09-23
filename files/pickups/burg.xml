@@ -83,7 +83,7 @@
 
 	<MaterialAreaCheckerComponent
     _enabled="1"
-    _tags="enabled_in_hand,enabled_in_inventory,enabled_in_world"
+    _tags="enabled_in_hand,enabled_in_world"
 		area_aabb.min_x="0"
 		area_aabb.max_x="0"
 		area_aabb.min_y="-6"
@@ -97,7 +97,7 @@
 
 	<MaterialAreaCheckerComponent
     _enabled="1"
-    _tags="enabled_in_hand,enabled_in_inventory,enabled_in_world"
+    _tags="enabled_in_hand,enabled_in_world"
 		area_aabb.min_x="6"
 		area_aabb.max_x="6"
 		area_aabb.min_y="0"
@@ -111,7 +111,7 @@
 
 	<MaterialAreaCheckerComponent
     _enabled="1"
-    _tags="enabled_in_hand,enabled_in_inventory,enabled_in_world"
+    _tags="enabled_in_hand,enabled_in_world"
 		area_aabb.min_x="0"
 		area_aabb.max_x="0"
 		area_aabb.min_y="6"
@@ -125,7 +125,7 @@
 
 	<MaterialAreaCheckerComponent
     _enabled="1"
-    _tags="enabled_in_hand,enabled_in_inventory,enabled_in_world"
+    _tags="enabled_in_hand,enabled_in_world"
 		area_aabb.min_x="-6"
 		area_aabb.max_x="-6"
 		area_aabb.min_y="0"

@@ -7,8 +7,8 @@ function item_pickup( entity_item, entity_who_picked, item_name )
     local comp = EntityGetFirstComponent(entity_who_picked, "DamageModelComponent") or 0
     SetRandomSeed(entity_item, GameGetFrameNum() + entity_who_picked)
     local cap = 9 + (1.5 ^ tonumber(GlobalsGetValue( "GRAHAM_MAGIC_SKIN_CURSE", "0" )))
-    local amount = Random(cap / 4, cap)
-    amount = math.min(100, amount)
+    local amount = Random(cap / 2, cap)
+    amount = math.min(40, amount)
     GlobalsSetValue( "GRAHAM_MAGIC_SKIN_CURSE", tostring(1 + tonumber(GlobalsGetValue( "GRAHAM_MAGIC_SKIN_CURSE", "0" ))) )
     GamePrint(GameTextGet("$graham_magicskin", tostring(amount)))
     local maxhp = ComponentGetValue2(comp, "max_hp") - amount / 25

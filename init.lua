@@ -530,6 +530,7 @@ if ModSettingGet("grahamsperks.StartingItems") ~= false then
 	})
 end
 
+--[[ retired for now. should probably get this working one day
 if ModIsEnabled("noita-together") then
 	table.insert(patches, {
         path    = "mods/noita-together/files/scripts/perks.lua",
@@ -537,6 +538,7 @@ if ModIsEnabled("noita-together") then
         to      = "EXTRA_MONEY=true,GRAHAM_HEALTHY_HEARTS=true,GRAHAM_LUCKY_CLOVER=true,GRAHAM_CAMPFIRE=true,GRAHAM_REFRESHER=true,GRAHAM_EXTRA_SLOTS=true,GRAHAM_REFRESHER=true,",
 	})
 end
+]]--
 
 if HasFlagPersistent("graham_death_hp_boost") then
 	table.insert(patches, {
@@ -658,7 +660,7 @@ function OnMagicNumbersAndWorldSeedInitialized()
 	end
 	
 	SetRandomSeed(823910, 145832)
-	if (Random(1, 30) == 1) then
+	if (Random(1, 15) == 1) then
 		ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_secret.lua" )
 	end
 end
