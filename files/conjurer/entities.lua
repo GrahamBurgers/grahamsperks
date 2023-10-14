@@ -121,6 +121,11 @@ table.insert(ALL_ENTITIES, {
             path="data/entities/animals/graham_fuzz.xml",
         },
         {
+            name="$animal_graham_fuzz",
+            image="data/ui_gfx/graham_fuzz_shiny.png",
+            path="data/entities/animals/graham_fuzz_shiny.xml",
+        },
+        {
             name="$animal_mini_mimic",
             image="mods/grahamsperks/files/conjurer/entities/mini_mimic.png",
             path="data/entities/animals/mini_mimic.xml",
