@@ -15,10 +15,30 @@ function spawn_hp( x, y )
             EntityLoad("mods/grahamsperks/files/entities/fireplace.xml", x-16, y+15 )
         end
     end
+    EntityLoad("mods/grahamsperks/files/entities/magic_skin_replacer.xml", x + 450, y)
     local pid
-    local count = math.min(10, GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" )) -- cap at 10
+    local count = math.min(30, GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" ))
+    while count >= 10 do
+        for i = 1, 10 do
+            pid = perk_spawn_random(x + -86 + i * 16, y - 30, true)
+            EntityAddComponent(pid, "LuaComponent", {
+                script_item_picked_up="mods/grahamsperks/files/scripts/magic_skin_curse.lua"
+            })
+            EntityAddComponent(pid, "SpriteComponent", {
+                image_file="mods/grahamsperks/files/entities/skin_perk.png",
+                offset_x = "8",
+                offset_y = "8",
+                update_transform = "1" ,
+                update_transform_rotation = "0",
+                z_index="0.8",
+            })
+            EntityRemoveTag(pid, "perk")
+        end
+        y = y + 15
+        count = count - 10
+    end
     for i = 1, count do
-        pid = perk_spawn_random(x - 6 + (count * -8) + i * 16, y - 26, true)
+        pid = perk_spawn_random(x - 6 + (math.min(10, count) * -8) + i * 16, y - 30, true)
         EntityAddComponent(pid, "LuaComponent", {
             script_item_picked_up="mods/grahamsperks/files/scripts/magic_skin_curse.lua"
         })
@@ -32,5 +52,4 @@ function spawn_hp( x, y )
         })
         EntityRemoveTag(pid, "perk")
     end
-    EntityLoad("mods/grahamsperks/files/entities/magic_skin_replacer.xml", x + 450, y)
 end

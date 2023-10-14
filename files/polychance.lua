@@ -3,7 +3,7 @@ dofile_once("data/scripts/lib/utilities.lua")
 function shot(projectile)
     local comps = EntityGetComponent(projectile, "ProjectileComponent")
     local x, y = EntityGetTransform(projectile)
-    SetRandomSeed( x + projectile, y - 4530 )
+    SetRandomSeed( x + projectile, y - 4530 + GetUpdatedComponentID() )
     local rando = 60
     if GameHasFlagRun("PERK_PICKED_GRAHAM_LUCKY_CLOVER") then rando = rando - 10 end
 

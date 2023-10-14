@@ -201,10 +201,9 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 
 		local comp = EntityGetFirstComponentIncludingDisabled(eid, "ProjectileComponent")
 		if comp ~= nil and entity[1] == "data/entities/projectiles/bomb_holy.xml" then
-			ComponentSetValue2(comp, "lifetime", 400)
-			ComponentSetValue2(comp, "damage", 150)
 			ComponentObjectSetValue2(comp, "config_explosion", "create_cell_material", "gold")
 			ComponentObjectSetValue2(comp, "config_explosion", "create_cell_probability", Random(2, 4))
+			ComponentObjectSetValue2(comp, "config_explosion", "damage", 2)
 			local health = EntityGetFirstComponent(eid, "DamageModelComponent") or 0
 			ComponentSetValue2(health, "hp", ComponentGetValue2(health, "hp") * 5)
 			EntityAddComponent2(eid, "SpriteComponent", {
