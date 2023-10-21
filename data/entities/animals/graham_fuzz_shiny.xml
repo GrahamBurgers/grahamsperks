@@ -61,7 +61,7 @@
 
 		<SpriteComponent
 			_tags="character"
-			image_file="data/enemies_gfx/graham_fuzz_shiny_alt.xml"
+			image_file="data/enemies_gfx/graham_fuzz_shiny.xml"
 			emissive="0"
 			update_transform_rotation="0"
 			has_special_scale="1"

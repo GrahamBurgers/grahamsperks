@@ -67,7 +67,7 @@
 
 		<SpriteComponent
 			_tags="character"
-			image_file="data/enemies_gfx/graham_fuzz_alt.xml"
+			image_file="data/enemies_gfx/graham_fuzz.xml"
 			emissive="0"
 			update_transform_rotation="0"
 			has_special_scale="1"
@@ -128,8 +128,8 @@
 	</Base>
 
 	<SpriteComponent
-        	_tags="character"
-		image_file="data/enemies_gfx/graham_fuzzzap_alt.xml"
+        _tags="character"
+		image_file="data/enemies_gfx/graham_fuzzzap.xml"
 		emissive="1"
 		additive="1"
 		update_transform_rotation="0"

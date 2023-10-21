@@ -31,4 +31,17 @@
   >
 </RectAnimation>
 
+  <RectAnimation
+  name="hurt"
+  pos_x="0"
+  pos_y="36"
+  frame_count="2"
+  frames_per_row="2"
+  frame_width="18"
+  frame_height="18"
+  frame_wait="0.10"
+  loop="0"
+  next_animation="stand"
+  ></RectAnimation>
+
 </Sprite>
