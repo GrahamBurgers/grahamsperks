@@ -1,9 +1,0 @@
-<Entity>
-
-    <LuaComponent
-        execute_every_n_frame="2"
-        script_source_file="mods/grahamsperks/files/scripts/spell_circle.lua"
-    ></LuaComponent>
-
-
-</Entity>

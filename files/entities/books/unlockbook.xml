@@ -1,4 +1,4 @@
-<Entity name="$graham_unlockbook_name" tags="scroll,graham_book,forgeable">
+<Entity tags="scroll,graham_book,forgeable,book_reforgeable">
 	<Base file="mods/grahamsperks/files/entities/books/base_book.xml">
 		
 		<PhysicsImageShapeComponent 

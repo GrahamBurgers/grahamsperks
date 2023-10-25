@@ -6,9 +6,9 @@
 	<MagicConvertMaterialComponent
 		_enabled="1"
 		kill_when_finished="0"
-		from_material_array="blood_cold,blood_cold_vapour,snowrock_static,steelfrost_static,water_ice,ice_static,ice_glass,ice_cold_static,ice_cold_glass,ice_acid_static,ice_acid_glass,ice_blood_static,ice_blood_glass,ice_slime_static,ice_slime_glass,ice_radioactive_static,ice_radioactive_glass,ice_poison_glass,ice_poison_static,snow_static,snow,snow_sticky,slush"
+		from_material_array="steelfrost_static,water_ice,ice_static,ice_glass,ice_cold_static,ice_cold_glass,ice_acid_static,ice_acid_glass,ice_blood_static,ice_blood_glass,ice_slime_static,ice_slime_glass,ice_radioactive_static,ice_radioactive_glass,ice_poison_glass,ice_poison_static,snow_static,snow,snow_sticky,slush"
 		steps_per_frame="32"
-		to_material_array="water,water,sand_static,steel_static,water,water,water,water_ice,water_ice,acid,acid,blood,blood,slime,slime,radioactive_liquid,radioactive_liquid,poison,poison,steam,steam,steam,steam"
+		to_material_array="steel_static,water,water,water,water_ice,water_ice,acid,acid,blood,blood,slime,slime,radioactive_liquid,radioactive_liquid,poison,poison,smoke,smoke,smoke,smoke"
 		clean_stains="0"
 		is_circle="1"
 		radius="32" 
@@ -19,9 +19,9 @@
 	<MagicConvertMaterialComponent
 		_enabled="1"
 		kill_when_finished="0"
-		from_material_array="steam,smoke"
+		from_material_array="smoke,blood_cold,blood_cold_vapour"
 		steps_per_frame="17"
-		to_material_array="air,air"
+		to_material_array="air,air,air"
 		clean_stains="0"
 		is_circle="1"
 		radius="17" 

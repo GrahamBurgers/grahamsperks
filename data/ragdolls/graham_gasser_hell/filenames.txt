@@ -1,9 +1,0 @@
-data/ragdolls/graham_gasser_hell/torso.png
-data/ragdolls/graham_gasser_hell/left_thigh.png
-data/ragdolls/graham_gasser_hell/right_thigh.png
-data/ragdolls/graham_gasser_hell/right_foot.png
-data/ragdolls/graham_gasser_hell/right_arm.png
-data/ragdolls/graham_gasser_hell/right_hand.png
-data/ragdolls/graham_gasser_hell/left_foot.png
-data/ragdolls/graham_gasser_hell/left_hand.png
-data/ragdolls/graham_gasser_hell/head.png

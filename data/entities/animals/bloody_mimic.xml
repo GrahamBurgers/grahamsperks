@@ -24,18 +24,15 @@
 		
 		<DamageModelComponent 
             hp="12"
-            ragdoll_material="wood_prop"
+            ragdoll_material="graham_hellblood"
 			ragdoll_filenames_file="" 
 			blood_material=""
 			fire_probability_of_ignition="20"
 			>
-			<damage_multipliers
-				holy="1.5"
-			></damage_multipliers>
 		</DamageModelComponent>
 
 		<SpriteComponent 
-			image_file="data/enemies_gfx/bloody_mimic.xml" 
+			image_file="mods/grahamsperks/files/entities/bloody_mimic.xml" 
 			offset_x="0"
 			offset_y="0"
 			>

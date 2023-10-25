@@ -79,8 +79,7 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 		local rnd = 9001
 
 		dofile_once( "data/scripts/perks/perk.lua" )
-		local pid = perk_spawn_random( x, y, true )
-		EntityRemoveTag(pid, "perk")
+		perk_spawn_random( x, y, true )
 		good_item_dropped = true
 		
 

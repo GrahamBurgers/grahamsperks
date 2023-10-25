@@ -17,9 +17,9 @@ for _,id in pairs(EntityGetInRadiusWithTag(x, y, 15, "item_pickup")) do
                     if amount >= bar then
                         -- spawn a new potion (33%)
                         SetRandomSeed(x, y)
-                        if Random(1, 3) == 1 or GameHasFlagRun("PERK_PICKED_GRAHAM_LUCKY_CLOVER") then
+                        if Random(1, 3) == 1 then 
                             EntityKill( id )
-                            EntityLoad("data/entities/items/pickup/potion_empty.xml", x, y)
+                            EntityLoad("data/entities/items/pickup/potion_empty.xml", x, y)                          
                         else
                             EntityKill( id )
                         end

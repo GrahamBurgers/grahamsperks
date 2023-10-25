@@ -10,7 +10,7 @@ if( damagemodels ~= nil ) then
         hp = 0.0024 + (max_hp / 2000)
         
         -- GamePrint(tostring(hp))
-        EntityInflictDamage( root_entity, hp, "DAMAGE_CURSE", "$graham_guardianangel_death", "NONE", 0, 0)
+        EntityInflictDamage( root_entity, hp, "DAMAGE_CURSE", "Martyr", "NONE", 0, 0)
         -- ComponentSetValue2( v, "hp", hp)
         break
     end

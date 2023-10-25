@@ -1,10 +1,7 @@
 local owner = EntityGetRootEntity(GetUpdatedEntityID())
-local comp = EntityGetFirstComponent(owner, "DamageModelComponent")
-if comp == nil then return end
-local hp = ComponentGetValue2(comp, "hp")
-local damage = 0.8
-if hp <= damage then
-    damage = hp - 0.04
+local comp = EntityGetFirstComponent(owner, "DamageModelComponent") or 0
+EntityInflictDamage(owner, 0.8, DAMAGE_CURSE, "$graham_name_foamarmor", DISINTEGRATED, 0, 0)
+if comp ~= 0 then
+    ComponentSetValue2(comp, "hp", ComponentGetValue2(comp, "hp") - 0.8)
+    ComponentSetValue2(comp, "max_hp", ComponentGetValue2(comp, "max_hp") - 0.8)
 end
-EntityInflictDamage(owner, damage, "DAMAGE_CURSE", "$graham_name_foamarmor", "NORMAL", 0, 0)
-ComponentSetValue2(comp, "hp", hp - damage)

@@ -1,6 +1,6 @@
 <Mod
 	name="Graham's Things 1.5"
-	description="Adds many new perks, materials, items, and so much more!\nCheck the mod's steam page and wiki page for more info!"
-	request_no_api_restrictions="0"
+	description="Adds many new perks, materials, items, and more!\nCheck the mod's steam page and wiki page for more info!\n(Load this mod above Alchemy Tutor if you have it installed!)"
+	request_no_api_restrictions="0"	
 >
 </Mod>

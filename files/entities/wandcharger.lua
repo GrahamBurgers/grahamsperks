@@ -1,4 +1,4 @@
-local player = EntityGetRootEntity(GetUpdatedEntityID())
+local player = EntityGetWithTag( "player_unit" )[1]
 local children = EntityGetAllChildren( player )
 
 if children == nil then return end

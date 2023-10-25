@@ -10,8 +10,8 @@
 
   <ProjectileComponent 
     _enabled="1" 
-	speed_min="180"
-	speed_max="220"
+	speed_min="150"
+	speed_max="180"
 	bounces_left="3"
 	bounce_energy="0.7"
 	bounce_at_any_angle="1"
@@ -28,7 +28,6 @@
     shoot_light_flash_radius="48"
 	knockback_force="1.0"
 	physics_impulse_coeff="2000"
-	explosion_dont_damage_shooter="1"
 	spawn_entity="mods/grahamsperks/files/entities/brambles.xml"
 	>
     <config_explosion
@@ -54,30 +53,9 @@
 		stains_radius="9"
         audio_enabled="0" >
     </config_explosion>
-	<damage_by_type slice="0.04" >
+	<damage_by_type slice="0.1" >
     </damage_by_type>
   </ProjectileComponent>
-
-	<ParticleEmitterComponent
-		emit_cosmetic_particles="1"
-		emitted_material_name="cursed_liquid"
-		x_vel_min="0"
-		x_vel_max="0"
-		y_vel_min="0"
-		y_vel_max="0"
-		count_min="3"
-		count_max="4"
-		lifetime_min="0.7"
-		lifetime_max="0.7"
-		is_trail="1"
-		emission_interval_min_frames="1"
-		emission_interval_max_frames="1"
-		airflow_scale="0"
-		gravity.x="0"
-		gravity.y="0"
-		render_back="1"
-		draw_as_long="1"
-	></ParticleEmitterComponent>
   
 	<SpriteComponent 
 		_enabled="1" 
@@ -99,23 +77,11 @@
         aabb_max_y="5" >
     </HitboxComponent>
 
-  	<AudioComponent
+  <AudioComponent
 		file="data/audio/Desktop/projectiles.bank"
 		event_root="projectiles/bullet_arrow">
 	</AudioComponent>
-
-	<LuaComponent
-		execute_on_added="0"
-		remove_after_executed="1"
-		script_source_file="mods/grahamsperks/files/scripts/bramball_lifetime.lua"
-	></LuaComponent>
   
-	<VariableStorageComponent
-		name="bramball_lifetime"
-		value_int="0"
-		>
-	</VariableStorageComponent>
-
 	<VariableStorageComponent
 		name="projectile_file"
 		value_string="mods/grahamsperks/files/spells/bramball.xml"

@@ -1,1 +1,0 @@
-data/ragdolls/graham_fuzz/body.png
