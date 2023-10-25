@@ -301,80 +301,81 @@ local to_insert = {
 					resistance = resistance * 0.5
 					ComponentObjectSetValue(damagemodel, "damage_multipliers", "fire", tostring(resistance))
 
-					EntityAddComponent(entity_who_picked, "LuaComponent",
-						{
-							_tags = "perk_component",
-							script_damage_about_to_be_received = "mods/grahamsperks/files/zaptap.lua",
-							execute_every_n_frame = "-1",
-						})
+		EntityAddComponent( entity_who_picked, "LuaComponent", 
+		{
+			_tags = "perk_component",
+			script_damage_about_to_be_received = "mods/grahamsperks/files/zaptap.lua",
+			execute_every_n_frame = "-1",
+		} )
 
-					local var_comp = get_variable_storage_component(entity_who_picked, "zap_tap_radius")
-					local radius = ComponentGetValue2(var_comp, "value_int")
-					if var_comp ~= nil then
-						ComponentSetValue2(var_comp, "value_int", radius + 8)
-					else
-						EntityAddComponent2(entity_who_picked, "VariableStorageComponent", {
-							value_int = 18,
-							name = "zap_tap_radius"
-						})
-					end
+    local var_comp = get_variable_storage_component(entity_who_picked, "zap_tap_radius")
+    local radius = ComponentGetValue2(var_comp, "value_int")
+    if var_comp ~= nil then
+      ComponentSetValue2(var_comp, "value_int", radius + 8)	
+    else
+      EntityAddComponent2(entity_who_picked, "VariableStorageComponent", {
+        value_int=18,
+        name="zap_tap_radius"
+      })
+    end
+    
+    end,
+    func_remove = function( entity_who_picked )
+      local var_comp = get_variable_storage_component(entity_who_picked, "zap_tap_radius")
+      EntityRemoveComponent(entity_who_picked, var_comp)
+    end,
+},
+{
+    id = "GRAHAM_LIFE_LOTTERY",
+    ui_name = "$perkname_graham_lifelottery",
+    ui_description = "$perkdesc_graham_lifelottery",
+    ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/lifelottery/spoopyboi2.png",
+    perk_icon = "mods/grahamsperks/files/perks/perks_gfx/lifelottery/spoopyboi.png",
+    one_off_effect = true,
+    not_in_default_perk_pool = true,
+    usable_by_enemies = false,
+    stackable = STACKABLE_YES,
+      func = function( entity_perk_item, entity_who_picked, item_name )
+      local x, y = EntityGetTransform( entity_who_picked )
+      SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
+      local goodluck = Random(1, 6)
+          
+      if GameHasFlagRun("greed_curse") and not GameHasFlagRun("greed_curse_gone") then
+        if ( goodluck < 5) then EntityLoad("data/entities/projectiles/deck/touch_gold.xml", x, y) end
+        if ( goodluck >= 5) then EntityLoad("data/entities/items/pickup/chest_random_super.xml", x-15, y) end
+        if ( goodluck >= 6) then EntityLoad("data/entities/items/pickup/chest_random_super.xml", x+15, y) end
+      else
+        if ( goodluck <= 3) then EntityLoad("data/entities/items/pickup/chest_random_super.xml", x, y+5) end
+        if ( goodluck > 3) then EntityLoad("data/entities/projectiles/deck/touch_gold.xml", x, y) end
+      end
+    end,
+},
+{
+  id = "GRAHAM_IOU",
+  ui_name = "$perkname_graham_iou",
+  ui_description = "$perkdesc_graham_iou",
+  ui_icon =   "mods/grahamsperks/files/perks/perks_gfx/gui/iou.png",
+  perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/iou.png",
+  usable_by_enemies = false,
+  not_in_default_perk_pool = false,
+  one_off_effect = true,
+  stackable = STACKABLE_YES,
+  func = function( entity_perk_item, entity_who_picked, item_name )
+    local x, y = EntityGetTransform(entity_who_picked)
+    
+    if GameHasFlagRun("PERK_PICKED_EDIT_WANDS_EVERYWHERE") then
+      local eid = EntityLoad( "mods/grahamsperks/files/pickups/chest_lost.xml", x + 12, y )
+      change_entity_ingame_name( eid, "$graham_chest_tinker" )
+      dofile("mods/grahamsperks/files/scripts/IOU.lua")
+    else
+      local entity_id = EntityLoad( "mods/grahamsperks/files/effects/tinkering.xml", x, y )
+      EntityAddChild( entity_who_picked, entity_id )
+    end
+					resistance = tonumber(ComponentObjectGetValue(damagemodel, "damage_multipliers", "ice"))
+					resistance = resistance * 0.5
+					ComponentObjectSetValue(damagemodel, "damage_multipliers", "ice", tostring(resistance))
 				end
 			end
-		end,
-		func_remove = function(entity_who_picked)
-			local var_comp = get_variable_storage_component(entity_who_picked, "zap_tap_radius")
-			EntityRemoveComponent(entity_who_picked, var_comp)
-		end,
-	},
-	{
-		id = "GRAHAM_LIFE_LOTTERY",
-		ui_name = "$perkname_graham_lifelottery",
-		ui_description = "$perkdesc_graham_lifelottery",
-		ui_icon = "mods/grahamsperks/files/perks/perks_gfx/lifelottery/spoopyboi2.png",
-		perk_icon = "mods/grahamsperks/files/perks/perks_gfx/lifelottery/spoopyboi.png",
-		one_off_effect = true,
-		not_in_default_perk_pool = true,
-		usable_by_enemies = false,
-		stackable = STACKABLE_YES,
-		func = function(entity_perk_item, entity_who_picked, item_name)
-			local x, y = EntityGetTransform(entity_who_picked)
-			SetRandomSeed(GameGetFrameNum(), GameGetFrameNum())
-			local goodluck = Random(1, 6)
-
-			if GameHasFlagRun("greed_curse") and not GameHasFlagRun("greed_curse_gone") then
-				if (goodluck < 5) then EntityLoad("data/entities/projectiles/deck/touch_gold.xml", x, y) end
-				if (goodluck >= 5) then EntityLoad("data/entities/items/pickup/chest_random_super.xml", x - 15, y) end
-				if (goodluck >= 6) then EntityLoad("data/entities/items/pickup/chest_random_super.xml", x + 15, y) end
-			else
-				if (goodluck <= 3) then EntityLoad("data/entities/items/pickup/chest_random_super.xml", x, y + 5) end
-				if (goodluck > 3) then EntityLoad("data/entities/projectiles/deck/touch_gold.xml", x, y) end
-			end
-		end,
-	},
-	{
-		id = "GRAHAM_IOU",
-		ui_name = "$perkname_graham_iou",
-		ui_description = "$perkdesc_graham_iou",
-		ui_icon = "mods/grahamsperks/files/perks/perks_gfx/gui/iou.png",
-		perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/iou.png",
-		usable_by_enemies = false,
-		not_in_default_perk_pool = false,
-		one_off_effect = true,
-		stackable = STACKABLE_YES,
-		func = function(entity_perk_item, entity_who_picked, item_name)
-			local x, y = EntityGetTransform(entity_who_picked)
-
-			if GameHasFlagRun("PERK_PICKED_EDIT_WANDS_EVERYWHERE") then
-				local eid = EntityLoad("mods/grahamsperks/files/pickups/chest_lost.xml", x + 12, y)
-				change_entity_ingame_name(eid, "$graham_chest_tinker")
-				dofile("mods/grahamsperks/files/scripts/IOU.lua")
-			else
-				local entity_id = EntityLoad("mods/grahamsperks/files/effects/tinkering.xml", x, y)
-				EntityAddChild(entity_who_picked, entity_id)
-			end
-			resistance = tonumber(ComponentObjectGetValue(damagemodel, "damage_multipliers", "ice"))
-			resistance = resistance * 0.5
-			ComponentObjectSetValue(damagemodel, "damage_multipliers", "ice", tostring(resistance))
 		end,
 	},
 	{
