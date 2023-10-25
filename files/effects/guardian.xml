@@ -28,14 +28,14 @@
 		description="$graham_statusdesc_guardian"
 		icon_sprite_file="mods/grahamsperks/files/effects/guardian.png"
 		is_perk="0"
-		display_above_head="0"
+		display_above_head="1"
 		display_in_hud="1"
 		>
 	</UIIconComponent>
 
 	<LuaComponent
 		script_source_file="mods/grahamsperks/files/scripts/protection_field.lua"
-		execute_every_n_frame="50"
+		execute_every_n_frame="5"
 		>
 	</LuaComponent>
 
@@ -85,11 +85,5 @@
 		emit_cosmetic_particles="1"
 		is_emitting="1" >
 	</ParticleEmitterComponent>
-
-	<AudioLoopComponent
-		file="data/audio/Desktop/animals.bank"
-		event_name="animals/tiny_ghost/movement_loop"
-		auto_play="1">
-	</AudioLoopComponent>
 
 </Entity>

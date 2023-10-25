@@ -1,4 +1,4 @@
-<Entity>
+<Entity tags="scroll">
 
 	<UIInfoComponent
 		name="$booktitle01"
@@ -78,5 +78,15 @@
 			deck_capacity="0"
 		></gun_config>
 	</AbilityComponent>
+
+	<LuaComponent
+		execute_on_added="1"
+		execute_every_n_frame="-1"
+		remove_after_executed="1"
+		script_source_file="mods/grahamsperks/files/scripts/book.lua"
+	></LuaComponent>
+
+	<BookComponent>
+	</BookComponent>
 
 </Entity>

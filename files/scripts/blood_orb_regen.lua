@@ -41,18 +41,8 @@ if healthcomp ~= nil then
 			if GameHasFlagRun("PERK_PICKED_MPP_CYBORG_FRIENDS") then
 				to_switch = to_switch .. "_robotic"
 			end
-
-			if current_sprite ~= "mods/grahamsperks/files/entities/eye/" .. to_switch .. ".png" then
-				-- Hack to make the sprite update faster; remove and readd the component
-				-- I'm sure this will cause no problems whatsoever
-				EntityRemoveComponent(me, spritecomp)
-				EntityAddComponent2(me, "SpriteComponent", {
-					image_file="mods/grahamsperks/files/entities/eye/" .. to_switch .. ".png",
-					offset_x=8,
-					offset_y=8,
-					z_index=-2,
-				})
-			end
+			ComponentSetValue2(spritecomp, "image_file", "mods/grahamsperks/files/entities/eye/" .. to_switch .. ".png")
+			EntityRefreshSprite(me, spritecomp)
         end
     end
 end

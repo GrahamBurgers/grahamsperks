@@ -8,6 +8,6 @@ EntityAddRandomStains( player, CellFactory_GetType("graham_unstainer"), 400 )
 
 EntityAddComponent2(player, "LuaComponent", {
     script_source_file="mods/grahamsperks/files/scripts/soapstone_clean.lua",
-    execute_on_added=true,
+    execute_every_n_frame=5,
     remove_after_executed=true,
 })

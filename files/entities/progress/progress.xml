@@ -1,0 +1,24 @@
+<Entity>
+
+    <LuaComponent
+        execute_every_n_frame="5"
+        script_source_file="mods/grahamsperks/files/entities/progress/progress.lua"
+    
+    ></LuaComponent>
+
+    <ParticleEmitterComponent
+        emitted_material_name="graham_purplebrick_lessglow"
+        create_real_particles="1"
+        image_animation_file="mods/grahamsperks/files/entities/progress/progress_shape.png"
+        lifetime_min="1"
+        lifetime_max="1"
+        emission_interval_min_frames="1"
+        emission_interval_max_frames="1"
+        count_min="500"
+        count_max="500"
+        offset.x="72"
+        offset.y="76"
+        image_animation_speed="300"
+    ></ParticleEmitterComponent>
+
+</Entity>

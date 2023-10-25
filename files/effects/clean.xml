@@ -1,0 +1,89 @@
+<Entity>
+
+	<InheritTransformComponent>
+    </InheritTransformComponent>
+
+	<LuaComponent
+		execute_on_added="1"
+		execute_every_n_frame="5"
+		script_source_file="mods/grahamsperks/files/scripts/clean_go.lua"
+	></LuaComponent>
+
+	<LuaComponent
+		execute_every_n_frame="-1"
+		execute_on_removed="1"
+		script_source_file="mods/grahamsperks/files/scripts/soapstone_remove.lua"
+	></LuaComponent>
+
+	<UIIconComponent
+		name="$graham_status_clean"
+		description="$graham_statusdesc_clean"
+		icon_sprite_file="mods/grahamsperks/files/effects/clean.png"
+		is_perk="0"
+		display_above_head="0"
+		display_in_hud="1"
+		>
+	</UIIconComponent>
+
+	<LifetimeComponent
+		lifetime="72000"
+		>
+	</LifetimeComponent>
+
+	<SpriteParticleEmitterComponent
+		_tags="enabled_in_world"
+		sprite_file="data/particles/shine_07.xml"
+		lifetime="0.3"
+		emission_interval_min_frames="3"
+		emission_interval_max_frames="70"
+		count_min="1"
+		count_max="1"
+		additive="1"
+		emissive="0"
+		scale.x="1.0"
+		scale.y="1.0"
+		sprite_random_rotation="1"
+		randomize_scale.min_x="-0.1" 
+		randomize_scale.max_x="0.1" 
+		randomize_scale.min_y="-0.1" 
+		randomize_scale.max_y="0.1" 
+		randomize_position.min_y="-6" 
+		randomize_position.max_y="6"
+		randomize_position.min_x="-6"  
+		randomize_position.max_x="6"
+		randomize_animation_speed_coeff.min="0.667"  
+		randomize_animation_speed_coeff.max="1.0"
+		z_index="10"
+		>
+	</SpriteParticleEmitterComponent>
+
+	<SpriteParticleEmitterComponent
+		_tags="enabled_in_world"
+		sprite_file="data/particles/shine_08.xml"
+		lifetime="0.2"
+		randomize_lifetime.min="0.1"
+		randomize_lifetime.max="0.8"
+		emission_interval_min_frames="3"
+		emission_interval_max_frames="70"
+		count_min="1"
+		count_max="1"
+		additive="1"
+		emissive="0"
+		scale.x="1.0"
+		scale.y="1.0"
+		sprite_random_rotation="1"
+		randomize_scale.min_x="-0.1" 
+		randomize_scale.max_x="0.1" 
+		randomize_scale.min_y="-0.1" 
+		randomize_scale.max_y="0.1" 
+		randomize_position.min_y="-6" 
+		randomize_position.max_y="6"
+		randomize_position.min_x="-6"  
+		randomize_position.max_x="6"
+		randomize_animation_speed_coeff.min="0.667"  
+		randomize_animation_speed_coeff.max="1.0" 
+		z_index="10"
+		>
+	</SpriteParticleEmitterComponent>
+
+</Entity>

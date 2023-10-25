@@ -27,15 +27,16 @@
 		image_file="mods/grahamsperks/files/entities/tipsy_ghost/tipsy_ghost_anim.xml"
 		>
 	</SpriteComponent>
-	<LuaComponent 
-		script_source_file="data/scripts/animals/tiny_ghost_move.lua"
-		execute_every_n_frame="1"
-		>
-	</LuaComponent>
 
 	<LuaComponent 
 		script_source_file="mods/grahamsperks/files/scripts/tipsy_ghost.lua"
 		execute_every_n_frame="600"
+		>
+	</LuaComponent>
+	
+	<LuaComponent 
+		script_source_file="data/scripts/animals/tiny_ghost_move.lua"
+		execute_every_n_frame="1"
 		>
 	</LuaComponent>
 

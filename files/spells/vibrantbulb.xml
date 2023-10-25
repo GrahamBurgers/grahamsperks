@@ -1,0 +1,66 @@
+<Entity>
+	
+	<Base file="data/entities/base_custom_card.xml" > 
+		<SpriteComponent 
+			image_file="mods/grahamsperks/files/spells/vibrantbulb.png" 
+			>
+		</SpriteComponent>
+		
+		<ItemActionComponent 
+			_tags="enabled_in_world"
+			action_id="GRAHAM_VIBRANT_BULB" >
+		</ItemActionComponent>
+	</Base>
+
+	<InheritTransformComponent
+		_tags="enabled_in_world,enabled_in_hand">
+	</InheritTransformComponent>
+
+	<LuaComponent
+		_tags="enabled_in_hand"
+		script_source_file="mods/grahamsperks/files/scripts/vibrant_bulb.lua"
+		execute_every_n_frame="4"
+	></LuaComponent>
+
+	<LightComponent 
+		_tags="enabled_in_hand,graham_lightbulb"
+		_enabled="1" 
+		radius="70"
+		fade_out_time="1.5" 
+		r="240"
+		g="180"
+		b="0" >
+	</LightComponent>
+	
+	<LightComponent 
+		_tags="enabled_in_hand,graham_lightbulb"
+		_enabled="1" 
+		radius="70"
+		fade_out_time="1.5" 
+		r="240"
+		g="180"
+		b="0" >
+	</LightComponent>
+	
+	<LightComponent 
+		_tags="enabled_in_hand,graham_lightbulb"
+		_enabled="1" 
+		radius="70"
+		fade_out_time="1.5" 
+		r="240"
+		g="180"
+		b="0" >
+	</LightComponent>
+
+    <SpriteComponent 
+	    _tags="enabled_in_hand,graham_lightbulb"
+        alpha="0.8"
+        image_file="data/particles/torch_fog_of_war_hole.xml"
+        smooth_filtering="1"
+        fog_of_war_hole="1"
+        has_special_scale="1"
+        special_scale_x="3"
+        special_scale_y="3" >
+    </SpriteComponent>
+	
+</Entity>
