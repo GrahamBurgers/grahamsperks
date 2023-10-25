@@ -702,4 +702,75 @@
     >
   </Reaction>
 
+<!-- new -->
+
+  <Reaction probability="20"
+    input_cell1="graham_resist" 	input_cell2="lava"
+    output_cell1="rock_static_radioactive" 	output_cell2="rock_static_radioactive"
+    blob_radius1="2" blob_radius2="2"
+    >
+  </Reaction>
+
+  <Reaction probability="60"
+    input_cell1="graham_slush_ice" 	input_cell2="graham_ascendum"
+    output_cell1="graham_slush" 	output_cell2="graham_ascendum"
+    blob_radius1="2" blob_radius2="2"
+    >
+  </Reaction>
+
+  <Reaction probability="60"
+    input_cell1="graham_lavaglass" 	input_cell2="graham_confuse"
+    output_cell1="material_rainbow" 	output_cell2="graham_confuse"
+    blob_radius1="2" blob_radius2="2"
+    >
+  </Reaction>
+
+  <Reaction probability="40"
+    input_cell1="graham_coffee" 	input_cell2="[magic_faster]"
+    output_cell1="graham_coffee" 	output_cell2="magic_liquid_faster_levitation_and_movement"
+    >
+  </Reaction>
+
+  <Reaction probability="40"
+    input_cell1="graham_resist" 	input_cell2="graham_hellblood"
+    output_cell1="poo_gas" 	output_cell2="poo_gas"
+    blob_radius1="2" blob_radius2="2"
+    >
+  </Reaction>
+
+  <Reaction probability="40"
+    input_cell1="graham_resist" 	input_cell2="radioactive_liquid"
+    output_cell1="acid" 	output_cell2="acid"
+    blob_radius2="2"
+    >
+  </Reaction>
+
+  <Reaction probability="40"
+    input_cell1="graham_resist" 	input_cell2="blood"
+    output_cell1="graham_resist" 	output_cell2="blood_worm"
+    blob_radius2="2"
+    >
+  </Reaction>
+
+  <Reaction probability="100"
+	input_cell1="graham_hellblood" 	input_cell2="graham_bubbly"
+	output_cell1="gunpowder_unstable" 	output_cell2="gunpowder_unstable"
+	blob_radius1="2"		blob_radius2="2"
+	></Reaction>
+
+  <Reaction probability="8"
+	input_cell1="graham_slush" 	input_cell2="[water]" 	input_cell3="[water]"
+	output_cell1="graham_slush" 	output_cell2="graham_slush" 	output_cell3="air"
+	></Reaction>
+
+  <Reaction probability="40"
+	input_cell1="graham_slush" 	input_cell2="graham_precursor"
+	output_cell1="graham_ascendum" 	output_cell2="steam"
+	></Reaction>
+
+  <Reaction probability="40"
+	input_cell1="magic_liquid_mana_regeneration" 	input_cell2="magic_liquid_invisibility"
+	output_cell1="graham_tele_chaotic" 	output_cell2="graham_tele_chaotic"
+	></Reaction>
+
 </Materials>

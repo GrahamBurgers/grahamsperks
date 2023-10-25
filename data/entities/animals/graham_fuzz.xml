@@ -34,7 +34,7 @@
 			attack_ranged_max_distance="250"
 			attack_ranged_offset_x="0"
 			attack_ranged_offset_y="0"
-			attack_ranged_action_frame="1"
+			attack_ranged_action_frame="0"
 			attack_ranged_entity_file="mods/grahamsperks/files/entities/cold_dart.xml"
 			attack_ranged_frames_between="50" 
 			attack_ranged_state_duration_frames="15"
@@ -128,8 +128,10 @@
 	</Base>
 
 	<SpriteComponent
+        _tags="character"
 		image_file="data/enemies_gfx/graham_fuzzzap.xml"
 		emissive="1"
+		additive="1"
 		update_transform_rotation="0"
 		offset_x="0"
 		offset_y="0"

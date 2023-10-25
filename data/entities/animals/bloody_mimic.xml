@@ -24,7 +24,7 @@
 		
 		<DamageModelComponent 
             hp="12"
-            ragdoll_material="graham_hellblood"
+            ragdoll_material="wood_prop"
 			ragdoll_filenames_file="" 
 			blood_material=""
 			fire_probability_of_ignition="20"

@@ -1,7 +1,7 @@
 <Entity name="$animal_graham_fuzz" >
   
 	<LuaComponent
-		script_source_file="mods/grahamsperks/files/scripts/orbit.lua"
+		script_source_file="mods/grahamsperks/files/scripts/orbit_shiny.lua"
 	></LuaComponent>
 
 	<VariableStorageComponent
@@ -23,12 +23,12 @@
 			needs_food="0"
 			sense_creatures="1"
 			attack_melee_enabled="0"
-			attack_ranged_enabled="1"
+			attack_ranged_enabled="0"
 			attack_ranged_min_distance="0"
 			attack_ranged_max_distance="150"
 			attack_ranged_offset_x="0"
 			attack_ranged_offset_y="0"
-			attack_ranged_action_frame="1"
+			attack_ranged_action_frame="0"
 			attack_ranged_entity_file="mods/grahamsperks/files/entities/gold_dart.xml"
 			attack_ranged_frames_between="15" 
 			attack_ranged_state_duration_frames="15"
@@ -120,6 +120,50 @@
 			>
 		</CharacterDataComponent>
 	</Base>
+
+	<AIAttackComponent
+		min_distance="0"
+		max_distance="150"
+		frames_between="15"
+		frames_between_global="15"
+		attack_ranged_action_frame="0"
+		attack_ranged_entity_file="mods/grahamsperks/files/entities/gold_dart.xml"
+		attack_ranged_entity_count_min="1"
+		attack_ranged_entity_count_max="1"
+		animation_name="attack_ranged"
+		state_duration_frames="15"
+		attack_ranged_offset_y="0"
+		attack_ranged_offset_x="0"
+		>
+	</AIAttackComponent>
+
+	<AIAttackComponent
+		min_distance="0"
+		max_distance="150"
+		frames_between="780"
+		frames_between_global="240"
+		attack_ranged_action_frame="2"
+		attack_ranged_entity_file="mods/grahamsperks/files/entities/gold_rocket_spawner.xml"
+		attack_ranged_entity_count_min="1"
+		attack_ranged_entity_count_max="1"
+		animation_name="attack_long"
+		state_duration_frames="84"
+		attack_ranged_offset_y="0"
+		attack_ranged_offset_x="0"
+		>
+	</AIAttackComponent>
+
+	<SpriteComponent
+        	_tags="character"
+		image_file="data/enemies_gfx/graham_fuzz_shiny_emissive_alt.xml"
+		emissive="1"
+		additive="1"
+		update_transform_rotation="0"
+		offset_x="0"
+		offset_y="0"
+		has_special_scale="1"
+		never_ragdollify_on_death="1">
+	</SpriteComponent>
 
 	<ParticleEmitterComponent
 		emit_cosmetic_particles="1"

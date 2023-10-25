@@ -11,7 +11,7 @@
   pos_y="0"
   frame_count="1"
   frame_width="24"
-  frame_height="20"
+  frame_height="21"
   frame_wait="0.10"
   frames_per_row="7"
   loop="1"   >
@@ -24,7 +24,7 @@
   pos_y="0"
   frame_count="1"
   frame_width="24"
-  frame_height="20"
+  frame_height="21"
   frame_wait="0.23"
   frames_per_row="7"
   loop="1"   >
@@ -37,7 +37,7 @@
   pos_y="0"
   frame_count="1"
   frame_width="24"
-  frame_height="20"
+  frame_height="21"
   frame_wait="0.23"
   frames_per_row="7"
   loop="1"   >
@@ -50,7 +50,7 @@
   pos_y="20"
   frame_count="7"
   frame_width="24"
-  frame_height="20"
+  frame_height="21"
   frame_wait="0.09"
   frames_per_row="7"
   loop="1"   >
@@ -59,10 +59,10 @@
  <RectAnimation
   name="attack"
   pos_x="0"
-  pos_y="20"
+  pos_y="21"
   frame_count="8"
   frame_width="24"
-  frame_height="20"
+  frame_height="21"
   frame_wait="0.08"
   frames_per_row="8"
   loop="0"   >

@@ -530,6 +530,7 @@ if ModSettingGet("grahamsperks.StartingItems") ~= false then
 	})
 end
 
+--[[ retired for now. should probably get this working one day
 if ModIsEnabled("noita-together") then
 	table.insert(patches, {
         path    = "mods/noita-together/files/scripts/perks.lua",
@@ -537,6 +538,7 @@ if ModIsEnabled("noita-together") then
         to      = "EXTRA_MONEY=true,GRAHAM_HEALTHY_HEARTS=true,GRAHAM_LUCKY_CLOVER=true,GRAHAM_CAMPFIRE=true,GRAHAM_REFRESHER=true,GRAHAM_EXTRA_SLOTS=true,GRAHAM_REFRESHER=true,",
 	})
 end
+]]--
 
 if HasFlagPersistent("graham_death_hp_boost") then
 	table.insert(patches, {
@@ -551,8 +553,103 @@ if HasFlagPersistent("graham_death_hp_boost") then
     })
 end
 
+local event_patches = {}
+local events = {
+	["1031"] = function()
+		event_patches = {
+			{
+			path    = "data/enemies_gfx/graham_fuzz.xml",
+			from    = "data/enemies_gfx/graham_fuzz.png",
+			to      = "mods/grahamsperks/files/seasonal/halloween_fuzz.png",
+		},
+			{
+			path    = "data/enemies_gfx/graham_fuzzzap.xml",
+			from    = "data/enemies_gfx/graham_fuzzzap.png",
+			to      = "mods/grahamsperks/files/seasonal/halloween_fuzzzap.png",
+		},
+			{
+			path    = "data/entities/animals/graham_fuzz.xml",
+			from    = "emitted_material_name=\"blood_cold\"",
+			to      = "emitted_material_name=\"magic_liquid_protection_all\"",
+		},
+			{
+			path    = "data/entities/animals/graham_fuzz.xml",
+			from    = "rock_box2d",
+			to      = "meat_pumpkin",
+		},
+			{
+			path    = "mods/grahamsperks/files/entities/cold_dart.xml",
+			from    = "magic_liquid_mana_regeneration",
+			to      = "magic_liquid_protection_all",
+		},
+			{
+			path    = "data/entities/animals/bloody_mimic.xml",
+			from    = "data/enemies_gfx/bloody_mimic.xml",
+			to      = "mods/grahamsperks/files/seasonal/halloween_bloody_mimic.xml",
+		},
+			{
+			path    = "data/entities/animals/mini_mimic.xml",
+			from    = "data/enemies_gfx/mini_mimic.xml",
+			to      = "mods/grahamsperks/files/seasonal/halloween_mini_mimic.xml",
+		},
+			{
+			path    = "data/entities/animals/graham_wizard_familiar.xml",
+			from    = "data/enemies_gfx/graham_wizard_familiar.xml",
+			to      = "mods/grahamsperks/files/seasonal/halloween_graham_wizard_familiar.xml",
+		},
+			{
+			path    = "data/entities/animals/graham_wizard_familiar.xml",
+			from    = "data/enemies_gfx/graham_wizard_familiar_emissive.xml",
+			to      = "mods/grahamsperks/files/seasonal/halloween_graham_wizard_familiar_emissive.xml", -- that's a mouthful
+		},
+			{
+			path    = "data/entities/animals/graham_wizard_familiar.xml",
+			from    = "<VerletPhysicsComponent",
+			to      = [[<VerletPhysicsComponent _enabled="0"]],
+		},
+		}
+		ModTextFileSetContent("data/ragdolls/graham_fuzz/filenames.txt", "data/ragdolls/graham_fuzz/halloween_body.png")
+		ModTextFileSetContent("data/ragdolls/graham_wizard_familiar/filenames.txt", ModTextFileGetContent("data/ragdolls/graham_wizard_familiar/filenames_halloween.txt"))
+	end,
+	["1111"] = function()
+		-- todo: add more to this?
+		ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_birthday.lua" )
+		event_patches = {
+			{
+			path    = "mods/grahamsperks/files/scripts/shiny.lua",
+			from    = "-- dummy",
+			to      = "threshold = threshold * 64",
+		},
+			{
+			path    = "mods/grahamsperks/files/scripts/book.lua",
+			from    = "= 8000",
+			to      = "= 500",
+		},
+			{
+			path    = "mods/grahamsperks/files/scripts/book.lua",
+			from    = "= 800",
+			to      = "= 50",
+		},
+		}
+	end,
+}
+local year, month, day, hour, minute, second = GameGetDateAndTimeLocal()
+local event = month .. day
+
+if events[event] ~= nil then
+	events[event]()
+end
+
 for i=1, #patches do
     local patch = patches[i]
+    local content = ModTextFileGetContent(patch.path)
+	if content ~= nil then
+		content = content:gsub(patch.from, patch.to)
+		ModTextFileSetContent(patch.path, content)
+	end
+end
+for i=1, #event_patches do
+    local patch = event_patches[i]
     local content = ModTextFileGetContent(patch.path)
 	if content ~= nil then
 		content = content:gsub(patch.from, patch.to)
@@ -649,16 +746,11 @@ function OnPlayerSpawned(player)
 end
 
 function OnMagicNumbersAndWorldSeedInitialized()
-	local year, month, day, hour, minute, second = GameGetDateAndTimeLocal()
 	SetRandomSeed(13548, 195430)
-	if ( month == 11 ) and ( day == 11 ) then
-		ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_birthday.lua" )
-	elseif (Random(1, 100) == 1) or ModSettingGet("grahamsperks.birthday") == "yes" then
+	if ModSettingGet("grahamsperks.birthday") == "yes" and event ~= "1111" then
 		ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_birthday.lua" )
 	end
-	
-	SetRandomSeed(823910, 145832)
-	if (Random(1, 30) == 1) then
+	if (Random(1, 15) == 1) then
 		ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_secret.lua" )
 	end
 end

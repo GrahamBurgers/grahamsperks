@@ -42,7 +42,7 @@ function kick( entity_who_kicked )
                     end
                 end
 
-                if EntityGetFirstComponent(wands[i], "ItemCostComponent") ~= nil and BiomeMapGetName(x, y) == "$biome_holymountain" or BiomeMapGetName(x, y) == "$biome_boss_arena" then
+                if removed and EntityGetFirstComponent(wands[i], "ItemCostComponent") ~= nil and BiomeMapGetName(x, y) == "$biome_holymountain" or BiomeMapGetName(x, y) == "$biome_boss_arena" then
                     -- player stole spells from a wand in a shop
                     -- anger the gods
                     GamePlaySound( "data/audio/Desktop/event_cues.bank", "event_cues/angered_the_gods/create", x2, y2 )
