@@ -363,7 +363,7 @@ local to_insert = {
 			SetRandomSeed(GameGetFrameNum(), GameGetFrameNum())
 			local goodluck = Random(1, 6)
 
-			if GameHasFlagRun("greed_curse") then
+			if GameHasFlagRun("greed_curse") and not GameHasFlagRun("greed_curse_gone") then -- i hate git
 				if (goodluck < 5) then EntityLoad("data/entities/projectiles/deck/touch_gold.xml", x, y) end
 				if (goodluck >= 5) then EntityLoad("data/entities/items/pickup/chest_random_super.xml", x - 15, y) end
 				if (goodluck >= 6) then EntityLoad("data/entities/items/pickup/chest_random_super.xml", x + 15, y) end
