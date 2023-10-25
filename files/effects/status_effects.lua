@@ -22,14 +22,6 @@ local to_insert = {
 		is_harmful=true,
 	},
 	{
-		id="GRAHAM_STARVING",
-		ui_name="$graham_status_starving",
-		ui_description="$graham_statusdesc_starving",
-		ui_icon="mods/grahamsperks/files/effects/starving.png",
-		effect_entity="mods/grahamsperks/files/effects/starving.xml",
-		is_harmful=true,
-	},
-	{
 		id="GRAHAM_CREEPYPOLY",
 		ui_name="$graham_status_creepypoly",
 		ui_description="$graham_statusdesc_creepypoly",

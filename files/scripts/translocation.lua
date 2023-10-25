@@ -5,10 +5,6 @@ local x, y = EntityGetTransform( entity_id )
 
 local projectiles = EntityGetInRadiusWithTag( x, y, 32, "projectile" )
 SetRandomSeed( x, y - GameGetFrameNum() )
-local who_shot_me = nil
-edit_component( entity_id, "ProjectileComponent", function(comp,vars)
-	who_shot_me = ComponentGetValue2( comp, "mWhoShot" )
-end)
 
 for i,projectile_id in ipairs(projectiles) do
 	if projectile_id ~= entity_id then
@@ -28,7 +24,7 @@ for i,projectile_id in ipairs(projectiles) do
 		
 		-- print( tostring( who_shot ) .. ", " .. tostring( entity_id ) )
 		
-		if ( who_shot ~= who_shot_me ) then
+		if ( who_shot ~= entity_id ) then
 			local spd = math.sqrt( vel_y ^ 2 + vel_x ^ 2 )
 			
 			if ( spd < 1000 ) then
@@ -45,10 +41,10 @@ for i,projectile_id in ipairs(projectiles) do
 				
 				EntitySetTransform( projectile_id, px, py )
 
-				-- subtract 3 seconds of lifetime for each projectile successfully phased
+				-- subtract 2 seconds of lifetime for each projectile successfully phased
 				-- I hope this can't cause any funky infinite lifetime shenanigans
 				local lifetime = EntityGetFirstComponent(entity_id, "LifetimeComponent") or 0
-				ComponentSetValue2(lifetime, "kill_frame", ComponentGetValue2(lifetime, "kill_frame") - 180)
+				ComponentSetValue2(lifetime, "kill_frame", ComponentGetValue2(lifetime, "kill_frame") - 120)
 			end
 		end
 	end

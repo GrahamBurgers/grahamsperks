@@ -1,4 +1,4 @@
-<Entity tags="graham_flum_shader">
+<Entity>
 
 	<InheritTransformComponent>
     </InheritTransformComponent>
@@ -8,17 +8,21 @@
 	    script_source_file="mods/grahamsperks/files/scripts/immunity_aura_reroll.lua"
 	></LuaComponent>
 
-	<LuaComponent 
-	    execute_every_n_frame="180"
-	    script_source_file="mods/grahamsperks/files/scripts/immunity_aura_vomit.lua"
-	></LuaComponent>
-
     <GameEffectComponent 
     	effect="CONFUSION"
     	frames="1000"
     >
 	</GameEffectComponent >
-	
+
+	<DrugEffectModifierComponent>
+		<fx_add
+			distortion_amount="0.2"
+			color_amount="4.5"
+			fractals_amount="0.2"
+			fractals_size="1.0"
+		/>
+	</DrugEffectModifierComponent>
+
 	<SpriteParticleEmitterComponent
 		sprite_file="data/particles/shine_confusion.xml"
 		delay="0"

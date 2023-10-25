@@ -1,8 +1,0 @@
-<Entity >
-   
-	<LuaComponent
-		execute_on_added="1"
-		script_source_file="mods/grahamsperks/files/scripts/divebomb.lua">
-	</LuaComponent>
-  
-</Entity>

@@ -4,7 +4,7 @@ local comps
 
 SetRandomSeed( entity_id, entity_id )
 
-comps = EntityGetComponentIncludingDisabled( entity_id, "ParticleEmitterComponent" )
+comps = EntityGetComponent( entity_id, "ParticleEmitterComponent" )
 if ( comps ~= nil ) then
 	for i,v in ipairs( comps ) do
 		local cosmetic = ComponentGetValue2( v, "emit_cosmetic_particles" )
@@ -19,21 +19,21 @@ if ( comps ~= nil ) then
 	end
 end
 
-comps = EntityGetComponentIncludingDisabled( entity_id, "SpriteParticleEmitterComponent" )
+comps = EntityGetComponent( entity_id, "SpriteParticleEmitterComponent" )
 if ( comps ~= nil ) then
 	for i,v in ipairs( comps ) do
 		ComponentSetValue2( v, "is_emitting", false )
 	end
 end
 
-comps = EntityGetComponentIncludingDisabled( entity_id, "SpriteComponent" )
+comps = EntityGetComponent( entity_id, "SpriteComponent" )
 if ( comps ~= nil ) then
 	for i,v in ipairs( comps ) do
 		ComponentSetValue2( v, "visible", false )
 	end
 end
 
-comps = EntityGetComponentIncludingDisabled( entity_id, "ProjectileComponent" )
+comps = EntityGetComponent( entity_id, "ProjectileComponent" )
 if ( comps ~= nil ) then
 	for i,v in ipairs( comps ) do
 		ComponentObjectSetValue2( v, "config_explosion", "explosion_sprite", "" )

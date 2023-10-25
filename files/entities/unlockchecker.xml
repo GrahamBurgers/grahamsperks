@@ -1,0 +1,13 @@
+<Entity>
+
+	<InheritTransformComponent>
+	</InheritTransformComponent>
+	
+<LuaComponent 
+  execute_on_added="1"
+  remove_after_executed="0"
+  script_source_file="mods/grahamsperks/files/entities/unlockcheck.lua"
+  execute_every_n_frame="20">
+</LuaComponent>
+
+</Entity>

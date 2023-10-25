@@ -8,14 +8,14 @@ function damage_about_to_be_received( damage, x, y, ent_thats_responsible, crit_
 	local health = 0
 	if( damagemodels ~= nil ) then
 		for i,v in ipairs(damagemodels) do
-			health = ComponentGetValue2( v, "hp" )
+			health = tonumber( ComponentGetValue2( v, "hp" ) )
 			break
 		end
 	end
-
+	
     local new_damage = damage
 	SetRandomSeed( GameGetFrameNum(), ent_thats_responsible )
-
+	
 	-- to make the math easier
 	health = health * 25
 	damage = damage * 25
@@ -28,13 +28,12 @@ function damage_about_to_be_received( damage, x, y, ent_thats_responsible, crit_
 
 	if cutoff >= rand and damage >= 2 then
 		new_damage = 0
-
+		
 		EntityLoad( "mods/grahamsperks/files/entities/lucky.xml", x, y )
 		if EntityHasTag(player, "player_unit") then
-            local enum = ModSettingGet("grahamsperks.LuckyDay")
-			if enum == 1 then
-				GamePrint(GameTextGet("$graham_lucky_chance", tostring(math.ceil(cutoff))))
-            elseif enum == 2 then
+			if ModSettingGet("grahamsperks.luckyday") == "yes" then
+				GamePrint(GameTextGetTranslatedOrNot("$graham_lucky") .. " (" .. tostring(math.ceil(cutoff)) .. "%)")
+			elseif ModSettingGet("grahamsperks.luckyday") == "no" then
 				GamePrint("$graham_lucky")
 			end
 		end

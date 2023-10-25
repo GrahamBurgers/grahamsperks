@@ -1,4 +1,0 @@
-data/ragdolls/graham_wizard_familiar/halloween_torso.png
-data/ragdolls/graham_wizard_familiar/halloween_hand.png
-data/ragdolls/graham_wizard_familiar/halloween_feet.png
-data/ragdolls/graham_wizard_familiar/halloween_head.png
