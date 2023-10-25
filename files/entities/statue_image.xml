@@ -1,0 +1,21 @@
+<Entity>
+
+    <PhysicsBody2Component
+        kill_entity_after_initialized="0" 
+        is_static="1"
+        fixed_rotation="1"
+        destroy_body_if_entity_destroyed="0"
+        >
+    </PhysicsBody2Component>
+    <PhysicsImageShapeComponent
+        is_root="1"
+        centered="1" 
+        image_file="mods/grahamsperks/files/entities/statue.png"
+        material="templebrick_noedge_static" >
+    </PhysicsImageShapeComponent>
+
+    <LifetimeComponent
+        lifetime="4"
+    ></LifetimeComponent>
+
+</Entity>

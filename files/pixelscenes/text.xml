@@ -1,8 +1,6 @@
 <Entity>
 	<PixelSceneComponent
 		pixel_scene="mods/grahamsperks/files/pixelscenes/text.png"
-		pixel_scene_visual="mods/grahamsperks/files/pixelscenes/text_visual.png"
-		pixel_scene_background="mods/grahamsperks/files/pixelscenes/text_background.png"
 		offset_x="-80"
 		offset_y="-60"
 		skip_biome_checks="1"

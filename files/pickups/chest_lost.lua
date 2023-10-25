@@ -81,7 +81,7 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 	end
 
 	-- CHEST DROPS GO HERE (Welcome to elseif hell)
-	local count = 1
+	local count = Random(1, 2)
 	while( count > 0 ) do
 		count = count - 1
 		local rnd = Random(1,100)
@@ -89,17 +89,17 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 			-- 10%: Random potions
 			table.insert(entities, { "data/entities/items/pickup/potion_random_material.xml" })
 			table.insert(entities, { "data/entities/items/pickup/potion_random_material.xml" })
-		elseif rnd <= 20 then
-			-- 10%: Large extra max health
-			if Random(1, 50) == 50 then
+		elseif rnd <= 30 then
+			-- 20%: Large extra max health
+			if Random(1, 200) == 200 then
 				table.insert( entities, { "data/entities/animals/illusions/dark_alchemist.xml" } )
 			else
 				table.insert( entities, { "data/entities/items/pickup/heart_better.xml" })
 			end
 		elseif rnd <= 40 then
-			-- 20%: Identical lost chest
+			-- 10%: Identical lost chest
 			-- Load it directly here to avoid rng wackiness
-			EntityLoad("mods/grahamsperks/files/pickups/chest_lost.xml", x + 1, y - 1)
+			EntityLoad("mods/grahamsperks/files/pickups/chest_lost.xml", x + 5, y - 5)
 		elseif rnd <= 45 then
 			-- 10%: Containers
 			table.insert(entities, { "mods/grahamsperks/files/pickups/balloon.xml" })
@@ -110,12 +110,7 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 			table.insert(entities, { "data/entities/projectiles/bomb_holy.xml" })
 			good_item_dropped = false
 		elseif rnd <= 60 then
-			-- 5%: Eye
-			EntityLoad("mods/grahamsperks/files/entities/eye/blood_orb.xml", x-10, y)
-			EntityLoad("mods/grahamsperks/files/entities/eye/blood_orb.xml", x+10, y)
-			good_item_dropped = false
-		elseif rnd <= 65 then
-			-- 5%: Bunch of wands and ghosts
+			-- 10%: Bunch of wands and ghosts
 			for i = 1, Random(2, 6) do
 				table.insert(entities, { "data/entities/animals/wand_ghost_charmed.xml" })
 				if Random(1, 2) == 1 then
@@ -126,9 +121,8 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 			end
 			good_item_dropped = false
 		elseif rnd <= 70 then
-			-- 5%: Mini mimic
-			table.insert(entities, { "data/entities/animals/mini_mimic.xml" })
-			good_item_dropped = false
+			-- 5%: Good wand
+			table.insert(entities, { "data/entities/items/wand_level_05.xml" })
 		elseif rnd <= 75 then
 			-- 5%: Gourds
 			for i = 1, Random(1, 3) do
@@ -141,6 +135,10 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 				"10",
 				"10",
 				"10",
+				"10",
+				"10",
+				"10",
+				"50",
 				"50",
 				"50",
 				"50",
@@ -157,7 +155,7 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 				end
 			end
 
-		elseif rnd <= 82 then
+		elseif rnd <= 86 then
 			-- 6%: spells
 			local amount = Random(5,8)
 			for i=1,amount do
@@ -166,8 +164,8 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 		elseif rnd <= 88 then
 			-- 2%: Midas
 			EntityConvertToMaterial(GetUpdatedEntityID(), "midas_precursor")
-		elseif rnd <= 90 then
-			-- 2%: Wacky items
+		elseif rnd <= 95 then
+			-- 7%: Wacky items
 			drops = {
 				"data/entities/items/pickup/physics_greed_die.xml",
 				"data/entities/items/pickup/physics_gold_orb_greed.xml",
@@ -178,8 +176,7 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 			table.insert(entities, { drops[Random(1, #drops)] })
 			table.insert(entities, { drops[Random(1, #drops)] })
 		else
-			-- 10%: Double roll
-			-- No triple roll because the double roll chance is 10% anyway
+			-- 5%: Double roll
 			count = count + 2
 		end
 	end
@@ -204,7 +201,29 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 
 		local comp = EntityGetFirstComponentIncludingDisabled(eid, "ProjectileComponent")
 		if comp ~= nil and entity[1] == "data/entities/projectiles/bomb_holy.xml" then
-			ComponentSetValue2(comp, "lifetime", 400)
+			ComponentObjectSetValue2(comp, "config_explosion", "create_cell_material", "gold")
+			ComponentObjectSetValue2(comp, "config_explosion", "create_cell_probability", Random(2, 4))
+			ComponentObjectSetValue2(comp, "config_explosion", "damage", 2)
+			local health = EntityGetFirstComponent(eid, "DamageModelComponent") or 0
+			ComponentSetValue2(health, "hp", ComponentGetValue2(health, "hp") * 5)
+			EntityAddComponent2(eid, "SpriteComponent", {
+				_tags="enabled_in_hand",
+				alpha=0.8,
+				image_file="data/particles/fog_of_war_hole.xml",
+				smooth_filtering=true,
+				fog_of_war_hole=true,
+				has_special_scale=true,
+				special_scale_x=4,
+				special_scale_y=4,
+			})
+			EntityAddComponent2(eid, "LightComponent", {
+				_tags="enabled_in_hand",
+				_enabled=true,
+				radius=200,
+				r=255,
+				g=0,
+				b=0,
+			})
 		end
 	end
 

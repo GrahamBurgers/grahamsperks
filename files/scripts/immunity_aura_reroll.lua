@@ -40,6 +40,15 @@ if #EntityGetWithTag("graham_immunityaura") > 0 and #EntityGetWithTag("graham_im
             table.insert(options, "purple")
         end
 
+        local comp = get_variable_storage_component(player, "graham_immunityaura")
+        local current = ComponentGetValue2(comp, "value_string")
+        -- remove current immunity from pool
+        for o, type in ipairs(options) do
+            if type == current then
+                table.remove(options, o)
+            end
+        end
+
         if #options < 1 then
             -- do nothing if we can't benefit the player
             -- convert immunity aura into a permanent passive damage resistance
@@ -56,16 +65,6 @@ if #EntityGetWithTag("graham_immunityaura") > 0 and #EntityGetWithTag("graham_im
             } )
         else
 
-            local comp = get_variable_storage_component(player, "graham_immunityaura")
-            local current = ComponentGetValue2(comp, "value_string")
-
-            -- remove current immunity from pool
-            for o, type in ipairs(options) do
-                if type == current then
-                    table.remove(options, o)
-                end
-            end
-
             -- roll new random
             SetRandomSeed( GameGetFrameNum(), x + y )
             local result = options[Random(1, #options)]
@@ -79,6 +78,5 @@ if #EntityGetWithTag("graham_immunityaura") > 0 and #EntityGetWithTag("graham_im
 
             -- remember our current immunity
             ComponentSetValue2(comp, "value_string", tostring(result))
-
         end
     end

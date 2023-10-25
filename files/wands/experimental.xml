@@ -1,4 +1,4 @@
-<Entity tags="wand,wand_experimental">
+<Entity tags="wand,wand_experimental" name="$graham_wand_experimental" >
 	<Base file="data/entities/base_item.xml">
         <SpriteComponent 
 			image_file="mods/grahamsperks/files/wands/experimental.png" 

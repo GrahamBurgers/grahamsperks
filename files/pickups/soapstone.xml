@@ -1,4 +1,4 @@
-<Entity tags="hittable,teleportable_NOT,item_physics,item_pickup,grahams_things" >
+<Entity tags="hittable,teleportable_NOT,item_physics,item_pickup,grahams_things,graham_soapstone" name="$graham_unstainer_name" >
 	<Base file="data/entities/base_item_projectile.xml" />
 
 	<!-- physical presence -->
@@ -22,7 +22,7 @@
 		centered="1"
 		is_circle="0"
 		image_file="mods/grahamsperks/files/pickups/soapstone.png"
-		material="item_box2d"
+		material="rock_box2d_hard"
 		>
 	</PhysicsImageShapeComponent>
 	
@@ -100,5 +100,10 @@
 			deck_capacity="0">
 		</gun_config>
 	</AbilityComponent>
+
+	<LuaComponent
+		_tags="enabled_in_hand,enabled_in_world,enabled_in_inventory"
+		script_source_file="mods/grahamsperks/files/scripts/soapstone_kaboom.lua"
+	></LuaComponent>
 
 </Entity>

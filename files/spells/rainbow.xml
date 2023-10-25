@@ -1,4 +1,4 @@
-<Entity tags="hittable,projectile_player" name="$projectile_default">
+<Entity tags="hittable,projectile_player,graham_rainbow" name="$projectile_default">
 
 	<Base file="data/entities/base_projectile.xml" >
 		<VelocityComponent

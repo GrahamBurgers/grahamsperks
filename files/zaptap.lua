@@ -7,9 +7,7 @@ local player = GetUpdatedEntityID()
 -- thank you dextercd for helping with this. jank scripts be jank
 local my = GetUpdatedComponentID()
 
-if player ~= ent_thats_responsible and EntityGetName(ent_thats_responsible) ~= "lap2_chaser" then
-
-local x, y = EntityGetTransform(player)
+if player ~= ent_thats_responsible and EntityGetName(ent_thats_responsible) ~= "lap2_chaser" and not EntityHasTag(ent_thats_responsible, "zappity_tappity") then
 local x2, y2 = EntityGetTransform(ent_thats_responsible)
 	if x ~= nil and y ~= nil and x2 ~= nil and y2 ~= nil then
 		-- thanks to Evaisa for helping me debug this

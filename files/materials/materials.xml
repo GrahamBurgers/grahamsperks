@@ -166,7 +166,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/bubbly.png">
     warmth_melts_to_material="graham_creepypoly"
     crackability="60"
     solid_friction="0.05"
-    tags="[static],[solid],[unconsumable]"
+    tags="[static],[solid],[unconsumable],[freezable]"
     burnable="0"
     density="10"
     show_in_creative_mode="1"
@@ -229,15 +229,15 @@ color="FF622d9a">
     liquid_sprite_stain_shaken_drop_chance="255"
     density="0.145"
     stickyness="0.3"
-    gfx_glow="155"
-    gfx_glow_color="FF505050"
+    gfx_glow="40"
+    gfx_glow_color="FFb32222"
     >
 	  <StatusEffects>
 	    <Stains>
 	      <StatusEffect type="GRAHAM_CONSUMED" />
 	    </Stains>
 	    <Ingestion>
-	      <StatusEffect type="POISONED" amount="0.3" />
+	      <StatusEffect type="GRAHAM_STARVING" amount="0.3" />
 	    </Ingestion>
 	  </StatusEffects>
 	<Graphics 
@@ -254,7 +254,7 @@ color="FFe4003c">
     cell_type="liquid"
     burnable="0"
     density="0.146"
-    lifetime="1200"
+    lifetime="800"
     audio_physics_material_wall="glass"
     >
 
@@ -262,26 +262,13 @@ color="FFe4003c">
 color="FF62cfb7"
 texture_file="mods/grahamsperks/files/materials/materials_gfx/yum.png">
 </Graphics>
+<StatusEffects>
+	<Ingestion>
+		<StatusEffect type="HP_REGENERATION" amount="0.06" />
+	</Ingestion>
+</StatusEffects>
 
   </CellData> 
-
-  <CellData 
-    name="graham_yumgas"
-    ui_name="$material_graham_yum"
-    wang_color="FfFfF5f6"
-    cell_type="gas"
-    burnable="0"
-    lifetime="1200"
-    audio_physics_material_wall="glass"
-    >
-
-<Graphics
-color="FF62cfb7"
-texture_file="mods/grahamsperks/files/materials/materials_gfx/yum.png">
-</Graphics>
-
-  </CellData> 
- 
 
   <CellData 
     name="graham_hellblood"
@@ -489,10 +476,12 @@ color="FF13890d">
 	wang_color="ff1d5893"
 	fire_hp="9000"
 	solid_on_collision_material="oil"
+	tags="[corrodible],[alchemy],[solid],[earth],[food]"
 	solid_static_type="0"
     cell_type="liquid"
 	liquid_sand="1"
 	liquid_static="0"
+	density="1"
 	>
 	    <Graphics
 	texture_file="mods/grahamsperks/files/materials/materials_gfx/meatdone.png"
@@ -514,7 +503,7 @@ color="FF13890d">
     </Graphics>
 	<StatusEffects>
 		<Ingestion>
-			<StatusEffect type="MOVEMENT_FASTER_2X" amount="0.1" />
+			<StatusEffect type="MOVEMENT_FASTER_2X" amount="0.3" />
 		</Ingestion>
 	</StatusEffects>
   </CellDataChild>
@@ -579,14 +568,19 @@ color="FF13890d">
     <CellData
   	name="graham_driedfungus" 
 	ui_name="$material_graham_driedfungus"
+	tags="[plant],[corrodible],[burnable],[alchemy],[earth],[fungus]"
 	wang_color="f1612150"
 	cell_type="liquid"
+	burnable="1"
 	liquid_sand="1"
 	gfx_glow="20"
 	gfx_glow_color="ff762d63"
 	color="ff762d63"
-        stickyness="6"
+    stickyness="6"
 	density="6.5"
+	temperature_of_fire="90" 
+	autoignition_temperature="25"
+	fire_hp="5"
 	>
 	    <Graphics
 	texture_file="mods/grahamsperks/files/materials/materials_gfx/driedfungus.png">
@@ -664,6 +658,7 @@ color="FF13890d">
     <CellData
   	name="graham_meathealthy" 
 	ui_name="$material_graham_meathealthy"
+	tags="[corrodible],[alchemy],[solid],[earth],[food]"
 	wang_color="f1f0005c"
 	platform_type="0"
 	fire_hp="9000"
@@ -689,6 +684,7 @@ color="FF13890d">
       <CellData
   	name="graham_meatgreedy" 
 	ui_name="$material_graham_meatgreedy"
+	tags="[corrodible],[alchemy],[solid],[earth],[food]"
 	platform_type="0"
 	wang_color="f1f0d000"
 	fire_hp="9000"
@@ -903,6 +899,7 @@ color="FF797e7e">
 	_parent="wood_static"
 	_inherit_reactions="1"
 	ui_name="$material_graham_wood_rot"
+	tags="[corrodible],[burnable],[alchemy],[solid],[earth],[impure]"
 	wang_color="ff14299"
 	lifetime="200"
 	name="graham_wood_rot"  >
@@ -1097,7 +1094,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/copium.png">
 	name="graham_tele_chaotic"
 	ui_name="$material_graham_tele_chaotic"
   	tags="[liquid],[water],[magic_liquid],[impure]"
-	density="4.43"
+	density="4.5"
 	cell_type="liquid"
 	wang_color="80438a8a"
 	generates_smoke="250"
@@ -1427,5 +1424,113 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/love.png">
 	</Ingestion>
 </StatusEffects>
 </CellDataChild>
+
+  <CellDataChild
+  	_parent="templerock_static"
+  	_inherit_reactions="1"
+  	name="graham_purplebrick" 
+	ui_name="$graham_mat_purplebrick"
+	tags="[static],[solid],[alchemy],[earth]"
+	hp="1200000"
+	durability="20"
+	gfx_glow="150"
+	audio_physics_material_wall="metalwall"
+	audio_physics_material_solid="metalhollow"
+	wang_color="ffa160fa">
+  	<Graphics
+		texture_file="mods/grahamsperks/files/materials/materials_gfx/purplebrick.png"
+		color="ffa160fa" >
+		<Edge>
+			  <EdgeGraphics 
+				color="ffa160fa" 
+				overwrite="1" 
+				percent="1" 
+				require_same_material="0" 
+				require_same_material_type="0" 
+				type="NORMAL_BASED" 
+				z="1" >
+				<Images>
+				<Image 
+					do_only_horizontal_stripe="1" 
+					do_only_vertical_stripe="0" 
+					filename="mods/grahamsperks/files/materials/materials_gfx/edge_purplebrick_hor.png"
+					min_angle="45" 
+					max_angle="135" />
+				  <Image 
+					do_only_horizontal_stripe="0" 
+					do_only_vertical_stripe="1" 
+					filename="mods/grahamsperks/files/materials/materials_gfx/edge_purplebrick_ver.png"
+					min_angle="135" 
+					max_angle="235" />
+				  <Image 
+					do_only_horizontal_stripe="1" 
+					do_only_vertical_stripe="0" 
+					filename="mods/grahamsperks/files/materials/materials_gfx/edge_purplebrick_hor.png"
+					min_angle="235" 
+					max_angle="315" />
+				  <Image 
+					do_only_horizontal_stripe="0" 
+					do_only_vertical_stripe="1" 
+					filename="mods/grahamsperks/files/materials/materials_gfx/edge_purplebrick_ver.png"
+					min_angle="315" 
+					max_angle="360" />
+				  <Image 
+					do_only_horizontal_stripe="0" 
+					do_only_vertical_stripe="1" 
+					filename="mods/grahamsperks/files/materials/materials_gfx/edge_purplebrick_ver.png"
+					min_angle="0" 
+					max_angle="45" />
+				</Images>
+			  </EdgeGraphics>
+		</Edge>
+    </Graphics>
+  </CellDataChild>
+
+  <CellDataChild
+  	_parent="graham_purplebrick"
+  	_inherit_reactions="1"
+  	name="graham_purplebrick_lessglow" 
+	ui_name="$graham_mat_purplebrick"
+	gfx_glow="20"
+	wang_color="ffa160fb"
+	></CellDataChild>
+
+  <CellDataChild
+  	_parent="meat"
+	name="graham_meat_healthy"
+	ui_name="$graham_mat_meat_healthy"
+	wang_color="ffc3a079"
+	solid_on_collision_material="blood"
+	solid_break_to_type="blood"
+	audio_physics_material_wall="meat"
+	audio_physics_material_solid="meat"
+	audio_is_soft="1"
+	show_in_creative_mode="1"
+	>
+	<StatusEffects>
+		<Ingestion>
+			<StatusEffect type="GRAHAM_HEALTHYMEAL" amount="5" />
+		</Ingestion>
+	</StatusEffects>
+  </CellDataChild>
+
+	<CellDataChild
+		_parent="aluminium"
+		_inherit_reactions="1"
+		tags="[box2d],[corrodible],[alchemy],[solid],[earth]"
+		name="graham_aluminium" 
+		ui_name="$mat_aluminium"
+		wang_color="ff3c2d3e"
+		audio_physics_material_wall="gravel"
+		audio_physics_material_solid="metalhollow"
+		electrical_conductivity="1"
+		durability="10"
+		hp="1000000"
+		>
+		<Graphics
+		texture_file="data/materials_gfx/steel.png"
+		color="ff43a34b" >
+		</Graphics>
+	</CellDataChild>
 
 </Materials>

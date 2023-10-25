@@ -11,7 +11,7 @@ function damage_received( dmg, msg, source )
 		local max_hp = ComponentGetValue2(damage, "max_hp")
 		local hp = ComponentGetValue2(damage, "hp") - dmg
 
-		if source == EntityGetParent(me) then dmg = dmg * 0.2 end
+		if source == EntityGetParent(me) then dmg = 0 end
 		
 		if ( source ~= nil ) and ( source ~= NULL_ENTITY ) and ( source ~= me ) then
 			local hm = EntityGetTransform( source )
@@ -29,14 +29,10 @@ function damage_received( dmg, msg, source )
 			local current_sprite = ComponentGetValue2(spritecomp, "image_file")
 			local to_switch
 
-			local hitbox = EntityGetFirstComponentIncludingDisabled(me, "HitboxComponent")
-			local particles = EntityGetFirstComponentIncludingDisabled(me, "ParticleEmitterComponent")
-			local damagecomp = EntityGetFirstComponentIncludingDisabled(me, "DamageModelComponent")
-			local genome = EntityGetFirstComponentIncludingDisabled(me, "GenomeDataComponent")
-			EntitySetComponentIsEnabled(me, hitbox, true)
-			EntitySetComponentIsEnabled(me, particles, true)
-			EntitySetComponentIsEnabled(me, damagecomp, true)
-			EntitySetComponentIsEnabled(me, genome, true)
+			EntitySetComponentIsEnabled(me, EntityGetFirstComponentIncludingDisabled(me, "HitboxComponent") or 0, true)
+            EntitySetComponentIsEnabled(me, EntityGetFirstComponentIncludingDisabled(me, "ParticleEmitterComponent") or 0, true)
+            EntitySetComponentIsEnabled(me, EntityGetFirstComponentIncludingDisabled(me, "DamageModelComponent") or 0, true)
+            EntitySetComponentIsEnabled(me, EntityGetFirstComponentIncludingDisabled(me, "GenomeDataComponent") or 0, true)
 		
 			if hp > 0 then
 				-- damage immunity
@@ -52,27 +48,17 @@ function damage_received( dmg, msg, source )
 				to_switch = "eye4"
 			else
 				to_switch = "eye5"
-				EntitySetComponentIsEnabled(me, hitbox, false)
-				EntitySetComponentIsEnabled(me, particles, false)
-				EntitySetComponentIsEnabled(me, damagecomp, false)
-				EntitySetComponentIsEnabled(me, genome, false)
+				EntitySetComponentIsEnabled(me, EntityGetFirstComponentIncludingDisabled(me, "HitboxComponent") or 0, false)
+				EntitySetComponentIsEnabled(me, EntityGetFirstComponentIncludingDisabled(me, "ParticleEmitterComponent") or 0, false)
+				EntitySetComponentIsEnabled(me, EntityGetFirstComponentIncludingDisabled(me, "DamageModelComponent") or 0, false)
+				EntitySetComponentIsEnabled(me, EntityGetFirstComponentIncludingDisabled(me, "GenomeDataComponent") or 0, false)
 			end
 
 			if GameHasFlagRun("PERK_PICKED_MPP_CYBORG_FRIENDS") then
 				to_switch = to_switch .. "_robotic"
 			end
-
-			if current_sprite ~= "mods/grahamsperks/files/entities/eye/" .. to_switch .. ".png" then
-				-- Hack to make the sprite update faster; remove and readd the component
-				-- I'm sure this will cause no problems whatsoever
-				EntityRemoveComponent(me, spritecomp)
-				EntityAddComponent2(me, "SpriteComponent", {
-					image_file="mods/grahamsperks/files/entities/eye/" .. to_switch .. ".png",
-					offset_x=8,
-					offset_y=8,
-					z_index=-2,
-				})
-			end
+			ComponentSetValue2(spritecomp, "image_file", "mods/grahamsperks/files/entities/eye/" .. to_switch .. ".png")
+			EntityRefreshSprite(me, spritecomp)
 		end
 	end
 end

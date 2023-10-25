@@ -1,0 +1,166 @@
+<Entity name="$graham_crystal_ball_name" tags="hittable,teleportable_NOT,item_physics,item_pickup" >
+  <Base file="data/entities/base_item_projectile.xml">
+    <ProjectileComponent
+      damage_scaled_by_speed="0"
+      on_lifetime_out_explode="1"
+      penetrate_entities="0"
+      explosion_dont_damage_shooter="1"
+      damage="0"
+      on_death_explode="1"
+      never_hit_player="1"
+      do_moveto_update="1"
+    >
+    <config_explosion
+      damage="3"
+      explosion_radius="80"
+	    explosion_sprite="data/particles/explosion_100_pink.xml"
+      cell_explosion_radius_min="80"
+      cell_explosion_radius_max="80"
+      explosion_sprite_lifetime="0"
+      audio_event_name="explosions/magic_grenade_big"
+      sparks_count_min="30" 
+      sparks_count_max="50" 
+	    spark_material="spark_purple_bright"
+      sparks_enabled="1" 
+      stains_enabled="1"
+      load_this_entity="data/entities/particles/particle_explosion/main_swirly_purple.xml"
+      damage_mortals="1"
+      hole_enabled="1"
+    ></config_explosion>
+      <damage_by_type
+      melee="0"
+      projectile="0"
+      explosion="0"
+      electricity="0"
+      healing="0"
+      fire="0"
+      drill="0"
+      slice="0"
+      ice="0"
+      physics_hit="0"
+      radioactive="0"
+      poison="0"
+      overeating="0"
+      curse="0"
+      >
+      </damage_by_type>
+    
+    </ProjectileComponent>
+  </Base>
+
+  <PhysicsBodyComponent 
+    _tags="enabled_in_world"
+    uid="1" 
+    allow_sleep="1" 
+    angular_damping="0" 
+    fixed_rotation="0" 
+    is_bullet="1" 
+    linear_damping="0"
+    auto_clean="0"
+    on_death_leave_physics_body="1"
+    hax_fix_going_through_ground="1"
+  ></PhysicsBodyComponent>
+  
+  <PhysicsImageShapeComponent 
+    body_id="1"
+    centered="1"
+    image_file="mods/grahamsperks/files/pickups/crystal_ball.png"
+    material="item_box2d_glass"
+  ></PhysicsImageShapeComponent>
+
+	<HomingComponent
+    _tags="enabled_in_world"
+    just_rotate_towards_target="1"
+	></HomingComponent>
+  
+  <PhysicsThrowableComponent
+    max_throw_speed="170"
+    throw_force_coeff="1.5"
+  ></PhysicsThrowableComponent>
+
+  <VelocityComponent
+    _tags="enabled_in_world"
+    affect_physics_bodies="1"
+  ></VelocityComponent>
+
+  <LuaComponent
+    execute_on_added="1"
+    remove_after_executed="1"
+    execute_every_n_frame="-1"
+    script_source_file="mods/grahamsperks/files/scripts/crystal_ball_init.lua"
+  ></LuaComponent>
+  
+  <!-- item -->
+
+  <SpriteComponent
+    _tags="enabled_in_hand"
+    _enabled="0"
+    offset_x="4"
+    offset_y="4"
+    image_file="mods/grahamsperks/files/pickups/crystal_ball.png"
+  ></SpriteComponent>
+
+  <SpriteComponent
+    _tags="enabled_in_hand"
+    _enabled="0"
+    offset_x="8"
+    offset_y="26"
+    image_file="mods/grahamsperks/files/pickups/crystal_ball_beam.png"
+    fog_of_war_hole="1"
+  ></SpriteComponent>
+
+  <SpriteComponent
+    _tags="enabled_in_hand"
+    _enabled="0"
+    offset_x="8"
+    offset_y="26"
+    image_file="mods/grahamsperks/files/pickups/crystal_ball_beam.png"
+    alpha="0.2"
+    z_index="-8"
+  ></SpriteComponent>
+
+  <SpriteComponent
+    _tags="enabled_in_world"
+    _enabled="1"
+    offset_x="16"
+    offset_y="16"
+    image_file="mods/grahamsperks/files/pickups/crystal_ball_glow.png"
+    fog_of_war_hole="1"
+  ></SpriteComponent>
+
+  <SpriteComponent
+    _tags="enabled_in_world"
+    _enabled="1"
+    offset_x="16"
+    offset_y="16"
+    image_file="mods/grahamsperks/files/pickups/crystal_ball_glow.png"
+    alpha="0.2"
+    z_index="-8"
+  ></SpriteComponent>
+
+  <ItemComponent
+    _tags="enabled_in_world"
+    item_name="$graham_crystal_ball_name"
+    ui_description="$graham_crystal_ball_desc"
+    ui_sprite="mods/grahamsperks/files/pickups/crystal_ball_ui.png"
+    max_child_items="0"
+    is_pickable="1"
+    is_equipable_forced="1"
+    preferred_inventory="QUICK"
+  ></ItemComponent>
+
+  <UIInfoComponent
+    _tags="enabled_in_world"
+    name="$graham_crystal_ball_name">
+  </UIInfoComponent>
+	
+	<AbilityComponent
+		ui_name="$graham_crystal_ball_name"
+		throw_as_item="1"
+		><gun_config
+			deck_capacity="0"
+		></gun_config>
+	</AbilityComponent>
+
+
+</Entity>
