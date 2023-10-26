@@ -603,6 +603,11 @@ local events = {
 			to      = "mods/grahamsperks/files/seasonal/halloween_graham_wizard_familiar_emissive.xml", -- that's a mouthful
 		},
 			{
+			path    = "data/entities/animals/graham_miner_gasser.xml",
+			from    = "data/enemies_gfx/graham_miner_gasser.xml",
+			to      = "mods/grahamsperks/files/seasonal/halloween_graham_miner_gasser.xml",
+		},
+			{
 			path    = "data/entities/animals/graham_wizard_familiar.xml",
 			from    = "<VerletPhysicsComponent",
 			to      = [[<VerletPhysicsComponent _enabled="0"]],
@@ -635,7 +640,6 @@ local events = {
 }
 local year, month, day, hour, minute, second = GameGetDateAndTimeLocal()
 local event = month .. day
-
 if events[event] ~= nil then
 	events[event]()
 end

@@ -1,4 +1,4 @@
-graham_oneoffs = perk_pickup 
+local graham_oneoffs = perk_pickup
 
 function perk_pickup( entity_item, entity_who_picked, item_name, do_cosmetic_fx, kill_other_perks, no_perk_entity_ )
 	

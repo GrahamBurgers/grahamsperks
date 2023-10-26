@@ -1,4 +1,4 @@
-<Entity tags="teleportable_NOT,lukki,glue_NOT,touchmagic_immunity,perk_entity,graham_lukki_mount" name="$graham_lukkimount_name" >	
+<Entity tags="teleportable_NOT,lukki,glue_NOT,touchmagic_immunity,perk_entity,graham_lukki_mount,graham_enemydialogue" name="$graham_lukkimount_name" >	
 
 	<SpriteComponent 
 		image_file="mods/grahamsperks/files/entities/lukki_mount/sprite.xml"

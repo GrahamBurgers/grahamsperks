@@ -28,11 +28,14 @@ function kick( entity_who_kicked )
                         local item = EntityGetFirstComponentIncludingDisabled(spells[j], "ItemComponent") or 0
                         if ComponentGetValue2(item, "permanently_attached") ~= true then
                             -- make the spell normal
-                            SetRandomSeed(x + entity_who_kicked, spells[j] + wands[i])
-                            EntitySetComponentsWithTagEnabled(spells[j], "enabled_in_world", true)
-                            EntitySetComponentsWithTagEnabled(spells[j], "enabled_in_hand", false)
-                            EntitySetComponentsWithTagEnabled(spells[j], "enabled_in_inventory", false)
                             EntityRemoveFromParent(spells[j])
+                            SetRandomSeed(x + entity_who_kicked, spells[j] + wands[i])
+
+                            local all = EntityGetAllComponents( spells[j] )
+                            for a,b in ipairs( all ) do
+                                EntitySetComponentIsEnabled( spells[j], b, true ) -- hax????
+                            end
+
                             EntitySetTransform(spells[j], x2, y2, 0)
                             EntityApplyTransform(spells[j], x2, y2, 0)
                             local velcomp = EntityGetFirstComponentIncludingDisabled(spells[j], "VelocityComponent") or 0

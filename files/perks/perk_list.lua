@@ -362,14 +362,15 @@ local to_insert = {
 			local x, y = EntityGetTransform(entity_who_picked)
 			SetRandomSeed(GameGetFrameNum(), GameGetFrameNum())
 			local goodluck = Random(1, 6)
+			if GameHasFlagRun("PERK_PICKED_GRAHAM_LUCKY_CLOVER") then goodluck = goodluck + 1 end
 
 			if GameHasFlagRun("greed_curse") and not GameHasFlagRun("greed_curse_gone") then -- i hate git
 				if (goodluck < 5) then EntityLoad("data/entities/projectiles/deck/touch_gold.xml", x, y) end
 				if (goodluck >= 5) then EntityLoad("data/entities/items/pickup/chest_random_super.xml", x - 15, y) end
 				if (goodluck >= 6) then EntityLoad("data/entities/items/pickup/chest_random_super.xml", x + 15, y) end
 			else
-				if (goodluck <= 3) then EntityLoad("data/entities/items/pickup/chest_random_super.xml", x, y + 5) end
-				if (goodluck > 3) then EntityLoad("data/entities/projectiles/deck/touch_gold.xml", x, y) end
+				if (goodluck > 3) then EntityLoad("data/entities/items/pickup/chest_random_super.xml", x, y + 5) end
+				if (goodluck <= 3) then EntityLoad("data/entities/projectiles/deck/touch_gold.xml", x, y) end
 			end
 		end,
 	},
@@ -489,7 +490,7 @@ local to_insert = {
 		stackable_is_rare = true,
 		func = function(entity_perk_item, entity_who_picked, item_name)
 			local damagemodels = EntityGetComponent(entity_who_picked, "DamageModelComponent")
-			local resistance = 0
+			local resistance
 			if (damagemodels ~= nil) then
 				for i, damagemodel in ipairs(damagemodels) do
 					resistance = tonumber(ComponentObjectGetValue(damagemodel, "damage_multipliers", "projectile"))
