@@ -45,7 +45,12 @@ function kick( entity_who_kicked )
                     end
                 end
 
-                if removed and EntityGetFirstComponent(wands[i], "ItemCostComponent") ~= nil and BiomeMapGetName(x, y) == "$biome_holymountain" or BiomeMapGetName(x, y) == "$biome_boss_arena" then
+                local itemcomp = EntityGetFirstComponent(wands[i], "ItemComponent")
+                local picked = false
+                if itemcomp ~= nil then
+                    picked = ComponentGetValue2(itemcomp, "has_been_picked_by_player")
+                end
+                if (not picked) and removed and EntityGetFirstComponent(wands[i], "ItemCostComponent") ~= nil and BiomeMapGetName(x, y) == "$biome_holymountain" or BiomeMapGetName(x, y) == "$biome_boss_arena" then
                     -- player stole spells from a wand in a shop
                     -- anger the gods
                     GamePlaySound( "data/audio/Desktop/event_cues.bank", "event_cues/angered_the_gods/create", x2, y2 )
@@ -69,7 +74,12 @@ function kick( entity_who_kicked )
                         -- poof shop wands
                         local poof = EntityGetInRadiusWithTag(x2, y2, 150, "wand")
                         for q = 1, #poof do
-                            if EntityGetFirstComponent(poof[q], "ItemCostComponent") ~= nil and BiomeMapGetName(EntityGetTransform(poof[q])) == "$biome_holymountain" or BiomeMapGetName(EntityGetTransform(poof[q])) == "$biome_boss_arena" then
+                            itemcomp = EntityGetFirstComponent(poof[q], "ItemComponent")
+                            picked = false
+                            if itemcomp ~= nil then
+                                picked = ComponentGetValue2(itemcomp, "has_been_picked_by_player")
+                            end
+                            if (not picked) and EntityGetFirstComponent(poof[q], "ItemCostComponent") ~= nil and BiomeMapGetName(EntityGetTransform(poof[q])) == "$biome_holymountain" or BiomeMapGetName(EntityGetTransform(poof[q])) == "$biome_boss_arena" then
                                 local x3, y3 = EntityGetTransform(poof[q])
                                 EntityLoad("data/entities/particles/poof_blue.xml", x3, y3)
                                 EntityKill(poof[q])
