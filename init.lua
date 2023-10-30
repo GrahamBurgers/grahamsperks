@@ -555,7 +555,7 @@ end
 
 local event_patches = {}
 local events = {
-	["1031"] = function()
+	["10/31"] = function()
 		event_patches = {
 			{
 			path    = "data/enemies_gfx/graham_fuzz.xml",
@@ -616,7 +616,7 @@ local events = {
 		ModTextFileSetContent("data/ragdolls/graham_fuzz/filenames.txt", "data/ragdolls/graham_fuzz/halloween_body.png")
 		ModTextFileSetContent("data/ragdolls/graham_wizard_familiar/filenames.txt", ModTextFileGetContent("data/ragdolls/graham_wizard_familiar/filenames_halloween.txt"))
 	end,
-	["1111"] = function()
+	["11/11"] = function()
 		-- todo: add more to this?
 		ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_birthday.lua" )
 		event_patches = {
@@ -639,7 +639,10 @@ local events = {
 	end,
 }
 local year, month, day, hour, minute, second = GameGetDateAndTimeLocal()
-local event = month .. day
+local event = month .. "/" .. day
+if event == "10/30" or event == "11/1" then event = "10/31" end -- too lazy to figure out how to simplify this
+if event == "11/10" or event == "11/12" then event = "11/11" end
+if event == "12/24" or event == "12/26" then event = "12/25" end
 if events[event] ~= nil then
 	events[event]()
 end
