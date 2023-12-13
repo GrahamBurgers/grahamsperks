@@ -2,7 +2,6 @@
 dofile_once("data/scripts/lib/utilities.lua")
 
 function damage_received( dmg, msg, source )
-	if dmg <= 0 then return end
 	local me = GetUpdatedEntityID()
 	local x, y = EntityGetTransform(me)
 	
@@ -13,7 +12,7 @@ function damage_received( dmg, msg, source )
 
 		if source == EntityGetParent(me) then dmg = 0 end
 		
-		if ( source ~= nil ) and ( source ~= NULL_ENTITY ) and ( source ~= me ) then
+		if ( source ~= nil ) and ( source ~= NULL_ENTITY ) and ( source ~= me ) and damage > 0 then
 			local hm = EntityGetTransform( source )
 			
 			if ( hm ~= nil ) and (hp > 0) then
@@ -59,6 +58,10 @@ function damage_received( dmg, msg, source )
 			end
 			ComponentSetValue2(spritecomp, "image_file", "mods/grahamsperks/files/entities/eye/" .. to_switch .. ".png")
 			EntityRefreshSprite(me, spritecomp)
+			EntityAddComponent2(me, "LuaComponent", {
+				remove_after_executed=true,
+				script_source_file="mods/grahamsperks/files/scripts/refresh.lua"
+			})
 		end
 	end
 end

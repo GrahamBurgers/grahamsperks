@@ -79,8 +79,8 @@
 	</GenomeDataComponent>
 	
 	<DamageModelComponent 
-		hp="6"
-		max_hp="6"
+		hp="4.8"
+		max_hp="4.8"
 		ragdoll_filenames_file=""
 		blood_material="plasma_fading"
 		blood_spray_material="plasma_fading"

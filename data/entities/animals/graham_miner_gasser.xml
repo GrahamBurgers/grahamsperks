@@ -32,7 +32,7 @@
 		</AnimalAIComponent>
 		
 		<DamageModelComponent 
-            hp="3.4"
+            hp="2.6"
 			ragdoll_material="plastic"
             materials_create_messages="1"
 			ragdoll_filenames_file="data/ragdolls/graham_miner_gasser/filenames.txt"
@@ -44,7 +44,7 @@
 			air_needed="0"
 			>
 			<damage_multipliers
-				projectile="0.6"
+				projectile="1"
 				explosion="0.4"
 				radioactive="0"
 				electricity="1.5"

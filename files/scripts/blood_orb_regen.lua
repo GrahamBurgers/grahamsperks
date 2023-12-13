@@ -4,11 +4,11 @@ if healthcomp ~= nil then
     local hp = ComponentGetValue2(healthcomp, "hp")
     local max_hp = ComponentGetValue2(healthcomp, "max_hp")
     if hp < max_hp and hp > 0 then
-        hp = hp + max_hp / 200
+        hp = hp + max_hp / 300
 
 		if GameHasFlagRun("PERK_PICKED_MPP_CYBORG_FRIENDS") then
 			-- Doubled regen + altered sprites
-			hp = hp + max_hp / 200
+			hp = hp + max_hp / 300
 		end
         if hp > max_hp then hp = max_hp end
         ComponentSetValue2(healthcomp, "hp", hp)

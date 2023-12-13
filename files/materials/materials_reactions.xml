@@ -369,7 +369,7 @@
 	>
   </Reaction>
   
-  <Reaction probability="70"
+  <Reaction probability="40"
 	input_cell1="graham_precursor" 	input_cell2="graham_mundane"
 	output_cell1="graham_precursor" 	output_cell2="graham_precursor"
 	>
@@ -772,5 +772,77 @@
 	input_cell1="magic_liquid_mana_regeneration" 	input_cell2="magic_liquid_invisibility"
 	output_cell1="graham_tele_chaotic" 	output_cell2="graham_tele_chaotic"
 	></Reaction>
+
+  <!-- 12/6/2023 -->
+
+  <Reaction probability="30"
+	input_cell1="graham_stickyfungus"     input_cell2="sand"
+	output_cell1="fungi"     output_cell2="fungal_gas"
+  blob_radius2="2"
+  ></Reaction>
+
+  <Reaction probability="30"
+	input_cell1="graham_stickyfungus"     input_cell2="sand_surface"
+	output_cell1="fungi"     output_cell2="fungal_gas"
+  blob_radius2="2"
+  ></Reaction>
+
+  <Reaction probability="15"
+	input_cell1="graham_driedfungus"     input_cell2="sand"
+	output_cell1="fungi"     output_cell2="fungal_gas"
+  blob_radius2="2"
+  ></Reaction>
+
+  <Reaction probability="15"
+	input_cell1="graham_driedfungus"     input_cell2="sand_surface"
+	output_cell1="fungi"     output_cell2="fungal_gas"
+  blob_radius2="2"
+  ></Reaction>
+
+  <Reaction probability="30"
+	input_cell1="graham_precursor"     input_cell2="graham_pureliquid"
+	output_cell1="rainbow_gas"     output_cell2="rainbow_gas"
+  ></Reaction>
+
+  <Reaction probability="30"
+	input_cell1="graham_precursor"     input_cell2="graham_coffee"
+	output_cell1="silver"     output_cell2="silver"
+  blob_radius1="2" blob_radius2="2"
+  ></Reaction>
+
+  <Reaction probability="30"
+	input_cell1="graham_precursor"     input_cell2="graham_slush"
+	output_cell1="honey"     output_cell2="honey"
+  blob_radius1="2"
+  ></Reaction>
+
+  <Reaction probability="30"
+	input_cell1="graham_precursor"     input_cell2="graham_ascendum"
+	output_cell1="copper"     output_cell2="copper"
+  blob_radius1="2"
+  ></Reaction>
+
+  <Reaction probability="30"
+	input_cell1="graham_precursor"     input_cell2="graham_tele_chaotic"
+	output_cell1="graham_creepypoly_frozen"     output_cell2="graham_tele_chaotic"
+  blob_radius1="2"  blob_radius2="2"
+  ></Reaction>
+
+  <Reaction probability="90"
+	input_cell1="graham_tele_chaotic"     input_cell2="graham_creepypoly_frozen"
+	output_cell1="graham_tele_chaotic"     output_cell2="graham_tele_chaotic"
+  ></Reaction>
+
+  <Reaction probability="30"
+	input_cell1="graham_precursor"     input_cell2="water"
+	output_cell1="graham_precursor"     output_cell2="graham_cloud_sweet"
+  blob_radius1="2"  blob_radius2="2"
+  ></Reaction>
+
+  <Reaction probability="50"
+	input_cell1="graham_mundane" 	input_cell2="meat_helpless"
+	output_cell1="magic_liquid_worm_attractor" 	output_cell2="meat_helpless"
+	>
+  </Reaction>
 
 </Materials>

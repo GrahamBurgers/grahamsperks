@@ -49,7 +49,6 @@
 			physics_explosion_power.min="0.1"
 			physics_explosion_power.max="0.3" 
 			physics_throw_enabled="0" 
-			physics_throw_enabled="1" 
 			shake_vegetation="1" 
 			sparks_enabled="0" 
 			material_sparks_enabled="0"
@@ -200,14 +199,6 @@
 		is_emitting="1" >
 	</ParticleEmitterComponent>
 
-	<LightComponent
-		radius="30"
-		r="255"
-		g="255"
-		b="2"
-		>
-	</LightComponent>
-
 	<AudioComponent
 		file="data/audio/Desktop/projectiles.bank"
 		event_root="projectiles/orb_cursed" >
@@ -239,4 +230,3 @@
 		>
 	</VariableStorageComponent>
 </Entity>
-

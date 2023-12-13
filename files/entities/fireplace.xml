@@ -71,18 +71,37 @@
 		is_emitting="1" >
 	</ParticleEmitterComponent>
 
-<LuaComponent 
-  execute_on_added="0"
-  remove_after_executed="0"
-  script_source_file="mods/grahamsperks/files/scripts/fireplace_dispense.lua"
-  execute_every_n_frame="2">
-</LuaComponent>
+	<LuaComponent 
+	execute_on_added="0"
+	remove_after_executed="0"
+	script_source_file="mods/grahamsperks/files/scripts/fireplace_dispense.lua"
+	execute_every_n_frame="2">
+	</LuaComponent>
 
 	<LightComponent
-		radius="30"
-		r="255"
-		g="70"
-		b="0"
+		update_properties="1"
+		radius="100"
+		r="241"
+		g="99"
+		b="10"
+		>
+	</LightComponent>
+
+	<LightComponent
+		update_properties="1"
+		radius="100"
+		r="241"
+		g="99"
+		b="10"
+		>
+	</LightComponent>
+
+	<LightComponent
+		update_properties="1"
+		radius="100"
+		r="241"
+		g="99"
+		b="10"
 		>
 	</LightComponent>
 

@@ -9,7 +9,7 @@
   name="fireball"
   pos_x="0"
   pos_y="0"
-  frame_count="3"
+  frame_count="4"
   frame_width="21"
   frame_height="16"
   frame_wait="0.1"

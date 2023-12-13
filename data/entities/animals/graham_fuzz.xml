@@ -44,7 +44,7 @@
 		</AnimalAIComponent>
 		
 		<DamageModelComponent 
-            hp="2.4"
+            hp="2"
             materials_create_messages="0"
 			ragdoll_filenames_file="data/ragdolls/graham_fuzz/filenames.txt"
 			materials_damage="0"
@@ -58,7 +58,7 @@
 			physics_objects_damage="0"
 			>
 			<damage_multipliers
-				projectile="0.5"
+				projectile="0.8"
 				melee="4"
 				physics_hit="0"
 				explosion="0.8"

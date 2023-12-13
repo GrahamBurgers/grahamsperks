@@ -200,14 +200,6 @@
 		is_emitting="1" >
 	</ParticleEmitterComponent>
 
-	<LightComponent
-		radius="30"
-		r="255"
-		g="255"
-		b="2"
-		>
-	</LightComponent>
-
 	<AudioComponent
 		file="data/audio/Desktop/projectiles.bank"
 		event_root="projectiles/orb_cursed" >

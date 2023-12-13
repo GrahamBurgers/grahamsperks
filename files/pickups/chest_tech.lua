@@ -54,20 +54,31 @@ function on_open( entity_item )
     local count = tonumber(GlobalsGetValue( "GRAHAM_TECH_CHEST_COUNT_OPENED", "0" ))
     GlobalsSetValue( "GRAHAM_TECH_CHEST_COUNT_OPENED", tostring(count + 1) )
 
-    SetRandomSeed( rand_x + GameGetFrameNum(), rand_y + x)
+    SetRandomSeed( rand_x + 18349, rand_y + 456828)
 
     local to_be_spawned = {}
+    local length = math.min(2 + count, 8)
     local spells_random = {
-    "GRAHAM_TOGGLER", "GRAHAM_TOGGLE_RED", "GRAHAM_TOGGLE_BLUE",
-    "GRAHAM_TOGGLER2", "GRAHAM_TOGGLE_GREEN", "GRAHAM_TOGGLE_YELLOW",
-    "GRAHAM_TOGGLEROFF", "GRAHAM_PASSIVES", "GRAHAM_MIXUP",
+    "GRAHAM_FOAMARMOR", "GRAHAM_INTENSIFY", "GRAHAM_STASIS",
+    "TRUE_ORBIT", "ZERO_DAMAGE", "HOOK",
+    "CASTER_CAST", "GRAHAM_PASSIVES", "GRAHAM_MIXUP",
     "NOLLA", "LIFETIME", "LIFETIME_DOWN",
     "SWAPPER_PROJECTILE", "TEMPORARY_PLATFORM", "TRANSMUTATION",
     "MATERIAL_BLOOD", "ALCOHOL_BLAST", "HITFX_CRITICAL_BLOOD"}
-    local requirements = {
-        "IF_PROJECTILE", "IF_HP", "IF_ENEMY", "IF_HALF", "IF_ELSE", "IF_END"
-    }
-    table.insert(to_be_spawned, requirements[Random(1, #requirements)])
+    if HasFlagPersistent("card_unlocked_maths") then
+        local requirements = {
+            "IF_PROJECTILE", "IF_HP", "IF_ENEMY", "IF_HALF", "IF_ELSE", "IF_END"
+        }
+        to_be_spawned[#to_be_spawned+1] = requirements[Random(1, #requirements)]
+        local toggles = {
+            "GRAHAM_TOGGLE_RED", "GRAHAM_TOGGLE_BLUE", "GRAHAM_TOGGLE_GREEN", "GRAHAM_TOGGLE_YELLOW",
+            "GRAHAM_TOGGLER_ALT", "GRAHAM_TOGGLER2_ALT", "GRAHAM_TOGGLER", "GRAHAM_TOGGLER2",
+        }
+        to_be_spawned[#to_be_spawned+1] = toggles[Random(1, #toggles)]
+        to_be_spawned[#to_be_spawned+1] = toggles[Random(1, #toggles)]
+    else
+        length = math.ceil(length / 2)
+    end
 
     dofile_once( "data/scripts/perks/perk.lua" )
     local pid = perk_spawn_random( x, y - 20, true )
@@ -84,19 +95,18 @@ function on_open( entity_item )
     })
     EntityRemoveTag(pid, "perk")
 
-    local length = math.min(2 + count, 8)
     for i = 1, length do
-        table.insert(to_be_spawned, spells_random[Random(1, #spells_random)])
+        to_be_spawned[#to_be_spawned+1] = spells_random[Random(1, #spells_random)]
     end
 
     if count == 14 then table.insert(to_be_spawned, "SUMMON_WANDGHOST") end
     if count == 24 then table.insert(to_be_spawned, "REGENERATION_FIELD") end
-    table.insert(to_be_spawned, make_random_card(x, y))
+    to_be_spawned[#to_be_spawned+1] = make_random_card(x, y)
 
-    local x2 = x - ((#to_be_spawned - 1) * 7.5)
+    local x2 = x - ((#to_be_spawned - 1) * 7)
     for i = 1, #to_be_spawned do
         CreateItemActionEntity(to_be_spawned[i], x2, y)
-        x2 = x2 + 15
+        x2 = x2 + 14
     end
 end
 

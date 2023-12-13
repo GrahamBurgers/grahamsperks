@@ -437,6 +437,7 @@ local to_insert = {
 		name              = "$graham_name_toggler",
 		description       = "$graham_desc_toggler",
 		sprite            = "mods/grahamsperks/files/spells/toggler.png",
+		spawn_requires_flag = "card_unlocked_maths",
 		type              = ACTION_TYPE_UTILITY,
 		spawn_level       = "10", -- MANA_REDUCE
 		spawn_probability = "0.2", -- MANA_REDUCE
@@ -465,6 +466,7 @@ local to_insert = {
 		name              = "$graham_name_toggler2",
 		description       = "$graham_desc_toggler2",
 		sprite            = "mods/grahamsperks/files/spells/toggler2.png",
+		spawn_requires_flag = "card_unlocked_maths",
 		type              = ACTION_TYPE_UTILITY,
 		spawn_level       = "10", -- MANA_REDUCE
 		spawn_probability = "0.2", -- MANA_REDUCE
@@ -494,6 +496,7 @@ local to_insert = {
 		name              = "$graham_name_toggleroff",
 		description       = "$graham_desc_toggleroff",
 		sprite            = "mods/grahamsperks/files/spells/toggler3.png",
+		spawn_requires_flag = "card_unlocked_maths",
 		type              = ACTION_TYPE_UTILITY,
 		spawn_level       = "10", -- MANA_REDUCE
 		spawn_probability = "0.2", -- MANA_REDUCE
@@ -701,7 +704,6 @@ local to_insert = {
 
 			local endpoint = -1
 			local elsepoint = -1
-			local entity_id = GetUpdatedEntityID()
 			local toggle = tonumber(GlobalsGetValue("GRAHAM_TOGGLE2", "null"))
 			local doskip = true
 
@@ -788,8 +790,6 @@ local to_insert = {
 
 			local endpoint = -1
 			local elsepoint = -1
-			local entity_id = GetUpdatedEntityID()
-			local comp = EntityGetFirstComponent(entity_id, "DamageModelComponent")
 			local toggle = tonumber(GlobalsGetValue("GRAHAM_TOGGLE2", "null"))
 			local doskip = true
 			if (toggle == 0) then
