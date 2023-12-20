@@ -544,7 +544,6 @@ color="FF13890d">
 	liquid_stains="1"
 	gfx_glow="150"
 	gfx_glow_color="ffd54aff"
-	color="ffd54aff"
         stickyness="1.2"
 	density="1.225"
 	>
@@ -560,6 +559,7 @@ color="FF13890d">
 	</StatusEffects>
 
 	    <Graphics
+	color="ffd54aff"
 	texture_file="mods/grahamsperks/files/materials/materials_gfx/stickyfungus.png">
     </Graphics>
 
@@ -575,7 +575,6 @@ color="FF13890d">
 	liquid_sand="1"
 	gfx_glow="20"
 	gfx_glow_color="ff762d63"
-	color="ff762d63"
     stickyness="6"
 	density="6.5"
 	temperature_of_fire="90" 
@@ -583,6 +582,7 @@ color="FF13890d">
 	fire_hp="5"
 	>
 	    <Graphics
+	color="ff762d63"
 	texture_file="mods/grahamsperks/files/materials/materials_gfx/driedfungus.png">
     </Graphics>
 	<StatusEffects>
@@ -669,9 +669,9 @@ color="FF13890d">
 	liquid_static="0"
         gfx_glow="43"
         gfx_glow_color="ffff0000"
-	color="fff0005c"
 	>
 	    <Graphics
+	color="fff0005c"
 	texture_file="mods/grahamsperks/files/materials/materials_gfx/meathealthy.png">
     </Graphics>
 	<StatusEffects>
@@ -693,11 +693,11 @@ color="FF13890d">
     cell_type="liquid"
 	liquid_sand="1"
 	liquid_static="0"
-	color="fff0d000"
         gfx_glow="73"
         gfx_glow_color="ffffee00"
 	>
 	    <Graphics
+	color="fff0d000"
 	texture_file="mods/grahamsperks/files/materials/materials_gfx/meatgreedy.png">
     </Graphics>
 	<StatusEffects>
