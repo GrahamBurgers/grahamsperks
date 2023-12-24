@@ -637,6 +637,46 @@ local events = {
 		},
 		}
 	end,
+	["12/25"] = function()
+		event_patches = {
+			{
+				path    = "data/entities/animals/bloody_mimic.xml",
+				from    = "data/enemies_gfx/bloody_mimic.xml",
+				to      = "mods/grahamsperks/files/seasonal/christmas_bloody_mimic.xml",
+		},
+			{
+				path    = "data/entities/animals/mini_mimic.xml",
+				from    = "data/enemies_gfx/mini_mimic.xml",
+				to      = "mods/grahamsperks/files/seasonal/christmas_mini_mimic.xml",
+		},
+			{
+				path    = "data/enemies_gfx/graham_fuzz.xml",
+				from    = "data/enemies_gfx/graham_fuzz.png",
+				to      = "mods/grahamsperks/files/seasonal/christmas_fuzz.png",
+		},
+			{
+				path    = "data/enemies_gfx/graham_fuzzzap.xml",
+				from    = "data/enemies_gfx/graham_fuzzzap.png",
+				to      = "mods/grahamsperks/files/seasonal/christmas_fuzzzap.png",
+		},
+			{
+				path    = "data/entities/animals/graham_fuzz.xml",
+				from    = "emitted_material_name=\"blood_cold\"",
+				to      = "emitted_material_name=\"midas\"",
+		},
+			{
+			path    = "mods/grahamsperks/files/entities/cold_dart.xml",
+			from    = "magic_liquid_mana_regeneration",
+			to      = "midas",
+		},
+			{
+			path    = "data/entities/animals/graham_fuzz.xml",
+			from    = "rock_box2d",
+			to      = "gold_b2",
+		},
+		}
+		ModTextFileSetContent("data/ragdolls/graham_fuzz/filenames.txt", "data/ragdolls/graham_fuzz/christmas_body.png")
+	end
 }
 local year, month, day, hour, minute, second = GameGetDateAndTimeLocal()
 local event = month .. "/" .. day
