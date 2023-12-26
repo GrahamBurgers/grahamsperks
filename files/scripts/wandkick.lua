@@ -33,7 +33,9 @@ function kick( entity_who_kicked )
 
                             local all = EntityGetAllComponents( spells[j] )
                             for a,b in ipairs( all ) do
-                                EntitySetComponentIsEnabled( spells[j], b, true ) -- hax????
+                                if not ComponentHasTag(b, "item_unidentified") then
+                                    EntitySetComponentIsEnabled( spells[j], b, true ) -- hax????
+                                end
                             end
 
                             EntitySetTransform(spells[j], x2, y2, 0)

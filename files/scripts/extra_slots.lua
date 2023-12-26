@@ -27,7 +27,9 @@ for i = 1, #wands do
                         local all = EntityGetAllComponents( v )
                         
                         for a,b in ipairs( all ) do
-                            EntitySetComponentIsEnabled( v, b, true )
+                            if not ComponentHasTag(b, "item_unidentified") then
+                                EntitySetComponentIsEnabled( v, b, true )
+                            end
                         end
                         local velcomp = EntityGetFirstComponentIncludingDisabled(v, "VelocityComponent") or 0
                         ComponentSetValue2(velcomp, "mVelocity", Random(-100, 100), Random(-50, -100))
