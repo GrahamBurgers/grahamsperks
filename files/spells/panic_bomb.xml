@@ -18,6 +18,7 @@
       shoot_light_flash_b="30"
       speed_min="110"
       speed_max="130"
+      on_death_gfx_leave_sprite="0"
       ><config_explosion
         never_cache="0" 
         damage="3.8"

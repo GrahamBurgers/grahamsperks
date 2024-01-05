@@ -17,13 +17,14 @@ function interacting( entity_who_interacted, entity_interacted, interactable_nam
         ComponentSetValue2(varsto, "value_int", entity_who_interacted)
         ComponentSetValue2(kick, "player_kickforce", 0)
         if speak then
-            dofile("mods/grahamsdialogue/files/common.lua")
-            local texts = {
-                "Alright! Where are we headed?",
-                "Sit back and relax. This'll be a smooth ride.",
-                "Away we go! Just tell me where to go.",
-            }
-            Speak(me, texts[Random(1, #texts)], "", false)
+            dofile_once("mods/grahamsdialogue/files/common.lua")
+            for i = 1, #Custom_speak_lines do
+                if Custom_speak_lines[i][1] == "lukki_mount_on" then
+                    local type = Random(2, #Custom_speak_lines[i])
+                    Speak(me, Custom_speak_lines[i][type], pools.CUSTOM, false)
+                    break
+                end
+            end
         end
     else
         ComponentSetValue2(comp, "name", "graham_lukki_mount")
@@ -33,13 +34,14 @@ function interacting( entity_who_interacted, entity_interacted, interactable_nam
         ComponentSetValue2(varsto, "value_int", 0)
         ComponentSetValue2(kick, "player_kickforce", 28)
         if speak then
-            dofile("mods/grahamsdialogue/files/common.lua")
-            local texts = {
-                "I'll stay close. And maybe bite some stuff.",
-                "What are you up to? Can I see?",
-                "Stay safe. If you need help, I won't be far.",
-            }
-            Speak(me, texts[Random(1, #texts)], "", false)
+            dofile_once("mods/grahamsdialogue/files/common.lua")
+            for i = 1, #Custom_speak_lines do
+                if Custom_speak_lines[i][1] == "lukki_mount_off" then
+                    local type = Random(2, #Custom_speak_lines[i])
+                    Speak(me, Custom_speak_lines[i][type], pools.CUSTOM, false)
+                    break
+                end
+            end
         end
     end
 end
