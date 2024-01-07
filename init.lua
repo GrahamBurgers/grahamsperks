@@ -1,24 +1,23 @@
 ---@diagnostic disable: undefined-global
-local translations = ModTextFileGetContent( "data/translations/common.csv" );
-if translations ~= nil then
-	translations = translations:gsub("\r","")
-	if ModSettingGet("grahamsperks.Language") == 2 then
-		if ModIsEnabled("better_chinese") then
-			translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_chinese_books.csv")
-			translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_chinese_1.5_books.csv")
-			translations = translations .. (ModTextFileGetContent( "mods/grahamsperks/files/entities/books/corrupt/c.csv" ) or "")
-		else
-			translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_chinese.csv")
-			translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_chinese_1.5.csv")
-			translations = translations .. (ModTextFileGetContent( "mods/grahamsperks/files/entities/books/corrupt/e.csv" ) or "")
-		end
-	else -- default to english
-		translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations.csv" )
-		translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_1.5.csv" )
-		translations = translations .. (ModTextFileGetContent( "mods/grahamsperks/files/entities/books/corrupt/e.csv" ) or "")
+local translations = ModTextFileGetContent( "data/translations/common.csv" ) or ""
+translations = translations:gsub("\r","")
+if ModSettingGet("grahamsperks.Language") == 2 then
+	if ModIsEnabled("better_chinese") then
+		translations = translations .. "\n" .. ModTextFileGetContent( "mods/grahamsperks/files/translations_chinese_books.csv") .. "\n"
+		translations = translations .. "\n" .. ModTextFileGetContent( "mods/grahamsperks/files/translations_chinese_1.5_books.csv") .. "\n"
+		translations = translations .. "\n" .. (ModTextFileGetContent( "mods/grahamsperks/files/entities/books/corrupt/c.csv" ) or "") .. "\n"
+	else
+		translations = translations .. "\n" .. ModTextFileGetContent( "mods/grahamsperks/files/translations_chinese.csv") .. "\n"
+		translations = translations .. "\n" .. ModTextFileGetContent( "mods/grahamsperks/files/translations_chinese_1.5.csv") .. "\n"
+		translations = translations .. "\n" .. (ModTextFileGetContent( "mods/grahamsperks/files/entities/books/corrupt/e.csv" ) or "") .. "\n"
 	end
-	ModTextFileSetContent( "data/translations/common.csv", translations )
+else -- default to english
+	translations = translations .. "\n" .. ModTextFileGetContent( "mods/grahamsperks/files/translations.csv" ) .. "\n"
+	translations = translations .. "\n" .. ModTextFileGetContent( "mods/grahamsperks/files/translations_1.5.csv" ) .. "\n"
+	translations = translations .. "\n" .. (ModTextFileGetContent( "mods/grahamsperks/files/entities/books/corrupt/e.csv" ) or "") .. "\n"
 end
+translations = translations:gsub("\r",""):gsub("\n\n","\n")
+ModTextFileSetContent( "data/translations/common.csv", translations )
 
 ModMaterialsFileAdd("mods/grahamsperks/files/materials/materials.xml")
 ModMaterialsFileAdd("mods/grahamsperks/files/materials/materials_reactions.xml")
@@ -181,8 +180,8 @@ add_scene({
 	{1800, 6600, "mods/grahamsperks/files/pickups/egg.xml", true},
 	{1800, 6600, "mods/grahamsperks/files/entities/books/eggbook.xml", true},
 	{-11695, 600, "mods/grahamsperks/files/pixelscenes/stargazer.xml", true},
-	{0, 20000, "mods/grahamsperks/files/pixelscenes/cat.xml", true},
-	{0, -20000, "mods/grahamsperks/files/pixelscenes/cat2.xml", true},
+	{0, 40000, "mods/grahamsperks/files/pixelscenes/cat.xml", true},
+	{0, -40000, "mods/grahamsperks/files/pixelscenes/cat2.xml", true},
 	{3331, 1616, "mods/grahamsperks/files/entities/progress/progress.xml", true},
 })
 
