@@ -1,27 +1,31 @@
-function kick( entity_who_kicked )
+local function is_shop_wand(wand_entity)
+    local x, y = EntityGetTransform(wand_entity)
+    if (BiomeMapGetName(x, y) == "$biome_holymountain" or BiomeMapGetName(x, y) == "$biome_boss_arena") and EntityGetFirstComponent(wand_entity, "ItemCostComponent") then
+        local itemcomp = EntityGetFirstComponent(wand_entity, "ItemComponent")
+        if itemcomp then
+            if ComponentGetValue2(itemcomp, "has_been_picked_by_player") then return false end
+        end
+        return true
+    end
+    return false
+end
 
+function kick( entity_who_kicked )
     local x, y = EntityGetTransform(entity_who_kicked)
     local wands = EntityGetInRadiusWithTag(x, y, 10, "wand") or 0
     -- bags of many support
-    local helditem = EntityGetFirstComponent(entity_who_kicked, "Inventory2Component") or 0
-    if helditem ~= 0 then
-        local item = ComponentGetValue2(helditem, "mActiveItem") or 0
-        if item ~= 0 then
-            local varsto = EntityGetComponentIncludingDisabled(item, "VariableStorageComponent") or {}
-            for i = 1, #varsto do
-                if ComponentGetValue2(varsto[i], "name") == "bags_of_many_positions" then
-                    return
-                end
-            end
-        end
+    local helditem = EntityGetFirstComponent(entity_who_kicked, "Inventory2Component")
+    if helditem then
+        local item = ComponentGetValue2(helditem, "mActiveItem")
+        if item and EntityHasTag(item, "bags_of_many") then return end
     end
 
     for i = 1, #wands do
         local x2, y2 = EntityGetTransform(wands[i])
         if EntityGetRootEntity(wands[i]) == wands[i] then
             local removed = false
-            local spells = EntityGetAllChildren(wands[i]) or 0
-            if spells ~= 0 then
+            local spells = EntityGetAllChildren(wands[i]) or {}
+            if #spells > 0 then
                 for j = 1, #spells do
                     if EntityHasTag(spells[j], "card_action") then
                         -- make sure it's not an always cast
@@ -33,8 +37,8 @@ function kick( entity_who_kicked )
 
                             local all = EntityGetAllComponents( spells[j] )
                             for a,b in ipairs( all ) do
-                                if not ComponentHasTag(b, "item_unidentified") then
-                                    EntitySetComponentIsEnabled( spells[j], b, true ) -- hax????
+                                if not (ComponentHasTag(b, "item_unidentified") or ComponentAddTag(b, "not_enabled_in_wand")) then
+                                    EntitySetComponentIsEnabled( spells[j], b, true ) -- hopefully not hax
                                 end
                             end
 
@@ -47,12 +51,7 @@ function kick( entity_who_kicked )
                     end
                 end
 
-                local itemcomp = EntityGetFirstComponent(wands[i], "ItemComponent")
-                local picked = false
-                if itemcomp ~= nil then
-                    picked = ComponentGetValue2(itemcomp, "has_been_picked_by_player")
-                end
-                if (not picked) and removed and EntityGetFirstComponent(wands[i], "ItemCostComponent") ~= nil and BiomeMapGetName(x, y) == "$biome_holymountain" or BiomeMapGetName(x, y) == "$biome_boss_arena" then
+                if is_shop_wand(wands[i]) and removed then
                     -- player stole spells from a wand in a shop
                     -- anger the gods
                     GamePlaySound( "data/audio/Desktop/event_cues.bank", "event_cues/angered_the_gods/create", x2, y2 )
@@ -76,12 +75,7 @@ function kick( entity_who_kicked )
                         -- poof shop wands
                         local poof = EntityGetInRadiusWithTag(x2, y2, 150, "wand")
                         for q = 1, #poof do
-                            itemcomp = EntityGetFirstComponent(poof[q], "ItemComponent")
-                            picked = false
-                            if itemcomp ~= nil then
-                                picked = ComponentGetValue2(itemcomp, "has_been_picked_by_player")
-                            end
-                            if (not picked) and EntityGetFirstComponent(poof[q], "ItemCostComponent") ~= nil and BiomeMapGetName(EntityGetTransform(poof[q])) == "$biome_holymountain" or BiomeMapGetName(EntityGetTransform(poof[q])) == "$biome_boss_arena" then
+                            if is_shop_wand(poof[q]) then
                                 local x3, y3 = EntityGetTransform(poof[q])
                                 EntityLoad("data/entities/particles/poof_blue.xml", x3, y3)
                                 EntityKill(poof[q])
