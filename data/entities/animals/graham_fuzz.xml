@@ -99,6 +99,7 @@
 		</GenomeDataComponent>
 		
 		<CharacterPlatformingComponent 
+			audio_liquid_splash_intensity="0"
 			jump_velocity_y="0" 
 			run_velocity="0"  >
 		</CharacterPlatformingComponent>
