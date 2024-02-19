@@ -1,9 +1,0 @@
-<Entity>
-
-<LuaComponent 
-  remove_after_executed="0"
-  script_source_file="mods/grahamsperks/files/entities/halo_check.lua"
-  execute_every_n_frame="20">
-</LuaComponent>
-
-</Entity>

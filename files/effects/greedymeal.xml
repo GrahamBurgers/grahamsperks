@@ -1,9 +1,0 @@
-<Entity>
-
-    <GameEffectComponent
-        effect="EXTRA_MONEY"
-        frames="10"
-        exclusivity_group="1"
-    ></GameEffectComponent>
-
-</Entity>

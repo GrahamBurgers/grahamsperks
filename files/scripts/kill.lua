@@ -1,1 +1,0 @@
-EntityKill(GetUpdatedEntityID())
