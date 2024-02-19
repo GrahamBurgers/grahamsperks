@@ -1229,7 +1229,6 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/copium.png">
 
 <CellDataChild
 	_parent="air"
-	_inherit_reactions="1"
 	wang_color="0013e132" 
 	name="graham_air" 
 	cell_type="gas"
