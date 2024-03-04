@@ -49,6 +49,7 @@ else
     local speed = 0.02
     if GameGetGameEffectCount(me, "CONFUSION") > 0 then speed = -0.02 end
     speed = speed * 1.5 ^ multiplier
+    if GameGetGameEffectCount(me, "FROZEN") > 0 then speed = 0 end
 
     local angle = math.atan2(y - y2, x - x2)
     angle = math.pi + angle + speed
