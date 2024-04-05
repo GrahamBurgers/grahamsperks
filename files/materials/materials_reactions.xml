@@ -295,83 +295,24 @@
 	output_cell1="air" 		output_cell2="air"  >
   </Reaction>
 
-<!-- gold + air -->
-
   <Reaction probability="20"
-  	fast_reaction="1"
-	input_cell1="graham_meatgold" 			input_cell2="air"
-	output_cell1="gold" 			output_cell2="air"  >
+  input_cell1="graham_meatgold" 			input_cell2="graham_meatgold"
+  output_cell1="gold" 			output_cell2="gold"  >
   </Reaction>
 
   <Reaction probability="70"
-  	fast_reaction="1"
-	input_cell1="graham_meatgold" 			input_cell2="air"
-	output_cell1="air" 			output_cell2="air"  >
+  input_cell1="graham_meatgold" 			input_cell2="graham_meatgold"
+  output_cell1="air" 			output_cell2="air"  >
   </Reaction>
 
   <Reaction probability="8"
-  	fast_reaction="1"
-	input_cell1="graham_wormygold" 			input_cell2="air"
-	output_cell1="gold" 			output_cell2="air"  >
+  input_cell1="graham_wormygold" 			input_cell2="graham_wormygold"
+  output_cell1="gold" 			output_cell2="gold"  >
   </Reaction>
 
   <Reaction probability="12"
-  	fast_reaction="1"
-	input_cell1="graham_wormygold" 			input_cell2="air"
-	output_cell1="air" 			output_cell2="air"  >
-  </Reaction>
- 
-<!-- gold + [liquid] -->
-
-  <Reaction probability="20"
-  	fast_reaction="1"
-	input_cell1="graham_meatgold" 			input_cell2="[liquid]"
-	output_cell1="gold" 			output_cell2="[liquid]"  >
-  </Reaction>
-
-  <Reaction probability="70"
-  	fast_reaction="1"
-	input_cell1="graham_meatgold" 			input_cell2="[liquid]"
-	output_cell1="air" 			output_cell2="[liquid]"  >
-  </Reaction>
-
-  <Reaction probability="8"
-  	fast_reaction="1"
-	input_cell1="graham_wormygold" 			input_cell2="[liquid]"
-	output_cell1="gold" 			output_cell2="[liquid]"  >
-  </Reaction>
-
-  <Reaction probability="12"
-  	fast_reaction="1"
-	input_cell1="graham_wormygold" 			input_cell2="[liquid]"
-	output_cell1="air" 			output_cell2="[liquid]"  >
-  </Reaction>
-
-
-<!-- gold + [solid] -->
-
-  <Reaction probability="20"
-  	fast_reaction="1"
-	input_cell1="graham_meatgold" 			input_cell2="[solid]"
-	output_cell1="gold" 			output_cell2="[solid]"  >
-  </Reaction>
-
-  <Reaction probability="70"
-  	fast_reaction="1"
-	input_cell1="graham_meatgold" 			input_cell2="[solid]"
-	output_cell1="air" 			output_cell2="[solid]"  >
-  </Reaction>
-
-  <Reaction probability="8"
-  	fast_reaction="1"
-	input_cell1="graham_wormygold" 			input_cell2="[solid]"
-	output_cell1="gold" 			output_cell2="[solid]"  >
-  </Reaction>
-
-  <Reaction probability="12"
-  	fast_reaction="1"
-	input_cell1="graham_wormygold" 			input_cell2="[solid]"
-	output_cell1="air" 			output_cell2="[solid]"  >
+  input_cell1="graham_wormygold" 			input_cell2="graham_wormygold"
+  output_cell1="air" 			output_cell2="blood_worm"  >
   </Reaction>
 
   <Reaction probability="1000"

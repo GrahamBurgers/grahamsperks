@@ -1,6 +1,7 @@
  <Materials>
 
   <CellData 
+ 	ignore_self_reaction_warning="1"
     name="graham_statium"
     ui_name="$material_graham_statium"
   	tags="[liquid],[water],[magic_liquid],[impure]"
@@ -33,7 +34,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/statium.png">
 
   </CellData>
 
-  <CellData
+  <CellData 
+ 	ignore_self_reaction_warning="1"
 	name="graham_meatgold"
 	ui_name="$mat_gold"
   	tags="[sand_metal],[corrodible],[alchemy],[gold],[solid],[earth]"
@@ -60,7 +62,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/statium.png">
     </Graphics>
   </CellData>
 
-  <CellData
+  <CellData 
+ 	ignore_self_reaction_warning="1"
 	name="graham_wormygold"
 	ui_name="$material_graham_wormygold"
   	tags="[sand_metal],[corrodible],[alchemy],[gold],[solid],[earth]"
@@ -93,6 +96,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/wormygold.png"
   </CellData>
 
     <CellData 
+ 	ignore_self_reaction_warning="1" 
     name="graham_bubblygas"
     ui_name="$material_graham_bubblygas"
   	tags="[gas]"
@@ -118,7 +122,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/bubblygas.png">
 
   </CellData>
   
-    <CellData 
+	<CellData 
+	ignore_self_reaction_warning="1" 
     name="graham_bubbly"
     ui_name="$material_graham_bubbly"
     wang_color="ff59321"
@@ -152,7 +157,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/bubbly.png">
 
   </CellData>
   
-    <CellData 
+	<CellData 
+	ignore_self_reaction_warning="1" 
     name="graham_creepypoly_frozen"
     ui_name="$material_graham_creepypoly_frozen"
     wang_color="ff14975"
@@ -180,7 +186,8 @@ color="FF622d9a">
 
   </CellData>
 
-  <CellData 
+	<CellData 
+	ignore_self_reaction_warning="1" 
     name="graham_creepypoly"
     ui_name="$material_graham_creepypoly"
     wang_color="ff48975"
@@ -218,7 +225,8 @@ color="FF622d9a">
 
   </CellData>
   
-  <CellData 
+	<CellData 
+	ignore_self_reaction_warning="1"  
     name="graham_graymatter_liquid"
     ui_name="$material_graham_graymatter_liquid"
 	tags="[liquid],[catastrophic]"
@@ -249,6 +257,7 @@ color="FFe4003c">
   </CellData>
 
   <CellData 
+    ignore_self_reaction_warning="1"  
     name="graham_yum"
     ui_name="$material_graham_yum"
 	tags="[catastrophic]"
@@ -273,6 +282,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/yum.png">
   </CellData> 
 
   <CellData 
+    ignore_self_reaction_warning="1"  
     name="graham_hellblood"
     ui_name="$material_graham_hellblood"
   	tags="[liquid],[water],[impure]"
@@ -304,6 +314,7 @@ color="FFFF0000">
   </CellData>
 
   <CellData 
+    ignore_self_reaction_warning="1"  
     name="graham_ascendum"
     ui_name="$material_graham_ascendum"
   	tags="[liquid],[water],[magic_liquid]"
@@ -352,6 +363,7 @@ color="FF4effb5">
   </CellData>
 
   <CellData 
+    ignore_self_reaction_warning="1"  
     name="graham_precursor"
     ui_name="$material_graham_precursor"
     tags="[liquid],[water],[magic_liquid]"
@@ -398,6 +410,7 @@ color="ffc300">
   </CellData>
 
   <CellData 
+    ignore_self_reaction_warning="1"  
     name="graham_resist"
     ui_name="$material_graham_resist"
   	tags="[liquid],[water],[magic_liquid],[impure]"
@@ -429,7 +442,8 @@ color="FF13890d">
   </CellData>
 
   <CellData
-	name="graham_darkgas"
+	ignore_self_reaction_warning="1"  
+    name="graham_darkgas"
 	ui_name="$material_graham_darkgas"
 	cell_type="gas"
   	tags="[gas]"
@@ -471,7 +485,8 @@ color="FF13890d">
   </CellData>
   
     <CellDataChild
-  	name="graham_meatdone" 
+  	ignore_self_reaction_warning="1"  
+    name="graham_meatdone" 
 	ui_name="$mat_meat_done"
   	_parent="meat"
   	_inherit_reactions="0"
@@ -511,7 +526,8 @@ color="FF13890d">
   </CellDataChild>
   
     <CellData
-	name="graham_sweetgas"
+	ignore_self_reaction_warning="1"  
+    name="graham_sweetgas"
 	ui_name="$material_graham_sweetgas"
 	cell_type="gas"
   	tags="[gas]"
@@ -535,7 +551,8 @@ color="FF13890d">
   </CellData>
 
     <CellData
-  	name="graham_stickyfungus" 
+	ignore_self_reaction_warning="1"  
+    name="graham_stickyfungus" 
 	ui_name="$material_graham_stickyfungus"
 	wang_color="f1d54aff"
   	tags="[liquid]"
@@ -568,7 +585,8 @@ color="FF13890d">
   </CellData>
 
     <CellData
-  	name="graham_driedfungus" 
+	ignore_self_reaction_warning="1"  
+    name="graham_driedfungus" 
 	ui_name="$material_graham_driedfungus"
 	tags="[plant],[corrodible],[burnable],[alchemy],[earth],[fungus]"
 	wang_color="f1612150"
@@ -592,7 +610,8 @@ color="FF13890d">
   </CellData>
   
     <CellData
-  	name="graham_pureliquid" 
+	ignore_self_reaction_warning="1"  
+    name="graham_pureliquid" 
 	ui_name="$material_graham_pureliquid"
 	wang_color="f1f0fff0"
  	tags="[liquid]"
@@ -613,7 +632,8 @@ color="FF13890d">
   </CellData>
   
     <CellData
-  	name="graham_beans" 
+	ignore_self_reaction_warning="1"  
+    name="graham_beans" 
 	ui_name="$material_graham_beans"
 	platform_type="0"
 	liquid_sand="1"
@@ -634,7 +654,8 @@ color="FF13890d">
   </CellData>
 
     <CellData
-  	name="graham_coffee" 
+	ignore_self_reaction_warning="1"  
+    name="graham_coffee" 
 	ui_name="$material_graham_coffee"
 	wang_color="f1feeef0"
 	cell_type="liquid"
@@ -658,7 +679,8 @@ color="FF13890d">
   </CellData>
   
     <CellData
-  	name="graham_meathealthy" 
+	ignore_self_reaction_warning="1"  
+    name="graham_meathealthy" 
 	ui_name="$material_graham_meathealthy"
 	tags="[corrodible],[alchemy],[solid],[earth],[food]"
 	wang_color="f1f0005c"
@@ -684,7 +706,8 @@ color="FF13890d">
   </CellData>
   
       <CellData
-  	name="graham_meatgreedy" 
+  	ignore_self_reaction_warning="1"  
+    name="graham_meatgreedy" 
 	ui_name="$material_graham_meatgreedy"
 	tags="[corrodible],[alchemy],[solid],[earth],[food]"
 	platform_type="0"
@@ -710,7 +733,8 @@ color="FF13890d">
   </CellData>
 
   <CellData
-	name="graham_cloud_angy"
+	ignore_self_reaction_warning="1"  
+    name="graham_cloud_angy"
 	ui_name="$material_graham_cloud_angy"
   	tags="[liquid],[liquid_common]"
 	burnable="0"
@@ -736,7 +760,8 @@ color="FF13890d">
   </CellData>
 
   <CellData
-	name="graham_cloud_sweet"
+	ignore_self_reaction_warning="1"  
+    name="graham_cloud_sweet"
 	ui_name="$material_graham_cloud_sweet"
   	tags="[liquid],[liquid_common]"
 	burnable="0"
@@ -762,6 +787,7 @@ color="FF13890d">
   </CellData>
 
   <CellData 
+    ignore_self_reaction_warning="1"  
     name="graham_mundane"
     ui_name="$material_graham_mundane"
   	tags="[liquid],[water]"
@@ -790,6 +816,7 @@ color="FF55467d">
   </CellData> 
 
   <CellData 
+    ignore_self_reaction_warning="1"  
     name="graham_lavaglass"
     ui_name="$material_graham_lavaglass"
     wang_color="ffe262d7"
@@ -825,7 +852,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/lavaglass.png">
 	on_fire="0"
 	always_ignites_damagemodel="0"
 	danger_fire="0"
-  	name="graham_lava"  >
+	ignore_self_reaction_warning="1"  
+    name="graham_lava"  >
   </CellDataChild>
 
   <CellDataChild
@@ -835,7 +863,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/lavaglass.png">
 	ui_name="$material_graham_acid"
 	gfx_glow="0"
 	color="4B00ed32"
-  	name="graham_acid"  >
+	ignore_self_reaction_warning="1"  
+    name="graham_acid"  >
   </CellDataChild>
 
   <CellDataChild
@@ -848,7 +877,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/lavaglass.png">
 	temperature_of_fire="0"
 	autoignition_temperature="99"
 	ui_name="$graham_magmacore_name"
-  	name="graham_sulphur_box2d"  >
+	ignore_self_reaction_warning="1"  
+    name="graham_sulphur_box2d"  >
   </CellDataChild>
   
   <CellDataChild
@@ -861,11 +891,13 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/lavaglass.png">
 	hp="99999"
 	convert_to_box2d_material="graham_hamburger_powder"
 	ui_name="$material_graham_hamburger"
-  	name="graham_hamburger"  >
+	ignore_self_reaction_warning="1"  
+    name="graham_hamburger"  >
   </CellDataChild>
 
   <CellData
-  	name="graham_hamburger_powder"
+  	ignore_self_reaction_warning="1"  
+    name="graham_hamburger_powder"
   	_inherit_reactions="0"
    	liquid_sand="1"
 	solid_on_collision_explode="0"
@@ -890,7 +922,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/lavaglass.png">
   	_inherit_reactions="1"
 	ui_name="$material_graham_ash"
     wang_color="ff12299"
-  	name="graham_ash"  >
+	ignore_self_reaction_warning="1"  
+    name="graham_ash"  >
 <Graphics 
 texture_file="mods/grahamsperks/files/materials/materials_gfx/ash.png"
 color="FF797e7e">
@@ -904,7 +937,8 @@ color="FF797e7e">
 	tags="[corrodible],[burnable],[alchemy],[solid],[earth],[impure]"
 	wang_color="ff14299"
 	lifetime="200"
-	name="graham_wood_rot"  >
+	ignore_self_reaction_warning="1"  
+    name="graham_wood_rot"  >
 <Graphics 
 texture_file="mods/grahamsperks/files/materials/materials_gfx/wood_rot.png"
 color="FF2c310c">
@@ -916,7 +950,8 @@ color="FF2c310c">
   	_inherit_reactions="0"
 	liquid_static="0"
     wang_color="ff14399"
-  	name="graham_wood_rot_powder"  >
+	ignore_self_reaction_warning="1"  
+    name="graham_wood_rot_powder"  >
 <Graphics 
 texture_file="mods/grahamsperks/files/materials/materials_gfx/wood_rot.png"
 color="FF2c310c">
@@ -924,6 +959,7 @@ color="FF2c310c">
   </CellDataChild>
 
   <CellData 
+    ignore_self_reaction_warning="1"  
     name="graham_birthday"
     ui_name="$material_graham_birthday"
   	tags="[liquid],[water],[magic_liquid]"
@@ -969,6 +1005,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/birthday.png">
   </CellData>
 
   <CellData 
+    ignore_self_reaction_warning="1"  
     name="graham_copium"
     ui_name="$material_graham_copium"
   	tags="[liquid],[water],[magic_liquid]"
@@ -1016,7 +1053,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/copium.png">
   <CellDataChild
   	_parent="spark"
   	_inherit_reactions="1"
-  	name="graham_spark_orange" 
+  	ignore_self_reaction_warning="1"  
+    name="graham_spark_orange" 
 	ui_name="$mat_spark_green"
 	wang_color="7ffd7746"
 	gfx_glow="1000" >
@@ -1029,7 +1067,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/copium.png">
   <CellDataChild
   	_parent="spark"
   	_inherit_reactions="1"
-  	name="graham_spark_beige" 
+  	ignore_self_reaction_warning="1"  
+    name="graham_spark_beige" 
 	ui_name="$mat_spark_green"
 	wang_color="7f917561"
 	gfx_glow="500" >
@@ -1043,7 +1082,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/copium.png">
   	_parent="blood"
   	_inherit_reactions="1"
 	wang_color="df7d7d4f" 
-  	name="graham_blood_fading" 
+	ignore_self_reaction_warning="1"  
+    name="graham_blood_fading" 
 	lifetime="40">
   </CellDataChild>
 
@@ -1051,7 +1091,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/copium.png">
   	_parent="graham_hellblood"
   	_inherit_reactions="1"
 	wang_color="ef7e7d4f" 
-  	name="graham_hellblood_fading" 
+	ignore_self_reaction_warning="1"  
+    name="graham_hellblood_fading" 
 	liquid_sprite_stain_shaken_drop_chance="25"
 	lifetime="20">
 	  <StatusEffects>
@@ -1065,7 +1106,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/copium.png">
   </CellDataChild>
 
   <CellData
-	name="graham_water_cloud"
+	ignore_self_reaction_warning="1"  
+    name="graham_water_cloud"
 	ui_name="$mat_water"
   	tags="[liquid],[liquid_common]"
 	burnable="0"
@@ -1093,7 +1135,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/copium.png">
   </CellData>
 
   <CellData
-	name="graham_tele_chaotic"
+	ignore_self_reaction_warning="1"  
+    name="graham_tele_chaotic"
 	ui_name="$material_graham_tele_chaotic"
   	tags="[liquid],[water],[magic_liquid],[impure]"
 	density="4.5"
@@ -1145,7 +1188,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/copium.png">
   </CellData>
 
     <CellData
-  	name="graham_slush" 
+  	ignore_self_reaction_warning="1"  
+    name="graham_slush" 
 	ui_name="$material_graham_slush"
 	wang_color="ffa4f6c9"
  	tags="[liquid]"
@@ -1168,7 +1212,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/copium.png">
   </CellData>
 
 	<CellData
-  	name="graham_slush_ice" 
+	ignore_self_reaction_warning="1"  
+    name="graham_slush_ice" 
 	ui_name="$material_graham_slush_ice"
 	wang_color="f16afbe8"
  	tags="[liquid]"
@@ -1195,14 +1240,16 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/copium.png">
   	_parent="templebrick_golden_static"
 	_inherit_reactions="1"
 	wang_color="8000BEE9"
-	name="graham_templebrick_golden_static"
+	ignore_self_reaction_warning="1"  
+    name="graham_templebrick_golden_static"
 	lifetime="290">
   </CellDataChild>
 
   <CellDataChild
   	_parent="root_growth"
   	_inherit_reactions="1"
-  	name="graham_root_growth"
+  	ignore_self_reaction_warning="1"  
+    name="graham_root_growth"
 	wang_color="ff412D49" 
 	hp="200000"
 	durability="14"
@@ -1213,7 +1260,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/copium.png">
   <CellDataChild
   	_parent="metal_hard"
   	_inherit_reactions="1"
-  	name="graham_metal_hard"
+  	ignore_self_reaction_warning="1"  
+    name="graham_metal_hard"
 	wang_color="ff472D49" 
 	hp="200000"
 	durability="18"
@@ -1225,14 +1273,16 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/copium.png">
 	_parent="alcohol_gas"
 	_inherit_reactions="1"
 	wang_color="df9d7d4f" 
-	name="graham_alcoholgas_fading" 
+	ignore_self_reaction_warning="1"  
+    name="graham_alcoholgas_fading" 
 	lifetime="12">
 </CellDataChild>
 
 <CellDataChild
 	_parent="air"
 	wang_color="0013e132" 
-	name="graham_air" 
+	ignore_self_reaction_warning="1"  
+    name="graham_air" 
 	cell_type="gas"
 	lifetime="1">
 </CellDataChild>
@@ -1240,6 +1290,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/copium.png">
 <CellDataChild
 _parent="spark"
 _inherit_reactions="1"
+ignore_self_reaction_warning="1"  
 name="graham_ia_red" 
 wang_color="85ff0909"
 gfx_glow="70"
@@ -1252,6 +1303,7 @@ color="85ff0909" >
 <CellDataChild
 _parent="spark"
 _inherit_reactions="1"
+ignore_self_reaction_warning="1"  
 name="graham_ia_orange" 
 wang_color="85ff7509"
 gfx_glow="70" 
@@ -1264,6 +1316,7 @@ color="85ff7509" >
 <CellDataChild
 _parent="spark"
 _inherit_reactions="1"
+ignore_self_reaction_warning="1"  
 name="graham_ia_yellow" 
 wang_color="85f4df0b"
 gfx_glow="70" 
@@ -1276,6 +1329,7 @@ color="85f4df0b" >
 <CellDataChild
 _parent="spark"
 _inherit_reactions="1"
+ignore_self_reaction_warning="1"  
 name="graham_ia_green" 
 wang_color="8508e700"
 gfx_glow="70" 
@@ -1288,6 +1342,7 @@ color="8508e700" >
 <CellDataChild
 _parent="spark"
 _inherit_reactions="1"
+ignore_self_reaction_warning="1"  
 name="graham_ia_cyan" 
 wang_color="8500e7ca"
 gfx_glow="70" 
@@ -1300,6 +1355,7 @@ color="8500e7ca" >
 <CellDataChild
 _parent="spark"
 _inherit_reactions="1"
+ignore_self_reaction_warning="1"  
 name="graham_ia_blue" 
 wang_color="85082af8"
 gfx_glow="70" 
@@ -1312,6 +1368,7 @@ color="85082af8" >
 <CellDataChild
 _parent="spark"
 _inherit_reactions="1"
+ignore_self_reaction_warning="1"  
 name="graham_ia_purple" 
 wang_color="858610f7"
 gfx_glow="70" 
@@ -1324,6 +1381,7 @@ color="858610f7" >
 <CellDataChild
 _parent="material_confusion"
 _inherit_reactions="0"
+ignore_self_reaction_warning="1"  
 name="graham_confuse"
 ui_name="$material_graham_confusion"
 wang_color="ffeb2e70"
@@ -1351,6 +1409,7 @@ color="ffeb2e70">
 _parent="rock_hard_border"
 _inherit_reactions="1"
 wang_color="ff5b0c37"
+ignore_self_reaction_warning="1"  
 name="graham_emptiness"
 ui_name="$material_graham_emptiness"
 >
@@ -1364,6 +1423,7 @@ _parent="aluminium"
 tags="[box2d],[solid]"
 _inherit_reactions="0"
 wang_color="ff76a3a4"
+ignore_self_reaction_warning="1"  
 name="graham_templebrick"
 platform_type="1"
 hp="1000000"
@@ -1383,6 +1443,7 @@ color="ff644620"
 _parent="blood_worm"
 _inherit_reactions="0"
 wang_color="ff8b0c37"
+ignore_self_reaction_warning="1"  
 name="graham_unstainer"
 liquid_stains="1"
 >
@@ -1395,6 +1456,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/nothing.png">
 <CellDataChild
 _parent="cloth_box2d"
 _inherit_reactions="0"
+ignore_self_reaction_warning="1"  
 name="graham_balloon_box2d"
 ui_name="$material_graham_balloon"
 solid_gravity_scale="0.6"
@@ -1411,6 +1473,7 @@ color="ff5787E7" >
 _parent="rock_hard_border"
 _inherit_reactions="1"
 wang_color="ffcf3ce2"
+ignore_self_reaction_warning="1"  
 name="graham_love"
 ui_name="$material_graham_love"
 durability="6"
@@ -1429,6 +1492,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/love.png">
   <CellDataChild
   	_parent="templerock_static"
   	_inherit_reactions="1"
+	ignore_self_reaction_warning="1"  
   	name="graham_purplebrick" 
 	ui_name="$graham_mat_purplebrick"
 	tags="[static],[solid],[alchemy],[earth]"
@@ -1490,6 +1554,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/love.png">
   <CellDataChild
   	_parent="graham_purplebrick"
   	_inherit_reactions="1"
+	ignore_self_reaction_warning="1"  
   	name="graham_purplebrick_lessglow" 
 	ui_name="$graham_mat_purplebrick"
 	gfx_glow="20"
@@ -1498,7 +1563,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/love.png">
 
   <CellDataChild
   	_parent="meat"
-	name="graham_meat_healthy"
+	ignore_self_reaction_warning="1"  
+  	name="graham_meat_healthy"
 	ui_name="$graham_mat_meat_healthy"
 	wang_color="ffc3a079"
 	solid_on_collision_material="blood"
@@ -1519,6 +1585,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/love.png">
 		_parent="aluminium"
 		_inherit_reactions="1"
 		tags="[box2d],[corrodible],[alchemy],[solid],[earth]"
+		ignore_self_reaction_warning="1"  
 		name="graham_aluminium" 
 		ui_name="$mat_aluminium"
 		wang_color="ff3c2d3e"
