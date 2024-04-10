@@ -1846,7 +1846,7 @@ local to_insert = {
 		spawn_level         = "1,2,3,4",
 		spawn_probability   = "0.8,0.1,0.1,0.8",
 		price               = 300,
-		mana                = 12,
+		mana                = 4,
 		related_projectiles = { "mods/grahamsperks/files/spells/shock_dart.xml" },
 		action              = function()
 			add_projectile("mods/grahamsperks/files/spells/shock_dart.xml")

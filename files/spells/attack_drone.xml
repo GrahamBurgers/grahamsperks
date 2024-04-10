@@ -40,7 +40,7 @@
 			hp="3"
 			max_hp="3"  >
 			<damage_multipliers
-				explosion="0.2"
+				projectile="0"
 			></damage_multipliers>
 		</DamageModelComponent>
 
@@ -90,10 +90,5 @@
 			effect="STUN_PROTECTION_ELECTRICITY"
 			frames="-1"
 		></GameEffectComponent >
-		<GameEffectComponent 
-			effect="PROTECTION_MELEE"
-			frames="-1"
-		></GameEffectComponent >
-
 	</Entity>
 </Entity>

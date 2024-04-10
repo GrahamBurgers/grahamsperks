@@ -326,11 +326,12 @@ local to_insert = {
 					_tags = "perk_component",
 					script_damage_about_to_be_received = "mods/grahamsperks/files/zaptap.lua",
 					execute_every_n_frame = -1,
+					limit_how_many_times_per_frame = 1,
 				})
 
 			local var_comp = get_variable_storage_component(entity_who_picked, "zap_tap_radius")
-			local radius = ComponentGetValue2(var_comp, "value_int")
-			if var_comp ~= nil then
+			if var_comp ~= nil and var_comp > 0 then
+				local radius = ComponentGetValue2(var_comp, "value_int")
 				ComponentSetValue2(var_comp, "value_int", radius + 8)
 			else
 				EntityAddComponent2(entity_who_picked, "VariableStorageComponent", {
@@ -338,13 +339,10 @@ local to_insert = {
 					name = "zap_tap_radius"
 				})
 			end
-
-			EntityAddTag(entity_who_picked, "zappity_tappity")
 		end,
 		func_remove = function(entity_who_picked)
 			local var_comp = get_variable_storage_component(entity_who_picked, "zap_tap_radius")
 			EntityRemoveComponent(entity_who_picked, var_comp)
-			EntityRemoveTag(entity_who_picked, "zappity_tappity")
 		end,
 	},
 	{

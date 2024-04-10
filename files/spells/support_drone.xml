@@ -33,15 +33,15 @@
 			sense_creatures="1"
 			attack_ranged_enabled="1"
 			attack_ranged_entity_file="mods/grahamsperks/files/spells/support_drone_bullet.xml"
-			attack_ranged_frames_between="40"
+			attack_ranged_frames_between="30"
 			>
 		</AnimalAIComponent>
 
 		<DamageModelComponent
-			hp="1"
-			max_hp="1"  >
+			hp="1.5"
+			max_hp="1.5"  >
 			<damage_multipliers
-				electricity="1.5"
+				melee="0"
 			></damage_multipliers>
 		</DamageModelComponent>
 		
@@ -91,10 +91,5 @@
 			effect="STUN_PROTECTION_ELECTRICITY"
 			frames="-1"
 		></GameEffectComponent >
-		<GameEffectComponent 
-			effect="PROTECTION_MELEE"
-			frames="-1"
-		></GameEffectComponent >
-
 	</Entity>
 </Entity>

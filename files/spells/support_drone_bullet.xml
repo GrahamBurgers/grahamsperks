@@ -9,4 +9,11 @@
             </damage_by_type>
 		</ProjectileComponent>
 	</Base>
+
+	<HomingComponent
+		target_tag="player_unit"
+		homing_targeting_coeff="30.0"
+		homing_velocity_multiplier="0.95"
+		detect_distance="300"
+	></HomingComponent>
 </Entity>

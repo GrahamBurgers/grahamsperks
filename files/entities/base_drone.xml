@@ -121,6 +121,7 @@
 	<LuaComponent
 		_tags="enabled_in_world"
 		script_source_file="mods/grahamsperks/files/scripts/drone_death.lua"
+		script_shot="mods/grahamsperks/files/scripts/drone_shoot.lua"
 	></LuaComponent>
 
 	<PathFindingComponent

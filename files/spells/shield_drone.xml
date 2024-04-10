@@ -31,11 +31,23 @@
 		<DamageModelComponent
 			hp="4"
 			max_hp="4" >
+			<damage_multipliers
+				explosion="0"
+			></damage_multipliers>
 		</DamageModelComponent>
 
     <SpriteComponent
         image_file="mods/grahamsperks/files/projectiles_gfx/shield_drone_wings.xml"
     ></SpriteComponent>
+
+	<AnimalAIComponent 
+		tries_to_ranged_attack_friends="1"
+		sense_creatures="1"
+		attack_ranged_enabled="1"
+		attack_ranged_entity_file="mods/grahamsperks/files/spells/shield_drone_bullet.xml"
+		attack_ranged_frames_between="800"
+		>
+	</AnimalAIComponent>
 		
 	</Base>
 
@@ -72,7 +84,7 @@
         _tags="enabled_in_world,disable_on_death"
         recharge_speed="0.5" 
 		max_energy="1"
-		radius="18"
+		radius="12"
 		energy_required_to_shield="1"
 		energy="1"
 		>
@@ -94,8 +106,8 @@
 		count_max="100"
 		render_on_grid="1"
 		fade_based_on_lifetime="0"
-		area_circle_radius.min="18"
-		area_circle_radius.max="18"
+		area_circle_radius.min="12"
+		area_circle_radius.max="12"
 		cosmetic_force_create="0"
 		airflow_force="0.3"
 		airflow_time="0.01"
@@ -116,8 +128,8 @@
 		count_max="200"
 		render_on_grid="1"
 		fade_based_on_lifetime="0"
-		area_circle_radius.min="18"
-		area_circle_radius.max="18"
+		area_circle_radius.min="12"
+		area_circle_radius.max="12"
 		cosmetic_force_create="0"
 		airflow_force="2.8"
 		airflow_time="0.03"
@@ -139,10 +151,5 @@
 			effect="STUN_PROTECTION_ELECTRICITY"
 			frames="-1"
 		></GameEffectComponent >
-		<GameEffectComponent 
-			effect="PROTECTION_MELEE"
-			frames="-1"
-		></GameEffectComponent >
-
 	</Entity>
 </Entity>

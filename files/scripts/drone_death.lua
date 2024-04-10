@@ -23,6 +23,10 @@ if hpcomp ~= nil then
             local physicsai = EntityGetFirstComponent(me, "PhysicsAIComponent") or 0
             ComponentSetValue2(physicsai, "force_coeff", 1)
             ComponentSetValue2(physicsai, "force_max", 1)
+            local ai = EntityGetFirstComponent(me, "AnimalAIComponent")
+            if ai then
+                ComponentSetValue2(ai, "attack_ranged_enabled", false)
+            end
         else
             local x, y = EntityGetTransform(me)
             if #EntityGetInRadiusWithTag(x, y, 8, "enemy") > 0 then
@@ -31,3 +35,5 @@ if hpcomp ~= nil then
         end
     end
 end
+
+-- 4/10/2024: idle effects

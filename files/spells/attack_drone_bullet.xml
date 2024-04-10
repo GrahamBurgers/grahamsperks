@@ -3,7 +3,7 @@
 	<Base file="data/entities/projectiles/machinegun_bullet_slower.xml" >
 		<ProjectileComponent
 			never_hit_player="1"
-            damage="0.32"
+            damage="0.2"
             penetrate_world="1"
 			>
 		</ProjectileComponent>

@@ -1,0 +1,15 @@
+<Entity name="$projectile_default" tags="projectile_player" >
+
+	<Base file="data/entities/projectiles/shieldshot.xml" >
+		<ProjectileComponent
+            penetrate_world="1"
+		></ProjectileComponent>
+
+		<HomingComponent
+			target_tag="player_unit"
+			homing_targeting_coeff="30.0"
+			homing_velocity_multiplier="0.95"
+			detect_distance="300"
+		></HomingComponent>
+	</Base>
+</Entity>
