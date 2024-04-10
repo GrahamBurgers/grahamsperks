@@ -30,7 +30,9 @@ function damage_about_to_be_received( damage, x, y, ent_thats_responsible, criti
 					EntityInflictDamage( ent_thats_responsible, dmg, "DAMAGE_ELECTRICITY", "$perkname_graham_zaptap", "DISINTEGRATED", 0, 0, player)
 				end
 
-				GetGameEffectLoadTo(player, "ELECTROCUTION", true)
+				if GameGetGameEffectCount(player, "STUN_PROTECTION_ELECTRICITY") + GameGetGameEffectCount(player, "PROTECTION_ELECTRICITY") <= 0 then
+					GetGameEffectLoadTo(player, "ELECTROCUTION", true)
+				end
 			end
 		end
 	end
