@@ -6,6 +6,15 @@ function damage_about_to_be_received( damage, x, y, ent_thats_responsible, criti
 	-- edit: the part that dexter helped with has since been removed, but I still am grateful for the effort
 
 	if player ~= ent_thats_responsible and not EntityHasTag(ent_thats_responsible, "lap2_chaser") and damage > 0 then
+		-- is entity a projectile?
+		local proj = EntityGetFirstComponent(ent_thats_responsible, "ProjectileComponent")
+		if proj then
+			local whoshot = ComponentGetValue2(proj, "mWhoShot")
+			if whoshot == ent_thats_responsible then -- panic?
+				return damage, critical_hit_chance
+			end
+			if whoshot ~= nil and whoshot ~= 0 then ent_thats_responsible = whoshot end
+		end
 		local x2, y2 = EntityGetTransform(ent_thats_responsible)
 		if x ~= nil and y ~= nil and x2 ~= nil and y2 ~= nil then
 			-- thanks to Evaisa for helping me debug this
@@ -31,7 +40,8 @@ function damage_about_to_be_received( damage, x, y, ent_thats_responsible, criti
 				end
 
 				if GameGetGameEffectCount(player, "STUN_PROTECTION_ELECTRICITY") + GameGetGameEffectCount(player, "PROTECTION_ELECTRICITY") <= 0 then
-					GetGameEffectLoadTo(player, "ELECTROCUTION", true)
+					local effect_id, entity_id = GetGameEffectLoadTo(player, "ELECTROCUTION", false)
+					ComponentSetValue2(effect_id, "frames", ComponentGetValue2(effect_id, "frames") * 0.5)
 				end
 			end
 		end
