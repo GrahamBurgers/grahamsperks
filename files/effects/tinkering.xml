@@ -11,6 +11,10 @@
 	</GameEffectComponent>
 
 	<LuaComponent
+		script_source_file="mods/grahamsperks/files/scripts/IOU_hold.lua">
+	</LuaComponent>
+
+	<LuaComponent
 		script_source_file="mods/grahamsperks/files/scripts/IOU.lua"
 		execute_on_added="0"
 		execute_on_removed="1"

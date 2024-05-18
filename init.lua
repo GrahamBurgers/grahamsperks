@@ -1,20 +1,14 @@
----@diagnostic disable: undefined-global
 local translations = ModTextFileGetContent( "data/translations/common.csv" ) or ""
-translations = translations:gsub("\r","")
+-- always load english first as a fallback in case something is missing
+translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations/en.csv" )
 if ModSettingGet("grahamsperks.Language") == 2 then
 	if ModIsEnabled("better_chinese") then
-		translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_chinese_books.csv")
-		translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_chinese_1.5_books.csv")
-		translations = translations .. (ModTextFileGetContent( "mods/grahamsperks/files/entities/books/corrupt/c.csv" ) or "")
+		translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations/zh_books.csv")
 	else
-		translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_chinese.csv")
-		translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_chinese_1.5.csv")
-		translations = translations .. (ModTextFileGetContent( "mods/grahamsperks/files/entities/books/corrupt/e.csv" ) or "")
+		translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations/zh.csv")
 	end
-else -- default to english
-	translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations.csv" )
-	translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations_1.5.csv" )
-	translations = translations .. (ModTextFileGetContent( "mods/grahamsperks/files/entities/books/corrupt/e.csv" ) or "")
+elseif ModSettingGet("grahamsperks.Language") == 3 then
+	translations = translations .. ModTextFileGetContent( "mods/grahamsperks/files/translations/ru.csv" )
 end
 translations = translations:gsub("\r",""):gsub("\n\n","\n")
 ModTextFileSetContent( "data/translations/common.csv", translations )
@@ -45,7 +39,7 @@ end
 ModLuaFileAppend("data/scripts/gun/gun_actions.lua", "mods/grahamsperks/files/spells/actions.lua")
 ModLuaFileAppend("data/scripts/perks/perk_list.lua", "mods/grahamsperks/files/perks/perk_list.lua")
 
-if ModSettingGet("grahamsperks.Creepy") ~= false then
+if not ModSettingGet("grahamsperks.Creepy") == true then
 	ModMaterialsFileAdd("mods/grahamsperks/files/materials/reactions_creepy.xml")
 end
 
@@ -63,6 +57,7 @@ ModLuaFileAppend( "data/scripts/items/heart_fullhp.lua", "mods/grahamsperks/file
 ModLuaFileAppend( "data/scripts/items/heart_fullhp_temple.lua", "mods/grahamsperks/files/scripts/blood_orb_fullheal.lua")
 ModLuaFileAppend( "data/scripts/magic/fungal_shift.lua", "mods/grahamsperks/files/scripts/fungal_shift_append.lua")
 ModLuaFileAppend( "data/scripts/streaming_integration/event_list.lua", "mods/grahamsperks/files/streaming/_streaming_events.lua" )
+ModLuaFileAppend( "data/scripts/biomes/boss_arena.lua", "mods/grahamsperks/files/scripts/final_mountain_missing.lua")
 
 if ModSettingGet("grahamsperks.Enemies") ~= false then
 	-- enemies
@@ -99,91 +94,21 @@ local function add_scene(table)
 	local string = "<mBufferedPixelScenes>"
 	local worldsize = tonumber(ModTextFileGetContent("data/compatibilitydata/worldsize.txt") or "35840") or 35840
 	for i = 1, #table do
-		string = string .. [[<PixelScene pos_x="]] .. table[i][1] .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
-		if table[i][4] then
-			-- make things show up in first 2 parallel worlds
-			-- hopefully this won't cause too much lag when starting a run
-			string = string .. [[<PixelScene pos_x="]] .. table[i][1] + worldsize .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
-			string = string .. [[<PixelScene pos_x="]] .. table[i][1] - worldsize .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
-			string = string .. [[<PixelScene pos_x="]] .. table[i][1] + worldsize * 2 .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
-			string = string .. [[<PixelScene pos_x="]] .. table[i][1] - worldsize * 2 .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
+		if table[i][5] ~= false then
+			string = string .. [[<PixelScene pos_x="]] .. table[i][1] .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
+			if table[i][4] then
+				-- make things show up in first 2 parallel worlds
+				-- hopefully this won't cause too much lag when starting a run
+				string = string .. [[<PixelScene pos_x="]] .. table[i][1] + worldsize .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
+				string = string .. [[<PixelScene pos_x="]] .. table[i][1] - worldsize .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
+				string = string .. [[<PixelScene pos_x="]] .. table[i][1] + worldsize * 2 .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
+				string = string .. [[<PixelScene pos_x="]] .. table[i][1] - worldsize * 2 .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
+			end
 		end
 	end
 	content = content:gsub("<mBufferedPixelScenes>", string)
 	ModTextFileSetContent(biome_path, content)
 end
-
-add_scene({
-	{-2379, 6646, "mods/grahamsperks/files/entities/books/cookbook.xml", true},
-	{9953, -1167, "mods/grahamsperks/files/entities/books/polybook.xml", true},
-	{-3811, 10113, "mods/grahamsperks/files/entities/books/lonelybook.xml", true},
-	{-16268, -7093, "mods/grahamsperks/files/entities/books/timebook.xml", true},
-	{-1933, -59, "mods/grahamsperks/files/entities/books/anvilbook.xml"},
-	{4379, 895, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
-	{-12340, 420, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
-	{-3367, 3346, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
-	{2945, 12316, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
-	{12336, -4642, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
-	{-1707, -742, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
-	{9654, 9186, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
-	{3372, 1876, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
-	{-4324, 3968, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
-	{4413, 13087, "mods/grahamsperks/files/pickups/chest_tech.xml", true},
-	{11480, -4864, "mods/grahamsperks/files/wands/candyheart.xml", true},
-	{10050, -736, "mods/grahamsperks/files/wands/rotting.xml", true},
-	{16090, 10000, "mods/grahamsperks/files/wands/coffee.xml", true},
-	{2520, 7440, "mods/grahamsperks/files/wands/petworm.xml", true},
-	{4135, 12964, "mods/grahamsperks/files/wands/gluestick.xml", true},
-	{16161, 3333, "mods/grahamsperks/files/wands/experimental.xml", true},
-	{1487, 6085, "mods/grahamsperks/files/entities/books/unlockbook.xml", true},
-	{3435, 936, "mods/grahamsperks/files/pickups/vial.xml", true},
-	{-2111, 2722, "mods/grahamsperks/files/pickups/balloon.xml", true},
-	{-1908, -56, "mods/grahamsperks/files/pixelscenes/text.xml"},
-	{-1864, -53, "data/entities/items/pickup/moon.xml"},
-	{2372, 530, "mods/grahamsperks/files/pixelscenes/hands.xml"},
-	{2382, 550, "mods/grahamsperks/files/entities/goldblood.xml"},
-	{-2221, 2564, "mods/grahamsperks/files/pixelscenes/hellblood.xml", true},
-	{-2490, 6480, "mods/grahamsperks/files/pixelscenes/transmutatium.xml", true},
-	{3921, 3100, "mods/grahamsperks/files/entities/forge_item_check.xml", true},
-	{3951, 3140, "mods/grahamsperks/files/pixelscenes/hand.xml", true},
-	{-14638, 13031, "mods/grahamsperks/files/entities/forge_item_check.xml", true},
-	{-14608, 13071, "mods/grahamsperks/files/pixelscenes/hand.xml", true},
-	{2318, 1870, "mods/grahamsperks/files/entities/eyechecker.xml", true},
-	{4573, 528, "mods/grahamsperks/files/pixelscenes/eye.xml", true},
-	{2000, 1735, "mods/grahamsperks/files/pixelscenes/closedeye.xml", true},
-	{-5302, 575, "mods/grahamsperks/files/pixelscenes/materials.xml"},
-	{-6760, 7424, "mods/grahamsperks/files/pixelscenes/yinyang.xml", true},
-	{-6693, 7515, "mods/grahamsperks/files/entities/halo_checker.xml", true},
-	{11537, 9956, "mods/grahamsperks/files/pixelscenes/water.xml"},
-	{11537, 9986, "mods/grahamsperks/files/pickups/chest_immunity.xml"},
-	{-317, -1673, "mods/grahamsperks/files/pixelscenes/island.xml"},
-	{-278, -1580, "mods/grahamsperks/files/entities/fireplace_worse.xml"},
-	{-46, -1550, "mods/grahamsperks/files/entities/books/cozybook.xml"},
-	{4046, 12977, "mods/grahamsperks/files/pixelscenes/secret.xml", true},
-	{4532, 13081, "mods/grahamsperks/files/entities/perk_spawners/map_spawner.xml"},
-	{785, -1231, "mods/grahamsperks/files/entities/perk_spawners/map2_spawner.xml"},
-	{15090, -3333, "mods/grahamsperks/files/entities/perk_spawners/ll_spawner.xml"},
-	{3546, 13100, "mods/grahamsperks/files/entities/perk_spawners/slots_spawner.xml"},
-	{14241, 16284, "mods/grahamsperks/files/entities/forge_item_check.xml", true},
-	{4692, 652, "mods/grahamsperks/files/entities/tear_secret.xml", true},
-	{14271, 16324, "mods/grahamsperks/files/pixelscenes/hand.xml", true},
-	{-16295, -7140, "mods/grahamsperks/files/pixelscenes/home.xml"},
-	{-16238, -6987, "data/entities/props/furniture_bed.xml"},
-	{-16116, -7004, "data/entities/props/furniture_wood_table.xml"},
-	{-16016, -7068, "mods/grahamsperks/files/pickups/chest_lost.xml"},
-	{-16117, -7015, "mods/grahamsperks/files/pickups/chest_mini.xml"},
-	{-16038, -7010, "mods/grahamsperks/files/entities/fireplace_worse.xml"},
-	{7412, 6175, "mods/grahamsperks/files/pixelscenes/heart.xml", true},
-	{12055, 2700, "mods/grahamsperks/files/pixelscenes/wealth.xml"},
-	{12055, 2730, "mods/grahamsperks/files/entities/midas_curse.xml"},
-	{1800, 6600, "mods/grahamsperks/files/pixelscenes/egg.xml", true},
-	{1800, 6600, "mods/grahamsperks/files/pickups/egg.xml", true},
-	{1800, 6600, "mods/grahamsperks/files/entities/books/eggbook.xml", true},
-	{-11695, 600, "mods/grahamsperks/files/pixelscenes/stargazer.xml", true},
-	{0, 40000, "mods/grahamsperks/files/pixelscenes/cat.xml", true},
-	{0, -40000, "mods/grahamsperks/files/pixelscenes/cat2.xml", true},
-	{3331, 1616, "mods/grahamsperks/files/entities/progress/progress.xml", true},
-})
 
 dofile_once("data/scripts/perks/perk.lua")
 
@@ -312,20 +237,6 @@ local patches = {
 		]],
     },
 	{
-        path    = "data/scripts/biome_scripts.lua",
-        from    = [[local entity = EntityLoad%( "data/entities/items/pickup/heart.xml", x, y%)]],
-        to      = [[SetRandomSeed%( x + 2594884, y + 485398 %)
-		local rnd =  Random%( 1, 5 %)
-
-		if GameHasFlagRun%("PERK_PICKED_GRAHAM_LUCKY_CLOVER"%) then rnd = Random%( 1, 6 %) end
-
-		if %( rnd >= 5 %) and not GameHasFlagRun%("PERK_PICKED_GRAHAM_HEALTHY_HEARTS"%) then
-			local entity = EntityLoad%( "mods/grahamsperks/files/pickups/heart_healthy.xml", x, y%)
-		else
-			local entity = EntityLoad%( "data/entities/items/pickup/heart.xml", x, y%)
-		end]],
-    },
-	{
         path    = "data/scripts/items/chest_random.lua",
         from    = "\"metal\"",
         to      = "\"metal\", \"graham_phase\"",
@@ -350,47 +261,49 @@ local patches = {
         from    = [[local eid = EntityLoad%( "data/entities/items/pickup/chest_random.xml", sx, sy %)]],
         to      = [[local eid
 		SetRandomSeed%( sx + 894524, sy - 137501 %)
-        if ModSettingGet%("grahamsperks.PacifistChest"%) then
-        if Random%(1, 12%) == 12 then eid = EntityLoad%("data/entities/animals/mini_mimic.xml", sx, sy%)
-        else eid = EntityLoad%("mods/grahamsperks/files/pickups/chest_mini.xml", sx, sy%) end
-        else eid = EntityLoad%("data/entities/items/pickup/chest_random.xml", sx, sy%) end]],
+        if %(ModSettingGet%("grahamsperks.PacifistChest"%) or true%) ~= false then
+        	if Random%(1, 12%) == 12 then
+				eid = EntityLoad%("data/entities/animals/mini_mimic.xml", sx, sy%)
+       		else
+				eid = EntityLoad%("mods/grahamsperks/files/pickups/chest_mini.xml", sx, sy%)
+			end
+        else
+			eid = EntityLoad%("data/entities/items/pickup/chest_random.xml", sx, sy%)
+		end]],
     },
 	{
         path    = "data/scripts/buildings/workshop_trigger_check_stats.lua",
         from    = [[print%("KILLED ALL"%)]],
         to      = [[print%("KILLED ALL"%)
-        if GameHasFlagRun%("PERK_PICKED_GRAHAM_BLOODY_EXTRA_PERK"%) then
-            local current_biome = BiomeMapGetName%(x, y - 500%):gsub%("$biome_", ""%)
-            if BiomeMapGetName%(x, y - 1000%):gsub%("$biome_", ""%) == "crypt" then current_biome = "crypt" end
-            local kills_needed = %({
-                ["coalmine"]        = 20,
-                ["coalmine_alt"]    = 20,
-                ["excavationsite"]  = 40,
-                ["fungicave"]       = 40,
-                ["snowcave"]        = 30,
-                ["wandcave"]        = 30,
-                ["snowcastle"]      = 40,
-                ["rainforest"]      = 30,
-                ["rainforest_open"] = 30,
-                ["vault"]           = 20,
-                ["crypt"]           = 40,
-            }%)[current_biome] or 100
-			kills_needed = kills_needed * %(0.8 ^ %(tonumber%(%( 1 + GlobalsGetValue%( "PLAYER_HALO_LEVEL", "0" %)%) * -1%)%)%)
-			kills_needed = math.floor%(kills_needed%) - 1 -- I forget what this part is supposed to do
-            if %(enemies_killed >= kills_needed%) then
-                local sx, sy = x, y
+		if GlobalsGetValue%("GRAHAM_SPAWN_BLOODY_CHEST", "0"%) == "1" then
+			GlobalsSetValue%("GRAHAM_SPAWN_BLOODY_CHEST", "0"%)
+			local sx, sy = x, y
 
-                if %(reference_id ~= NULL_ENTITY%) then
-                    sx, sy = EntityGetTransform%(reference_id%)
-                end
-                local chance = 12
-                if HasFlagPersistent%("graham_bloodymimic_killed"%) == false then
-                    chance = 6
-                end
-				SetRandomSeed%( sx - 2594884, sy - 485398 %)
-                if Random%(1, chance%) == chance then local eid = EntityLoad%("data/entities/animals/bloody_mimic.xml", sx, sy%)
-                else local eid = EntityLoad%("mods/grahamsperks/files/pickups/chest_bloody.xml", sx, sy + 7%) end
-            end
+			if %(reference_id ~= NULL_ENTITY%) then
+				sx, sy = EntityGetTransform%(reference_id%)
+			end
+			local biome_name = BiomeMapGetName%(x - 600, y - 800%):sub%(8,-1%)
+			local kills_needed = %({
+                ["coalmine"]       = 40,
+				["coalmine_alt"]   = 40,
+                ["excavationsite"] = 30,
+                ["snowcave"]       = 40,
+                ["snowcastle"]     = 30,
+                ["rainforest"]     = 30,
+                ["vault"]          = 40,
+                ["crypt"]          = 60,
+				["boss_arena"]     = 40,
+            }%)[biome_name] or 20
+			kills_needed = kills_needed * %(0.8 ^ %(tonumber%(%( 1 + GlobalsGetValue%( "PLAYER_HALO_LEVEL", "0" %)%) * -1%)%)%)
+
+			GlobalsSetValue%("GRAHAM_BLOODY_BONUS_KILLS", tostring%(kills_needed%)%)
+			local chance = 12
+			if HasFlagPersistent%("graham_bloodymimic_killed"%) == false then
+				chance = 6
+			end
+			SetRandomSeed%( sx - 2594884, sy - 485398 %)
+			if Random%(1, chance%) == chance then local eid = EntityLoad%("data/entities/animals/bloody_mimic.xml", sx, sy%)
+			else local eid = EntityLoad%("mods/grahamsperks/files/pickups/chest_bloody.xml", sx, sy + 7%) end
         end]],
     },
 	{
@@ -409,6 +322,26 @@ local patches = {
 			look_for_failure="0"
 			kill_after_message="0">
 		</MaterialAreaCheckerComponent>
+		</Entity>
+		]],
+    },
+	{
+        path    = "data/entities/items/pickup/heart.xml",
+        from    = [[</Entity>]],
+        to      = [[
+		<LuaComponent
+			script_source_file="mods/grahamsperks/files/scripts/healthyheart_check.lua">
+		</LuaComponent>
+		</Entity>
+		]],
+    },
+	{
+        path    = "data/entities/items/pickup/heart_better.xml",
+        from    = [[</Entity>]],
+        to      = [[
+		<LuaComponent
+			script_source_file="mods/grahamsperks/files/scripts/healthyheart_check.lua">
+		</LuaComponent>
 		</Entity>
 		]],
     },
@@ -624,15 +557,15 @@ local events = {
 			from    = "-- dummy",
 			to      = "threshold = threshold * 64",
 		},
-			{
+		{
 			path    = "mods/grahamsperks/files/scripts/book.lua",
-			from    = "= 8000",
-			to      = "= 500",
+			from    = "= 500",
+			to      = "= 50",
 		},
 			{
 			path    = "mods/grahamsperks/files/scripts/book.lua",
-			from    = "= 800",
-			to      = "= 50",
+			from    = "= 5000",
+			to      = "= 500",
 		},
 		}
 	end,
@@ -706,11 +639,11 @@ end
 function OnPlayerSpawned(player)
 	EntitySetDamageFromMaterial(player, "graham_purplebrick_lessglow", 0.00012)
 	local x, y = EntityGetTransform(player)
-	
+
 	GlobalsSetValue( "GRAHAM_TOGGLE", "null" )
 	GlobalsSetValue( "GRAHAM_TOGGLE2", "null" )
 
-	if ModSettingGet("grahamsperks.SettingsReminder") then
+	if ModSettingGet("grahamsperks.SettingsReminder") ~= false then
 	    GamePrint("$graham_settings_check")
 	end
 	
@@ -793,10 +726,93 @@ end
 
 function OnMagicNumbersAndWorldSeedInitialized()
 	SetRandomSeed(13548, 195430)
-	if ModSettingGet("grahamsperks.birthday") == "yes" and event ~= "1111" then
+	if ModSettingGet("grahamsperks.birthday") == true and event ~= "1111" then
 		ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_birthday.lua" )
 	end
 	if (Random(1, 15) == 1) then
 		ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_secret.lua" )
 	end
+
+	-- this is going to look really stupid
+	local tech_chest_shuffle = {
+		true, true, true, true, true, false, false, false, false, false
+	}
+	local chest = {}
+	for i = 1, #tech_chest_shuffle do
+		local number = Random(1, #tech_chest_shuffle)
+		chest[#chest+1] = tech_chest_shuffle[number]
+		table.remove(tech_chest_shuffle, number)
+	end
+
+	add_scene({
+		{-2379, 6646, "mods/grahamsperks/files/entities/books/cookbook.xml", true},
+		{9953, -1167, "mods/grahamsperks/files/entities/books/polybook.xml", true},
+		{-3811, 10113, "mods/grahamsperks/files/entities/books/lonelybook.xml", true},
+		{-16268, -7093, "mods/grahamsperks/files/entities/books/timebook.xml", true},
+		{-1933, -59, "mods/grahamsperks/files/entities/books/anvilbook.xml"},
+		{4379, 895, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[1]},
+		{-12340, 420, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[2]},
+		{-3367, 3346, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[3]},
+		{2945, 12316, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[4]},
+		{12336, -4642, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[5]},
+		{-1707, -742, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[6]},
+		{9654, 9186, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[7]},
+		{3372, 1876, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[8]},
+		{-4324, 3968, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[9]},
+		{4413, 13087, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[10]},
+		{11480, -4864, "mods/grahamsperks/files/wands/candyheart.xml", true},
+		{10050, -736, "mods/grahamsperks/files/wands/rotting.xml", true},
+		{16090, 10000, "mods/grahamsperks/files/wands/coffee.xml", true},
+		{2520, 7440, "mods/grahamsperks/files/wands/petworm.xml", true},
+		{4135, 12964, "mods/grahamsperks/files/wands/gluestick.xml", true},
+		{16161, 3333, "mods/grahamsperks/files/wands/experimental.xml", true},
+		{1487, 6085, "mods/grahamsperks/files/entities/books/unlockbook.xml", true},
+		{3435, 936, "mods/grahamsperks/files/pickups/vial.xml", true},
+		{-2111, 2722, "mods/grahamsperks/files/pickups/balloon.xml", true},
+		{-1908, -56, "mods/grahamsperks/files/pixelscenes/text.xml"},
+		{-1864, -53, "data/entities/items/pickup/moon.xml"},
+		{2372, 530, "mods/grahamsperks/files/pixelscenes/hands.xml"},
+		{2382, 550, "mods/grahamsperks/files/entities/goldblood.xml"},
+		{-2221, 2564, "mods/grahamsperks/files/pixelscenes/hellblood.xml", true},
+		{-2490, 6480, "mods/grahamsperks/files/pixelscenes/transmutatium.xml", true},
+		{3921, 3100, "mods/grahamsperks/files/entities/forge_item_check.xml", true},
+		{3951, 3140, "mods/grahamsperks/files/pixelscenes/hand.xml", true},
+		{-14638, 13031, "mods/grahamsperks/files/entities/forge_item_check.xml", true},
+		{-14608, 13071, "mods/grahamsperks/files/pixelscenes/hand.xml", true},
+		{2318, 1870, "mods/grahamsperks/files/entities/eyechecker.xml", true},
+		{4573, 528, "mods/grahamsperks/files/pixelscenes/eye.xml", true},
+		{2000, 1735, "mods/grahamsperks/files/pixelscenes/closedeye.xml", true},
+		{-5302, 575, "mods/grahamsperks/files/pixelscenes/materials.xml"},
+		{-6760, 7424, "mods/grahamsperks/files/pixelscenes/yinyang.xml", true},
+		{-6693, 7515, "mods/grahamsperks/files/entities/halo_checker.xml", true},
+		{11537, 9956, "mods/grahamsperks/files/pixelscenes/water.xml"},
+		{11537, 9986, "mods/grahamsperks/files/pickups/chest_immunity.xml"},
+		{-317, -1673, "mods/grahamsperks/files/pixelscenes/island.xml"},
+		{-278, -1580, "mods/grahamsperks/files/entities/fireplace_worse.xml"},
+		{-46, -1550, "mods/grahamsperks/files/entities/books/cozybook.xml"},
+		{4046, 12977, "mods/grahamsperks/files/pixelscenes/secret.xml", true},
+		{4532, 13081, "mods/grahamsperks/files/entities/perk_spawners/map_spawner.xml"},
+		{785, -1231, "mods/grahamsperks/files/entities/perk_spawners/map2_spawner.xml"},
+		{15090, -3333, "mods/grahamsperks/files/entities/perk_spawners/ll_spawner.xml"},
+		{3546, 13100, "mods/grahamsperks/files/entities/perk_spawners/slots_spawner.xml"},
+		{14241, 16284, "mods/grahamsperks/files/entities/forge_item_check.xml", true},
+		{4692, 652, "mods/grahamsperks/files/entities/tear_secret.xml", true},
+		{14271, 16324, "mods/grahamsperks/files/pixelscenes/hand.xml", true},
+		{-16295, -7140, "mods/grahamsperks/files/pixelscenes/home.xml"},
+		{-16238, -6987, "data/entities/props/furniture_bed.xml"},
+		{-16116, -7004, "data/entities/props/furniture_wood_table.xml"},
+		{-16016, -7068, "mods/grahamsperks/files/pickups/chest_lost.xml"},
+		{-16117, -7015, "mods/grahamsperks/files/pickups/chest_mini.xml"},
+		{-16038, -7010, "mods/grahamsperks/files/entities/fireplace_worse.xml"},
+		{7412, 6175, "mods/grahamsperks/files/pixelscenes/heart.xml", true},
+		{12055, 2700, "mods/grahamsperks/files/pixelscenes/wealth.xml"},
+		{12055, 2730, "mods/grahamsperks/files/entities/midas_curse.xml"},
+		{1800, 6600, "mods/grahamsperks/files/pixelscenes/egg.xml", true},
+		{1800, 6600, "mods/grahamsperks/files/pickups/egg.xml", true},
+		{1800, 6600, "mods/grahamsperks/files/entities/books/eggbook.xml", true},
+		{-11695, 600, "mods/grahamsperks/files/pixelscenes/stargazer.xml", true},
+		{0, 60000, "mods/grahamsperks/files/pixelscenes/cat.xml", true},
+		{0, -60000, "mods/grahamsperks/files/pixelscenes/cat2.xml", true},
+		{3331, 1616, "mods/grahamsperks/files/entities/progress/progress.xml", true},
+	})
 end

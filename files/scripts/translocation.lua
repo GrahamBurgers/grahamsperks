@@ -9,6 +9,13 @@ local who_shot_me = nil
 edit_component( entity_id, "ProjectileComponent", function(comp,vars)
 	who_shot_me = ComponentGetValue2( comp, "mWhoShot" )
 end)
+local comp = EntityGetFirstComponent(entity_id, "ParticleEmitterComponent")
+local lifetime = EntityGetFirstComponent(entity_id, "LifetimeComponent")
+if not lifetime or not comp then return end
+local left = ComponentGetValue2(lifetime, "kill_frame") - GameGetFrameNum()
+ComponentSetValue2(comp, "area_circle_radius", left / 257.142857, left / 257.142857)
+ComponentSetValue2(comp, "count_min", left / 60)
+ComponentSetValue2(comp, "count_max", left / 60)
 
 for i,projectile_id in ipairs(projectiles) do
 	if projectile_id ~= entity_id then
@@ -44,10 +51,10 @@ for i,projectile_id in ipairs(projectiles) do
 				EntityLoad( "data/entities/particles/teleportation_target.xml", px, py )
 				
 				EntitySetTransform( projectile_id, px, py )
+				GamePlaySound("data/audio/Desktop/misc.bank", "game_effect/teleport/tick", px, py)
 
 				-- subtract 3 seconds of lifetime for each projectile successfully phased
 				-- I hope this can't cause any funky infinite lifetime shenanigans
-				local lifetime = EntityGetFirstComponent(entity_id, "LifetimeComponent") or 0
 				ComponentSetValue2(lifetime, "kill_frame", ComponentGetValue2(lifetime, "kill_frame") - 180)
 			end
 		end

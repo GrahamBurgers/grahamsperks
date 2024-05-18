@@ -21,26 +21,30 @@ if( damagemodels ~= nil ) then
                 -- If healing is applicable, then heal and add to counter
                 local hp = hp + (max_hp / 100)
                 if hp > max_hp then hp = max_hp end
-                fireplace_hp_used = fireplace_hp_used + (max_hp / 50)
-                storage_comp = get_variable_storage_component(entity_id, "fireplace_hp_used")
+                fireplace_hp_used = fireplace_hp_used + (max_hp / 25)
+                local storage_comp = get_variable_storage_component(entity_id, "fireplace_hp_used")
                 ComponentSetValue2(storage_comp, "value_float", fireplace_hp_used)
                 ComponentSetValue2( v, "hp", hp)
 
             end
-            local sprite = EntityGetFirstComponentIncludingDisabled(entity_id, "SpriteComponent")
+            local sprite = EntityGetFirstComponentIncludingDisabled(entity_id, "SpriteComponent") or 0
             local trans = 1 - (fireplace_hp_used / max_hp)
-            local emittercomp = EntityGetFirstComponentIncludingDisabled(entity_id, "ParticleEmitterComponent")
+            local emittercomp = EntityGetFirstComponentIncludingDisabled(entity_id, "ParticleEmitterComponent") or 0
             ComponentSetValue2(emittercomp, "count_max", trans * 60 )
-            
+
             if trans < 0.2 then
                 ComponentSetValue2(emittercomp, "is_emitting", false )
             else
                 ComponentSetValue2(emittercomp, "is_emitting", true )
             end
+            local lights = EntityGetComponentIncludingDisabled(entity_id, "LightComponent") or {}
+            for j = 1, #lights do
+                ComponentSetValue2(lights[j], "radius", math.max(0, trans * 100))
+            end
 
-            local uiinfo = EntityGetFirstComponentIncludingDisabled(entity_id, "InteractableComponent")
+            local uiinfo = EntityGetFirstComponentIncludingDisabled(entity_id, "InteractableComponent") or 0
             -- Very excessive use of parentheses cause I think I forgot the order of operations
-            local display = math.floor((max_hp * 25 - fireplace_hp_used * 25) / 2)
+            local display = math.floor(max_hp * 25 - fireplace_hp_used * 25)
             if display > 0 then
                 ComponentSetValue2( uiinfo, "ui_text", tostring(display) .. " health remaining")
                 ComponentSetValue2(sprite, "alpha", 0.1 + trans )

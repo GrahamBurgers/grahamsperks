@@ -63,14 +63,13 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
 		local health = 0
 		if( damagemodels ~= nil ) then
 			for i,v in ipairs(damagemodels) do
-				maxhealth = 25 * tonumber( ComponentGetValue( v, "max_hp" ) )
-				health = 25 * tonumber( ComponentGetValue( v, "hp" ) )
+				maxhealth = 25 * tonumber( ComponentGetValue2( v, "max_hp" ) )
+				health = 25 * tonumber( ComponentGetValue2( v, "hp" ) )
 				break
 			end
 		end
 
 		if health <= 20 then
-			local message = ModSettingGet("grahamsperks.respawns")
 			SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
 			if Random(1, health * 10) == 1 and GlobalsGetValue( "GRAHAM_SPAWNED_LUCKY", "0" ) ~= "yes" then
 				if HasFlagPersistent("graham_progress_lucky") ~= true then
@@ -87,30 +86,10 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
 
 		if GameHasFlagRun("PERK_PICKED_GRAHAM_BLOODY_EXTRA_PERK") then
 
-			local enemies_killed = tonumber( StatsBiomeGetValue("enemies_killed") )
-            -- Cpoi:
-            -- We have switch cases at home
-            -- Switch cases at home:
-            local kills_needed = ({
-                ["coalmine"]        = 20,
-                ["coalmine_alt"]    = 20,
-                ["excavationsite"]  = 40,
-                ["fungicave"]       = 40,
-                ["snowcave"]        = 30,
-                ["wandcave"]        = 30,
-                ["snowcastle"]      = 40,
-                ["rainforest"]      = 30,
-                ["rainforest_open"] = 30,
-                ["vault"]           = 20,
-                ["crypt"]           = 40,
-            })[BiomeMapGetName(x, y):sub(8,-1)] or 0
+			local remainder = tonumber( GlobalsGetValue("GRAHAM_BLOODY_BONUS_KILLS", "20") ) - 1
+			GlobalsSetValue("GRAHAM_BLOODY_BONUS_KILLS", tostring(remainder))
 
-			kills_needed = kills_needed * (0.8 ^ (tonumber(( 1 + GlobalsGetValue( "PLAYER_HALO_LEVEL", "0" )) * -1)))
-			kills_needed = math.floor(kills_needed) - 1 -- I forget what this part is supposed to do
-
-			local remainder = kills_needed - enemies_killed
-
-			local enum = ModSettingGet("grahamsperks.BloodyBonus")
+			local enum = ModSettingGet("grahamsperks.BloodyBonus") or 2
 			local cond = false
 
 			if ( enum == 1 ) then
@@ -127,7 +106,8 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
 				end
 			end
 
-			if ( enemies_killed == kills_needed ) then
+			if remainder <= 0 and GlobalsGetValue("GRAHAM_SPAWN_BLOODY_CHEST", "0") ~= "1" then
+				GlobalsSetValue("GRAHAM_SPAWN_BLOODY_CHEST", "1")
 				SetRandomSeed( GameGetFrameNum(), GameGetFrameNum() )
 				local message = "$graham_bloodied_0" .. tostring( Random(1,9) )
 

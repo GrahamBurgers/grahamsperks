@@ -31,7 +31,7 @@ function damage_about_to_be_received( damage, x, y, ent_thats_responsible, crit_
 
 		EntityLoad( "mods/grahamsperks/files/entities/lucky.xml", x, y )
 		if EntityHasTag(player, "player_unit") then
-            local enum = ModSettingGet("grahamsperks.LuckyDay")
+            local enum = ModSettingGet("grahamsperks.LuckyDay") or 1
 			if enum == 1 then
 				GamePrint(GameTextGet("$graham_lucky_chance", tostring(math.ceil(cutoff))))
             elseif enum == 2 then

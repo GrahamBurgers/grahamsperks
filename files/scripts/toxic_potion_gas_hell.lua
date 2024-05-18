@@ -12,7 +12,7 @@ for i = 1, #enemies do
     -- hopefully should be the final fix here (I'm so glad that mShooterHerdId exists)
     local herdcomp = EntityGetFirstComponent(enemies[i], "GenomeDataComponent")
     local herd = nil
-    if herdcomp ~= 0 then
+    if herdcomp and herdcomp ~= 0 then
         herd = ComponentGetValue2(herdcomp, "herd_id")
     end
     if herd == nil or herdid == nil or friendlyfire == true or (whoshot ~= enemies[i] and GetHerdRelation(herdid, herd) <= 60) then

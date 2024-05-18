@@ -1,9 +1,8 @@
 local me = GetUpdatedEntityID()
-local comp = EntityGetFirstComponent(me, "ProjectileComponent") or 0
-if comp == 0 then return end
-local whoshot = ComponentGetValue2(comp, "mWhoShot") or 0
-
-local particles = EntityGetFirstComponent(me, "ParticleEmitterComponent") or 0
+local comp = EntityGetFirstComponent(me, "ProjectileComponent")
+local particles = EntityGetFirstComponent(me, "ParticleEmitterComponent")
+if not comp or not particles then return end
+local whoshot = ComponentGetValue2(comp, "mWhoShot")
 if ComponentGetValue2(comp, "on_death_explode") ~= true or ComponentGetValue2(comp, "on_lifetime_out_explode") ~= true then
     ComponentSetValue2(particles, "is_emitting", false)
     return
@@ -28,8 +27,8 @@ if distance > radius + 2 then
 end
 
 ComponentObjectSetValue2(comp, "config_explosion", "explosion_radius", math.max(10, radius - 0.15))
-ComponentSetValue2(particles, "count_min", radius * 0.75)
-ComponentSetValue2(particles, "count_max", radius * 0.75)
+ComponentSetValue2(particles, "count_min", radius * 2)
+ComponentSetValue2(particles, "count_max", radius * 2)
 
 local sizes = {"008", "012", "016", "032", "064", "128",}
 for i = 1, #sizes do

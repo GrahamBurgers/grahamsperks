@@ -9,9 +9,15 @@ end
 
 local x, y = EntityGetTransform(GetUpdatedEntityID())
 local eid = shoot_projectile_from_projectile( GetUpdatedEntityID(), "mods/grahamsperks/files/entities/toxic_gas.xml", x, y, 0, 0)
-local particles = EntityGetFirstComponent(eid, "ParticleEmitterComponent") or 0
-ComponentSetValue2(particles, "area_circle_radius", 0, size)
-ComponentSetValue2(particles, "count_min", size / 2)
-ComponentSetValue2(particles, "count_max", size / 2)
+local particles = EntityGetComponent(eid, "ParticleEmitterComponent") or {}
+for i = 1, #particles do
+    if i == 1 then
+        ComponentSetValue2(particles[i], "area_circle_radius", 0, size)
+    else
+        ComponentSetValue2(particles[i], "area_circle_radius", size, size)
+    end
+    ComponentSetValue2(particles[i], "count_min", size / 2)
+    ComponentSetValue2(particles[i], "count_max", size / 2)
+end
 local new = EntityGetFirstComponent(eid, "ProjectileComponent") or 0
 ComponentSetValue2(new, "friendly_fire", friendlyfire)

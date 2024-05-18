@@ -33,7 +33,7 @@ local progress = {
     "graham_progress_rotting_exchange",
 }
 
-local currentLang = ModSettingGet("grahamsperks.Language")
+local currentLang = ModSettingGet("grahamsperks.Language") or 1
 local translations = { -- default to English
     {"Settings reminder", "Should this mod pester you about its settings?"},
     {"Pacifist chest replacement", "Should the pacifist chest always be replaced with a Mini Treasure Chest?"},
@@ -47,7 +47,8 @@ local translations = { -- default to English
     {"Unlock all progress", "[Unlock All]", "Click here to unlock all progress for this mod. This cannot be undone!"},
     {"[True]", "[False]", "[Locked]", "You can't use this while in a run.", "Confused or want more info? Check out the mod's wiki page at noita.wiki.gg/Mods!"},
     {"Language", "What language do you want to play Graham's Things in?\nRestart the game after changing this setting."},
-    {"Hide breadcrumbs", "Should Breadcrumbs from the perk be invisible?\nThis is just cosmetic. Enable this if the perk is causing too much visual clutter."}
+    {"Hide breadcrumbs", "Should Breadcrumbs from the perk be invisible?\nThis is just cosmetic. Enable this if the perk is causing too much visual clutter."},
+    {"Spell weight multiplier", "Increase or decrease the spawn frequency of spells from Graham's Things.\nValues higher than 100% will make them appear more often.\nValues lower than 100% will make them appear less often.", "100%", "120%", "150%", "200%", "80%", "50%", "10%"},
 }
 
 if currentLang == 2 then -- Chinese translations here
@@ -64,7 +65,25 @@ if currentLang == 2 then -- Chinese translations here
         {"解锁所有进度", "[解锁全部]", "单击此处解锁此模组的所有进度。 这不能撤消！"},
         {"[是]", "[否]", "[锁定]", "你不能在进行游戏时修改这个选项。", "感到困惑或想了解更多信息？ 查看该模组的wiki页面：noita.wiki.gg/Mods！"},
         {"语言", "你想用什么语言玩Graham's Things？\n更改此设置后需要重新启动游戏才能生效。"},
-        {"隐藏面包屑", "面包屑天赋产生的面包屑应该隐形吗？\n这只是装饰性的。如果面包屑天赋导致画面过于混乱，请启用此功能。"}
+        {"隐藏面包屑", "面包屑天赋产生的面包屑应该隐形吗？\n这只是装饰性的。如果面包屑天赋导致画面过于混乱，请启用此功能。"},
+        {"法术生成权重", "增加或降低Graham's Things法术的生成频率。\n大于100%会增加此mod所属法术的生成频率\n小于100%则会降低法术的生成频率", "100%", "120%", "150%", "200%", "80%", "50%", "10%"},
+    }
+elseif currentLang == 3 then -- Russian translations here
+    translations = {
+        {"Напоминание о настройках", "Должен ли этот мод донимать вас своими настройками?"},
+        {"Замена сундука пацифиста", "Должен ли сундук пацифиста всегда заменяться на мини-сундук с сокровищами?"},
+        {"Добавить новых врагов", "Должен ли мод добавлять новых врагов?\n Это исключает мимику, которая всегда включена.\nПримечание: отключение врагов сделает невозможным получение 100%\n вражеского прогресса, если вы уже не убили врагов ранее.\n (Извините, технические ограничения и тому подобное.)"},
+        {"Добавить новые стартовые предметы", "Должны ли вы иметь возможность начинать с новыми заклинаниями или зельями в начале игры?"},
+        {"Сообщение о кровавом бонусе", "Должен ли перк \"Кровавый бонус\" сообщать вам, сколько убийств у вас осталось?", "При каждом убийстве", "Каждые 5 убийств", "Нет, никогда"},
+        {"Сообщение о Дне удачи", "Должен ли День удачи сообщать вам, когда вы уклонились от атаки?", "Да, показывать процент", "Да", "Нет, никогда"},
+        {"Принудительные материалы дня рождения", "Должны ли появляться Копиум и Магия дня рождения, даже если сегодня не 11/11?"},
+        {"Агрессивное распространение материалов", "Должны ли Жуткий полиморфин и Сушеный гриб распространяться по воздуху?"},
+        {"Сбросить весь прогресс", "[Сбросить все]", "Нажмите здесь, чтобы сбросить весь прогресс для этого мода. Этого нельзя отменить!"},
+        {"Разблокировать весь прогресс", "[Разблокировать все]", "Нажмите здесь, чтобы разблокировать весь прогресс для этого мода. Это нельзя отменить!"},
+        {"[Да]", "[Нет]", "[Заблокировано]", "Вы не можете использовать это во время бега.", "Запутались или хотите больше информации? Загляните на вики-страницу мода по адресу noita.wiki.gg/Mods!"},
+        {"Язык", "На каком языке вы хотите играть в \"Вещи Грэма\"?\n Перезапустите игру после изменения этой настройки."},
+        {"Скрывать хлебные крошки", "Должны ли хлебные крошки от перка быть невидимыми?\n Это просто косметический параметр. Включите эту настройку, если перк создает слишком много визуальных помех."},
+        {"Множитель количества заклинаний", "Увеличивает или уменьшает частоту спавна заклинаний из Graham's Things.\nЗначение больше 100% будет заставлять их появляться чаще.\nЗначение меньше 100% будет заставлять их появляться реже.", "100%", "120%", "150%", "200%", "80%", "50%", "10%"},
     }
 end
 
@@ -93,6 +112,7 @@ local settings = {
         values  = {
             [1] = "English",
             [2] = "中文 (Chinese)",
+            [3] = "Русский (Russian)"
         },
         default = 1,
     },
@@ -123,6 +143,22 @@ local settings = {
         desc    = translations[4][2],
         type    = "boolean",
         default = true,
+    },
+    {
+        id      = "SpellWeightMultiplier",
+        name    = translations[14][1],
+        desc    = translations[14][2],
+        type    = "enum",
+        values  = {
+            [1] = translations[14][3],
+            [2] = translations[14][4],
+            [3] = translations[14][5],
+            [4] = translations[14][6],
+            [5] = translations[14][7],
+            [6] = translations[14][8],
+            [7] = translations[14][9],
+        },
+        default = 1,
     },
     {
         id      = "BloodyBonus",

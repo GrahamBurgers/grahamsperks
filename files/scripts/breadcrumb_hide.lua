@@ -1,4 +1,4 @@
-local setting = ModSettingGet("grahamsperks.Breadcrumbs")
+local setting = ModSettingGet("grahamsperks.Breadcrumbs") or false
 local sprite = EntityGetFirstComponentIncludingDisabled(GetUpdatedEntityID(), "SpriteComponent")
 if sprite == nil then return end
 if setting ~= true then

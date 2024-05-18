@@ -13,7 +13,6 @@
     burnable="0"
     density="5.05"
     stickyness="0.4"
-    audio_materialaudio_type="MAGICAL" 
     >
 	  <StatusEffects>
 	    <Stains>
@@ -103,8 +102,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/wormygold.png"
     wang_color="ef29621"
     cell_type="gas"
     liquid_stains="2"
-    lifetime="200"
-    audio_materialaudio_type="MAGICAL" 
+    lifetime="150"
     gfx_glow="155"
     gfx_glow_color="FFff7700"
     >
@@ -135,7 +133,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/bubblygas.png">
     burnable="0"
     density="0.08"
     stickyness="2"
-    audio_materialaudio_type="MAGICAL" 
+	audio_materialaudio_type="LAVA"
     gfx_glow="155"
     gfx_glow_color="FFf5280d"
     >
@@ -456,7 +454,6 @@ color="FF13890d">
 	liquid_stains="1"
 	liquid_sprite_stain_shaken_drop_chance="5"
 	status_effects="POISONED"
-	audio_materialaudio_type="MAGICAL" 
 	show_in_creative_mode="1" 
 	stickyness="0.5"
 	>
@@ -539,7 +536,6 @@ color="FF13890d">
 	liquid_stains="1"
 	liquid_sprite_stain_shaken_drop_chance="10"
 	status_effects="CHARM"
-	audio_materialaudio_type="MAGICAL" 
 	show_in_creative_mode="1" 
 	stickyness="0.5"
 	>

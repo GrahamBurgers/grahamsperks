@@ -47,7 +47,7 @@ function item_pickup( entity_item, entity_who_picked, name )
 		description =  GameTextGet( "$logdesc_heart_blocked", tostring(math.floor(max_hp*25)) )
 	end
 
-	GamePrintImportant( "Picked up a Healthy Heart", description )
+	GamePrintImportant( "$graham_healthyheart_pickup", description )
 	GameTriggerMusicCue( "item" )
 
 	-- remove the item from the game
