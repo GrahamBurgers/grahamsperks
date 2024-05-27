@@ -429,8 +429,8 @@ color="ffc300">
 	      <StatusEffect type="FOOD_POISONING" />
 	    </Stains>
 	    <Ingestion>
-	      <StatusEffect type="GRAHAM_PROTECTION_ALL" amount="0.12" />
-	      <StatusEffect type="FOOD_POISONING" amount="0.04" />
+	      <StatusEffect type="GRAHAM_PROTECTION_ALL" amount="0.06" />
+	      <StatusEffect type="FOOD_POISONING" amount="0.08" />
 	    </Ingestion>
 	  </StatusEffects>
 <Graphics 

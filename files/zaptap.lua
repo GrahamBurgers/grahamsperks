@@ -27,7 +27,7 @@ function damage_about_to_be_received( damage, x, y, ent_thats_responsible, criti
 			local frame = ComponentGetValue2(var_comp, "value_float")
 
 			if distance < radius and frame < GameGetFrameNum() then
-				ComponentSetValue2(var_comp, "value_float", GameGetFrameNum())
+				ComponentSetValue2(var_comp, "value_float", GameGetFrameNum() + 30)
 				local dmg = 1
 				damage = 0
 				if GameHasFlagRun("PERK_PICKED_ELECTRICITY") then dmg = dmg * 2 end
@@ -41,7 +41,7 @@ function damage_about_to_be_received( damage, x, y, ent_thats_responsible, criti
 
 				if GameGetGameEffectCount(player, "STUN_PROTECTION_ELECTRICITY") + GameGetGameEffectCount(player, "PROTECTION_ELECTRICITY") <= 0 then
 					local effect_id, entity_id = GetGameEffectLoadTo(player, "ELECTROCUTION", false)
-					ComponentSetValue2(effect_id, "frames", ComponentGetValue2(effect_id, "frames") * 0.5)
+					ComponentSetValue2(effect_id, "frames", 20)
 				end
 			end
 		end
