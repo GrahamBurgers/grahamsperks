@@ -263,7 +263,7 @@ local to_insert = {
 		stackable = STACKABLE_NO,
 		func = function(entity_perk_item, entity_who_picked, item_name)
 			add_halo_level(entity_who_picked, -1)
-			local x, y = EntityGetTransform(entity_who_picked)
+			-- handled in bloodybonus_check.lua
 		end,
 	},
 	{
@@ -692,6 +692,7 @@ local to_insert = {
 		not_in_default_perk_pool = false,
 		stackable = STACKABLE_NO,
 		func = function(entity_perk_item, entity_who_picked, item_name)
+			-- handled in bloodybonus_check.lua
 		end,
 	},
 	{
