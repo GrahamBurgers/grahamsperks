@@ -282,25 +282,12 @@ local patches = {
 			if %(reference_id ~= NULL_ENTITY%) then
 				sx, sy = EntityGetTransform%(reference_id%)
 			end
-			local biome_name = BiomeMapGetName%(x - 600, y - 800%):sub%(8,-1%)
-			local kills_needed = %({
-                ["coalmine"]       = 35,
-				["coalmine_alt"]   = 35,
-                ["excavationsite"] = 25,
-                ["snowcave"]       = 35,
-                ["snowcastle"]     = 25,
-                ["rainforest"]     = 25,
-                ["vault"]          = 35,
-                ["crypt"]          = 55,
-				["boss_arena"]     = 35,
-            }%)[biome_name] or 25
-			kills_needed = kills_needed * %(0.8 ^ %(tonumber%(%( 1 + GlobalsGetValue%( "PLAYER_HALO_LEVEL", "0" %)%) * -1%)%)%)
-			kills_needed = math.floor(kills_needed)
+			local kills_needed = 14 + math.floor(sy / 200)
 
 			GlobalsSetValue%("GRAHAM_BLOODY_BONUS_KILLS", tostring%(kills_needed%)%)
-			local chance = 12
+			local chance = 15
 			if HasFlagPersistent%("graham_bloodymimic_killed"%) == false then
-				chance = 4
+				chance = 5
 			end
 			SetRandomSeed%( sx - 2594884, sy - 485398 %)
 			if Random%(1, chance%) == chance then local eid = EntityLoad%("data/entities/animals/bloody_mimic.xml", sx, sy%)
