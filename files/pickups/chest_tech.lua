@@ -66,19 +66,25 @@ function on_open( entity_item )
     "SWAPPER_PROJECTILE", "TEMPORARY_PLATFORM", "TRANSMUTATION",
     "MATERIAL_BLOOD", "ALCOHOL_BLAST", "HITFX_CRITICAL_BLOOD"}
     if HasFlagPersistent("card_unlocked_maths") then
-        local requirements = {
-            "IF_PROJECTILE", "IF_HP", "IF_ENEMY", "IF_HALF", "IF_ELSE", "IF_END"
-        }
-        SetRandomSeed( rand_x + 18349, rand_y + 1568299)
-        to_be_spawned[#to_be_spawned+1] = requirements[Random(1, #requirements)]
         local toggles = {
-            "GRAHAM_TOGGLE_RED", "GRAHAM_TOGGLE_BLUE", "GRAHAM_TOGGLE_GREEN", "GRAHAM_TOGGLE_YELLOW",
-            "GRAHAM_TOGGLER_ALT", "GRAHAM_TOGGLER2_ALT", "GRAHAM_TOGGLER", "GRAHAM_TOGGLER2",
+            {"GRAHAM_TOGGLER", "GRAHAM_TOGGLE_RED"},
+            {"GRAHAM_TOGGLER", "GRAHAM_TOGGLE_BLUE"},
+            {"GRAHAM_TOGGLER2", "GRAHAM_TOGGLE_GREEN"},
+            {"GRAHAM_TOGGLER2", "GRAHAM_TOGGLE_YELLOW"},
+            {"GRAHAM_TOGGLER_ALT", "GRAHAM_TOGGLE_RED"},
+            {"GRAHAM_TOGGLER_ALT", "GRAHAM_TOGGLE_BLUE"},
+            {"GRAHAM_TOGGLER2_ALT", "GRAHAM_TOGGLE_GREEN"},
+            {"GRAHAM_TOGGLER2_ALT", "GRAHAM_TOGGLE_YELLOW"},
         }
-        SetRandomSeed( rand_x + 18349, rand_y + 4568299)
-        to_be_spawned[#to_be_spawned+1] = toggles[Random(1, #toggles)]
         SetRandomSeed( rand_x + 18349, rand_y + 9568299)
-        to_be_spawned[#to_be_spawned+1] = toggles[Random(1, #toggles)]
+        local num = Random(1, #toggles)
+        to_be_spawned[#to_be_spawned+1] = toggles[num][1]
+        to_be_spawned[#to_be_spawned+1] = toggles[num][2]
+        local requirements = {
+            "IF_PROJECTILE", "IF_HP", "IF_ENEMY", "IF_HALF", "IF_ELSE", "IF_END", "GRAHAM_TOGGLEROFF"
+        }
+        SetRandomSeed( rand_x + 1835449, rand_y + 156828799)
+        to_be_spawned[#to_be_spawned+1] = requirements[Random(1, #requirements)]
     else
         length = math.ceil(length / 2)
     end

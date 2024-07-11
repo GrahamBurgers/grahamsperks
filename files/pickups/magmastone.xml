@@ -230,6 +230,50 @@
     emission_interval_max_frames="30"
     is_emitting="1" >
   </ParticleEmitterComponent>
+
+  <DamageModelComponent 
+    _tags="enabled_in_world"
+    air_needed="0" 
+    blood_material="" 
+    drop_items_on_death="0" 
+    falling_damages="0" 
+    fire_damage_amount="0.2" 
+    fire_probability_of_ignition="0" 
+	  critical_damage_resistance="1"
+    hp="0" 
+    is_on_fire="0" 
+    materials_create_messages="0" 
+    materials_damage="0" 
+    materials_that_damage="lava"
+    materials_how_much_damage="0.001"
+    ragdoll_filenames_file=""
+    ragdoll_material=""
+    wait_for_kill_flag_on_death="1"
+    ui_report_damage="0"
+		>
+		<damage_multipliers
+			melee="0.0"
+			projectile="0.0"
+			explosion="0.0"
+			electricity="0.0"
+			fire="0.0" 
+			slice="0.0"
+			ice="0.0"
+			radioactive="0.0"
+			>
+		</damage_multipliers>
+  </DamageModelComponent>
+
+  <LuaComponent
+    _tags="enabled_in_world"
+    script_damage_received="mods/grahamsperks/files/scripts/magmastone_tele.lua"
+  ></LuaComponent>
+
+  <PhysicsBodyCollisionDamageComponent 
+    _tags="enabled_in_world" 
+    speed_threshold="3.0"
+    damage_multiplier="0.1"
+  ></PhysicsBodyCollisionDamageComponent>
   
   <LightComponent 
     _tags="enabled_in_hand,enabled_in_world,item_identified"
@@ -276,20 +320,5 @@
       emission_interval_min_frames="60"
       emission_interval_max_frames="250" >
   </ParticleEmitterComponent>
-
-  <AudioComponent
-      _tags="enabled_in_hand"
-    file="data/audio/Desktop/projectiles.bank"
-    event_root="player_projectiles/torch"
-    set_latest_event_position="1" >
-  </AudioComponent>
-
-  <AudioLoopComponent
-    _tags="enabled_in_hand,enabled_in_world"
-    file="data/audio/Desktop/projectiles.bank"
-    event_name="player_projectiles/torch/loop"
-    auto_play_if_enabled="1"
-    play_on_component_enable="1" >
-  </AudioLoopComponent>
 
 </Entity>

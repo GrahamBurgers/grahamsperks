@@ -6,8 +6,8 @@ local x, y = EntityGetTransform(ghost)
 
 for _,id in pairs(EntityGetInRadiusWithTag(x, y, 15, "item_pickup")) do
     if EntityGetRootEntity(id) == id and EntityGetComponent( id, "PotionComponent" ) then
-        local matid = GetMaterialInventoryMainMaterial( id )       
-        if matid == CellFactory_GetType("alcohol") or matid == CellFactory_GetType("sima") then
+        local matid = GetMaterialInventoryMainMaterial( id )
+        if matid == CellFactory_GetType("alcohol") or matid == CellFactory_GetType("sima") or matid == CellFactory_GetType("beer") or matid == CellFactory_GetType("molut") then
             local inv = EntityGetFirstComponentIncludingDisabled( id, "MaterialInventoryComponent" )
             if inv then
                 local counts = ComponentGetValue2( inv, "count_per_material_type" )

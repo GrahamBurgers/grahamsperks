@@ -12,7 +12,7 @@ if projectile ~= nil then
 			local dir_x = x2 - x
 			local dir_y = y2 - y
 			local distance = math.floor(math.sqrt(dir_x * dir_x + dir_y * dir_y) / 10)
-			if distance > 12 then distance = 12 end
+			if distance > 15 then distance = 15 end
 			local curx = x
 			local cury = y
 			local count = 0
@@ -28,5 +28,5 @@ if projectile ~= nil then
 
 	else
 	end
-	
+
 end

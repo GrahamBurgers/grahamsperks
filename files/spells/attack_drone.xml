@@ -16,18 +16,6 @@
 			image_file="mods/grahamsperks/files/projectiles_gfx/attack_drone_body.png"
 		></SpriteComponent>
 
-		<ItemComponent
-			item_name="$graham_attackdrone"
-			ui_description="$graham_drone_desc"
-			ui_sprite="mods/grahamsperks/files/projectiles_gfx/attack_drone_inv.png"
-		></ItemComponent>
-
-		<ProjectileComponent>
-			<config_explosion 
-				load_this_entity="mods/grahamsperks/files/spells/wood.xml"
-			></config_explosion>
-		</ProjectileComponent>
-
 		<AnimalAIComponent
 			sense_creatures="1"
 			attack_ranged_enabled="1"
@@ -37,21 +25,21 @@
 		</AnimalAIComponent>
 
 		<DamageModelComponent
-			hp="3"
-			max_hp="3"  >
+			hp="3.2"
+			max_hp="3.2"  >
 			<damage_multipliers
 				projectile="0"
 			></damage_multipliers>
 		</DamageModelComponent>
 
-    <SpriteComponent
-        image_file="mods/grahamsperks/files/projectiles_gfx/attack_drone_wings.xml"
-    ></SpriteComponent>
+		<SpriteComponent
+			image_file="mods/grahamsperks/files/projectiles_gfx/attack_drone_wings.xml"
+		></SpriteComponent>
 		
 	</Base>
 
 	<LightComponent 
-    	_tags="enabled_in_hand,item_identified,enabled_in_world"
+    	_tags="enabled_in_hand,item_identified,enabled_in_world,drone_base_comp"
         _enabled="1" 
         radius="80"
         fade_out_time="1.5" 
@@ -61,23 +49,28 @@
 	</LightComponent>
 
     <SpriteComponent
-        _tags="enabled_in_world,disable_on_death,enabled_in_hand"
-	emissive="1"
-	additive="1"
+        _tags="enabled_in_world,disable_on_death,enabled_in_hand,drone_base_comp"
+		emissive="1"
+		additive="1"
         image_file="mods/grahamsperks/files/projectiles_gfx/attack_drone_emissive.xml"
         update_transform_rotation="1"
     ></SpriteComponent>
 
     <SpriteComponent
-        _tags="lurker_data"
-	_enabled="0" 
-	emissive="1"
-	additive="1"
-        image_file="mods/grahamsperks/files/projectiles_gfx/attack_drone_emissive.xml"
-        update_transform_rotation="1"
-	next_rect_animation="alarm" 
-	rect_animation="alarm"
+		_tags="lurker_data,drone_base_comp"
+		_enabled="0" 
+		emissive="1"
+		additive="1"
+		image_file="mods/grahamsperks/files/projectiles_gfx/attack_drone_emissive.xml"
+		update_transform_rotation="1"
+		next_rect_animation="alarm" 
+		rect_animation="alarm"
     ></SpriteComponent>
+
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="mods/grahamsperks/files/spells/attack_drone.xml"
+	></VariableStorageComponent>
 
 	<Entity>
 		<InheritTransformComponent />

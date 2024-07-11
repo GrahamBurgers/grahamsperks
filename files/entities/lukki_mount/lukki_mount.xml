@@ -108,8 +108,9 @@
 		marker_work_flag="16" >
 	</PathFindingGridMarkerComponent>
 
-	<IKLimbsAnimatorComponent>
-	</IKLimbsAnimatorComponent>
+	<IKLimbsAnimatorComponent
+		no_ground_attachment_penalty_coeff="0.05"
+	></IKLimbsAnimatorComponent>
 
 	<PhysicsAIComponent
 		_tags="graham_lukki_dismount"

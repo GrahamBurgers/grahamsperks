@@ -374,7 +374,7 @@ perkdesc_graham_robot,"当你捡起心时会召唤一些临时机器人与你并
 perkname_graham_magicskin,"魔法皮肤",,,,,,,,,,,,
 perkdesc_graham_magicskin,"在此后的圣山中你能获得额外的天赋，但是你会受到可怕的诅咒......",,,,,,,,,,,,
 perkname_graham_death,"消亡",,,,,,,,,,,,
-perkdesc_graham_death,"当生命值低于20%时你会立即死亡，但你会以+50最大生命值和额外的天赋开始下一局游戏。",,,,,,,,,,,,
+perkdesc_graham_death,"当生命值低于10%时你会立即死亡，但你会以+50最大生命值和额外的天赋开始下一局游戏。",,,,,,,,,,,,
 perkname_graham_blindspot,盲点,,,,,,,,,,,,
 perkdesc_graham_blindspot,"你可以清楚地看清你周围的一大片区域，并且不会失明。",,,,,,,,,,,,
 perkname_graham_refresher,花式刷新,,,,,,,,,,,,

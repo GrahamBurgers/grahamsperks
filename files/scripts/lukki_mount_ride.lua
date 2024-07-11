@@ -29,6 +29,7 @@ if player_riding ~= 0 then
         local chomp = EntityGetFirstComponent(player_riding, "CharacterDataComponent")
         if chomp ~= nil then
             ComponentSetValue2(chomp, "is_on_ground", true)
+            ComponentSetValue2(chomp, "mFlyingTimeLeft", ComponentGetValue2(chomp, "mFlyingTimeLeft") + 3)
         end
     else
         EntityLoad( "data/entities/particles/teleportation_source.xml", x, y )
@@ -46,10 +47,18 @@ if player_riding ~= 0 then
         xv = xv * -0.1
         yv = yv * -0.1
         yv = yv - 0.30159 --stop falling
+        local anim = EntityGetFirstComponent(me, "IKLimbsAnimatorComponent")
+        if anim then
+            local stand = ComponentGetValue2(anim, "mHasGroundAttachmentOnAnyLeg")
+            if not stand then
+                yv = yv + 1
+            else
+                if ComponentGetValue2(comp, "mButtonDownDown") then yv = yv + 1.2 end
+                if ComponentGetValue2(comp, "mButtonDownUp") then yv = yv - 1.2 end
+            end
+        end
         if ComponentGetValue2(comp, "mButtonDownRight") then xv = xv + 1 end
         if ComponentGetValue2(comp, "mButtonDownLeft") then xv = xv - 1 end
-        if ComponentGetValue2(comp, "mButtonDownDown") then yv = yv + 1.2 end
-        if ComponentGetValue2(comp, "mButtonDownUp") then yv = yv - 1.2 end
         PhysicsApplyForce(me, xv * 30, yv * 60)
     end
 end

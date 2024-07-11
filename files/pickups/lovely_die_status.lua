@@ -27,7 +27,7 @@ function bullet_circle( target_list, count, speed)
 				ComponentSetValue2( comp, "herd_id", StringToHerdId("player") )
 				local charm_component = GetGameEffectLoadTo( bid, "CHARM", true )
 				if( charm_component ~= nil ) then
-					ComponentSetValue2( charm_component, "frames", -1 )
+					ComponentSetValue2( charm_component, "frames", 600 )
 				end
 			end
 			local proj = EntityGetFirstComponent( bid, "ProjectileComponent")

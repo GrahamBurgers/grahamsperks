@@ -15,22 +15,10 @@
 		<SpriteComponent
 			image_file="mods/grahamsperks/files/projectiles_gfx/shield_drone_body.png"
 		></SpriteComponent>
-
-		<ItemComponent
-			item_name="$graham_shielddrone"
-			ui_description="$graham_drone_desc"
-			ui_sprite="mods/grahamsperks/files/projectiles_gfx/shield_drone_inv.png"
-		></ItemComponent>
-
-		<ProjectileComponent>
-			<config_explosion 
-				load_this_entity="data/entities/projectiles/deck/shield_field.xml"
-			></config_explosion>
-		</ProjectileComponent>
 		
 		<DamageModelComponent
-			hp="4"
-			max_hp="4" >
+			hp="1.2"
+			max_hp="1.2" >
 			<damage_multipliers
 				explosion="0"
 			></damage_multipliers>
@@ -70,18 +58,18 @@
     ></SpriteComponent>
 
     <SpriteComponent
-        _tags="lurker_data"
-	_enabled="0" 
-	emissive="1"
-	additive="1"
+        _tags="lurker_data,drone_base_comp"
+		_enabled="0" 
+		emissive="1"
+		additive="1"
         image_file="mods/grahamsperks/files/projectiles_gfx/shield_drone_emissive.xml"
         update_transform_rotation="1"
-	next_rect_animation="alarm" 
-	rect_animation="alarm"
+		next_rect_animation="alarm" 
+		rect_animation="alarm"
     ></SpriteComponent>
 	
 	<EnergyShieldComponent 
-        _tags="enabled_in_world,disable_on_death"
+        _tags="enabled_in_world,disable_on_death,drone_base_comp"
         recharge_speed="0.5" 
 		max_energy="1"
 		radius="12"
@@ -91,13 +79,14 @@
     </EnergyShieldComponent>
 
 	<AudioComponent
+		_tags="drone_base_comp"
 		file="data/audio/Desktop/projectiles.bank"
 		event_root="player_projectiles/shield"
 		set_latest_event_position="1" >
 	</AudioComponent>
 
 	<ParticleEmitterComponent
-        _tags="enabled_in_world,shield_ring,disable_on_death"
+        _tags="enabled_in_world,shield_ring,disable_on_death,drone_base_comp"
 		emitted_material_name="plasma_fading"
 		gravity.y="0.0"
 		lifetime_min="0.02"
@@ -119,7 +108,7 @@
 	</ParticleEmitterComponent>
 
 	<ParticleEmitterComponent
-		_tags="enabled_in_world,shield_hit,disable_on_death"
+		_tags="enabled_in_world,shield_hit,disable_on_death,drone_base_comp"
 		emitted_material_name="plasma_fading"
 		gravity.y="0.0"
 		lifetime_min="0.3"
@@ -139,6 +128,11 @@
 		emit_cosmetic_particles="1"
 		is_emitting="0" >
 	</ParticleEmitterComponent>
+
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="mods/grahamsperks/files/spells/shield_drone.xml"
+	></VariableStorageComponent>
 
 	<Entity>
 		<InheritTransformComponent />

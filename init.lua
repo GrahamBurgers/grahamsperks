@@ -634,20 +634,25 @@ function OnPlayerSpawned(player)
 	if ModSettingGet("grahamsperks.SettingsReminder") ~= false then
 	    GamePrint("$graham_settings_check")
 	end
-	
+
 	if GameHasFlagRun("spawned_lifelottery") == false then
 		if PolymorphTableAddEntity == nil then
 			EntityLoad("mods/grahamsperks/files/entities/books/bigbook.xml", x + 200, y)
 		end
-		
+
 		GlobalsSetValue( "GRAHAM_ONEOFFS", "0" )
 		GameAddFlagRun("spawned_lifelottery")
-			
+
 		if HasFlagPersistent("graham_death_hp_boost") then
+			dofile_once("data/scripts/perks/perk.lua")
 			RemoveFlagPersistent("graham_death_hp_boost")
-			EntityLoad("mods/grahamsperks/files/pickups/heart_healthy.xml", x, y)
-			EntityLoad("mods/grahamsperks/files/pickups/heart_healthy.xml", x, y)
-			EntityLoad("data/entities/_debug/random_perk.xml", x, y - 20)
+			local dmg = EntityGetFirstComponent(player, "DamageModelComponent")
+			if dmg then
+				ComponentSetValue2(dmg, "hp", ComponentGetValue2(dmg, "hp") * 1.5)
+				ComponentSetValue2(dmg, "max_hp", ComponentGetValue2(dmg, "max_hp") * 1.5)
+			end
+			local eid = perk_spawn_random(x, y)
+			perk_pickup(eid, player, EntityGetName(eid), true, false)
 		end
 
 		local eid = EntityCreateNew()
@@ -714,7 +719,7 @@ end
 
 function OnMagicNumbersAndWorldSeedInitialized()
 	SetRandomSeed(13548, 195430)
-	if ModSettingGet("grahamsperks.birthday") == true and event ~= "1111" then
+	if ModSettingGet("grahamsperks.birthday") == true and event ~= "11/11" then
 		ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_birthday.lua" )
 	end
 	if (Random(1, 15) == 1) then
@@ -781,7 +786,6 @@ function OnMagicNumbersAndWorldSeedInitialized()
 		{4046, 12977, "mods/grahamsperks/files/pixelscenes/secret.xml", true},
 		{4532, 13081, "mods/grahamsperks/files/entities/perk_spawners/map_spawner.xml"},
 		{785, -1231, "mods/grahamsperks/files/entities/perk_spawners/map2_spawner.xml"},
-		{15090, -3333, "mods/grahamsperks/files/entities/perk_spawners/ll_spawner.xml"},
 		{3546, 13100, "mods/grahamsperks/files/entities/perk_spawners/slots_spawner.xml"},
 		{14241, 16284, "mods/grahamsperks/files/entities/forge_item_check.xml", true},
 		{4692, 652, "mods/grahamsperks/files/entities/tear_secret.xml", true},
@@ -803,4 +807,9 @@ function OnMagicNumbersAndWorldSeedInitialized()
 		{0, -60000, "mods/grahamsperks/files/pixelscenes/cat2.xml", true},
 		{3331, 1616, "mods/grahamsperks/files/entities/progress/progress.xml", true},
 	})
+	if ModIsEnabled("Apotheosis") then
+		add_scene({{22770, -3333, "mods/grahamsperks/files/entities/perk_spawners/ll_spawner.xml"}})
+	else
+		add_scene({{15090, -3333, "mods/grahamsperks/files/entities/perk_spawners/ll_spawner.xml"}})
+	end
 end

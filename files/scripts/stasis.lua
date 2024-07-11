@@ -1,26 +1,10 @@
-dofile_once("data/scripts/lib/utilities.lua")
-
-local entity_id    = GetUpdatedEntityID()
-local x, y = EntityGetTransform( entity_id )
-
-local parent_id = EntityGetParent( entity_id )
-
-local target_id = 0
-
-if ( parent_id ~= NULL_ENTITY ) then
-	target_id = parent_id
-else
-	target_id = entity_id
+local entity_id = EntityGetRootEntity(GetUpdatedEntityID())
+local proj = EntityGetFirstComponent(entity_id, "ProjectileComponent")
+if proj then
+	ComponentSetValue2(proj, "die_on_low_velocity", false)
 end
-
-if ( target_id ~= NULL_ENTITY ) then
-	local projectile_components = EntityGetComponent( target_id, "ProjectileComponent" )
-	
-	if( projectile_components == nil ) then return end
-		
-	if ( #projectile_components > 0 ) then
-		edit_component( target_id, "VelocityComponent", function(comp,vars)
-			vars.gravity_y = 0
-		end)
-	end
+local vel = EntityGetFirstComponent(entity_id, "VelocityComponent")
+if vel then
+	ComponentSetValue2(vel, "gravity_x", 0)
+	ComponentSetValue2(vel, "gravity_y", 0)
 end

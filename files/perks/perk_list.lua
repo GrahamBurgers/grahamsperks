@@ -33,10 +33,19 @@ local to_insert = {
 		not_in_default_perk_pool = false,
 		func = function(entity_perk_item, entity_who_picked, item_name)
 			local x, y = EntityGetTransform(entity_who_picked)
-			EntityLoad("data/entities/items/pickup/potion_random_material.xml", x - 30, y)
-			EntityLoad("data/entities/items/pickup/potion_aggressive.xml", x + 30, y)
-			EntityLoad("data/entities/items/pickup/powder_stash.xml", x + 15, y)
+
+			local p1 = EntityLoad("data/entities/items/pickup/potion_random_material.xml", x - 30, y)
+			local phys1 = EntityGetFirstComponent(p1, "PhysicsBodyCollisionDamageComponent")
+			if phys1 then ComponentSetValue2(phys1, "damage_multiplier", 0) end
+			local p2 = EntityLoad("data/entities/items/pickup/potion_aggressive.xml", x + 30, y)
+			local phys2 = EntityGetFirstComponent(p2, "PhysicsBodyCollisionDamageComponent")
+			if phys2 then ComponentSetValue2(phys2, "damage_multiplier", 0) end
+			local p3 = EntityLoad("data/entities/items/pickup/powder_stash.xml", x + 15, y)
+			local dmg3 = EntityGetFirstComponent(p3, "DamageModelComponent")
+			if dmg3 then ComponentSetValue2(dmg3, "max_hp", ComponentGetValue2(dmg3, "max_hp") * 4) end
+			if dmg3 then ComponentSetValue2(dmg3, "hp", ComponentGetValue2(dmg3, "hp") * 4) end
 			EntityLoad("data/entities/items/wand_level_03.xml", x, y - 30)
+
 			SetRandomSeed(x + y, GameGetFrameNum())
 			local rockrandom = Random(1, 6)
 			if (rockrandom == 1) then EntityLoad("data/entities/items/pickup/thunderstone.xml", x - 15, y) end

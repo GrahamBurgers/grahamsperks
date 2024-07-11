@@ -374,7 +374,7 @@ perkdesc_graham_robot,"Picking up a heart conjures a few temporary robots to fig
 perkname_graham_magicskin,"Magic Skin",,,,,,,,,,,,
 perkdesc_graham_magicskin,"You gain a bonus perk in future Holy Mountains, but you become terribly cursed...",,,,,,,,,,,,
 perkname_graham_death,"Demise",,,,,,,,,,,,
-perkdesc_graham_death,"You die instantly when under 20% health, but you start your next run with +50 max HP and an extra perk.",,,,,,,,,,,,
+perkdesc_graham_death,"You die instantly when under 10% health, but you start your next run with +50 max HP and an extra perk.",,,,,,,,,,,,
 perkname_graham_blindspot,Blind Spot,,,,,,,,,,,,
 perkdesc_graham_blindspot,"You can see clearly in a large ring around you, and are immune to blindness.",,,,,,,,,,,,
 perkname_graham_refresher,Refreshing Variety,,,,,,,,,,,,

@@ -2,7 +2,7 @@
 
 	<Base file="data/entities/projectiles/shieldshot.xml" >
 		<ProjectileComponent
-            penetrate_world="1"
+            go_through_this_material="graham_aluminium"
 		></ProjectileComponent>
 
 		<HomingComponent
