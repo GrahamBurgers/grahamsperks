@@ -1,22 +1,27 @@
 <Entity name="$graham_shielddrone">
 	<Base file="mods/grahamsperks/files/entities/base_drone.xml" >
         <UIInfoComponent
+			_tags="drone_base_comp"
             name="$graham_shielddrone"
         ></UIInfoComponent>
         
         <AbilityComponent
+			_tags="drone_base_comp"
             ui_name="$graham_shielddrone"
         ></AbilityComponent>
 
 		<PhysicsImageShapeComponent
+			_tags="drone_base_comp"
 			image_file="mods/grahamsperks/files/projectiles_gfx/shield_drone_body.png"
 		></PhysicsImageShapeComponent>
 
 		<SpriteComponent
+			_tags="drone_base_comp"
 			image_file="mods/grahamsperks/files/projectiles_gfx/shield_drone_body.png"
 		></SpriteComponent>
 		
 		<DamageModelComponent
+			_tags="drone_base_comp"
 			hp="1.2"
 			max_hp="1.2" >
 			<damage_multipliers
@@ -24,23 +29,25 @@
 			></damage_multipliers>
 		</DamageModelComponent>
 
-    <SpriteComponent
-        image_file="mods/grahamsperks/files/projectiles_gfx/shield_drone_wings.xml"
-    ></SpriteComponent>
+		<SpriteComponent
+			_tags="drone_base_comp"
+			image_file="mods/grahamsperks/files/projectiles_gfx/shield_drone_wings.xml"
+		></SpriteComponent>
 
-	<AnimalAIComponent 
-		tries_to_ranged_attack_friends="1"
-		sense_creatures="1"
-		attack_ranged_enabled="1"
-		attack_ranged_entity_file="mods/grahamsperks/files/spells/shield_drone_bullet.xml"
-		attack_ranged_frames_between="800"
-		>
-	</AnimalAIComponent>
+		<AnimalAIComponent 
+			_tags="drone_base_comp"
+			tries_to_ranged_attack_friends="1"
+			sense_creatures="1"
+			attack_ranged_enabled="1"
+			attack_ranged_entity_file="mods/grahamsperks/files/spells/shield_drone_bullet.xml"
+			attack_ranged_frames_between="800"
+			>
+		</AnimalAIComponent>
 		
 	</Base>
 
 	<LightComponent 
-    	_tags="enabled_in_hand,item_identified,enabled_in_world"
+    	_tags="enabled_in_hand,item_identified,enabled_in_world,drone_base_comp"
         _enabled="1" 
         radius="80"
         fade_out_time="1.5" 
@@ -50,9 +57,9 @@
 	</LightComponent>
 
     <SpriteComponent
-        _tags="enabled_in_world,disable_on_death,enabled_in_hand"
-	emissive="1"
-	additive="1"
+        _tags="enabled_in_world,disable_on_death,enabled_in_hand,drone_base_comp"
+		emissive="1"
+		additive="1"
         image_file="mods/grahamsperks/files/projectiles_gfx/shield_drone_emissive.xml"
         update_transform_rotation="0"
     ></SpriteComponent>

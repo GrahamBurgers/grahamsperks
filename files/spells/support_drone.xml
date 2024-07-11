@@ -1,22 +1,27 @@
 <Entity name="$graham_supportdrone">
 	<Base file="mods/grahamsperks/files/entities/base_drone.xml" >
         <UIInfoComponent
+			_tags="drone_base_comp"
             name="$graham_supportdrone"
         ></UIInfoComponent>
         
         <AbilityComponent
+			_tags="drone_base_comp"
             ui_name="$graham_supportdrone"
         ></AbilityComponent>
 
 		<PhysicsImageShapeComponent
+			_tags="drone_base_comp"
 			image_file="mods/grahamsperks/files/projectiles_gfx/support_drone_body.png"
 		></PhysicsImageShapeComponent>
 
 		<SpriteComponent
+			_tags="drone_base_comp"
 			image_file="mods/grahamsperks/files/projectiles_gfx/support_drone_body.png"
 		></SpriteComponent>
 
 		<AnimalAIComponent 
+			_tags="drone_base_comp"
 			tries_to_ranged_attack_friends="1"
 			sense_creatures="1"
 			attack_ranged_enabled="1"
@@ -26,6 +31,7 @@
 		</AnimalAIComponent>
 
 		<DamageModelComponent
+			_tags="drone_base_comp"
 			hp="0.8"
 			max_hp="0.8"  >
 			<damage_multipliers
@@ -34,6 +40,7 @@
 		</DamageModelComponent>
 			
 		<SpriteComponent
+			_tags="drone_base_comp"
 			image_file="mods/grahamsperks/files/projectiles_gfx/support_drone_wings.xml"
 		></SpriteComponent>
 		

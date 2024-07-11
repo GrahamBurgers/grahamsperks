@@ -3,6 +3,10 @@
 	<SpriteAnimatorComponent>
 	</SpriteAnimatorComponent>
 
+	<InheritTransformComponent
+		_tags="enabled_in_hand,drone_base_comp"
+	></InheritTransformComponent>
+
 	<PhysicsBodyComponent 
 		_tags="enabled_in_world,drone_base_comp"
 		uid="1" 
@@ -13,7 +17,7 @@
 		linear_damping="0"
 		auto_clean="1"
 		on_death_leave_physics_body="0"
-  ></PhysicsBodyComponent>
+	></PhysicsBodyComponent>
 
 	<PhysicsImageShapeComponent
 		_tags="enabled_in_world,enabled_in_hand,enabled_in_inventory,drone_base_comp"
