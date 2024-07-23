@@ -4,7 +4,8 @@
     <VelocityComponent
       gravity_y="0"
       air_friction="1.7"
-	  mass="0.04"
+	    mass="0.04"
+      displace_liquid="0"
 	  >
     </VelocityComponent>
 	</Base>

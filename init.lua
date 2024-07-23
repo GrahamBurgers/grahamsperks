@@ -676,7 +676,7 @@ function OnPlayerSpawned(player)
 			value_int=0,
 		})
 
-		if not HasFlagPersistent("graham_death_is_ok") then
+		if not HasFlagPersistent("graham_death_is_ok") or HasFlagPersistent("fury_secret_funny") then
 			RemoveFlagPersistent("graham_deathquest_01")
 			RemoveFlagPersistent("graham_deathquest_02")
 			RemoveFlagPersistent("graham_deathquest_03")
