@@ -434,6 +434,12 @@ local patches = {
 		tex_coord += vec2(0.5);
 		tex_coord = (grahams_perks_distance_weight * grahams_perks_effect_strength * tex_coord + tex_coord_)/(1.0 + grahams_perks_distance_weight * grahams_perks_effect_strength);]],
     },
+	{
+        path    = "data/scripts/buildings/bunker_check.lua",
+        from    = "EntityKill%( entity_id %)",
+        to      = [[CreateItemActionEntity%( "GRAHAM_GOLDEN", x + 128, y - 16%)
+		EntityKill%( entity_id %)]],
+    },
 }
 
 if ModSettingGet("grahamsperks.StartingItems") ~= false then
@@ -623,6 +629,7 @@ for i=1, #event_patches do
 		ModTextFileSetContent(patch.path, content)
 	end
 end
+print(ModTextFileGetContent("data/scripts/buildings/bunker_check.lua"))
 
 function OnPlayerSpawned(player)
 	EntitySetDamageFromMaterial(player, "graham_purplebrick_lessglow", 0.00012)
