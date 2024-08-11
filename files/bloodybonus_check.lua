@@ -113,6 +113,17 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
 
 				EntityLoad("mods/grahamsperks/files/entities/blood_circle.xml", x, y)
 				GamePrintImportant( message, "$graham_bloodied_desc" )
+
+				local perk = EntityGetWithTag("perk_entity")
+				for i = 1, #perk do
+					local ui = EntityGetFirstComponent(perk[i], "UIIconComponent")
+					if ui then
+						local current = ComponentGetValue2(ui, "icon_sprite_file")
+						if current == "mods/grahamsperks/files/perks/perks_gfx/gui/bloodybonus.png" then
+							ComponentSetValue2(ui, "icon_sprite_file", "mods/grahamsperks/files/perks/perks_gfx/gui/bloodybonus_on.png")
+						end
+					end
+				end
 			end
 		end
 	end

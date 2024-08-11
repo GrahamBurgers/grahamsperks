@@ -292,6 +292,17 @@ local patches = {
 			SetRandomSeed%( sx - 2594884, sy - 485398 %)
 			if Random%(1, chance%) == chance then local eid = EntityLoad%("data/entities/animals/bloody_mimic.xml", sx, sy%)
 			else local eid = EntityLoad%("mods/grahamsperks/files/pickups/chest_bloody.xml", sx, sy + 7%) end
+
+			local perk = EntityGetWithTag%("perk_entity"%)
+			for i = 1, #perk do
+				local ui = EntityGetFirstComponent%(perk[i], "UIIconComponent"%)
+				if ui then
+					local current = ComponentGetValue2%(ui, "icon_sprite_file"%)
+					if current == "mods/grahamsperks/files/perks/perks_gfx/gui/bloodybonus_on.png" then
+						ComponentSetValue2%(ui, "icon_sprite_file", "mods/grahamsperks/files/perks/perks_gfx/gui/bloodybonus.png"%)
+					end
+				end
+			end
         end]],
     },
 	{
@@ -629,7 +640,6 @@ for i=1, #event_patches do
 		ModTextFileSetContent(patch.path, content)
 	end
 end
-print(ModTextFileGetContent("data/scripts/buildings/bunker_check.lua"))
 
 function OnPlayerSpawned(player)
 	EntitySetDamageFromMaterial(player, "graham_purplebrick_lessglow", 0.00012)
