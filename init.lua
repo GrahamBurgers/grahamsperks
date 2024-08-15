@@ -451,6 +451,11 @@ local patches = {
         to      = [[CreateItemActionEntity%( "GRAHAM_GOLDEN", x + 128, y - 16%)
 		EntityKill%( entity_id %)]],
     },
+	{ -- Make glimmer spells work with plasma emitters. Thank you Conga Lyne!!! (and Sharpy796!)
+		path    = "data/scripts/projectiles/colour_spell.lua",
+		from    = "comps %= EntityGetComponent%( entity_id, \"ParticleEmitterComponent\" %)",
+		to      = "comps = EntityGetComponent( entity_id, \"LaserEmitterComponent\" ) or {} for k=1,#comps do local v = comps[k] ComponentObjectSetValue2( v, \"laser\", \"beam_particle_type\", CellFactory_GetType(particle)) end comps = EntityGetComponent( entity_id, \"ParticleEmitterComponent\" )",
+	},
 }
 
 if ModSettingGet("grahamsperks.StartingItems") ~= false then

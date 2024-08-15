@@ -46,3 +46,10 @@ if ( comps ~= nil ) then
 		end
 	end
 end
+
+-- Make glimmer spells work with plasma emitters. Thank you Conga Lyne!!!
+comps = EntityGetComponent( entity_id, "LaserEmitterComponent" ) or {}
+for k=1,#comps do
+    local v = comps[k]
+    ComponentObjectSetValue2( v, "laser", "beam_particle_type", CellFactory_GetType(particle))
+end
