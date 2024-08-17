@@ -12,10 +12,10 @@
     >
     <config_explosion
       damage="3"
-      explosion_radius="80"
+      explosion_radius="90"
 	    explosion_sprite="data/particles/explosion_100_pink.xml"
-      cell_explosion_radius_min="80"
-      cell_explosion_radius_max="80"
+      cell_explosion_radius_min="90"
+      cell_explosion_radius_max="90"
       explosion_sprite_lifetime="0"
       audio_event_name="explosions/magic_grenade_big"
       sparks_count_min="30" 

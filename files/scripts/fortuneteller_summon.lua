@@ -14,7 +14,7 @@ function interacting( player, me )
         -- scale explosion damage
         local proj = EntityGetFirstComponent(eid, "ProjectileComponent") or 0
         local hp = EntityGetFirstComponent(player, "DamageModelComponent") or 0
-        local damage = ComponentGetValue2(hp, "max_hp") / 4
+        local damage = ComponentGetValue2(hp, "max_hp") / 2
         ComponentObjectSetValue2(proj, "config_explosion", "damage", damage)
         ComponentObjectSetValue2(proj, "damage_by_type", "explosion", damage)
     else
