@@ -661,7 +661,7 @@ for i=1, #event_patches do
 end
 
 function OnPlayerSpawned(player)
-	EntitySetDamageFromMaterial(player, "graham_purplebrick_lessglow", 0.00012)
+	-- EntitySetDamageFromMaterial(player, "graham_purplebrick_lessglow", 0.00012)
 	local x, y = EntityGetTransform(player)
 
 	GlobalsSetValue( "GRAHAM_TOGGLE", "null" )
