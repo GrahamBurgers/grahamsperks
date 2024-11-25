@@ -1,4 +1,4 @@
-<Entity name="$projectile_default" tags="projectile_player" >
+<Entity name="$projectile_default" tags="projectile_player,warmth_affector" >
 	<Base file="data/entities/base_projectile.xml" >
 		<VelocityComponent
 			air_friction="-0.2"
@@ -109,4 +109,12 @@
 		execute_times="1"
 		>
 	</LuaComponent>
+	
+	<VariableStorageComponent
+    	_tags="enabled_in_hand,enabled_in_world"
+		name="warmth_affector"
+		value_float="-80"
+		>
+	</VariableStorageComponent>
+
 </Entity>

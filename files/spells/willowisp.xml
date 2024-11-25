@@ -1,5 +1,5 @@
 <Entity 
-  name="$projectile_default" tags="projectile_player"
+  name="$projectile_default" tags="projectile_player,warmth_affector"
    >
 
 	<Base file="data/entities/base_projectile.xml" >
@@ -131,4 +131,11 @@
 		value_string="mods/grahamsperks/files/spells/willowisp.xml"
 		>
 	</VariableStorageComponent>
+
+	<VariableStorageComponent
+		name="warmth_affector"
+		value_float="40"
+		>
+	</VariableStorageComponent>
+
 </Entity>

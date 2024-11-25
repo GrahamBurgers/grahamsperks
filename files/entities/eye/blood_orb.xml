@@ -12,7 +12,7 @@
 		fade_based_on_lifetime="1"
 		area_circle_radius.min="0"
 		area_circle_radius.max="0"
-		cosmetic_force_create="0"
+		cosmetic_force_create="1"
 		airflow_force="1.1"
 		airflow_time="1.01"
 		airflow_scale="0.05"

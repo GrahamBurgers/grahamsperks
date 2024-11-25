@@ -1,4 +1,4 @@
-<Entity tags="teleportable_NOT,projectile,player_projectile" >
+<Entity tags="teleportable_NOT,projectile,player_projectile,warmth_affector" >
 
   <SpriteComponent
     image_file="mods/grahamsperks/files/projectiles_gfx/hail.xml"
@@ -63,4 +63,12 @@
 		value_string="mods/grahamsperks/files/spells/hail.xml"
 		>
 	</VariableStorageComponent>
+
+	<VariableStorageComponent
+    _tags="enabled_in_hand,enabled_in_world"
+    name="warmth_affector"
+    value_float="-30"
+    >
+  </VariableStorageComponent>
+
 </Entity>

@@ -1,4 +1,4 @@
-<Entity tags="drillable,teleportable_NOT,item_pickup">
+<Entity tags="drillable,teleportable_NOT,item_pickup,warmth_affector">
     <SimplePhysicsComponent
     ></SimplePhysicsComponent>
 
@@ -72,10 +72,10 @@
 	</ParticleEmitterComponent>
 
 	<LuaComponent 
-	execute_on_added="0"
-	remove_after_executed="0"
-	script_source_file="mods/grahamsperks/files/scripts/fireplace_dispense.lua"
-	execute_every_n_frame="2">
+		execute_on_added="0"
+		remove_after_executed="0"
+		script_source_file="mods/grahamsperks/files/scripts/fireplace_dispense.lua"
+		execute_every_n_frame="2">
 	</LuaComponent>
 
 	<LightComponent
@@ -108,6 +108,12 @@
 	<VariableStorageComponent
 		name="fireplace_hp_used"
 		value_float="0"
+		>
+	</VariableStorageComponent>
+
+	<VariableStorageComponent
+		name="warmth_affector"
+		value_float="30"
 		>
 	</VariableStorageComponent>
 

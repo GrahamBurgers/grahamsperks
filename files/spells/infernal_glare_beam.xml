@@ -1,5 +1,5 @@
 <Entity 
-  name="$projectile_default" tags="projectile_player"
+  name="$projectile_default" tags="projectile_player,warmth_affector"
    >
 
 	<Base file="data/entities/base_projectile.xml" >
@@ -167,5 +167,10 @@
 		event_root="projectiles/flamethrower">
 	</AudioComponent>
 	
+	<VariableStorageComponent
+		name="warmth_affector"
+		value_float="40"
+		>
+	</VariableStorageComponent>
 
 </Entity>

@@ -1,4 +1,4 @@
-<Entity name="$projectile_default" tags="projectile_player" >
+<Entity name="$projectile_default" tags="projectile_player,warmth_affector" >
 
 	<Base file="data/entities/base_projectile.xml" >
 		<VelocityComponent
@@ -101,5 +101,10 @@
 		>
 	</VariableStorageComponent>
 
-</Entity>
+  <VariableStorageComponent
+    name="warmth_affector"
+    value_float="20"
+    >
+  </VariableStorageComponent>
 
+</Entity>

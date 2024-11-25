@@ -1,4 +1,4 @@
-<Entity tags="perk_entity">
+<Entity tags="perk_entity,warmth_affector">
 
 	<InheritTransformComponent>
 	</InheritTransformComponent>
@@ -51,5 +51,11 @@
 		velocity_always_away_from_center="50"
 		>
 	</ParticleEmitterComponent>
+
+	<VariableStorageComponent
+		name="warmth_affector"
+		value_float="20"
+		>
+	</VariableStorageComponent>
 
 </Entity>

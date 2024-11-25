@@ -1,4 +1,4 @@
-<Entity>
+<Entity tags="warmth_affector">
 
 	<Base file="data/entities/base_custom_card.xml" > 
 		<SpriteComponent 
@@ -81,5 +81,11 @@
 		area_circle_sector_degrees="360"
 		>
 	</ParticleEmitterComponent>
+
+	<VariableStorageComponent
+		name="warmth_affector"
+		value_float="20"
+		>
+	</VariableStorageComponent>
 
 </Entity>

@@ -43,21 +43,38 @@ if not ModSettingGet("grahamsperks.Creepy") == true then
 	ModMaterialsFileAdd("mods/grahamsperks/files/materials/reactions_creepy.xml")
 end
 
-ModLuaFileAppend( "data/scripts/items/heart.lua", "mods/grahamsperks/files/healthyheart.lua" )
-ModLuaFileAppend( "data/scripts/items/heart_evil.lua", "mods/grahamsperks/files/healthyheart.lua" )
-ModLuaFileAppend( "data/scripts/items/heart_better.lua", "mods/grahamsperks/files/healthyheart_better.lua" )
-ModLuaFileAppend( "data/scripts/items/spell_refresh.lua", "mods/grahamsperks/files/scripts/spell_refresh_append.lua" )
+-- 9/9/24: stop silly errors in dev exe by replacing some of these with manual appends
+
+-- ModLuaFileAppend( "data/scripts/items/heart.lua", "mods/grahamsperks/files/healthyheart.lua" )
+-- ModLuaFileAppend( "data/scripts/items/heart_evil.lua", "mods/grahamsperks/files/healthyheart.lua" )
+-- ModLuaFileAppend( "data/scripts/items/heart_better.lua", "mods/grahamsperks/files/healthyheart_better.lua" )
+-- ModLuaFileAppend( "data/scripts/items/spell_refresh.lua", "mods/grahamsperks/files/scripts/spell_refresh_append.lua" )
 ModLuaFileAppend( "data/scripts/status_effects/status_list.lua", "mods/grahamsperks/files/effects/status_effects.lua" )
-ModLuaFileAppend( "data/scripts/items/drop_money.lua", "mods/grahamsperks/files/bloodybonus_check.lua" )
+-- ModLuaFileAppend( "data/scripts/items/drop_money.lua", "mods/grahamsperks/files/bloodybonus_check.lua" )
 ModLuaFileAppend( "data/scripts/perks/perk.lua", "mods/grahamsperks/files/add_oneoffs.lua" )
 ModLuaFileAppend( "data/scripts/biomes/temple_altar.lua", "mods/grahamsperks/files/scripts/temple_altar_append.lua")
 ModLuaFileAppend( "data/scripts/biomes/boss_arena.lua", "mods/grahamsperks/files/scripts/temple_altar_append.lua")
 ModLuaFileAppend( "data/scripts/buildings/forge_item_convert.lua", "mods/grahamsperks/files/scripts/anvil_append.lua")
-ModLuaFileAppend( "data/scripts/items/heart_fullhp.lua", "mods/grahamsperks/files/scripts/blood_orb_fullheal.lua")
-ModLuaFileAppend( "data/scripts/items/heart_fullhp_temple.lua", "mods/grahamsperks/files/scripts/blood_orb_fullheal.lua")
+-- ModLuaFileAppend( "data/scripts/items/heart_fullhp.lua", "mods/grahamsperks/files/scripts/blood_orb_fullheal.lua")
+-- ModLuaFileAppend( "data/scripts/items/heart_fullhp_temple.lua", "mods/grahamsperks/files/scripts/blood_orb_fullheal.lua")
 ModLuaFileAppend( "data/scripts/magic/fungal_shift.lua", "mods/grahamsperks/files/scripts/fungal_shift_append.lua")
 ModLuaFileAppend( "data/scripts/streaming_integration/event_list.lua", "mods/grahamsperks/files/streaming/_streaming_events.lua" )
 ModLuaFileAppend( "data/scripts/biomes/boss_arena.lua", "mods/grahamsperks/files/scripts/final_mountain_missing.lua")
+
+local thingy = ModTextFileGetContent("data/scripts/items/drop_money.lua")
+ModTextFileSetContent("data/scripts/items/drop_money.lua", thingy .. "\n" .. "dofile_once(\"mods/grahamsperks/files/bloodybonus_check.lua\")")
+thingy = ModTextFileGetContent("data/scripts/items/heart.lua")
+ModTextFileSetContent("data/scripts/items/heart.lua", thingy .. "\n" .. "dofile_once(\"mods/grahamsperks/files/healthyheart.lua\")")
+thingy = ModTextFileGetContent("data/scripts/items/heart_evil.lua")
+ModTextFileSetContent("data/scripts/items/heart_evil.lua", thingy .. "\n" .. "dofile_once(\"mods/grahamsperks/files/healthyheart.lua\")")
+thingy = ModTextFileGetContent("data/scripts/items/heart_better.lua")
+ModTextFileSetContent("data/scripts/items/heart_better.lua", thingy .. "\n" .. "dofile_once(\"mods/grahamsperks/files/healthyheart_better.lua\")")
+thingy = ModTextFileGetContent("data/scripts/items/spell_refresh.lua")
+ModTextFileSetContent("data/scripts/items/spell_refresh.lua", thingy .. "\n" .. "dofile_once(\"mods/grahamsperks/files/scripts/spell_refresh_append.lua\")")
+thingy = ModTextFileGetContent("data/scripts/items/heart_fullhp.lua")
+ModTextFileSetContent("data/scripts/items/heart_fullhp.lua", thingy .. "\n" .. "dofile_once(\"mods/grahamsperks/files/scripts/blood_orb_fullheal.lua\")")
+thingy = ModTextFileGetContent("data/scripts/items/heart_fullhp_temple.lua")
+ModTextFileSetContent("data/scripts/items/heart_fullhp_temple.lua", thingy .. "\n" .. "dofile_once(\"mods/grahamsperks/files/scripts/blood_orb_fullheal.lua\")")
 
 if ModSettingGet("grahamsperks.Enemies") ~= false then
 	-- enemies
@@ -470,6 +487,47 @@ local patches = {
 		
 	comps = EntityGetComponentIncludingDisabled( entity_id, "ParticleEmitterComponent" )]],
 	},
+	-- 11/25/24: stupid silly stupid hardcoded freezy effects
+	{
+        path    = "data/entities/misc/material_converter_freeze.xml",
+        from    = "radioactive_liquid,",
+        to      = [[radioactive_liquid,graham_creepypoly,]],
+    },
+	{
+        path    = "data/entities/misc/material_converter_freeze.xml",
+        from    = "ice_radioactive_static,",
+        to      = [[ice_radioactive_static,graham_creepypoly_frozen,]],
+    },
+	{
+        path    = "data/entities/particles/freeze_charge.xml",
+        from    = "radioactive_liquid,",
+        to      = [[radioactive_liquid,graham_creepypoly,]],
+    },
+	{
+        path    = "data/entities/particles/freeze_charge.xml",
+        from    = "ice_radioactive_static,",
+        to      = [[ice_radioactive_static,graham_creepypoly_frozen,]],
+    },
+	{
+        path    = "data/entities/projectiles/deck/freeze_field.xml",
+        from    = "radioactive_liquid,",
+        to      = [[radioactive_liquid,graham_creepypoly,]],
+    },
+	{
+		path    = "data/entities/projectiles/deck/freeze_field.xml",
+        from    = "ice_radioactive_static,",
+        to      = [[ice_radioactive_static,graham_creepypoly_frozen,]],
+    },
+	{
+        path    = "data/entities/projectiles/deck/freezing_gaze_beam.xml",
+        from    = "radioactive_liquid,",
+        to      = [[radioactive_liquid,graham_creepypoly,]],
+    },
+	{
+		path    = "data/entities/projectiles/deck/freezing_gaze_beam.xml",
+        from    = "ice_radioactive_static,",
+        to      = [[ice_radioactive_static,graham_creepypoly_frozen,]],
+    },
 }
 
 if ModSettingGet("grahamsperks.StartingItems") ~= false then

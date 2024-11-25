@@ -20,7 +20,7 @@ if times > TIMER or EntityGetRootEntity(me) ~= me or who == 0 then
     if item then ComponentSetValue2(item, "auto_pickup", false) end
     return
 end
-if times == TIMER and who > 0 then
+if times == TIMER and who > 0 and EntityHasTag(who, "player_unit") then
     local x2, y2 = EntityGetTransform(who)
     EntityLoad( "data/entities/particles/teleportation_source.xml", x, y )
     EntityLoad( "data/entities/particles/teleportation_target.xml", x2, y2 )

@@ -1,4 +1,4 @@
-<Entity tags="projectile_player" >
+<Entity tags="projectile_player,warmth_affector" >
 	<InheritTransformComponent>
     </InheritTransformComponent>
 	
@@ -30,5 +30,11 @@
 		file="data/audio/Desktop/projectiles.bank"
 		event_root="player_projectiles/touch">
 	</AudioComponent>
+
+	<VariableStorageComponent
+		name="warmth_affector"
+		value_float="-2000"
+		>
+	</VariableStorageComponent>
   
 </Entity>
