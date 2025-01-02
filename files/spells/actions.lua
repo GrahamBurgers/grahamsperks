@@ -1012,6 +1012,7 @@ local to_insert = {
 		mana                   = 10,
 		related_extra_entities = { "data/entities/misc/orbit_blue.xml" },
 		action                 = function()
+			c.lifetime_add 		= c.lifetime_add + 25
 			c.speed_multiplier = c.speed_multiplier * 0.8
 			c.extra_entities = c.extra_entities .. "mods/grahamsperks/files/spells/orbit_blue.xml,"
 			draw_actions(1, true)
@@ -1228,7 +1229,7 @@ local to_insert = {
 		--max_uses = 100,
 		related_projectiles = { "mods/grahamsperks/files/spells/echo_bubble.xml" },
 		action              = function()
-			c.fire_rate_wait = c.fire_rate_wait + 30
+			c.fire_rate_wait = c.fire_rate_wait + 20
 			add_projectile("mods/grahamsperks/files/spells/echo_bubble.xml")
 		end,
 	},

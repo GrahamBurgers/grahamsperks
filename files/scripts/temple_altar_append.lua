@@ -17,7 +17,7 @@ function spawn_hp( x, y )
     end
     EntityLoad("mods/grahamsperks/files/entities/magic_skin_replacer.xml", x + 450, y)
     local pid
-    local count = math.min(30, GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" ))
+    local count = math.min(30, GlobalsGetValue( "GRAHAM_MAGIC_SKIN_COUNTER", "0" ) * 2)
     while count >= 10 do
         for i = 1, 10 do
             pid = perk_spawn_random(x + -86 + i * 16, y - 30, true)

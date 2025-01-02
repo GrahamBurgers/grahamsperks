@@ -9,7 +9,7 @@ function item_pickup( entity_item, entity_who_picked, item_name )
 
     local skins = tonumber(GlobalsGetValue( "GRAHAM_MAGIC_SKIN_CURSE", "0" ))
     -- ramen code
-    local amount = math.floor((41 / (1 + 1.9^(7-0.9*skins))) + 10)
+    local amount = math.floor((10000 / (1 + 1.9 ^ (7 - skins * 0.05))) - 100)
 
     GlobalsSetValue( "GRAHAM_MAGIC_SKIN_CURSE", tostring(1 + tonumber(GlobalsGetValue( "GRAHAM_MAGIC_SKIN_CURSE", "0" ))) )
     GamePrint(GameTextGet("$graham_magicskin", tostring(amount)))

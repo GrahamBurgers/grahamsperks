@@ -83,6 +83,7 @@
 	</ParticleEmitterComponent>
 
 	<VariableStorageComponent
+		_tags="enabled_in_hand"
 		name="warmth_affector"
 		value_float="20"
 		>

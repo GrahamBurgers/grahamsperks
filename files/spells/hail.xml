@@ -67,7 +67,7 @@
 	<VariableStorageComponent
     _tags="enabled_in_hand,enabled_in_world"
     name="warmth_affector"
-    value_float="-30"
+    value_float="-10"
     >
   </VariableStorageComponent>
 

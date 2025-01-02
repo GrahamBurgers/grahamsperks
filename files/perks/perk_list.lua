@@ -836,7 +836,7 @@ local to_insert = {
 					local id = ComponentGetValue2(comp, "action_id")
 					local entity = CreateItemActionEntity(id, x, y)
 					SetRandomSeed(x + GameGetFrameNum(), y + comp)
-					local cardcost = 25 * Random(6, 20) -- not sure how to balance this properly
+					local cardcost = 25 * Random(2, 10) -- not sure how to balance this properly
 					boop_spell(items[i], cardcost)
 					boop_spell(entity, cardcost)
 					nothing = false

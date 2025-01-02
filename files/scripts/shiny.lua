@@ -9,7 +9,7 @@ if Random(1, 8192) <= threshold then
     me = EntityLoad("data/entities/animals/graham_fuzz_shiny.xml", x, y)
 end
 
-if Random(1, 2048) <= threshold then
+if Random(1, 1024) <= threshold then
     local child = EntityLoad("data/entities/misc/effect_charm.xml")
     EntityAddChild(me, child)
 end
