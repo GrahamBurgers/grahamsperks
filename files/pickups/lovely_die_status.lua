@@ -24,7 +24,7 @@ function bullet_circle( target_list, count, speed)
 			EntityAddComponent2( bid, "VariableStorageComponent", { _tags="no_gold_drop", })
 			local comp = EntityGetFirstComponent( bid, "GenomeDataComponent")
 			if comp ~= nil then
-				ComponentSetValue2( comp, "herd_id", StringToHerdId("player") )
+				-- ComponentSetValue2( comp, "herd_id", StringToHerdId("player") )
 				local charm_component = GetGameEffectLoadTo( bid, "CHARM", true )
 				if( charm_component ~= nil ) then
 					ComponentSetValue2( charm_component, "frames", 600 )

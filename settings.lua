@@ -11,7 +11,7 @@ local progress = {
     "graham_progress_robot",     -- technical prowess
     "graham_progress_lucky",     -- lucky day
     "graham_progress_tech",      -- materialist
-    "graham_progress_lukki",      -- lukki mount
+    "graham_progress_lukki",     -- lukki mount
     "graham_progress_immunity",  -- immunity aura
     "graham_minimimic_killed",   -- mini perk spells
     "graham_bloodymimic_killed", -- magic skin
@@ -116,6 +116,7 @@ local settings = {
         },
         default = 1,
     },
+    --[[
     {
         id      = "SettingsReminder",
         name    = translations[1][1],
@@ -123,6 +124,7 @@ local settings = {
         type    = "boolean",
         default = true,
     },
+    ]]--
     {
         id      = "PacifistChest",
         name    = translations[2][1],

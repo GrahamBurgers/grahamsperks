@@ -4,6 +4,18 @@ dofile_once( "data/scripts/game_helpers.lua" )
 function item_pickup( entity_item, entity_who_picked, name )
     local x, y = EntityGetTransform(entity_item)
 	SetRandomSeed(entity_item + GameGetFrameNum(), entity_who_picked)
+    -- refresh cyber eyes
+    local eyes = EntityGetInRadiusWithTag(x, y, 32, "cyber_eye")
+    for i = 1, #eyes do
+        local c = EntityGetFirstComponentIncludingDisabled(eyes[i], "VariableStorageComponent", "cyber_eye_charge")
+        local item = EntityGetFirstComponentIncludingDisabled(eyes[i], "ItemComponent")
+        if c and item then
+            local new = ComponentGetValue2(c, "value_int") + 1800
+            ComponentSetValue2(c, "value_int", new)
+            ComponentSetValue2(item, "uses_remaining", math.ceil(new / 6))
+        end
+    end
+
     -- Refreshing Variety: decide if we spawn spells instead (hopefully this can't spawn spells without the perk)
     local stack = tonumber(GlobalsGetValue( "GRAHAM_REFRESHER_COUNT", "0" ))
     if (50 * (0.50 ^ (stack - 1)) < Random(1, 100)) then

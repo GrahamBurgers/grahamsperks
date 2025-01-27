@@ -31,6 +31,7 @@
 		knockback_force="1.5"
 		ragdoll_force_multiplier="0.05"
 		damage_every_x_frames="15"
+		on_death_gfx_leave_sprite="0"
 		> 
 		<config_explosion
 			never_cache="1" 

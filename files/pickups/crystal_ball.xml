@@ -9,6 +9,7 @@
       on_death_explode="1"
       never_hit_player="1"
       do_moveto_update="1"
+		  on_death_gfx_leave_sprite="0"
     >
     <config_explosion
       damage="3"

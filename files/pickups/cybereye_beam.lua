@@ -5,7 +5,7 @@ local iris_distance = 2
 local rot_lerp_amount = 0.25
 
 local entity_id = GetUpdatedEntityID()
-local children = EntityGetAllChildren(entity_id)
+local children = EntityGetAllChildren(entity_id) or {}
 if #children == 0 then return end
 local laser_id = children[1]
 
@@ -54,15 +54,32 @@ x,y = vec_add(x,y,item_x,item_y)
 
 EntitySetTransform(laser_id, x, y, rot)
 
+local vsc = EntityGetFirstComponentIncludingDisabled(entity_id, "VariableStorageComponent", "cyber_eye_charge")
+local charge = 0
+local item = EntityGetFirstComponentIncludingDisabled(entity_id, "ItemComponent")
+if not (vsc and item) then return end
+charge = ComponentGetValue2(vsc, "value_int")
+ComponentSetValue2(item, "uses_remaining", math.ceil(charge / 6))
+
 -- enable laser emission, disable iris sprite
 local comps = EntityGetAllComponents(laser_id)
+local s = children[2] and EntityGetFirstComponentIncludingDisabled(children[2], "SpriteComponent")
 if #comps < 2 then return end
-ComponentSetValue2( comps[1], "is_emitting", true ) -- enable laser emitter
-EntitySetComponentIsEnabled( laser_id, comps[1], true )
-EntitySetComponentIsEnabled( laser_id, comps[2], true )
+if EntityGetRootEntity(entity_id) == entity_id or charge <= 0 then -- not being held, so disable laser and enable sprite
+	ComponentSetValue2( comps[1], "is_emitting", false )
+	if s then EntitySetComponentIsEnabled(children[2], s, true) end
+	EntitySetComponentIsEnabled( laser_id, comps[1], false )
+	EntitySetComponentIsEnabled( laser_id, comps[2], false )
+else
+	ComponentSetValue2( comps[1], "is_emitting", true )
+	if s then EntitySetComponentIsEnabled(children[2], s, false) end
+	EntitySetComponentIsEnabled( laser_id, comps[1], true )
+	EntitySetComponentIsEnabled( laser_id, comps[2], true )
+	-- drain charges when held, turn off when out of charges
+	ComponentSetValue2(vsc, "value_int", charge - 1)
+end
 
-ComponentAddTag(GetUpdatedComponentID(), "enabled_in_world" ) -- laser stays on after picked up once
-
+ComponentAddTag(GetUpdatedComponentID(), "enabled_in_world" )
 -- clean up initial iris sprite entity
 if #children > 1 then
 	EntityKill(children[2])

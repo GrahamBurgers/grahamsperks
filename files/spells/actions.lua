@@ -1422,7 +1422,7 @@ local to_insert = {
 		spawn_level         = "2,3,4",
 		spawn_nonsense      = {0.2,0.3,0.4},
 		price               = 80,
-		mana                = 120,
+		mana                = 90,
 		related_projectiles = { "mods/grahamsperks/files/spells/holy_bullet.xml" },
 		action              = function()
 			add_projectile("mods/grahamsperks/files/spells/holy_bullet.xml")
@@ -1735,10 +1735,10 @@ local to_insert = {
 		spawn_level         = "0,1,2,5",
 		spawn_nonsense      = {1,1,1,1},
 		price               = 100,
-		mana                = 10,
+		mana                = 15,
 		related_projectiles = { "mods/grahamsperks/files/spells/invisible.xml" },
 		action              = function()
-			c.fire_rate_wait = c.fire_rate_wait + 4
+			c.fire_rate_wait = c.fire_rate_wait + 2
 			add_projectile("mods/grahamsperks/files/spells/invisible.xml")
 		end,
 	},

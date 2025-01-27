@@ -116,10 +116,9 @@ local function add_scene(table)
 			if table[i][4] then
 				-- make things show up in first 2 parallel worlds
 				-- hopefully this won't cause too much lag when starting a run
+				-- 1/26/25: decreased this to only adjacent
 				string = string .. [[<PixelScene pos_x="]] .. table[i][1] + worldsize .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
 				string = string .. [[<PixelScene pos_x="]] .. table[i][1] - worldsize .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
-				string = string .. [[<PixelScene pos_x="]] .. table[i][1] + worldsize * 2 .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
-				string = string .. [[<PixelScene pos_x="]] .. table[i][1] - worldsize * 2 .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
 			end
 		end
 	end
@@ -346,7 +345,8 @@ local patches = {
         from    = [[</Entity>]],
         to      = [[
 		<LuaComponent
-			script_source_file="mods/grahamsperks/files/scripts/healthyheart_check.lua">
+			script_source_file="mods/grahamsperks/files/scripts/healthyheart_check.lua"
+			execute_every_n_frame="60">
 		</LuaComponent>
 		</Entity>
 		]],
@@ -356,7 +356,8 @@ local patches = {
         from    = [[</Entity>]],
         to      = [[
 		<LuaComponent
-			script_source_file="mods/grahamsperks/files/scripts/healthyheart_check.lua">
+			script_source_file="mods/grahamsperks/files/scripts/healthyheart_check.lua"
+			execute_every_n_frame="60">
 		</LuaComponent>
 		</Entity>
 		]],
@@ -535,7 +536,7 @@ if ModSettingGet("grahamsperks.StartingItems") ~= false then
 	table.insert(patches, {
 		path    = "data/scripts/gun/procedural/starting_wand.lua",
         from    = "\"SPITTER\"",
-        to      = "\"SPITTER\",\"GRAHAM_GLOW_DART\",\"GRAHAM_BRAMBALL\"",
+        to      = "\"SPITTER\",\"GRAHAM_GLOW_DART\",\"GRAHAM_BRAMBALL\",\"GRAHAM_INVISIBLE\"",
 	})
 	table.insert(patches, {
         path    = "data/scripts/gun/procedural/starting_bomb_wand.lua",
@@ -636,18 +637,23 @@ local events = {
 		event_patches = {
 			{
 			path    = "mods/grahamsperks/files/scripts/shiny.lua",
-			from    = "-- dummy",
-			to      = "threshold = threshold * 64",
+			from    = "1024",
+			to      = "128",
+		},
+			{
+			path    = "mods/grahamsperks/files/scripts/shiny.lua",
+			from    = "8192",
+			to      = "2048",
 		},
 		{
 			path    = "mods/grahamsperks/files/scripts/book.lua",
-			from    = "= 500",
-			to      = "= 50",
+			from    = "= 250",
+			to      = "= 25",
 		},
 			{
 			path    = "mods/grahamsperks/files/scripts/book.lua",
-			from    = "= 5000",
-			to      = "= 500",
+			from    = "= 2500",
+			to      = "= 250",
 		},
 		}
 	end,
@@ -725,9 +731,11 @@ function OnPlayerSpawned(player)
 	GlobalsSetValue( "GRAHAM_TOGGLE", "null" )
 	GlobalsSetValue( "GRAHAM_TOGGLE2", "null" )
 
+	--[[ 1/26/25: retired
 	if ModSettingGet("grahamsperks.SettingsReminder") ~= false then
 	    GamePrint("$graham_settings_check")
 	end
+	]]--
 
 	if GameHasFlagRun("spawned_lifelottery") == false then
 		if PolymorphTableAddEntity == nil then
@@ -753,13 +761,14 @@ function OnPlayerSpawned(player)
 		EntityAddTag(eid, "graham_midas_curse")
 		EntityAddChild(GameGetWorldStateEntity(), eid)
 
+		-- 1/26/25: made these run less often
 		EntityAddComponent2(player, "LuaComponent", {
 			script_source_file="mods/grahamsperks/files/entities/unlockcheck.lua",
-			execute_every_n_frame=5,
+			execute_every_n_frame=60,
 		})
 		EntityAddComponent2(player, "LuaComponent", {
 			script_source_file="mods/grahamsperks/files/scripts/immunity_aura_vfx.lua",
-			execute_every_n_frame=1,
+			execute_every_n_frame=60,
 		})
 		EntityAddComponent2(player, "LuaComponent", {
 			script_death="mods/grahamsperks/files/scripts/death.lua",

@@ -533,6 +533,54 @@
 	blob_restrict_to_input_material1="1" 	blob_restrict_to_input_material2="1"
 	audio_fx_volume_1="100.0" >
   </Reaction>
+
+	<Reaction probability="20"
+		input_cell1="graham_water_cloud" 		input_cell2="[slime]"
+		output_cell1="graham_water_cloud"		output_cell2="graham_water_cloud">
+	</Reaction>
+
+  <Reaction probability="200" 
+	input_cell1="cement" 				input_cell2="graham_water_cloud"
+	output_cell1="concrete_static" 		output_cell2="air"  
+	destroy_horizontally_lonely_pixels="1"
+  req_lifetime="600" >
+  </Reaction>
+
+  <Reaction probability="3"
+	input_cell1="graham_water_cloud" 		input_cell2="ice"
+	output_cell1="graham_water_cloud" 		output_cell2="water_ice"  >
+  </Reaction>
+
+  <Reaction probability="3"
+	input_cell1="graham_water_cloud" 		input_cell2="ice_static"
+	output_cell1="graham_water_cloud" 		output_cell2="water_ice"  >
+  </Reaction>
+  
+  <Reaction probability="3"
+	input_cell1="graham_water_cloud" 		input_cell2="[ice]"
+	output_cell1="graham_water_cloud" 		output_cell2="water_ice"  >
+  </Reaction>
+
+  <Reaction probability="13"
+	input_cell1="graham_water_cloud" 	input_cell2="radioactive_liquid"
+	output_cell1="graham_water_cloud" 	output_cell2="water"
+	>
+  </Reaction>
+
+  <Reaction probability="5"
+	input_cell1="salt" 	input_cell2="graham_water_cloud"
+	output_cell1="air" 	output_cell2="water_salt"  >
+  </Reaction>
+
+  <Reaction probability="40"
+	input_cell1="[meltable]_molten" 	input_cell2="graham_water_cloud"
+	output_cell1="[meltable]" 		    output_cell2="steam"  >
+  </Reaction>
+
+  <Reaction probability="40"
+	input_cell1="[meltable_plastic]_molten" 	input_cell2="graham_water_cloud"
+	output_cell1="plastic_grey" 		    	output_cell2="steam"  >
+  </Reaction>
   
   <Reaction probability="53"
 	input_cell1="blood_cold_vapour" 	input_cell2="diamond"

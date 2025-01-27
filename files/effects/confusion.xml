@@ -1,4 +1,4 @@
-<Entity tags="graham_flum_shader">
+<Entity name="graham_flum_shader">
 
 	<InheritTransformComponent>
     </InheritTransformComponent>

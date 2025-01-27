@@ -1,4 +1,4 @@
-<Entity name="$graham_cybereye_name" tags="hittable,teleportable_NOT,item_physics,item_pickup,evil_eye,grahams_things" >
+<Entity name="$graham_cybereye_name" tags="hittable,teleportable_NOT,item_physics,item_pickup,evil_eye,grahams_things,cyber_eye" >
 	<Base file="data/entities/base_item_projectile.xml" />
 
 	<!-- physical presence -->
@@ -65,11 +65,11 @@
 			_enabled="1">
 			<laser
 				is_emitting="1"
-				damage_to_entities="0.18"
-				damage_to_cells="180000"
+				damage_to_entities="0.24"
+				damage_to_cells="200000"
 				max_length="74"
 				beam_radius="4"
-				max_cell_durability_to_destroy="13"
+				max_cell_durability_to_destroy="14"
 				root_entity_is_responsible_for_damage="0"
 				audio_enabled="0"
 				audio_hit_always_enabled="1"
@@ -101,6 +101,11 @@
 			>
 		</SpriteComponent>
 	</Entity>
+
+	<VariableStorageComponent
+		_tags="cyber_eye_charge"
+		value_int="1800"
+	></VariableStorageComponent>
 	
 	<LuaComponent
 		_tags="enabled_in_hand"
@@ -135,6 +140,8 @@
 		is_pickable="1"
 		is_equipable_forced="1"
 		ui_sprite="mods/grahamsperks/files/pickups/cybereye_ui.png"
+		uses_remaining="300"
+		camera_max_distance="70"
 		ui_description="$graham_cybereye_desc"
 		preferred_inventory="QUICK"
 		>
