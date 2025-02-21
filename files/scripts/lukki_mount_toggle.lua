@@ -43,5 +43,8 @@ function interacting( entity_who_interacted, entity_interacted, interactable_nam
                 end
             end
         end
+        if not GameHasFlagRun("PERK_PICKED_GRAHAM_LUKKI_MOUNT") then
+            EntityKill(me)
+        end
     end
 end

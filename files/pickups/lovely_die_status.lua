@@ -105,7 +105,8 @@ if ( variablestorages ~= nil ) then
 				else
 					textprint = textprint .. "good"
 					anim = "rolled_good"
-					EntityLoad("mods/grahamsperks/files/entities/lukki_mount/lukki_mount.xml", pos_x, pos_y)
+					dofile_once("data/scripts/perks/perk.lua")
+					perk_spawn( pos_x, pos_y, "GRAHAM_LUKKI_MOUNT", true )
 					EntityLoad("data/entities/particles/poof_blue.xml", pos_x, pos_y)
 					EntityKill( entity_id )
 				end

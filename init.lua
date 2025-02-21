@@ -746,7 +746,6 @@ function OnPlayerSpawned(player)
 		GameAddFlagRun("spawned_lifelottery")
 
 		if HasFlagPersistent("graham_death_hp_boost") then
-			dofile_once("data/scripts/perks/perk.lua")
 			RemoveFlagPersistent("graham_death_hp_boost")
 			local dmg = EntityGetFirstComponent(player, "DamageModelComponent")
 			if dmg then
