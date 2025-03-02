@@ -40,7 +40,7 @@
 	</VelocityComponent>
 
     <SpriteComponent 
-	    _tags="enabled_in_hand"
+	    _tags="enabled_in_hand,light"
         alpha="0.8"
         image_file="data/particles/fog_of_war_hole_64.xml"
         smooth_filtering="1"
@@ -51,7 +51,7 @@
     </SpriteComponent>
 
 	<LightComponent 
-		_tags="enabled_in_hand"
+		_tags="enabled_in_hand,light"
 		_enabled="1" 
 		radius="200"
 		r="0"
@@ -165,8 +165,8 @@
 		angular_velocity="0"
 		scale.x="1" scale.y="0"
 		scale_velocity.x="-0.3" scale_velocity.y="3"
-		emission_interval_min_frames="3"
-		emission_interval_max_frames="6"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="3"
 		emissive="1"
 		additive="1"
 		count_min="1" count_max="1"
@@ -194,7 +194,7 @@
 	<!-- FX -->
 
 	<LightComponent
-		_tags="enabled_in_world,enabled_in_hand,magic_eye_check"
+		_tags="enabled_in_world,enabled_in_hand,magic_eye_check,light"
 		radius="60"
 		r="0"
 		g="255"
@@ -203,7 +203,7 @@
 	</LightComponent>
 	
 	<ParticleEmitterComponent 
-		_tags="enabled_in_world,enabled_in_hand"
+		_tags="enabled_in_world,enabled_in_hand,light"
 		emitted_material_name="spark_green"
 		offset.x="0"
 		offset.y="0"
@@ -226,8 +226,8 @@
 		render_on_grid="1"
 		emit_cosmetic_particles="1"
 		fade_based_on_lifetime="0"
-		emission_interval_min_frames="10"
-		emission_interval_max_frames="100"
+		emission_interval_min_frames="3"
+		emission_interval_max_frames="40"
 		is_emitting="1" >
 	</ParticleEmitterComponent>
 

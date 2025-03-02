@@ -38,7 +38,7 @@
 	physics_impulse_coeff="10000"
     >
 	<damage_by_type
-		curse="0.2"
+		curse="0.3"
 		>
 	</damage_by_type>
     <config_explosion
@@ -152,4 +152,3 @@
 	</VariableStorageComponent>
   
 </Entity>
-

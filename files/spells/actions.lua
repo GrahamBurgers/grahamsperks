@@ -131,7 +131,7 @@ local to_insert = {
 		name                = "$graham_name_orb_blue",
 		description         = "$graham_desc_orb_blue",
 		sprite              = "mods/grahamsperks/files/spells/orb_blue.png",
-		type                = ACTION_TYPE_PROJECTILE,
+		type                = ACTION_TYPE_STATIC_PROJECTILE,
 		spawn_level         = "1,2,3,4,5",
 		spawn_nonsense      = {0.4,0.5,0.6,0.7,1.8},
 		price               = 140,
@@ -148,7 +148,7 @@ local to_insert = {
 		name                = "$graham_name_orb_blue_timer",
 		description         = "$graham_desc_orb_blue_timer",
 		sprite              = "mods/grahamsperks/files/spells/orb_blue_timer.png",
-		type                = ACTION_TYPE_PROJECTILE,
+		type                = ACTION_TYPE_STATIC_PROJECTILE,
 		spawn_level         = "1,2,3,4,5",
 		spawn_nonsense      = {0.6,0.7,0.8,0.9,1.0},
 		price               = 140,
@@ -421,14 +421,13 @@ local to_insert = {
 		sprite              = "mods/grahamsperks/files/spells/teleport.png",
 		type                = ACTION_TYPE_PROJECTILE,
 		spawn_level         = "0,1,2,3",
-		spawn_nonsense      = {0.8,0.6,0.4,0.2},
-		price               = 180,
+		spawn_nonsense      = {0.6,0.6,0.4,0.2},
+		price               = 300,
 		mana                = 60,
 		custom_xml_file     = "mods/grahamsperks/files/spells/teleport_fast_card.xml",
 		related_projectiles = { "mods/grahamsperks/files/spells/teleport_fast.xml" },
 		action              = function()
 			c.fire_rate_wait = c.fire_rate_wait + 35
-			if refecting then return end
 			add_projectile("mods/grahamsperks/files/spells/teleport_fast.xml")
 		end,
 	},
@@ -1028,7 +1027,7 @@ local to_insert = {
 		spawn_nonsense      = {1,0.5,0.25,0.125},
 		spawn_requires_flag = "card_unlocked_mestari",
 		price               = 80,
-		mana                = 2,
+		mana                = 0,
 		custom_xml_file     = "mods/grahamsperks/files/spells/vein.xml",
 		action              = function()
 			draw_actions(1, true)
@@ -1209,7 +1208,7 @@ local to_insert = {
 		spawn_level         = "1,2,3,4",
 		spawn_nonsense      = {0.6,0.8,1.0,1.5},
 		price               = 80,
-		max_uses            = 30,
+		max_uses            = 90,
 		mana                = 15,
 		related_projectiles = { "mods/grahamsperks/files/spells/rainbow.xml" },
 		action              = function()
@@ -1406,7 +1405,7 @@ local to_insert = {
 		spawn_level            = "0,1,2,3,4",
 		spawn_nonsense         = {0.4,0.4,0.4,0.4,0.4},
 		price                  = 150,
-		mana                   = 30,
+		mana                   = 10,
 		related_extra_entities = { "mods/grahamsperks/files/spells/powder_evaporation.xml," },
 		action                 = function()
 			c.extra_entities = c.extra_entities .. "mods/grahamsperks/files/spells/powder_evaporation.xml,"
@@ -1657,7 +1656,7 @@ local to_insert = {
 		spawn_level            = "2,3,4,5",
 		spawn_nonsense         = {0.5,0.5,0.5,0.5},
 		price                  = 50,
-		mana                   = 24,
+		mana                   = 14,
 		action                 = function()
 			draw_actions(1, true)
 
@@ -1670,23 +1669,11 @@ local to_insert = {
 				local activeitem = 0
 				if inv2comp then
 					activeitem = ComponentGetValue2(inv2comp, "mActiveItem")
-				end
-				local projs = 0
-				local mods  = 0
-				if EntityHasTag(activeitem, "wand") then
-					local spells = EntityGetAllChildren(activeitem) or {}
-					for i, j in ipairs(spells) do
-						if EntityHasTag(j, "graham_spelltype_projectile") then
-							projs = projs + 1
-						elseif EntityHasTag(j, "graham_spelltype_modifier") then
-							mods = mods + 1
-						end
+					if #EntityGetAllChildren(activeitem, "graham_spelltype_projectile") or 0 > #EntityGetAllChildren(activeitem, "graham_spelltype_modifier") or 0 then
+						current_reload_time = current_reload_time - 30
+					else
+						c.damage_critical_chance = c.damage_critical_chance + 30
 					end
-				end
-				if projs > mods then
-					current_reload_time = current_reload_time - 30
-				else
-					c.damage_critical_chance = c.damage_critical_chance + 30
 				end
 			end
 		end,
@@ -1803,43 +1790,43 @@ local to_insert = {
 		spawn_nonsense      = {1,1,1,1,0.5},
 		price               = 80,
 		mana                = 45,
-		max_uses    = 6,
+		max_uses            = 6,
 		custom_xml_file   = "mods/grahamsperks/files/spells/panic_bomb_card.xml",
-		action 		= function()
+		action              = function()
 			add_projectile("mods/grahamsperks/files/spells/panic_bomb.xml")
 			c.fire_rate_wait = c.fire_rate_wait + 70
 		end,
 	},
 	{
-		id          = "GRAHAM_TOXIC_CRIT",
-		name 		= "$graham_name_toxic_crit",
-		description = "$graham_desc_toxic_crit",
+		id                  = "GRAHAM_TOXIC_CRIT",
+		name                = "$graham_name_toxic_crit",
+		description         = "$graham_desc_toxic_crit",
 		sprite              = "mods/grahamsperks/files/spells/toxic_crit.png",
 		related_projectiles = { "mods/grahamsperks/files/spells/toxic_crit.xml" },
-		type 		= ACTION_TYPE_MODIFIER,
-		spawn_level                       = "1,3,4,5", -- HITFX_CRITICAL_BLOOD
-		spawn_nonsense                    = {0.2,0.2,0.2,0.4}, -- HITFX_CRITICAL_BLOOD
-		price = 70,
-		mana = 15,
+		type                = ACTION_TYPE_MODIFIER,
+		spawn_level         = "1,3,4,5", -- HITFX_CRITICAL_BLOOD
+		spawn_nonsense      = {0.2,0.2,0.2,0.4}, -- HITFX_CRITICAL_BLOOD
+		price               = 70,
+		mana                = 15,
 		--max_uses = 50,
-		action 		= function()
+		action              = function()
 			c.extra_entities = c.extra_entities .. "mods/grahamsperks/files/spells/toxic_crit.xml,"
 			draw_actions( 1, true )
 		end,
 	},
 	{
-		id          = "GRAHAM_CLOUD_HAIL",
-		name 		= "$graham_name_cloud_hail",
-		description = "$graham_desc_cloud_hail",
+		id                  = "GRAHAM_CLOUD_HAIL",
+		name                = "$graham_name_cloud_hail",
+		description         = "$graham_desc_cloud_hail",
 		sprite              = "mods/grahamsperks/files/spells/cloud_hail.png",
 		related_projectiles = { "mods/grahamsperks/files/spells/cloud_hail.xml" },
-		type 		= ACTION_TYPE_STATIC_PROJECTILE,
-		spawn_level                       = "0,1,2,3,4,5",
-		spawn_nonsense                    = {0.4,0.4,0.2,0.2,0.3,0.2},
-		price = 200,
-		mana = 50,
-		max_uses = 8,
-		action 		= function()
+		type 		        = ACTION_TYPE_STATIC_PROJECTILE,
+		spawn_level         = "0,1,2,3,4,5",
+		spawn_nonsense      = {0.4,0.4,0.2,0.2,0.3,0.2},
+		price               = 200,
+		mana                = 50,
+		max_uses            = 8,
+		action              = function()
 			add_projectile("mods/grahamsperks/files/spells/cloud_hail.xml")
 			c.fire_rate_wait = c.fire_rate_wait + 25
 		end,
@@ -1854,7 +1841,7 @@ local to_insert = {
 		spawn_level         = "1,2,3,4",
 		spawn_nonsense      = {0.8,0.1,0.1,0.8},
 		price               = 300,
-		mana                = 4,
+		mana                = 8,
 		related_projectiles = { "mods/grahamsperks/files/spells/shock_dart.xml" },
 		action              = function()
 			add_projectile("mods/grahamsperks/files/spells/shock_dart.xml")

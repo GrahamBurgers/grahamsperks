@@ -1,12 +1,7 @@
 <Materials>
 
-    <Reaction probability="16"
-    input_cell1="graham_creepypoly"     input_cell2="[solid]"
-    output_cell1="graham_creepypoly"     output_cell2="graham_creepypoly" >
-    </Reaction>
-
-    <Reaction probability="35"
-    input_cell1="graham_creepypoly"     input_cell2="[liquid]"
+    <Reaction probability="20"
+    input_cell1="graham_creepypoly"     input_cell2="[corrodible]"
     output_cell1="graham_creepypoly"     output_cell2="graham_creepypoly" >
     </Reaction>
 
@@ -31,7 +26,7 @@
     </Reaction>
 
     <Reaction probability="5"
-	input_cell1="graham_driedfungus"     input_cell2="[solid]"
+	input_cell1="graham_driedfungus"     input_cell2="[corrodible]"
 	output_cell1="graham_driedfungus"     output_cell2="graham_driedfungus"
 	direction="bottom" >
     </Reaction>

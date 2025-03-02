@@ -5,27 +5,33 @@
 	<Base file="data/entities/base_projectile.xml" >
 		<VelocityComponent
 			gravity_y="0"
-			mass="0.04"
+			mass="0"
+      displace_liquid="0"
+      liquid_drag="0"
 		>
 		</VelocityComponent>
 	</Base>
 
   <ProjectileComponent 
     _enabled="1" 
-    lob_min="0.8"
-    lob_max="1.0"
-    speed_min="0"
-    speed_max="0"
+    lob_min="0"
+    lob_max="0"
+		speed_min="0"
+		speed_max="0"
+		on_collision_die="0"
+		collide_with_entities="1"
+		collide_with_world="0"
+		penetrate_world="1"
     direction_random_rad="0"
     on_death_explode="0"
     on_death_gfx_leave_sprite="0" 
     on_lifetime_out_explode="0"
-    explosion_dont_damage_shooter="1" 
-    on_collision_die="1"
+    explosion_dont_damage_shooter="1"
     die_on_liquid_collision="0"
-    velocity_sets_scale="1"
-    lifetime="4"
-    damage="0.14"
+    velocity_sets_scale="0"
+    lifetime="-1"
+    damage="0.08"
+    damage_every_x_frames="2"
     ragdoll_force_multiplier="0.0"
     ragdoll_fx_on_collision="BLOOD_SPRAY"
     hit_particle_force_multiplier="0.0"
@@ -38,6 +44,8 @@
     ground_penetration_coeff="1"
     collide_with_shooter_frames="90"
     friendly_fire="0"
+    on_death_emit_particle="0"
+    on_death_emit_particle_count="0"
 	>
     <config_explosion />
   </ProjectileComponent>
@@ -50,27 +58,48 @@
     b="30">
   </LightComponent>
 
-  <ParticleEmitterComponent 
+  <ParticleEmitterComponent
     emitted_material_name="spark_yellow"
     offset.x="0"
     offset.y="0"
 	  gravity.y="0.0"
+    custom_alpha="0.5"
 	  x_vel_min="0"
     x_vel_max="0"
-    y_vel_min="-2"
-    y_vel_max="2"
-    count_min="3"
-    count_max="3"
-    lifetime_min="0.05"
-    lifetime_max="0.1"
+    y_vel_min="0"
+    y_vel_max="0"
+    count_min="1"
+    count_max="1"
+    lifetime_min="0.3"
+    lifetime_max="0.3"
     emit_real_particles="0"
 	  render_on_grid="1"
-    render_ultrabright="1"
+    render_ultrabright="0"
     emit_cosmetic_particles="1"
     emission_interval_min_frames="1"
-    emission_interval_max_frames="2"
-	  area_circle_radius.max="2"
+    emission_interval_max_frames="1"
+    fade_based_on_lifetime="1"
+    velocity_always_away_from_center="14"
+    friction="0.3"
+	  area_circle_radius.max="5"
     is_emitting="1" >
   </ParticleEmitterComponent>
+
+  <SpriteComponent 
+    _enabled="1" 
+    alpha="1"
+    z_index="-2"
+    additive="1"
+    image_file="mods/grahamsperks/files/projectiles_gfx/connection_trail.xml" 
+  ></SpriteComponent>
+
+	<GameAreaEffectComponent
+		radius="3"
+		frame_length="1"
+	></GameAreaEffectComponent>
+
+  <LuaComponent
+    script_source_file="mods/grahamsperks/files/entities/connection_trail_dot.lua"
+  ></LuaComponent>
 
 </Entity>

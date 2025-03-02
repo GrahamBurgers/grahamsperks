@@ -567,9 +567,9 @@ color="FF13890d">
 	      <StatusEffect type="SLIMY" />
 	    </Stains>
 	    <Ingestion>
-		<StatusEffect type="TRIP" amount="0.08" />
-		<StatusEffect type="GRAHAM_GREEDYMEAL" amount="0.14" />
-		<StatusEffect type="HYDRATED" amount="0.1" />
+		<StatusEffect type="TRIP" amount="0.24" />
+		<StatusEffect type="GRAHAM_GREEDYMEAL" amount="0.30" />
+		<StatusEffect type="HYDRATED" amount="0.30" />
 	    </Ingestion>
 	</StatusEffects>
 

@@ -5,6 +5,7 @@
 			gravity_y="0"
 			air_friction="4"
 			mass="0.07"
+      liquid_drag="0.5"
 			>
 		</VelocityComponent>
 	</Base>
@@ -38,7 +39,7 @@
 	  knockback_force="2.2"
     physics_impulse_coeff="1500"
     penetrate_world="1"
-    penetrate_world_velocity_coeff="1"
+    penetrate_world_velocity_coeff="0.7"
     on_collision_die="0"
     friendly_fire="1"
     penetrate_entities="0"

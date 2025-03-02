@@ -5,6 +5,7 @@
       air_friction="0"
   	  gravity_y="0"
   	  mass="0.03"
+      liquid_drag="0"
 	    >
     </VelocityComponent>
 	</Base>
@@ -35,7 +36,7 @@
     shoot_light_flash_radius="60"
     >
     <damage_by_type
-      electricity="0.08"
+      electricity="0.12"
     ></damage_by_type>
     <config_explosion
       never_cache="0" 
@@ -84,16 +85,21 @@
   ></ParticleEmitterComponent>
 
   <LuaComponent
-    execute_every_n_frame="4"
+    execute_every_n_frame="5"
     script_source_file="mods/grahamsperks/files/scripts/shock_dart.lua"
   ></LuaComponent>
 
   <CardinalMovementComponent
+      horizontal_movement="0"
+      vertical_movement="0"
       intercardinal_movement="1"
   ></CardinalMovementComponent>
 
   <HomingComponent
+      detect_distance="120"
       homing_targeting_coeff="60"
+      just_rotate_towards_target="1"
+      max_turn_rate="0.1"
   ></HomingComponent>
 
   <AudioComponent

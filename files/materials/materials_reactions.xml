@@ -191,16 +191,6 @@
         output_cell1="graham_ascendum"     output_cell2="graham_ascendum" >
     </Reaction>
 
-    <Reaction probability="2"
-        input_cell1="graham_creepypoly"     input_cell2="[solid]"
-        output_cell1="graham_creepypoly"     output_cell2="graham_creepypoly" >
-    </Reaction>
-	
-    <Reaction probability="5"
-        input_cell1="graham_creepypoly"     input_cell2="[liquid]"
-        output_cell1="graham_creepypoly"     output_cell2="graham_creepypoly" >
-    </Reaction>
-
     <Reaction probability="6"
         input_cell1="graham_creepypoly"     input_cell2="air"
         output_cell1="air"     output_cell2="air" >
@@ -399,8 +389,8 @@
 	>
   </Reaction>
 
-  <Reaction probability="1"
-	input_cell1="graham_driedfungus"     input_cell2="[solid]"
+  <Reaction probability="3"
+	input_cell1="graham_driedfungus"     input_cell2="[corrodible]"
 	output_cell1="graham_driedfungus"     output_cell2="graham_driedfungus"
 	direction="bottom" >
   </Reaction>

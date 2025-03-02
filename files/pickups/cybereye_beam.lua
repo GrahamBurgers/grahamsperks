@@ -67,11 +67,13 @@ local s = children[2] and EntityGetFirstComponentIncludingDisabled(children[2], 
 if #comps < 2 then return end
 if EntityGetRootEntity(entity_id) == entity_id or charge <= 0 then -- not being held, so disable laser and enable sprite
 	ComponentSetValue2( comps[1], "is_emitting", false )
+	EntitySetComponentsWithTagEnabled(entity_id, "light", false)
 	if s then EntitySetComponentIsEnabled(children[2], s, true) end
 	EntitySetComponentIsEnabled( laser_id, comps[1], false )
 	EntitySetComponentIsEnabled( laser_id, comps[2], false )
 else
 	ComponentSetValue2( comps[1], "is_emitting", true )
+	EntitySetComponentsWithTagEnabled(entity_id, "light", true)
 	if s then EntitySetComponentIsEnabled(children[2], s, false) end
 	EntitySetComponentIsEnabled( laser_id, comps[1], true )
 	EntitySetComponentIsEnabled( laser_id, comps[2], true )

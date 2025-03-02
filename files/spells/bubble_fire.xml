@@ -65,7 +65,7 @@
       stains_enabled="1"
       stains_radius="3" >
     </config_explosion>
-    <damage_by_type fire="0.12" >
+    <damage_by_type fire="0.2" >
     </damage_by_type>
   </ProjectileComponent>
   

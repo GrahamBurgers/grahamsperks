@@ -1,9 +1,9 @@
 <Entity>
 	
     <MagicConvertMaterialComponent
-      kill_when_finished="1"
+      kill_when_finished="0"
       from_material="graham_graymatter_liquid"
-      steps_per_frame="6"
+      steps_per_frame="7"
       to_material="graham_yum"
       clean_stains="0"
       is_circle="1"
@@ -23,9 +23,9 @@
 	></MagicConvertMaterialComponent>
 
     <MagicConvertMaterialComponent
-      kill_when_finished="0"
+      kill_when_finished="1"
       from_material="graham_graymatter_liquid"
-      steps_per_frame="4"
+      steps_per_frame="3"
       to_material="graham_yum"
       clean_stains="0"
       is_circle="1"
@@ -36,7 +36,7 @@
     <MagicConvertMaterialComponent
       kill_when_finished="0"
       from_material="graham_graymatter_liquid"
-      steps_per_frame="3"
+      steps_per_frame="1"
       to_material="graham_yum"
       clean_stains="0"
       is_circle="1"

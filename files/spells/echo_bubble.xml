@@ -98,8 +98,8 @@
 		emit_cosmetic_particles="1"
 		emission_interval_min_frames="3"
 		emission_interval_max_frames="3"
-		area_circle_radius.min="6"
-		area_circle_radius.max="6"
+		area_circle_radius.min="8"
+		area_circle_radius.max="8"
 		delay_frames="1"
 		is_emitting="1"
 		>
@@ -124,9 +124,9 @@
 		>
 	</VariableStorageComponent>
 
-  <GameAreaEffectComponent
-      radius="6"
-	  frame_length="12"
-  ></GameAreaEffectComponent>
+	<GameAreaEffectComponent
+		radius="8"
+		frame_length="12"
+	></GameAreaEffectComponent>
 
 </Entity>

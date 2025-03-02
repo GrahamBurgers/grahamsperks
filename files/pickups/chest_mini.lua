@@ -15,20 +15,20 @@ function make_random_card( x, y )
 		local itemno = Random( 1, #actions )
 		local thisitem = actions[itemno]
 		item = string.lower(thisitem.id)
-		
+
 		if ( thisitem.spawn_requires_flag ~= nil ) then
 			local flag_name = thisitem.spawn_requires_flag
 			local flag_status = HasFlagPersistent( flag_name )
-			
+
 			if flag_status then
 				valid = true
 			end
 
 			-- 
-			if( thisitem.spawn_probability == "0" ) then 
+			if( thisitem.spawn_probability == "0" ) then
 				valid = false
 			end
-			
+
 		else
 			valid = true
 		end
@@ -50,7 +50,7 @@ function chest_load_gold_entity( entity_filename, x, y, remove_timer )
 	-- auto_pickup e.g. gold should have a delay in the next_frame_pickable, since they get gobbled up too fast by the player to see
 	if item_comp ~= nil then
 		if( ComponentGetValue2( item_comp, "auto_pickup") ) then
-			ComponentSetValue2( item_comp, "next_frame_pickable", GameGetFrameNum() + 30 )	
+			ComponentSetValue2( item_comp, "next_frame_pickable", GameGetFrameNum() + 30 )
 		end
 	end
 end
@@ -58,7 +58,7 @@ end
 -------------------------------------------------------------------------------
 
 function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
-	local set_rnd = false 
+	local set_rnd = false
 	if( set_rnd_ ~= nil ) then set_rnd = set_rnd_ end
 
 	if( set_rnd ) then
@@ -68,17 +68,6 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 	local good_item_dropped = true
 
 	local entities = {}
-	local drops = {}
-	local value = nil
-
-	local remove_gold_timer = false
-	
-	local comp_worldstate = EntityGetFirstComponent( GameGetWorldStateEntity(), "WorldStateComponent" )
-	if( comp_worldstate ~= nil ) then
-		if( ComponentGetValue2( comp_worldstate, "perk_gold_is_forever" ) ) then
-			remove_gold_timer = true
-		end
-	end
 
 	-- CHEST DROPS GO HERE (Welcome to elseif hell)
 	local count = 1
@@ -149,9 +138,9 @@ function drop_random_reward( x, y, entity_id, rand_x, rand_y, set_rnd_  )
 	end
 
 	for i,entity in ipairs(entities) do
-		local eid = 0 
-		if( entity[2] ~= nil and entity[3] ~= nil ) then 
-			eid = EntityLoad( entity[1], entity[2], entity[3] ) 
+		local eid = 0
+		if( entity[2] ~= nil and entity[3] ~= nil ) then
+			eid = EntityLoad( entity[1], entity[2], entity[3] )
 		else
 			eid = EntityLoad( entity[1], rand_x, rand_y )
 			EntityApplyTransform( eid, x + Random(-10,10), y - 4 + Random(-5,5)  )
@@ -201,7 +190,7 @@ function on_open( entity_item )
 	-- bunch of spiders
 	-- bomb
 	local good_item_dropped = drop_random_reward( x, y, entity_item, rand_x, rand_y, false )
-	
+
 	if good_item_dropped then
 		EntityLoad("data/entities/particles/image_emitters/chest_effect.xml", x, y)
 	else
@@ -218,7 +207,7 @@ function item_pickup( entity_item, entity_who_picked, name )
 	--end
 
 	on_open( entity_item )
-	
+
 	EntityKill( entity_item )
 end
 
@@ -226,12 +215,12 @@ function physics_body_modified( is_destroyed )
 	-- GamePrint( "A chest was broken open" )
 	-- GameTriggerMusicCue( "item" )
 	local entity_item = GetUpdatedEntityID()
-	
+
 	on_open( entity_item )
 
 	edit_component( entity_item, "ItemComponent", function(comp,vars)
 		EntitySetComponentIsEnabled( entity_item, comp, false )
 	end)
-	
+
 	EntityKill( entity_item )
 end

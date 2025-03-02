@@ -3,10 +3,12 @@ function death()
 	local x, y = EntityGetTransform( entity_id )
 	local component_id = EntityGetFirstComponent( entity_id, "DamageModelComponent" ) or 0
 	SetRandomSeed(x, y)
+	dofile_once("mods/grahamsperks/files/pickups/chest_mini.lua")
+	chest_load_gold_entity( "data/entities/items/pickup/goldnugget_50.xml", x, y, false )
 
 	local rnd = Random(1, 8)
 	-- GamePrint("rolled a " .. rnd)
-	
+
 	if rnd == 1 then
 		EntityLoad( "mods/grahamsperks/files/spells/circle_sweet.xml",  x, y )
 	elseif rnd == 2 then
@@ -16,23 +18,23 @@ function death()
 	elseif rnd == 3 then
 		ComponentSetValue2(component_id, "ragdoll_material", "gold")
 	elseif rnd == 4 then
-		ComponentSetValue2(component_id, "ragdoll_material", "material_rainbow")
+		ComponentSetValue2(component_id, "ragdoll_material", "graham_ascendum")
 	elseif rnd == 5 then
 		-- Spawn two random mini perk spells
 		SetRandomSeed(entity_id + x, component_id + y)
 		local options = {
-					"GRAHAM_MINI_HEATWAVE",
-					"GRAHAM_MINI_FREEZEFIELD",
-					"GRAHAM_MINI_DISSOLVEPOWDERS",
-					"GRAHAM_MINI_ATTRACTGOLD",
-					"GRAHAM_MINI_ELECTRICITY",
-					"GRAHAM_MINI_NOKNOCKBACK",
-					"GRAHAM_MINI_MIDASMEAT",
-				}
-				
+			"GRAHAM_MINI_HEATWAVE",
+			"GRAHAM_MINI_FREEZEFIELD",
+			"GRAHAM_MINI_DISSOLVEPOWDERS",
+			"GRAHAM_MINI_ATTRACTGOLD",
+			"GRAHAM_MINI_ELECTRICITY",
+			"GRAHAM_MINI_NOKNOCKBACK",
+			"GRAHAM_MINI_MIDASMEAT",
+		}
+
 		local result = options[math.random(1, #options)]
 		CreateItemActionEntity(result, x - 12, y)
-		
+
 		result = options[math.random(1, #options)]
 		CreateItemActionEntity(result, x + 12, y)
 	elseif rnd == 6 then

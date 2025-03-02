@@ -5,15 +5,10 @@
     
     <GameEffectComponent 
         effect="BLINDNESS"
-        frames="301"
+        frames="300"
     >
 	</GameEffectComponent>
-	
-	<LifetimeComponent
-		lifetime="300"
-		>
-	</LifetimeComponent>
-	
+
 	<UIIconComponent
 		name="$graham_status_snub"
 		description="$graham_statusdesc_snub"

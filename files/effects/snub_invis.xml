@@ -5,14 +5,9 @@
     
     <GameEffectComponent 
         effect="INVISIBILITY"
-        frames="720"
+        frames="840"
     >
 	</GameEffectComponent>
-	
-	<LifetimeComponent
-		lifetime="721"
-		>
-	</LifetimeComponent>
 
 	<UIIconComponent
 		name="$graham_status_snub"

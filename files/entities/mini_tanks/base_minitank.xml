@@ -92,7 +92,7 @@
 
 	<LifetimeComponent
 		fade_sprites="0"
-		lifetime="3600"
+		lifetime="1200"
 	></LifetimeComponent>
 
 	<SpriteComponent 
@@ -115,6 +115,17 @@
 
 	<LuaComponent
 		script_source_file="mods/grahamsperks/files/scripts/tank_timeout.lua"
+	></LuaComponent>
+
+	<LuaComponent
+		script_source_file="mods/grahamsperks/files/scripts/tank_teleport.lua"
+		execute_every_n_frame="5"
+	></LuaComponent>
+
+	<LuaComponent
+		script_source_file="mods/grahamsperks/files/scripts/tank_health.lua"
+		execute_on_added="1"
+		remove_after_executed="1"
 	></LuaComponent>
 
 	<ProjectileComponent

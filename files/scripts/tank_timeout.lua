@@ -1,10 +1,11 @@
 local me = GetUpdatedEntityID()
-local x, y = EntityGetTransform(me)
-local comp = EntityGetFirstComponent(GetUpdatedEntityID(), "LifetimeComponent")
-local sprite = EntityGetFirstComponent(GetUpdatedEntityID(), "SpriteComponent", "timed_health_slider")
-if sprite == nil or comp == nil then return end
+local comp = EntityGetFirstComponent(me, "LifetimeComponent")
+local ai = EntityGetFirstComponent(me, "AnimalAIComponent")
+local sprite = EntityGetFirstComponent(me, "SpriteComponent", "timed_health_slider")
+if (not sprite) or (not comp) or (not ai) then return end
 
-if BiomeMapGetName(x, y) == "$biome_holymountain" or BiomeMapGetName(x, y) == "$biome_boss_arena" then
+local prev = ComponentGetValue2(ai, "mAiStatePrev")
+if (prev ~= 15 and prev ~= 16) then
     ComponentSetValue2(comp, "kill_frame", ComponentGetValue2(comp, "kill_frame") + 1)
     ComponentSetValue2(comp, "creation_frame", ComponentGetValue2(comp, "creation_frame") + 1)
 end
