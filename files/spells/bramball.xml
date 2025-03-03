@@ -30,6 +30,7 @@
 	physics_impulse_coeff="2000"
 	explosion_dont_damage_shooter="1"
 	spawn_entity="mods/grahamsperks/files/entities/brambles.xml"
+	spawn_entity_is_projectile="1"
 	>
     <config_explosion
         never_cache="1" 
@@ -90,14 +91,6 @@
 		update_transform_rotation="1"
 		>
 	</SpriteComponent>
-
-    <HitboxComponent 
-        _enabled="1" 
-        aabb_min_x="-5" 
-        aabb_max_x="5" 
-        aabb_min_y="-5" 
-        aabb_max_y="5" >
-    </HitboxComponent>
 
   	<AudioComponent
 		file="data/audio/Desktop/projectiles.bank"

@@ -467,7 +467,10 @@ local to_insert = {
 			EntityAddTag(child_id, "perk_entity")
 			EntityAddChild(entity_who_picked, child_id)
 
-			EntityLoad("data/entities/items/pickup/potion_empty.xml", x, y)
+			-- ENTANGLED WORLDS START
+			if EntityHasTag(entity_who_picked, "player_unit") then
+				EntityLoad("data/entities/items/pickup/potion_empty.xml", x, y)
+			end
 
 			perk_pickup_event("GHOST")
 
@@ -557,46 +560,49 @@ local to_insert = {
 		stackable_is_rare = true,
 		stackable_maximum = 3,
 		func = function(entity_perk_item, entity_who_picked, item_name)
-			for i = 1, 3, 1 do
-				local x, y = EntityGetTransform(entity_who_picked)
-				local child_id = EntityLoad("mods/grahamsperks/files/entities/eye/blood_orb.xml", x, y)
+			-- ENTANGLED WORLDS START
+			if EntityHasTag(entity_who_picked, "player_unit") then
+				for i = 1, 3, 1 do
+					local x, y = EntityGetTransform(entity_who_picked)
+					local child_id = EntityLoad("mods/grahamsperks/files/entities/eye/blood_orb.xml", x, y)
 
-				-- faction logic
-				local factioncomp = EntityGetFirstComponentIncludingDisabled(entity_who_picked, "GenomeDataComponent")
-				if factioncomp ~= nil then
-					local faction = ComponentGetValue2(factioncomp, "herd_id")
-					local other = EntityGetFirstComponentIncludingDisabled(child_id, "GenomeDataComponent")
-					if other ~= nil then
-						ComponentSetValue2(other, "herd_id", faction)
+					-- faction logic
+					local factioncomp = EntityGetFirstComponentIncludingDisabled(entity_who_picked, "GenomeDataComponent")
+					if factioncomp ~= nil then
+						local faction = ComponentGetValue2(factioncomp, "herd_id")
+						local other = EntityGetFirstComponentIncludingDisabled(child_id, "GenomeDataComponent")
+						if other ~= nil then
+							ComponentSetValue2(other, "herd_id", faction)
+						end
 					end
+
+					-- stacking logic
+					local varsto = EntityGetFirstComponent(entity_who_picked, "VariableStorageComponent", "graham_blood_orbs")
+					if varsto ~= nil then
+						local orbs = ComponentGetValue2(varsto, "value_int") + 1
+						ComponentSetValue2(varsto, "value_int", orbs)
+
+						EntityAddComponent2(child_id, "VariableStorageComponent", {
+							_tags = "wizard_orb_id",
+							name = "wizard_orb_id",
+							value_int = orbs,
+						})
+					else
+						EntityAddComponent2(entity_who_picked, "VariableStorageComponent", {
+							_tags = "graham_blood_orbs",
+							value_int = 1,
+						})
+
+						EntityAddComponent2(child_id, "VariableStorageComponent", {
+							_tags = "wizard_orb_id",
+							name = "wizard_orb_id",
+							value_int = 1,
+						})
+					end
+
+					EntityAddChild(entity_who_picked, child_id)
+					if varsto ~= nil and i == 1 then break end
 				end
-
-				-- stacking logic
-				local varsto = EntityGetFirstComponent(entity_who_picked, "VariableStorageComponent", "graham_blood_orbs")
-				if varsto ~= nil then
-					local orbs = ComponentGetValue2(varsto, "value_int") + 1
-					ComponentSetValue2(varsto, "value_int", orbs)
-
-					EntityAddComponent2(child_id, "VariableStorageComponent", {
-						_tags = "wizard_orb_id",
-						name = "wizard_orb_id",
-						value_int = orbs,
-					})
-				else
-					EntityAddComponent2(entity_who_picked, "VariableStorageComponent", {
-						_tags = "graham_blood_orbs",
-						value_int = 1,
-					})
-
-					EntityAddComponent2(child_id, "VariableStorageComponent", {
-						_tags = "wizard_orb_id",
-						name = "wizard_orb_id",
-						value_int = 1,
-					})
-				end
-
-				EntityAddChild(entity_who_picked, child_id)
-				if varsto ~= nil and i == 1 then break end
 			end
 		end,
 		func_remove = function(entity_who_picked)
@@ -633,6 +639,10 @@ local to_insert = {
 		stackable = STACKABLE_YES,
 		stackable_maximum = 5,
 		func = function(entity_perk_item, entity_who_picked, item_name)
+			-- ENTANGLED WORLDS START
+			local func = EntityLoad
+			if not EntityHasTag(entity_who_picked, "player_unit") then function EntityLoad() end end
+
 			local amount = GlobalsGetValue("GRAHAM_REFRESHER_COUNT", 0)
 			GlobalsSetValue("GRAHAM_REFRESHER_COUNT", amount + 1)
 			local x, y = EntityGetTransform(entity_who_picked)
@@ -643,6 +653,9 @@ local to_insert = {
 					ComponentSetValue2(item_comp, "next_frame_pickable", GameGetFrameNum() + 60)
 				end
 			end
+
+			-- ENTANGLED WORLDS END
+			EntityLoad = func
 		end,
 		func_remove = function(entity_who_picked)
 			GlobalsSetValue("GRAHAM_REFRESHER_COUNT", 0)

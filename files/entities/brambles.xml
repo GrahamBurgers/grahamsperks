@@ -20,7 +20,8 @@
 		on_death_gfx_leave_sprite="0"
 		on_lifetime_out_explode="1"
 		friendly_fire="1"
-		collide_with_entities="0"
+		collide_with_entities="1"
+		damage_every_x_frames="12"
 		shoot_light_flash_radius="100"
 		shoot_light_flash_r="255"
 		shoot_light_flash_g="30"
@@ -57,9 +58,12 @@
 			stains_image="data/temp/explosion_stain.png"
 			spark_material="spark" >
 		</config_explosion>
-        <damage_by_type slice="0.04" >
-        </damage_by_type>
 	</ProjectileComponent>
+
+	<GameAreaEffectComponent
+		radius="18"
+		frame_length="12"
+	></GameAreaEffectComponent>
 
 	<SpriteComponent
 		image_file="mods/grahamsperks/files/projectiles_gfx/brambles.xml"

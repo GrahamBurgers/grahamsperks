@@ -3,22 +3,18 @@ dofile_once("data/scripts/lib/utilities.lua")
 local x, y = EntityGetTransform(GetUpdatedEntityID())
 local entities = EntityGetInRadiusWithTag(x, y, 18, "hittable")
 local comp = EntityGetFirstComponent(GetUpdatedEntityID(), "ProjectileComponent")
+local ticks = ComponentGetValue2(GetUpdatedComponentID(), "mTimesExecuted")
 -- awful code but it actually works
 local shooter, bx, by, ex, ey, cx, cy
-if comp ~= nil then
-	shooter = ComponentGetValue2(comp, "mWhoShot")
-end
+if not comp then return end
+shooter = ComponentGetValue2(comp, "mWhoShot")
 
 for i = 1, #entities do
-	local go = true
-	if shooter ~= nil and shooter ~= 0 then
-		go = (shooter ~= entities[i] and EntityGetHerdRelation( shooter, entities[i] ) <= 60)
-	end
-	if go then
+	if (shooter and shooter ~= 0) and (shooter ~= entities[i] and EntityGetHerdRelation( shooter, entities[i]) <= 60) then
 		ex, ey = EntityGetTransform(entities[i])
 		cx = get_variable_storage_component( entities[i], "graham_brambles_x" )
 		cy = get_variable_storage_component( entities[i], "graham_brambles_y" )
-		if cx ~= nil and cy ~= nil then
+		if cx and cy then
 			bx = ComponentGetValue2(cx, "value_int")
 			by = ComponentGetValue2(cy, "value_int")
 
@@ -34,10 +30,6 @@ for i = 1, #entities do
 					end
 				end
 			end
-			
-			if GameGetFrameNum() % 12 == 0 then
-				EntityInflictDamage(entities[i], 0.024, "DAMAGE_SLICE", "$graham_name_bramball", "NONE", 0, 0, shooter)
-			end
 		else
 			EntityAddComponent2(entities[i], "VariableStorageComponent", {
 				name="graham_brambles_x",
@@ -47,10 +39,6 @@ for i = 1, #entities do
 				name="graham_brambles_y",
 				value_int=ey,
 			})
-		end
-	else
-		if GameGetFrameNum() % 12 == 0 and shooter ~= entities[i] then
-			EntityInflictDamage(entities[i], 0.024, "DAMAGE_SLICE", "$graham_name_bramball", "NONE", 0, 0, shooter)
 		end
 	end
 end
