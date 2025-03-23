@@ -49,6 +49,7 @@ local translations = { -- default to English
     {"Language", "What language do you want to play Graham's Things in?\nRestart the game after changing this setting."},
     {"Hide breadcrumbs", "Should Breadcrumbs from the perk be invisible?\nThis is just cosmetic. Enable this if the perk is causing too much visual clutter."},
     {"Spell weight multiplier", "Increase or decrease the spawn frequency of spells from Graham's Things.\nValues higher than 100% will make them appear more often.\nValues lower than 100% will make them appear less often.", "100%", "120%", "150%", "200%", "80%", "50%", "10%"},
+    {"Confused effect shader", "Should the Confused status effect from Flummoxium apply a custom screen shader?\nThis might cause a performance impact when enabled."},
 }
 
 if currentLang == 2 then -- Chinese translations here
@@ -67,6 +68,7 @@ if currentLang == 2 then -- Chinese translations here
         {"语言", "你想用什么语言玩Graham's Things？\n更改此设置后需要重新启动游戏才能生效。"},
         {"隐藏面包屑", "面包屑天赋产生的面包屑应该隐形吗？\n这只是装饰性的。如果面包屑天赋导致画面过于混乱，请启用此功能。"},
         {"法术生成权重", "增加或降低Graham's Things法术的生成频率。\n大于100%会增加此mod所属法术的生成频率\n小于100%则会降低法术的生成频率", "100%", "120%", "150%", "200%", "80%", "50%", "10%"},
+        {"混乱效果着色器", "是否为混乱魔药引发的混乱效果应用自定义屏幕着色器？\n启用此功能可能会对性能产生影响。"},
     }
 elseif currentLang == 3 then -- Russian translations here
     translations = {
@@ -84,6 +86,7 @@ elseif currentLang == 3 then -- Russian translations here
         {"Язык", "На каком языке вы хотите играть в \"Вещи Грэма\"?\n Перезапустите игру после изменения этой настройки."},
         {"Скрывать хлебные крошки", "Должны ли хлебные крошки от перка быть невидимыми?\n Это просто косметический параметр. \nВключите эту настройку, если перк создает слишком много визуальных помех."},
         {"Множитель количества заклинаний", "Увеличивает или уменьшает частоту спавна заклинаний из Graham's Things.\nЗначение больше 100% будет заставлять их появляться чаще.\nЗначение меньше 100% будет заставлять их появляться реже.", "100%", "120%", "150%", "200%", "80%", "50%", "10%"},
+        {"Шейдер эффекта замешательства", "Должен ли эффект состояния замешательства из Флуммоксиума применять пользовательский шейдер экрана?\nЭто может повлиять на производительность при включении."},
     }
 end
 
@@ -143,6 +146,13 @@ local settings = {
         id      = "StartingItems",
         name    = translations[4][1],
         desc    = translations[4][2],
+        type    = "boolean",
+        default = true,
+    },
+    {
+        id      = "FlumShader",
+        name    = translations[15][1],
+        desc    = translations[15][2],
         type    = "boolean",
         default = true,
     },

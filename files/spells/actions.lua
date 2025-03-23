@@ -24,8 +24,8 @@ local to_insert = {
 		description         = "$graham_desc_material_pure",
 		sprite              = "mods/grahamsperks/files/spells/material_pure.png",
 		type                = ACTION_TYPE_MATERIAL,
-		spawn_level         = "2,3,4,5",
-		spawn_nonsense      = {0.5,0.7,0.9,1.1},
+		spawn_level         = "1,2,3,4,5",
+		spawn_nonsense      = {0.3,0.5,0.7,0.9,1.1},
 		price               = 120,
 		max_uses            = 250,
 		mana                = 0,
@@ -135,7 +135,7 @@ local to_insert = {
 		spawn_level         = "1,2,3,4,5",
 		spawn_nonsense      = {0.4,0.5,0.6,0.7,1.8},
 		price               = 140,
-		mana                = 10,
+		mana                = 30,
 		--max_uses = 100,
 		related_projectiles = { "mods/grahamsperks/files/spells/orb_blue.xml" },
 		action              = function()
@@ -152,7 +152,7 @@ local to_insert = {
 		spawn_level         = "1,2,3,4,5",
 		spawn_nonsense      = {0.6,0.7,0.8,0.9,1.0},
 		price               = 140,
-		mana                = 15,
+		mana                = 35,
 		--max_uses = 100,
 		related_projectiles = { "mods/grahamsperks/files/spells/orb_blue.xml" },
 		action              = function()
@@ -173,7 +173,7 @@ local to_insert = {
 		related_projectiles = { "mods/grahamsperks/files/spells/spark_bolt.xml" },
 		action              = function()
 			add_projectile("mods/grahamsperks/files/spells/spark_bolt.xml")
-			c.fire_rate_wait = c.fire_rate_wait + 3
+			-- c.fire_rate_wait = c.fire_rate_wait + 3
 			c.screenshake = c.screenshake - 0.5
 			c.spread_degrees = c.spread_degrees + 1.0
 			c.damage_critical_chance = c.damage_critical_chance - 5
@@ -406,10 +406,28 @@ local to_insert = {
 
 			local entity_who_shot = GetUpdatedEntityID()
 			local x, y = EntityGetTransform(entity_who_shot)
-			local entity_id = EntityLoad("mods/grahamsperks/files/effects/snub_invis.xml", x, y)
-			EntityAddChild(entity_who_shot, entity_id)
-			entity_id = EntityLoad("mods/grahamsperks/files/effects/snub_blind.xml", x, y)
-			EntityAddChild(entity_who_shot, entity_id)
+			local children = EntityGetAllChildren(entity_who_shot) or {}
+
+			local done_invis, done_blind = false, false
+			for i = 1, #children do
+				local game = EntityGetFirstComponent(children[i], "GameEffectComponent")
+				if EntityGetName(children[i]) == "snub_invis" and game then
+					done_invis = true
+					ComponentSetValue2(game, "frames", ComponentGetValue2(game, "frames") + 840)
+				end
+				if EntityGetName(children[i]) == "snub_blind" and game then
+					done_blind = true
+					ComponentSetValue2(game, "frames", ComponentGetValue2(game, "frames") + 300)
+				end
+			end
+			if not done_invis then
+				local entity_id = EntityLoad("mods/grahamsperks/files/effects/snub_invis.xml", x, y)
+				EntityAddChild(entity_who_shot, entity_id)
+			end
+			if not done_blind then
+				entity_id = EntityLoad("mods/grahamsperks/files/effects/snub_blind.xml", x, y)
+				EntityAddChild(entity_who_shot, entity_id)
+			end
 			EntityAddRandomStains(entity_who_shot, CellFactory_GetType("graham_unstainer"), 400)
 			add_projectile("mods/grahamsperks/files/entities/snub.xml")
 		end,
@@ -871,7 +889,7 @@ local to_insert = {
 		mana                = 0,
 		custom_xml_file     = "mods/grahamsperks/files/spells/mini_heatwave.xml",
 		action              = function()
-			current_reload_time = current_reload_time + 12
+			current_reload_time = current_reload_time + 6
 			draw_actions(1, true)
 		end,
 	},
@@ -888,7 +906,7 @@ local to_insert = {
 		mana                = 0,
 		custom_xml_file     = "mods/grahamsperks/files/spells/mini_freezefield.xml",
 		action              = function()
-			current_reload_time = current_reload_time + 12
+			current_reload_time = current_reload_time + 6
 			draw_actions(1, true)
 		end,
 	},
@@ -905,7 +923,7 @@ local to_insert = {
 		mana                = 0,
 		custom_xml_file     = "mods/grahamsperks/files/spells/mini_dissolvepowders.xml",
 		action              = function()
-			current_reload_time = current_reload_time + 12
+			current_reload_time = current_reload_time + 6
 			draw_actions(1, true)
 		end,
 	},
@@ -922,7 +940,7 @@ local to_insert = {
 		mana                = 0,
 		custom_xml_file     = "mods/grahamsperks/files/spells/mini_attractgold.xml",
 		action              = function()
-			current_reload_time = current_reload_time + 12
+			current_reload_time = current_reload_time + 6
 			draw_actions(1, true)
 		end,
 	},
@@ -939,7 +957,7 @@ local to_insert = {
 		mana                = 0,
 		custom_xml_file     = "mods/grahamsperks/files/spells/mini_electricity.xml",
 		action              = function()
-			current_reload_time = current_reload_time + 12
+			current_reload_time = current_reload_time + 6
 			draw_actions(1, true)
 		end,
 	},
@@ -956,7 +974,7 @@ local to_insert = {
 		mana                = 0,
 		custom_xml_file     = "mods/grahamsperks/files/spells/mini_noknockback.xml",
 		action              = function()
-			current_reload_time = current_reload_time + 12
+			current_reload_time = current_reload_time + 6
 			draw_actions(1, true)
 		end,
 	},
@@ -973,7 +991,7 @@ local to_insert = {
 		mana                = 0,
 		custom_xml_file     = "mods/grahamsperks/files/spells/mini_midasmeat.xml",
 		action              = function()
-			current_reload_time = current_reload_time + 12
+			current_reload_time = current_reload_time + 6
 			draw_actions(1, true)
 		end,
 	},
@@ -1008,7 +1026,7 @@ local to_insert = {
 		spawn_level            = "0,1,2,4,5",     -- GRAVITY_FIELD_ENEMY
 		spawn_nonsense         = {0.5,0.2,0.8,0.4,0.2}, -- GRAVITY_FIELD_ENEMY
 		price                  = 140,
-		mana                   = 10,
+		mana                   = 40,
 		related_extra_entities = { "data/entities/misc/orbit_blue.xml" },
 		action                 = function()
 			c.lifetime_add 		= c.lifetime_add + 25
@@ -1251,6 +1269,7 @@ local to_insert = {
 			add_projectile("mods/grahamsperks/files/spells/redhand.xml")
 		end,
 	},
+	--[[
 	{
 		id                  = "GRAHAM_HANDPORTAL",
 		name                = "$graham_name_handportal",
@@ -1269,14 +1288,15 @@ local to_insert = {
 			add_projectile("mods/grahamsperks/files/spells/hand_portal.xml")
 		end,
 	},
+	]]--
 	{
 		id                     = "GRAHAM_GUARDIAN_SHOT",
 		name                   = "$graham_name_guardianshot",
 		description            = "$graham_desc_guardianshot",
 		sprite                 = "mods/grahamsperks/files/spells/guardian.png",
 		type                   = ACTION_TYPE_MODIFIER,
-		spawn_level            = "2,3,4,10",
-		spawn_nonsense         = {0.6,0.8,1.0,0.5},
+		spawn_level            = "1,2,3,4,10",
+		spawn_nonsense         = {0.2,0.6,0.8,1.0,0.5},
 		price                  = 200,
 		mana                   = 40,
 		max_uses               = 10,
@@ -1473,7 +1493,7 @@ local to_insert = {
 		sprite              = "mods/grahamsperks/files/spells/translocation.png",
 		type                = ACTION_TYPE_STATIC_PROJECTILE,
 		spawn_level         = "1,2,3,4,5,6",       -- SHIELD_FIELD
-		spawn_nonsense      = {0.2,0.4,0.4,0.6,0.6,0.2}, -- SHIELD_FIELD
+		spawn_nonsense      = {0.4,0.4,0.4,0.6,0.6,0.2}, -- SHIELD_FIELD
 		price               = 260,
 		mana                = 60,
 		max_uses            = 6,
@@ -1501,19 +1521,44 @@ local to_insert = {
 			if reflecting then return end
 			local entity_who_shot = GetUpdatedEntityID()
 			local x, y = EntityGetTransform(entity_who_shot)
-			local entity_id = EntityLoad("mods/grahamsperks/files/effects/foam_armor.xml", x, y)
-			EntityAddChild(entity_who_shot, entity_id)
+			local children = EntityGetAllChildren(entity_who_shot, "foam_armor") or {}
+			local entity_id = children and children[1]
+			if entity_id then
+				local games = EntityGetComponent(entity_id, "GameEffectComponent") or {}
+				for i = 1, #games do
+					ComponentSetValue2(games[i], "frames", ComponentGetValue2(games[i], "frames") + 2700)
+				end
+			else
+				entity_id = EntityLoad("mods/grahamsperks/files/effects/foam_armor.xml", x, y)
+				EntityAddChild(entity_who_shot, entity_id)
+			end
+
 			add_projectile("mods/grahamsperks/files/entities/foamarmor.xml")
 			local dmg = EntityGetFirstComponent(entity_who_shot, "DamageModelComponent")
-			if dmg then
+			local ui = EntityGetFirstComponentIncludingDisabled(entity_id, "UIIconComponent")
+			if dmg and ui then
 				local healing = -0.8
 				local hp = ComponentGetValue2(dmg, "hp")
 				local max_hp = ComponentGetValue2(dmg, "max_hp")
 				healing = math.max(healing, hp - max_hp)
 				EntityInflictDamage(entity_who_shot, healing, "DAMAGE_HEALING", "$damage_healing", "NORMAL", 0, 0)
-				EntityAddComponent2(entity_id, "VariableStorageComponent", {
-					value_float=healing
-				})
+
+				local var = EntityGetFirstComponent(entity_id, "VariableStorageComponent", "foam_armor_ouch")
+				local total = 0
+				if var then
+					total = ComponentGetValue2(var, "value_float") - healing
+					ComponentSetValue2(var, "value_float", total)
+				else
+					total = -healing
+					var = EntityAddComponent2(entity_id, "VariableStorageComponent", {
+						_tags="foam_armor_ouch",
+						value_float=-healing
+					})
+				end
+				if math.abs(total) >= 0.04 then
+					local str = tostring(math.ceil(total * 25))
+					ComponentSetValue2(ui, "description", GameTextGet("$graham_statusdesc_foam2", str))
+				end
 			end
 		end,
 	},
@@ -1701,10 +1746,10 @@ local to_insert = {
 		description            = "$graham_desc_intensify",
 		sprite                 = "mods/grahamsperks/files/spells/intensify.png",
 		type                   = ACTION_TYPE_MODIFIER,
-		spawn_level            = "3,4,5,6",
-		spawn_nonsense         = {1,1,1,1},
+		spawn_level            = "2,3,4,5,6",
+		spawn_nonsense         = {0.5,1,1,1,1},
 		price                  = 250,
-		mana                   = 5,
+		mana                   = 10,
 		related_extra_entities = { "mods/grahamsperks/files/spells/intensify.xml," },
 		action                 = function()
 			-- current_reload_time = current_reload_time + 12
@@ -1725,7 +1770,7 @@ local to_insert = {
 		mana                = 15,
 		related_projectiles = { "mods/grahamsperks/files/spells/invisible.xml" },
 		action              = function()
-			c.fire_rate_wait = c.fire_rate_wait + 2
+			c.fire_rate_wait = c.fire_rate_wait + 3
 			add_projectile("mods/grahamsperks/files/spells/invisible.xml")
 		end,
 	},
@@ -1824,7 +1869,7 @@ local to_insert = {
 		spawn_level         = "0,1,2,3,4,5",
 		spawn_nonsense      = {0.4,0.4,0.2,0.2,0.3,0.2},
 		price               = 200,
-		mana                = 50,
+		mana                = 20,
 		max_uses            = 8,
 		action              = function()
 			add_projectile("mods/grahamsperks/files/spells/cloud_hail.xml")

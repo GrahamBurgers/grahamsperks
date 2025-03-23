@@ -5,7 +5,7 @@
       kill_when_finished="0"
       from_material_array="sand,soil,bone,fungisoil,mud,sandstone,snow,snow_sticky,sand_herb,wax,coal,sulphur,salt,gunpowder,gunpowder_unstable,gunpowder_explosive,gunpowder_tnt,poo,glass_broken"
       steps_per_frame="25"
-      to_material_array="graham_darkgas,graham_darkgas,graham_darkgas,graham_darkgas,graham_darkgas,graham_darkgas,graham_darkgas,graham_darkgas,graham_darkgas,graham_darkgas,graham_darkgas,graham_darkgas,graham_darkgas,graham_darkgas,graham_darkgas,graham_darkgas,graham_darkgas,graham_darkgas,graham_darkgas"
+      to_material_array="poison_gas,poison_gas,poison_gas,poison_gas,poison_gas,poison_gas,poison_gas,poison_gas,poison_gas,poison_gas,poison_gas,poison_gas,poison_gas,poison_gas,poison_gas,poison_gas,poison_gas,poison_gas,poison_gas"
       clean_stains="0"
       is_circle="1"
       radius="25"

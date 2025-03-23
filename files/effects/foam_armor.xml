@@ -1,4 +1,4 @@
-<Entity>
+<Entity tags="foam_armor">
 
 	<InheritTransformComponent>
     </InheritTransformComponent>
@@ -14,18 +14,14 @@
 	</UIIconComponent>
 
 	<GameEffectComponent
-		frames="3600"
+		frames="2700"
 		effect="PROTECTION_FIRE">
 	</GameEffectComponent>
 
 	<GameEffectComponent
-		frames="3600"
+		frames="2700"
 		effect="PROTECTION_RADIOACTIVITY">
 	</GameEffectComponent>
-
-	<LifetimeComponent
-		lifetime="3600"
-	></LifetimeComponent>
 
 	<LuaComponent
 		execute_on_removed="1"

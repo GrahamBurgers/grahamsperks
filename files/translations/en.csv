@@ -625,6 +625,7 @@ graham_minitank_name,Pikku-tankki,,,,,,,,,,,,doesn't need to be translated
 graham_lukkimount_name,Hämähäkkiratsu,,,,,,,,,,,,doesn't need to be translated
 graham_status_foam,Foamed,,,,,,,,,,,,
 graham_statusdesc_foam,"You are immune to fire and toxicity, and gain extra health for a time.",,,,,,,,,,,,
+graham_statusdesc_foam2,"You are immune to fire and toxicity, and gain extra health for a time.\n($0)",,,,,,,,,,,,
 graham_enable_redblue,Enabled Red/Blue togglers,,,,,,,,,,,,
 graham_enable_greenyellow,Enabled Green/Yellow togglers,,,,,,,,,,,,
 graham_toggle_red,Toggled to RED,,,,,,,,,,,,

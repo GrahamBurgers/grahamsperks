@@ -8,6 +8,8 @@ local comp2 = EntityGetFirstComponent(me, "ProjectileComponent")
 local var = EntityGetFirstComponent(bramble[1], "VariableStorageComponent")
 if comp and comp2 and var then
     ComponentSetValue2(comp2, "mWhoShot", ComponentGetValue2(comp, "mWhoShot"))
+    ComponentSetValue2(comp2, "mShooterHerdId", ComponentGetValue2(comp, "mShooterHerdId"))
+    ComponentSetValue2(comp2, "mWhoShotEntityTypeID", ComponentGetValue2(comp, "mWhoShotEntityTypeID"))
     -- inherit lifetime modifiers
     ComponentSetValue2(comp2, "lifetime", ComponentGetValue2(var, "value_int") * 1.5)
     -- inherit damage

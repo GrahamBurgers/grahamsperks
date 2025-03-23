@@ -1,18 +1,19 @@
-local me = GetUpdatedEntityID()
-local comp = EntityGetFirstComponent(me, "LifetimeComponent")
-local ai = EntityGetFirstComponent(me, "AnimalAIComponent")
-local sprite = EntityGetFirstComponent(me, "SpriteComponent", "timed_health_slider")
-if (not sprite) or (not comp) or (not ai) then return end
 
-local prev = ComponentGetValue2(ai, "mAiStatePrev")
-if (prev ~= 15 and prev ~= 16) then
-    ComponentSetValue2(comp, "kill_frame", ComponentGetValue2(comp, "kill_frame") + 1)
-    ComponentSetValue2(comp, "creation_frame", ComponentGetValue2(comp, "creation_frame") + 1)
+function shot(projectile)
+    local me = GetUpdatedEntityID()
+    local comp = EntityGetFirstComponentIncludingDisabled(me, "VariableStorageComponent", "minitank_hp")
+    local sprite = EntityGetFirstComponentIncludingDisabled(me, "SpriteComponent", "timed_health_slider")
+    local proj = EntityGetFirstComponentIncludingDisabled(projectile, "ProjectileComponent")
+    if (not sprite) or (not comp) or (not proj) then return end
+
+    local value = ComponentGetValue2(comp, "value_float") - ComponentGetValue2(proj, "damage")
+    local max = ComponentGetValue2(comp, "value_int")
+    ComponentSetValue2(comp, "value_float", value)
+    if value < 0 then
+        EntityKill(me)
+    else
+        -- timeout bar functionality
+        -- technically this should work with any entities with a lifetimecomponent and a tagged spritecomponent
+        ComponentSetValue2(sprite, "special_scale_x", value / max)
+    end
 end
-
--- timeout bar functionality
--- technically this should work with any entities with a lifetimecomponent and a tagged spritecomponent
-local endframe = ComponentGetValue2(comp, "kill_frame")
-local startframe = ComponentGetValue2(comp, "creation_frame")
-local percentage = (GameGetFrameNum() - startframe) / (endframe - startframe)
-ComponentSetValue2(sprite, "special_scale_x", 1 - percentage)

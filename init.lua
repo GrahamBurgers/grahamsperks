@@ -75,6 +75,7 @@ thingy = ModTextFileGetContent("data/scripts/items/heart_fullhp.lua")
 ModTextFileSetContent("data/scripts/items/heart_fullhp.lua", thingy .. "\n" .. "dofile_once(\"mods/grahamsperks/files/scripts/blood_orb_fullheal.lua\")")
 thingy = ModTextFileGetContent("data/scripts/items/heart_fullhp_temple.lua")
 ModTextFileSetContent("data/scripts/items/heart_fullhp_temple.lua", thingy .. "\n" .. "dofile_once(\"mods/grahamsperks/files/scripts/blood_orb_fullheal.lua\")")
+ModLuaFileAppend("mods/quant.ew/files/api/global_perks.lua", "mods/grahamsperks/files/scripts/ew_global_perks.lua")
 
 if ModSettingGet("grahamsperks.Enemies") ~= false then
 	-- enemies
@@ -363,6 +364,86 @@ local patches = {
 		]],
     },
 	{
+        path    = "data/scripts/buildings/bunker_check.lua",
+        from    = "EntityKill%( entity_id %)",
+        to      = [[CreateItemActionEntity%( "GRAHAM_GOLDEN", x + 128, y - 16%)
+		EntityKill%( entity_id %)]],
+    },
+	{ -- Make glimmer spells work with plasma emitters. Thank you Conga Lyne!!! (and Sharpy796!)
+		path    = "data/scripts/projectiles/colour_spell.lua",
+		from    = "comps %= EntityGetComponent%( entity_id, \"ParticleEmitterComponent\" %)",
+		to      = [[comps = EntityGetComponent( entity_id, "LaserEmitterComponent" )
+	if ( comps ~= nil ) then
+		for i,v in ipairs( comps ) do
+		-- for k=1,#comps do
+			-- local v = comps[k]
+			if ( particle ~= nil ) then
+				ComponentObjectSetValue2( v, "laser", "beam_particle_type", CellFactory_GetType(particle))
+				ComponentObjectSetValue2( v, "laser", "beam_particle_chance", 90)
+			else
+				ComponentObjectSetValue2( v, "laser", "beam_particle_chance", 0)
+			end
+		end
+	end
+		
+	comps = EntityGetComponentIncludingDisabled( entity_id, "ParticleEmitterComponent" )]],
+	},
+	-- 11/25/24: stupid silly stupid hardcoded freezy effects
+	{
+        path    = "data/entities/misc/material_converter_freeze.xml",
+        from    = "radioactive_liquid,",
+        to      = [[radioactive_liquid,graham_creepypoly,]],
+    },
+	{
+        path    = "data/entities/misc/material_converter_freeze.xml",
+        from    = "ice_radioactive_static,",
+        to      = [[ice_radioactive_static,graham_creepypoly_frozen,]],
+    },
+	{
+        path    = "data/entities/particles/freeze_charge.xml",
+        from    = "radioactive_liquid,",
+        to      = [[radioactive_liquid,graham_creepypoly,]],
+    },
+	{
+        path    = "data/entities/particles/freeze_charge.xml",
+        from    = "ice_radioactive_static,",
+        to      = [[ice_radioactive_static,graham_creepypoly_frozen,]],
+    },
+	{
+        path    = "data/entities/projectiles/deck/freeze_field.xml",
+        from    = "radioactive_liquid,",
+        to      = [[radioactive_liquid,graham_creepypoly,]],
+    },
+	{
+		path    = "data/entities/projectiles/deck/freeze_field.xml",
+        from    = "ice_radioactive_static,",
+        to      = [[ice_radioactive_static,graham_creepypoly_frozen,]],
+    },
+	{
+        path    = "data/entities/projectiles/deck/freezing_gaze_beam.xml",
+        from    = "radioactive_liquid,",
+        to      = [[radioactive_liquid,graham_creepypoly,]],
+    },
+	{
+		path    = "data/entities/projectiles/deck/freezing_gaze_beam.xml",
+        from    = "ice_radioactive_static,",
+        to      = [[ice_radioactive_static,graham_creepypoly_frozen,]],
+    },
+	{
+		path    = "data/entities/misc/curse_strong.xml",
+        from    = "_tags=\"effect_curse_damage\"",
+        to      = [[_tags="effect_curse_damage"
+		name="effect_curse_damage"]],
+	},
+	{
+		path    = "data/entities/misc/curse_stronger.xml",
+        from    = "_tags=\"effect_curse_damage\"",
+        to      = [[_tags="effect_curse_damage"
+		name="effect_curse_damage"]],
+	},
+}
+if ModSettingGet("grahamsperks.FlumShader") ~= false then
+	table.insert(patches, {
         path    = "data/shaders/post_final.frag",
         from    = [[varying vec2 tex_coord_fogofwar;]], -- mit licensed simplex noise so this is ok to be using, technically don't need to credit but that would be unfriendly.
         to      = [[varying vec2 tex_coord_fogofwar; uniform vec4 grahams_perks_distortion_strength;
@@ -440,8 +521,8 @@ local patches = {
 		return 42.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1), 
 										dot(p2,x2), dot(p3,x3) ) );
 		}]],
-    },
-	{
+    })
+	table.insert(patches, {
         path    = "data/shaders/post_final.frag",
         from    = [[vec2 tex_coord = tex_coord_;]],
         to      = [[vec2 tex_coord = tex_coord_;
@@ -462,74 +543,8 @@ local patches = {
 		tex_coord /= 2.0;
 		tex_coord += vec2(0.5);
 		tex_coord = (grahams_perks_distance_weight * grahams_perks_effect_strength * tex_coord + tex_coord_)/(1.0 + grahams_perks_distance_weight * grahams_perks_effect_strength);]],
-    },
-	{
-        path    = "data/scripts/buildings/bunker_check.lua",
-        from    = "EntityKill%( entity_id %)",
-        to      = [[CreateItemActionEntity%( "GRAHAM_GOLDEN", x + 128, y - 16%)
-		EntityKill%( entity_id %)]],
-    },
-	{ -- Make glimmer spells work with plasma emitters. Thank you Conga Lyne!!! (and Sharpy796!)
-		path    = "data/scripts/projectiles/colour_spell.lua",
-		from    = "comps %= EntityGetComponent%( entity_id, \"ParticleEmitterComponent\" %)",
-		to      = [[comps = EntityGetComponent( entity_id, "LaserEmitterComponent" )
-	if ( comps ~= nil ) then
-		for i,v in ipairs( comps ) do
-		-- for k=1,#comps do
-			-- local v = comps[k]
-			if ( particle ~= nil ) then
-				ComponentObjectSetValue2( v, "laser", "beam_particle_type", CellFactory_GetType(particle))
-				ComponentObjectSetValue2( v, "laser", "beam_particle_chance", 90)
-			else
-				ComponentObjectSetValue2( v, "laser", "beam_particle_chance", 0)
-			end
-		end
-	end
-		
-	comps = EntityGetComponentIncludingDisabled( entity_id, "ParticleEmitterComponent" )]],
-	},
-	-- 11/25/24: stupid silly stupid hardcoded freezy effects
-	{
-        path    = "data/entities/misc/material_converter_freeze.xml",
-        from    = "radioactive_liquid,",
-        to      = [[radioactive_liquid,graham_creepypoly,]],
-    },
-	{
-        path    = "data/entities/misc/material_converter_freeze.xml",
-        from    = "ice_radioactive_static,",
-        to      = [[ice_radioactive_static,graham_creepypoly_frozen,]],
-    },
-	{
-        path    = "data/entities/particles/freeze_charge.xml",
-        from    = "radioactive_liquid,",
-        to      = [[radioactive_liquid,graham_creepypoly,]],
-    },
-	{
-        path    = "data/entities/particles/freeze_charge.xml",
-        from    = "ice_radioactive_static,",
-        to      = [[ice_radioactive_static,graham_creepypoly_frozen,]],
-    },
-	{
-        path    = "data/entities/projectiles/deck/freeze_field.xml",
-        from    = "radioactive_liquid,",
-        to      = [[radioactive_liquid,graham_creepypoly,]],
-    },
-	{
-		path    = "data/entities/projectiles/deck/freeze_field.xml",
-        from    = "ice_radioactive_static,",
-        to      = [[ice_radioactive_static,graham_creepypoly_frozen,]],
-    },
-	{
-        path    = "data/entities/projectiles/deck/freezing_gaze_beam.xml",
-        from    = "radioactive_liquid,",
-        to      = [[radioactive_liquid,graham_creepypoly,]],
-    },
-	{
-		path    = "data/entities/projectiles/deck/freezing_gaze_beam.xml",
-        from    = "ice_radioactive_static,",
-        to      = [[ice_radioactive_static,graham_creepypoly_frozen,]],
-    },
-}
+	})
+end
 
 if ModSettingGet("grahamsperks.StartingItems") ~= false then
 	ModLuaFileAppend( "data/scripts/items/potion_starting.lua", "mods/grahamsperks/files/scripts/potion_starting_append.lua")

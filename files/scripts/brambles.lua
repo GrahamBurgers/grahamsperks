@@ -3,7 +3,6 @@ dofile_once("data/scripts/lib/utilities.lua")
 local x, y = EntityGetTransform(GetUpdatedEntityID())
 local entities = EntityGetInRadiusWithTag(x, y, 18, "hittable")
 local comp = EntityGetFirstComponent(GetUpdatedEntityID(), "ProjectileComponent")
-local ticks = ComponentGetValue2(GetUpdatedComponentID(), "mTimesExecuted")
 -- awful code but it actually works
 local shooter, bx, by, ex, ey, cx, cy
 if not comp then return end

@@ -12,8 +12,8 @@
 	<ProjectileComponent 
 		lob_min="0.8"
 		lob_max="1.0"
-		speed_min="45"
-		speed_max="55"
+		speed_min="0"
+		speed_max="0"
 		direction_random_rad="0.15"
 		die_on_liquid_collision="0"
 		on_death_explode="1"
@@ -25,13 +25,12 @@
 		shoot_light_flash_r="255"
 		shoot_light_flash_g="30"
 		shoot_light_flash_b="30"
-		damage="3.0"
+		damage="1.2"
 		lifetime="7200"
 		hit_particle_force_multiplier="0.25"
 		knockback_force="1.5"
 		ragdoll_force_multiplier="0.05"
 		damage_every_x_frames="15"
-		on_death_gfx_leave_sprite="0"
 		> 
 		<config_explosion
 			never_cache="1" 
@@ -173,7 +172,7 @@
 	<!-- ring: ready -->
 	<ParticleEmitterComponent 
 		emitted_material_name="spark_blue_dark"
-		delay_frames="115"
+		delay_frames="57"
 		emitter_lifetime_frames="2"
 		fade_based_on_lifetime="1"
 		render_on_grid="1"
@@ -195,8 +194,8 @@
 		lifetime_max="5.0"
 		create_real_particles="0"
 		emit_cosmetic_particles="1"
-		emission_interval_min_frames="100"
-		emission_interval_max_frames="100"
+		emission_interval_min_frames="57"
+		emission_interval_max_frames="57"
 		is_emitting="1" >
 	</ParticleEmitterComponent>
 
@@ -212,15 +211,8 @@
 	</VariableStorageComponent>
 
 	<LuaComponent
-		script_source_file="data/scripts/projectiles/orb_expanding.lua"
-		execute_on_added="data/scripts/projectiles/orb_expanding.lua"
-		execute_every_n_frame="1"
-		execute_times="58" >
-	</LuaComponent>
-
-	<LuaComponent
-		script_source_file="data/scripts/projectiles/orb_expanding.lua"
-		execute_on_added="data/scripts/projectiles/orb_expanding.lua"
+		script_source_file="mods/grahamsperks/files/spells/orb_blue.lua"
+		execute_on_added="mods/grahamsperks/files/spells/orb_blue.lua"
 		execute_every_n_frame="1"
 		execute_times="58" >
 	</LuaComponent>

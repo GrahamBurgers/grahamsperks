@@ -43,5 +43,16 @@ function item_pickup( entity_item, entity_who_picked, name )
         EntityLoad("mods/grahamsperks/files/entities/mini_tanks/" .. options[Random(1, #options)], x, y)
     end
 
+    -- remove the foams hurt
+    local children = EntityGetAllChildren(entity_who_picked, "foam_armor") or {}
+    for i = 1, #children do
+        local var = EntityGetComponent(children[i], "VariableStorageComponent", "foam_armor_ouch") or {}
+        local ui = EntityGetFirstComponent(children[i], "UIIconComponent")
+        for j = 1, #var do
+            ComponentSetValue2(var[j], "value_float", 0)
+            if ui then ComponentSetValue2(ui, "description", GameTextGet("$graham_statusdesc_foam")) end
+        end
+    end
+
     item_pickup_old( entity_item, entity_who_picked, name )
 end

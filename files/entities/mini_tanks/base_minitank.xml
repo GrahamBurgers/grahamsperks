@@ -90,10 +90,11 @@
 		</AudioComponent>
 	</Base>
 
-	<LifetimeComponent
-		fade_sprites="0"
-		lifetime="1200"
-	></LifetimeComponent>
+	<VariableStorageComponent
+		_tags="minitank_hp"
+		value_float="4"
+		value_int="4"
+	></VariableStorageComponent>
 
 	<SpriteComponent 
 		offset_x="11"
@@ -114,7 +115,7 @@
 	</SpriteComponent>
 
 	<LuaComponent
-		script_source_file="mods/grahamsperks/files/scripts/tank_timeout.lua"
+		script_shot="mods/grahamsperks/files/scripts/tank_timeout.lua"
 	></LuaComponent>
 
 	<LuaComponent

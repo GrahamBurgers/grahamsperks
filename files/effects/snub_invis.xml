@@ -1,4 +1,4 @@
-<Entity>
+<Entity name="snub_invis">
 	<InheritTransformComponent 
 		_enabled="1" >
     </InheritTransformComponent>	

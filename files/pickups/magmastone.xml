@@ -21,7 +21,6 @@
     linear_damping="0"
     auto_clean="0"
     on_death_leave_physics_body="1"
-		on_death_gfx_leave_sprite="0"
     hax_fix_going_through_ground="1"
   ></PhysicsBodyComponent>
   

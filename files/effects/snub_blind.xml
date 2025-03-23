@@ -1,4 +1,4 @@
-<Entity>
+<Entity name="snub_blind">
 	<InheritTransformComponent 
 		_enabled="1" >
     </InheritTransformComponent>	
@@ -18,4 +18,5 @@
 		display_in_hud="1"
 		>
 	</UIIconComponent>
+
 </Entity>

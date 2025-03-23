@@ -625,6 +625,7 @@ graham_minitank_name,Pikku-tankki,,,,,,,,,,,,doesn't need to be translated
 graham_lukkimount_name,Hämähäkkiratsu,,,,,,,,,,,,doesn't need to be translated
 graham_status_foam,Вспененный,,,,,,,,,,,,
 graham_statusdesc_foam,"Вы невосприимчивы к огню и токсичности, а также получаете дополнительное здоровье на некоторое время.",,,,,,,,,,,,
+graham_statusdesc_foam,"Вы невосприимчивы к огню и токсичности, а также получаете дополнительное здоровье на некоторое время.\n($0)",,,,,,,,,,,,
 graham_enable_redblue,Включены переключатели красного/синего цвета,,,,,,,,,,,,
 graham_enable_greenyellow,Включены переключатели зеленого/желтого цвета,,,,,,,,,,,,
 graham_toggle_red,Переключить на КРАСНЫЙ,,,,,,,,,,,,

@@ -20,6 +20,9 @@ function kick( entity_who_kicked )
         if item and EntityHasTag(item, "bags_of_many") then return end
     end
 
+    -- try not to dupe spells with entangled worlds
+    if not (EntityHasTag(entity_who_kicked, "player_unit") and not EntityHasTag(entity_who_kicked, "ew_notplayer")) then return end
+
     for i = 1, #wands do
         local x2, y2 = EntityGetTransform(wands[i])
         if EntityGetRootEntity(wands[i]) == wands[i] then

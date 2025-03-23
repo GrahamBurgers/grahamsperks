@@ -6,15 +6,15 @@
 	<ParticleEmitterComponent
 		emitted_material_name="spark_white_bright"
 		gravity.y="0.0"
-		lifetime_min="0.05"
-		lifetime_max="0.05"
-		count_min="120"
-		count_max="120"
-		custom_alpha="0.6"
+		lifetime_min="0.25"
+		lifetime_max="0.45"
+		count_min="30"
+		count_max="30"
+		custom_alpha="0.2"
 		render_on_grid="1"
 		fade_based_on_lifetime="1"
-		area_circle_radius.max="32"
-        area_circle_radius.min="32"
+		area_circle_radius.max="42"
+        area_circle_radius.min="22"
 		cosmetic_force_create="0"
 		airflow_force="0.5"
 		airflow_time="0.1"
@@ -26,6 +26,5 @@
 		area_circle_sector_degrees="360"
 		>
 	</ParticleEmitterComponent>
-
 
 </Entity>

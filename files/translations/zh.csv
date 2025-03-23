@@ -625,6 +625,7 @@ graham_minitank_name,Pikku-tankki,,,,,,,,,,,,doesn't need to be translated
 graham_lukkimount_name,Hämähäkkiratsu,,,,,,,,,,,,doesn't need to be translated
 graham_status_foam,泡沫防护,,,,,,,,,,,,
 graham_statusdesc_foam,"你对火焰和绿毒免疫，并获得临时的生命值。",,,,,,,,,,,,
+graham_statusdesc_foam2,"你对火焰和绿毒免疫，并获得临时的生命值。\n($0)",,,,,,,,,,,,
 graham_enable_redblue,启用红色/蓝色切换器,,,,,,,,,,,,
 graham_enable_greenyellow,启用绿色/黄色切换器,,,,,,,,,,,,
 graham_toggle_red,切换为红色,,,,,,,,,,,,

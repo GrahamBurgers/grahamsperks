@@ -138,4 +138,19 @@
 		>
 	</VariableStorageComponent>
 
+	<LightComponent 
+    _enabled="1"
+    radius="100"
+    r="247"
+    g="187"
+    b="67"
+  ></LightComponent>
+
+	<SpriteComponent 
+		alpha="0.55"
+		image_file="data/particles/fog_of_war_hole_64.xml"
+		smooth_filtering="1"
+		fog_of_war_hole="1" >
+	</SpriteComponent>
+
 </Entity>

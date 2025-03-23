@@ -34,26 +34,31 @@ local to_insert = {
 		func = function(entity_perk_item, entity_who_picked, item_name)
 			local x, y = EntityGetTransform(entity_who_picked)
 
-			local p1 = EntityLoad("data/entities/items/pickup/potion_random_material.xml", x - 30, y)
-			local phys1 = EntityGetFirstComponent(p1, "PhysicsBodyCollisionDamageComponent")
-			if phys1 then ComponentSetValue2(phys1, "damage_multiplier", 0) end
-			local p2 = EntityLoad("data/entities/items/pickup/potion_aggressive.xml", x + 30, y)
-			local phys2 = EntityGetFirstComponent(p2, "PhysicsBodyCollisionDamageComponent")
-			if phys2 then ComponentSetValue2(phys2, "damage_multiplier", 0) end
-			local p3 = EntityLoad("data/entities/items/pickup/powder_stash.xml", x + 15, y)
-			local dmg3 = EntityGetFirstComponent(p3, "DamageModelComponent")
-			if dmg3 then ComponentSetValue2(dmg3, "max_hp", ComponentGetValue2(dmg3, "max_hp") * 4) end
-			if dmg3 then ComponentSetValue2(dmg3, "hp", ComponentGetValue2(dmg3, "hp") * 4) end
-			EntityLoad("data/entities/items/wand_level_03.xml", x, y - 30)
+			if EntityHasTag(entity_who_picked, "player_unit") and not EntityHasTag(entity_who_picked, "ew_notplayer") then
+				local p1 = EntityLoad("data/entities/items/pickup/potion_random_material.xml", x - 30, y)
+				local phys1 = EntityGetFirstComponent(p1, "PhysicsBodyCollisionDamageComponent")
+				if phys1 then ComponentSetValue2(phys1, "damage_multiplier", 0) end
+				local p2 = EntityLoad("data/entities/items/pickup/potion_aggressive.xml", x + 30, y)
+				local phys2 = EntityGetFirstComponent(p2, "PhysicsBodyCollisionDamageComponent")
+				if phys2 then ComponentSetValue2(phys2, "damage_multiplier", 0) end
+				local p3 = EntityLoad("data/entities/items/pickup/powder_stash.xml", x + 15, y)
+				local dmg3 = EntityGetFirstComponent(p3, "DamageModelComponent")
+				if dmg3 then ComponentSetValue2(dmg3, "max_hp", ComponentGetValue2(dmg3, "max_hp") * 4) end
+				if dmg3 then ComponentSetValue2(dmg3, "hp", ComponentGetValue2(dmg3, "hp") * 4) end
+				EntityLoad("data/entities/items/wand_level_03.xml", x, y - 30)
 
-			SetRandomSeed(x + y, GameGetFrameNum())
-			local rockrandom = Random(1, 6)
-			if (rockrandom == 1) then EntityLoad("data/entities/items/pickup/thunderstone.xml", x - 15, y) end
-			if (rockrandom == 2) then EntityLoad("data/entities/items/pickup/brimstone.xml", x - 15, y) end
-			if (rockrandom == 3) then EntityLoad("data/entities/items/pickup/waterstone.xml", x - 15, y) end
-			if (rockrandom == 4) then EntityLoad("data/entities/items/pickup/safe_haven.xml", x - 15, y) end
-			if (rockrandom == 5) then EntityLoad("mods/grahamsperks/files/pickups/soapstone.xml", x - 15, y) end
-			if (rockrandom == 6) then EntityLoad("mods/grahamsperks/files/pickups/lovely_die.xml", x - 15, y) end
+				local rx, ry = EntityGetTransform(entity_perk_item)
+				SetRandomSeed(rx + 459835, ry + 389636)
+				local rock = {
+					"data/entities/items/pickup/thunderstone.xml",
+					"data/entities/items/pickup/brimstone.xml",
+					"data/entities/items/pickup/waterstone.xml",
+					"data/entities/items/pickup/safe_haven.xml",
+					"mods/grahamsperks/files/pickups/soapstone.xml",
+					"mods/grahamsperks/files/pickups/lovely_die.xml",
+				}
+				EntityLoad(rock[Random(1, #rock)], x - 15, y)
+			end
 		end,
 	},
 	{
@@ -257,8 +262,10 @@ local to_insert = {
 		not_in_default_perk_pool = false,
 		func = function(entity_perk_item, entity_who_picked, item_name)
 			add_halo_level(entity_who_picked, 1)
-			local x, y = EntityGetTransform(entity_who_picked)
-			EntityLoad("mods/grahamsperks/files/pickups/magmastone.xml", x, y - 15)
+			if EntityHasTag(entity_who_picked, "player_unit") and not EntityHasTag(entity_who_picked, "ew_notplayer") then
+				local x, y = EntityGetTransform(entity_who_picked)
+				EntityLoad("mods/grahamsperks/files/pickups/magmastone.xml", x, y - 15)
+			end
 		end,
 	},
 	{
@@ -467,11 +474,6 @@ local to_insert = {
 			EntityAddTag(child_id, "perk_entity")
 			EntityAddChild(entity_who_picked, child_id)
 
-			-- ENTANGLED WORLDS START
-			if EntityHasTag(entity_who_picked, "player_unit") then
-				EntityLoad("data/entities/items/pickup/potion_empty.xml", x, y)
-			end
-
 			perk_pickup_event("GHOST")
 
 			if (GameHasFlagRun("player_status_tipsy_ghost") == false) then
@@ -560,49 +562,46 @@ local to_insert = {
 		stackable_is_rare = true,
 		stackable_maximum = 3,
 		func = function(entity_perk_item, entity_who_picked, item_name)
-			-- ENTANGLED WORLDS START
-			if EntityHasTag(entity_who_picked, "player_unit") then
-				for i = 1, 3, 1 do
-					local x, y = EntityGetTransform(entity_who_picked)
-					local child_id = EntityLoad("mods/grahamsperks/files/entities/eye/blood_orb.xml", x, y)
+			for i = 1, 3, 1 do
+				local x, y = EntityGetTransform(entity_who_picked)
+				local child_id = EntityLoad("mods/grahamsperks/files/entities/eye/blood_orb.xml", x, y)
 
-					-- faction logic
-					local factioncomp = EntityGetFirstComponentIncludingDisabled(entity_who_picked, "GenomeDataComponent")
-					if factioncomp ~= nil then
-						local faction = ComponentGetValue2(factioncomp, "herd_id")
-						local other = EntityGetFirstComponentIncludingDisabled(child_id, "GenomeDataComponent")
-						if other ~= nil then
-							ComponentSetValue2(other, "herd_id", faction)
-						end
+				-- faction logic
+				local factioncomp = EntityGetFirstComponentIncludingDisabled(entity_who_picked, "GenomeDataComponent")
+				if factioncomp ~= nil then
+					local faction = ComponentGetValue2(factioncomp, "herd_id")
+					local other = EntityGetFirstComponentIncludingDisabled(child_id, "GenomeDataComponent")
+					if other ~= nil then
+						ComponentSetValue2(other, "herd_id", faction)
 					end
-
-					-- stacking logic
-					local varsto = EntityGetFirstComponent(entity_who_picked, "VariableStorageComponent", "graham_blood_orbs")
-					if varsto ~= nil then
-						local orbs = ComponentGetValue2(varsto, "value_int") + 1
-						ComponentSetValue2(varsto, "value_int", orbs)
-
-						EntityAddComponent2(child_id, "VariableStorageComponent", {
-							_tags = "wizard_orb_id",
-							name = "wizard_orb_id",
-							value_int = orbs,
-						})
-					else
-						EntityAddComponent2(entity_who_picked, "VariableStorageComponent", {
-							_tags = "graham_blood_orbs",
-							value_int = 1,
-						})
-
-						EntityAddComponent2(child_id, "VariableStorageComponent", {
-							_tags = "wizard_orb_id",
-							name = "wizard_orb_id",
-							value_int = 1,
-						})
-					end
-
-					EntityAddChild(entity_who_picked, child_id)
-					if varsto ~= nil and i == 1 then break end
 				end
+
+				-- stacking logic
+				local varsto = EntityGetFirstComponent(entity_who_picked, "VariableStorageComponent", "graham_blood_orbs")
+				if varsto ~= nil then
+					local orbs = ComponentGetValue2(varsto, "value_int") + 1
+					ComponentSetValue2(varsto, "value_int", orbs)
+
+					EntityAddComponent2(child_id, "VariableStorageComponent", {
+						_tags = "wizard_orb_id",
+						name = "wizard_orb_id",
+						value_int = orbs,
+					})
+				else
+					EntityAddComponent2(entity_who_picked, "VariableStorageComponent", {
+						_tags = "graham_blood_orbs",
+						value_int = 1,
+					})
+
+					EntityAddComponent2(child_id, "VariableStorageComponent", {
+						_tags = "wizard_orb_id",
+						name = "wizard_orb_id",
+						value_int = 1,
+					})
+				end
+
+				EntityAddChild(entity_who_picked, child_id)
+				if varsto ~= nil and i == 1 then break end
 			end
 		end,
 		func_remove = function(entity_who_picked)
@@ -639,26 +638,29 @@ local to_insert = {
 		stackable = STACKABLE_YES,
 		stackable_maximum = 5,
 		func = function(entity_perk_item, entity_who_picked, item_name)
-			-- ENTANGLED WORLDS START
-			local func = EntityLoad
-			if not EntityHasTag(entity_who_picked, "player_unit") then function EntityLoad() end end
+			local comp = EntityGetFirstComponent(entity_who_picked, "VariableStorageComponent", "graham_refresher")
+			if (not comp) or comp <= 0 then
+				comp = EntityAddComponent2(entity_who_picked, "VariableStorageComponent", {
+					_tags="graham_refresher",
+					value_int=0
+				})
+			end
+			ComponentSetValue2(comp, "value_int", ComponentGetValue2(comp, "value_int") + 1)
 
-			local amount = GlobalsGetValue("GRAHAM_REFRESHER_COUNT", 0)
-			GlobalsSetValue("GRAHAM_REFRESHER_COUNT", amount + 1)
-			local x, y = EntityGetTransform(entity_who_picked)
-			local eid = EntityLoad("data/entities/items/pickup/spell_refresh.xml", x, y)
-			local item_comp = EntityGetFirstComponent(eid, "ItemComponent")
-			if item_comp ~= nil then
-				if (ComponentGetValue2(item_comp, "auto_pickup")) then
-					ComponentSetValue2(item_comp, "next_frame_pickable", GameGetFrameNum() + 60)
+			if EntityHasTag(entity_who_picked, "player_unit") and not EntityHasTag(entity_who_picked, "ew_notplayer") then
+				local x, y = EntityGetTransform(entity_who_picked)
+				local eid = EntityLoad("data/entities/items/pickup/spell_refresh.xml", x, y)
+				local item_comp = EntityGetFirstComponent(eid, "ItemComponent")
+				if item_comp then
+					if (ComponentGetValue2(item_comp, "auto_pickup")) then
+						ComponentSetValue2(item_comp, "next_frame_pickable", GameGetFrameNum() + 120)
+					end
 				end
 			end
-
-			-- ENTANGLED WORLDS END
-			EntityLoad = func
 		end,
 		func_remove = function(entity_who_picked)
-			GlobalsSetValue("GRAHAM_REFRESHER_COUNT", 0)
+			local comp = EntityGetFirstComponent(entity_who_picked, "VariableStorageComponent", "graham_refresher")
+			if comp then EntityRemoveComponent(entity_who_picked, comp) end
 		end,
 	},
 	--[[
@@ -837,29 +839,32 @@ local to_insert = {
 				})
 			end
 
-			local nothing = true
-			local x, y = EntityGetTransform(entity_who_picked)
-			local items = GameGetAllInventoryItems(entity_who_picked) or {}
-			for i = 1, #items do
-				if EntityHasTag(items[i], "card_action") then
-					EntityRemoveFromParent(items[i])
-					EntityApplyTransform(items[i], x, y, 0)
+			if EntityHasTag(entity_who_picked, "player_unit") and not EntityHasTag(entity_who_picked, "ew_notplayer") then
+				local nothing = true
+				local x, y = EntityGetTransform(entity_who_picked)
+				local items = GameGetAllInventoryItems(entity_who_picked) or {}
+				for i = 1, #items do
+					if EntityHasTag(items[i], "card_action") then
+						EntityRemoveFromParent(items[i])
+						EntityApplyTransform(items[i], x, y, 0)
 
-					local comp = EntityGetFirstComponentIncludingDisabled(items[i], "ItemActionComponent") or 0
-					local id = ComponentGetValue2(comp, "action_id")
-					local entity = CreateItemActionEntity(id, x, y)
-					SetRandomSeed(x + GameGetFrameNum(), y + comp)
-					local cardcost = 25 * Random(2, 10) -- not sure how to balance this properly
-					boop_spell(items[i], cardcost)
-					boop_spell(entity, cardcost)
-					nothing = false
+						local comp = EntityGetFirstComponentIncludingDisabled(items[i], "ItemActionComponent") or 0
+						local id = ComponentGetValue2(comp, "action_id")
+						local entity = CreateItemActionEntity(id, x, y)
+						SetRandomSeed(x + GameGetFrameNum(), y + comp)
+						local cardcost = 25 * Random(2, 10) -- not sure how to balance this properly
+						boop_spell(items[i], cardcost)
+						boop_spell(entity, cardcost)
+						nothing = false
+					end
 				end
-			end
 
-			if nothing then
-				x, y = EntityGetTransform(entity_perk_item)
-				EntityLoad("mods/grahamsperks/files/entities/snub.xml", x, y)
-				EntityLoad("mods/grahamsperks/files/entities/eye/blood_orb.xml", x, y)
+				if nothing then
+					-- live wandering eye reaction
+					x, y = EntityGetTransform(entity_perk_item)
+					EntityLoad("mods/grahamsperks/files/entities/snub.xml", x, y)
+					EntityLoad("mods/grahamsperks/files/entities/eye/blood_orb.xml", x, y)
+				end
 			end
 		end,
 	},
@@ -961,12 +966,14 @@ local to_insert = {
 			local entity_id = EntityLoad("mods/grahamsperks/files/entities/oil.xml", x, y)
 			EntityAddChild(entity_who_picked, entity_id)
 
-			local value = GlobalsGetValue("GRAHAM_ROBOTS_COUNT", 0)
-			GlobalsSetValue("GRAHAM_ROBOTS_COUNT", value + 3)
-			local options = { "tank.xml", "tank_rocket.xml", "tank_super.xml", "toasterbot.xml" }
-			for i = 1, 3 do
-				SetRandomSeed(x, y + i)
-				EntityLoad("mods/grahamsperks/files/entities/mini_tanks/" .. options[Random(1, #options)], x, y)
+			if EntityHasTag(entity_who_picked, "player_unit") and not EntityHasTag(entity_who_picked, "ew_notplayer") then
+				local value = GlobalsGetValue("GRAHAM_ROBOTS_COUNT", 0)
+				GlobalsSetValue("GRAHAM_ROBOTS_COUNT", value + 3)
+				local options = { "tank.xml", "tank_rocket.xml", "tank_super.xml", "toasterbot.xml" }
+				for i = 1, 3 do
+					SetRandomSeed(x, y + i)
+					EntityLoad("mods/grahamsperks/files/entities/mini_tanks/" .. options[Random(1, #options)], x, y)
+				end
 			end
 		end,
 		func_remove = function(entity_who_picked)
@@ -1007,10 +1014,25 @@ local to_insert = {
 		not_in_default_perk_pool = not HasFlagPersistent("graham_progress_immunity"),
 		func = function(entity_perk_item, entity_who_picked, item_name)
 			local x, y = EntityGetTransform(entity_who_picked)
-			local entity_id = EntityLoad("mods/grahamsperks/files/entities/immunityaura/none.xml", x, y)
-			EntityAddChild(entity_who_picked, entity_id)
+			if #(EntityGetAllChildren(player, "graham_immunityaura") or {}) == 0 then
+				local entity_id = EntityLoad("mods/grahamsperks/files/entities/immunityaura/none.xml", x, y)
+				EntityAddChild(entity_who_picked, entity_id)
+				local effect = LoadGameEffectEntityTo(entity_who_picked, "mods/grahamsperks/files/effects/confusion.xml")
+				EntityAddComponent2(effect, "UIIconComponent", {
+					icon_sprite_file="data/ui_gfx/status_indicators/confusion.png",
+					is_perk=false,
+					display_above_head=true,
+					display_in_hud=true,
+					name="$status_confusion",
+					description="$graham_statusdesc_confusion",
+				})
+			end
 
-			EntityLoad("mods/grahamsperks/files/entities/immunityaura/potion_flum.xml", x, y)
+			--[[
+			if EntityHasTag(entity_who_picked, "player_unit") and not EntityHasTag(entity_who_picked, "ew_notplayer") then
+				EntityLoad("mods/grahamsperks/files/entities/immunityaura/potion_flum.xml", x, y)
+			end
+			]]--
 
 			EntityAddComponent2(entity_who_picked, "VariableStorageComponent", {
 				name = "graham_immunityaura",
@@ -1029,13 +1051,11 @@ local to_insert = {
 		not_in_default_perk_pool = not HasFlagPersistent("graham_bloodymimic_killed"),
 		func = function(entity_perk_item, entity_who_picked, item_name)
 			add_halo_level(entity_who_picked, -1)
-			local x, y = EntityGetTransform(entity_who_picked)
 
 			local value = GlobalsGetValue("GRAHAM_MAGIC_SKIN_COUNTER", "0") + 1
 			GlobalsSetValue("GRAHAM_MAGIC_SKIN_COUNTER", value)
 		end,
 		func_remove = function(entity_who_picked)
-			local count = tonumber(GlobalsGetValue("GRAHAM_MAGIC_SKIN_COUNTER", "0"))
 			GlobalsSetValue("GRAHAM_MAGIC_SKIN_COUNTER", "0")
 		end,
 	},
