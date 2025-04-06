@@ -12,24 +12,28 @@
     _enabled="1" 
 	speed_min="180"
 	speed_max="220"
+	lob_min="0.75"
+	lob_max="0.75"
 	bounces_left="3"
-	bounce_energy="0.7"
+	bounce_energy="0.8"
 	bounce_at_any_angle="1"
 	bounce_always="1"
     on_death_explode="1"
+	collide_with_entities="1"
     on_death_gfx_leave_sprite="0" 
     on_lifetime_out_explode="1"
-    on_collision_die="1"
 	damage="0"
-    lifetime="80"
+    lifetime="240"
 	shoot_light_flash_r="0"
     shoot_light_flash_g="150"
     shoot_light_flash_b="0"
     shoot_light_flash_radius="48"
 	knockback_force="1.0"
+	damage_every_x_frames="12"
 	physics_impulse_coeff="2000"
 	explosion_dont_damage_shooter="1"
-	spawn_entity="mods/grahamsperks/files/entities/brambles.xml"
+    on_collision_die="0"
+	spawn_entity="mods/grahamsperks/files/entities/bramball_caller.xml"
 	spawn_entity_is_projectile="1"
 	>
     <config_explosion
@@ -92,22 +96,14 @@
 		>
 	</SpriteComponent>
 
+	<LuaComponent
+		script_source_file="mods/grahamsperks/files/scripts/bramball_half.lua"
+	></LuaComponent>
+
   	<AudioComponent
 		file="data/audio/Desktop/projectiles.bank"
 		event_root="projectiles/bullet_arrow">
 	</AudioComponent>
-
-	<LuaComponent
-		execute_on_added="0"
-		remove_after_executed="1"
-		script_source_file="mods/grahamsperks/files/scripts/bramball_lifetime.lua"
-	></LuaComponent>
-  
-	<VariableStorageComponent
-		name="bramball_lifetime"
-		value_int="0"
-		>
-	</VariableStorageComponent>
 
 	<VariableStorageComponent
 		name="projectile_file"

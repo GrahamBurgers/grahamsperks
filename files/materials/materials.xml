@@ -102,6 +102,8 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/wormygold.png"
     wang_color="ef29621"
     cell_type="gas"
     liquid_stains="2"
+	liquid_sprite_stain_shaken_drop_chance="8"
+	liquid_sprite_stains_status_threshold="0.25"
     lifetime="150"
     gfx_glow="155"
     gfx_glow_color="FFff7700"
@@ -227,7 +229,7 @@ color="FF622d9a">
 	ignore_self_reaction_warning="1"  
     name="graham_graymatter_liquid"
     ui_name="$material_graham_graymatter_liquid"
-	tags="[liquid],[catastrophic]"
+	tags="[liquid],[catastrophic],[food]"
     wang_color="958212"
     cell_type="liquid"
     liquid_stains="2"
@@ -273,7 +275,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/yum.png">
 </Graphics>
 <StatusEffects>
 	<Ingestion>
-		<StatusEffect type="HP_REGENERATION" amount="0.06" />
+		<StatusEffect type="HP_REGENERATION" amount="0.3" />
 	</Ingestion>
 </StatusEffects>
 
@@ -333,7 +335,7 @@ color="FFFF0000">
 	      <StatusEffect type="FASTER_LEVITATION" />
 	    </Stains>
 	    <Ingestion>
-	      <StatusEffect type="HP_REGENERATION" amount="0.01" />
+	      <StatusEffect type="HP_REGENERATION" amount="0.02" />
 	      <StatusEffect type="INVISIBILITY" amount="0.1" />
 	    </Ingestion>
 	  </StatusEffects>
@@ -614,6 +616,7 @@ color="FF13890d">
 	cell_type="liquid"
 	density="1.17"
 	gfx_glow="80"
+	liquid_stains="2"
 	gfx_glow_color="ff97edff"
 	>
 	    <Graphics
@@ -655,7 +658,7 @@ color="FF13890d">
 	ui_name="$material_graham_coffee"
 	wang_color="f1feeef0"
 	cell_type="liquid"
-  	tags="[impure],[liquid]"
+  	tags="[impure],[liquid],[food]"
 	liquid_stains="2"
 	liquid_sprite_stain_shaken_drop_chance="45"
 	density="2.3"
@@ -894,6 +897,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/lavaglass.png">
   <CellData
   	ignore_self_reaction_warning="1"  
     name="graham_hamburger_powder"
+	tags="[corrodible],[alchemy],[meat],[solid],[earth],[food]"
   	_inherit_reactions="0"
    	liquid_sand="1"
 	solid_on_collision_explode="0"
@@ -958,7 +962,7 @@ color="FF2c310c">
     ignore_self_reaction_warning="1"  
     name="graham_birthday"
     ui_name="$material_graham_birthday"
-  	tags="[liquid],[water],[magic_liquid]"
+  	tags="[liquid],[water],[magic_liquid],[food]"
     wang_color="ffffe140"
     cell_type="liquid"
     burnable="0"
@@ -1004,7 +1008,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/birthday.png">
     ignore_self_reaction_warning="1"  
     name="graham_copium"
     ui_name="$material_graham_copium"
-  	tags="[liquid],[water],[magic_liquid]"
+  	tags="[liquid],[water],[magic_liquid],[food]"
     wang_color="ff16489"
     cell_type="liquid"
     burnable="0"
@@ -1188,7 +1192,7 @@ texture_file="mods/grahamsperks/files/materials/materials_gfx/copium.png">
     name="graham_slush" 
 	ui_name="$material_graham_slush"
 	wang_color="ffa4f6c9"
- 	tags="[liquid]"
+ 	tags="[liquid],[food]"
 	cell_type="liquid"
 	density="1.07"
 	gfx_glow="80"

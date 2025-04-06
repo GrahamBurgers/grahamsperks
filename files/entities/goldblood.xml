@@ -1,30 +1,12 @@
 <Entity>
-	
-	<MagicConvertMaterialComponent
-		_enabled="1"
-		kill_when_finished="0"
-		from_material_tag="[blood]"
-		to_material="graham_meatgold"
-		radius="12"
-		steps_per_frame="12"
-		clean_stains="0"
-		is_circle="1"
-		loop="1"
-		>
-	</MagicConvertMaterialComponent>
 
-	<MagicConvertMaterialComponent
-		_enabled="1"
-		kill_when_finished="0"
-		from_material_tag="[meat]"
-		to_material="gold"
-		radius="12"
-		steps_per_frame="12"
-		clean_stains="0"
-		is_circle="1"
-		loop="1"
-		>
-	</MagicConvertMaterialComponent>
+	<SpriteAnimatorComponent/>
+
+	<SpriteOffsetAnimatorComponent
+		y_amount="2"
+		y_speed="0.5"
+		sprite_id="0"
+	></SpriteOffsetAnimatorComponent>
 
 	<ParticleEmitterComponent
 		emitted_material_name="spark_yellow"
@@ -48,5 +30,14 @@
 		area_circle_sector_degrees="360"
 		>
 	</ParticleEmitterComponent>
+
+	<LuaComponent
+		script_source_file="mods/grahamsperks/files/entities/goldblood.lua"
+	></LuaComponent>
+
+	<LuaComponent
+		execute_every_n_frame="-1"
+		script_material_area_checker_success="mods/grahamsperks/files/entities/goldblood.lua"
+	></LuaComponent>
 
 </Entity>

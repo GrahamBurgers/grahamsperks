@@ -882,7 +882,7 @@ function OnMagicNumbersAndWorldSeedInitialized()
 		{-1908, -56, "mods/grahamsperks/files/pixelscenes/text.xml"},
 		{-1864, -53, "data/entities/items/pickup/moon.xml"},
 		{2372, 530, "mods/grahamsperks/files/pixelscenes/hands.xml"},
-		{2382, 550, "mods/grahamsperks/files/entities/goldblood.xml"},
+		{2382, 560, "mods/grahamsperks/files/entities/goldblood.xml"},
 		{-2221, 2564, "mods/grahamsperks/files/pixelscenes/hellblood.xml", true},
 		{-2490, 6480, "mods/grahamsperks/files/pixelscenes/transmutatium.xml", true},
 		{3921, 3100, "mods/grahamsperks/files/entities/forge_item_check.xml", true},

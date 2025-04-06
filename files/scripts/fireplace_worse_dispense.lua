@@ -3,8 +3,8 @@ dofile_once("data/scripts/lib/utilities.lua")
 local entity_id = GetUpdatedEntityID()
 local x, y = EntityGetTransform(entity_id)
 local player = EntityGetClosestWithTag(x, y, "player_unit")
-if not player then return end
 local x2, y2 = EntityGetTransform(player)
+if (not player) or (not x2) or (not y2) then return end
 
 local dir_x = x - x2
 local dir_y = y - y2

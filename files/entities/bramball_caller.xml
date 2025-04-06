@@ -1,0 +1,12 @@
+<Entity>
+
+    <LifetimeComponent
+        lifetime="1"
+    ></LifetimeComponent>
+
+    <LuaComponent
+        execute_on_added="1"
+        script_source_file="mods/grahamsperks/files/scripts/bramball_caller.lua"
+    ></LuaComponent>
+
+</Entity>

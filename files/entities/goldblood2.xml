@@ -1,0 +1,29 @@
+<Entity>
+
+	<MagicConvertMaterialComponent
+		_enabled="1"
+		kill_when_finished="1"
+		from_material_tag="[blood]"
+		to_material="gold"
+		radius="24"
+		steps_per_frame="4"
+		clean_stains="1"
+		is_circle="1"
+		loop="0"
+		>
+	</MagicConvertMaterialComponent>
+
+	<MagicConvertMaterialComponent
+		_enabled="1"
+		kill_when_finished="1"
+		from_material_tag="[meat]"
+		to_material="gold"
+		radius="24"
+		steps_per_frame="4"
+		clean_stains="1"
+		is_circle="1"
+		loop="0"
+		>
+	</MagicConvertMaterialComponent>
+
+</Entity>

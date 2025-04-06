@@ -2,7 +2,7 @@ dofile_once("data/scripts/lib/utilities.lua")
 
 local execute_times = 57
 local damage_min = 0.1
-local damage_max = 1.2
+local damage_max = 0.8
 local radius_min = 0
 local radius_max = 8
 
