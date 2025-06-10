@@ -92,8 +92,8 @@
 
 	<VariableStorageComponent
 		_tags="minitank_hp"
-		value_float="4"
-		value_int="4"
+		value_float="10"
+		value_int="10"
 	></VariableStorageComponent>
 
 	<SpriteComponent 

@@ -106,27 +106,6 @@ if ModSettingGet("grahamsperks.Enemies") ~= false then
 	end
 end
 
-local function add_scene(table)
-	local biome_path = ModIsEnabled("noitavania") and "mods/noitavania/data/biome/_pixel_scenes.xml" or "data/biome/_pixel_scenes.xml"
-	local content = ModTextFileGetContent(biome_path)
-	local string = "<mBufferedPixelScenes>"
-	local worldsize = tonumber(ModTextFileGetContent("data/compatibilitydata/worldsize.txt") or "35840") or 35840
-	for i = 1, #table do
-		if table[i][5] ~= false then
-			string = string .. [[<PixelScene pos_x="]] .. table[i][1] .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
-			if table[i][4] then
-				-- make things show up in first 2 parallel worlds
-				-- hopefully this won't cause too much lag when starting a run
-				-- 1/26/25: decreased this to only adjacent
-				string = string .. [[<PixelScene pos_x="]] .. table[i][1] + worldsize .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
-				string = string .. [[<PixelScene pos_x="]] .. table[i][1] - worldsize .. [[" pos_y="]] .. table[i][2] .. [[" just_load_an_entity="]] .. table[i][3] .. [["/>]]
-			end
-		end
-	end
-	content = content:gsub("<mBufferedPixelScenes>", string)
-	ModTextFileSetContent(biome_path, content)
-end
-
 dofile_once("data/scripts/perks/perk.lua")
 
 local patches = {
@@ -843,90 +822,34 @@ function OnMagicNumbersAndWorldSeedInitialized()
 		ModLuaFileAppend( "data/scripts/items/potion.lua", "mods/grahamsperks/files/materials/potion_secret.lua" )
 	end
 
-	-- this is going to look really stupid
+	local biome_path = ModIsEnabled("noitavania") and "mods/noitavania/data/biome/_pixel_scenes.xml" or "data/biome/_pixel_scenes.xml"
+	local worldsize = tonumber(ModTextFileGetContent("data/compatibilitydata/worldsize.txt") or "35840") or 35840
+	local file = "mods/grahamsperks/files/scenes_list_" .. tostring(worldsize) .. ".lua"
+	if not ModDoesFileExist(file) then
+		SetTimeOut(2, "mods/grahamsperks/init.lua", "sillyerror")
+		file = "mods/grahamsperks/files/scenes_list_35840.lua"
+	end
+
+	local text = dofile(file)
 	local tech_chest_shuffle = {
-		true, true, true, true, true, false, false, false, false, false
+		[[pos_y="895"]], [[pos_y="420"]], [[pos_y="3346"]], [[pos_y="12316"]], [[pos_y="-4642"]], [[pos_y="-742"]], [[pos_y="9186"]], [[pos_y="1876"]], [[pos_y="3968"]], [[pos_y="13087"]],
 	}
-	local chest = {}
-	for i = 1, #tech_chest_shuffle do
+	-- still stupid, but differently
+	for i = 1, #tech_chest_shuffle / 2 do
 		local number = Random(1, #tech_chest_shuffle)
-		chest[#chest+1] = tech_chest_shuffle[number]
+		text = text:gsub(tech_chest_shuffle[number], [[pos_y="-999999"]])
 		table.remove(tech_chest_shuffle, number)
 	end
 
-	add_scene({
-		{-2379, 6646, "mods/grahamsperks/files/entities/books/cookbook.xml", true},
-		{9953, -1167, "mods/grahamsperks/files/entities/books/polybook.xml", true},
-		{-3811, 10113, "mods/grahamsperks/files/entities/books/lonelybook.xml", true},
-		{-16268, -7093, "mods/grahamsperks/files/entities/books/timebook.xml", true},
-		{-1933, -59, "mods/grahamsperks/files/entities/books/anvilbook.xml"},
-		{4379, 895, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[1]},
-		{-12340, 420, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[2]},
-		{-3367, 3346, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[3]},
-		{2945, 12316, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[4]},
-		{12336, -4642, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[5]},
-		{-1707, -742, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[6]},
-		{9654, 9186, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[7]},
-		{3372, 1876, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[8]},
-		{-4324, 3968, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[9]},
-		{4413, 13087, "mods/grahamsperks/files/pickups/chest_tech.xml", true, chest[10]},
-		{11480, -4864, "mods/grahamsperks/files/wands/candyheart.xml", true},
-		{10050, -736, "mods/grahamsperks/files/wands/rotting.xml", true},
-		{16090, 10000, "mods/grahamsperks/files/wands/coffee.xml", true},
-		{2520, 7440, "mods/grahamsperks/files/wands/petworm.xml", true},
-		{4135, 12964, "mods/grahamsperks/files/wands/gluestick.xml", true},
-		{16161, 3333, "mods/grahamsperks/files/wands/experimental.xml", true},
-		{1487, 6085, "mods/grahamsperks/files/entities/books/unlockbook.xml", true},
-		{3435, 936, "mods/grahamsperks/files/pickups/vial.xml", true},
-		{-2111, 2722, "mods/grahamsperks/files/pickups/balloon.xml", true},
-		{-1908, -56, "mods/grahamsperks/files/pixelscenes/text.xml"},
-		{-1864, -53, "data/entities/items/pickup/moon.xml"},
-		{2372, 530, "mods/grahamsperks/files/pixelscenes/hands.xml"},
-		{2382, 560, "mods/grahamsperks/files/entities/goldblood.xml"},
-		{-2221, 2564, "mods/grahamsperks/files/pixelscenes/hellblood.xml", true},
-		{-2490, 6480, "mods/grahamsperks/files/pixelscenes/transmutatium.xml", true},
-		{3921, 3100, "mods/grahamsperks/files/entities/forge_item_check.xml", true},
-		{3951, 3140, "mods/grahamsperks/files/pixelscenes/hand.xml", true},
-		{-14638, 13031, "mods/grahamsperks/files/entities/forge_item_check.xml", true},
-		{-14608, 13071, "mods/grahamsperks/files/pixelscenes/hand.xml", true},
-		{2318, 1870, "mods/grahamsperks/files/entities/eyechecker.xml", true},
-		{4573, 528, "mods/grahamsperks/files/pixelscenes/eye.xml", true},
-		{2000, 1735, "mods/grahamsperks/files/pixelscenes/closedeye.xml", true},
-		{-5302, 575, "mods/grahamsperks/files/pixelscenes/materials.xml"},
-		{-6760, 7424, "mods/grahamsperks/files/pixelscenes/yinyang.xml", true},
-		{-6693, 7515, "mods/grahamsperks/files/entities/halo_checker.xml", true},
-		{11537, 9956, "mods/grahamsperks/files/pixelscenes/water.xml"},
-		{11537, 9986, "mods/grahamsperks/files/pickups/chest_immunity.xml"},
-		{-317, -1673, "mods/grahamsperks/files/pixelscenes/island.xml"},
-		{-278, -1580, "mods/grahamsperks/files/entities/fireplace_worse.xml"},
-		{-46, -1550, "mods/grahamsperks/files/entities/books/cozybook.xml"},
-		{4046, 12977, "mods/grahamsperks/files/pixelscenes/secret.xml", true},
-		{4532, 13081, "mods/grahamsperks/files/entities/perk_spawners/map_spawner.xml"},
-		{785, -1231, "mods/grahamsperks/files/entities/perk_spawners/map2_spawner.xml"},
-		{3546, 13100, "mods/grahamsperks/files/entities/perk_spawners/slots_spawner.xml"},
-		{14241, 16284, "mods/grahamsperks/files/entities/forge_item_check.xml", true},
-		{4692, 652, "mods/grahamsperks/files/entities/tear_secret.xml", true},
-		{14271, 16324, "mods/grahamsperks/files/pixelscenes/hand.xml", true},
-		{-16295, -7140, "mods/grahamsperks/files/pixelscenes/home.xml"},
-		{-16238, -6987, "data/entities/props/furniture_bed.xml"},
-		{-16116, -7004, "data/entities/props/furniture_wood_table.xml"},
-		{-16016, -7068, "mods/grahamsperks/files/pickups/chest_lost.xml"},
-		{-16117, -7015, "mods/grahamsperks/files/pickups/chest_mini.xml"},
-		{-16038, -7010, "mods/grahamsperks/files/entities/fireplace_worse.xml"},
-		{7412, 6175, "mods/grahamsperks/files/pixelscenes/heart.xml", true},
-		{12055, 2700, "mods/grahamsperks/files/pixelscenes/wealth.xml"},
-		{12055, 2730, "mods/grahamsperks/files/entities/midas_curse.xml"},
-		{1800, 6600, "mods/grahamsperks/files/pixelscenes/egg.xml", true},
-		{1800, 6600, "mods/grahamsperks/files/pickups/egg.xml", true},
-		{1800, 6600, "mods/grahamsperks/files/entities/books/eggbook.xml", true},
-		{-11695, 600, "mods/grahamsperks/files/pixelscenes/stargazer.xml", true},
-		{0, 60000, "mods/grahamsperks/files/pixelscenes/cat.xml", true},
-		{0, -60000, "mods/grahamsperks/files/pixelscenes/cat2.xml", true},
-		{3331, 1616, "mods/grahamsperks/files/entities/progress/progress.xml", true},
-	})
 	if ModIsEnabled("Apotheosis") then
-		add_scene({{22770, -3333, "mods/grahamsperks/files/entities/perk_spawners/ll_spawner.xml"}})
-	else
-		add_scene({{15090, -3333, "mods/grahamsperks/files/entities/perk_spawners/ll_spawner.xml"}})
+		text = text:gsub([[pos_x="15090"]], [[pos_x="22770"]])
 	end
+	local content = ModTextFileGetContent(biome_path)
+	content = content:gsub("<mBufferedPixelScenes>", text)
+	ModTextFileSetContent(biome_path, content)
+end
+
+function sillyerror()
+	local worldsize = tonumber(ModTextFileGetContent("data/compatibilitydata/worldsize.txt") or "35840") or 35840
+	GamePrintImportant("ERROR!!", "Let Graham know you saw this error with a world size of " .. tostring(worldsize) .. "!")
 end
