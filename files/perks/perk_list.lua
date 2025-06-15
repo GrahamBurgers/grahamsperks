@@ -1,6 +1,32 @@
 ---@diagnostic disable: undefined-global, param-type-mismatch
 dofile_once("data/scripts/lib/utilities.lua")
 
+local function removechild(who, name)
+	local children = EntityGetAllChildren(who) or {}
+	for i = 1, #children do
+		if EntityGetName(children[i]) == name or EntityHasTag(children[i], name) then
+			EntityKill(children[i])
+		end
+	end
+end
+local function removelua(who, tag)
+	local comps = EntityGetComponentIncludingDisabled(who, "LuaComponent", tag) or {}
+	for i = 1, #comps do
+		EntityRemoveComponent(who, comps[i])
+	end
+end
+local function removevar(who, tag)
+	local comps = EntityGetComponentIncludingDisabled(who, "VariableStorageComponent", tag) or {}
+	for i = 1, #comps do
+		EntityRemoveComponent(who, comps[i])
+	end
+end
+local function firsteffect(flag)
+	local thing = not GameHasFlagRun("graham_firsteffect_" .. flag)
+	GameAddFlagRun("graham_firsteffect_" .. flag)
+	return thing
+end
+
 local to_insert = {
 	{
 		id = "GRAHAM_HEALTHY_HEARTS",
@@ -18,6 +44,7 @@ local to_insert = {
 		end,
 		func_remove = function(entity_who_picked)
 			GlobalsSetValue("HEALTHY_HEARTS_HP_MULTIPLIER", 1)
+			add_halo_level(entity_who_picked, -1)
 		end,
 	},
 	{
@@ -75,6 +102,9 @@ local to_insert = {
 			local entity_id = EntityLoad("mods/grahamsperks/files/entities/goldmeat.xml", x, y)
 			EntityAddChild(entity_who_picked, entity_id)
 		end,
+		func_remove = function(entity_who_picked)
+			removechild(entity_who_picked, "graham_midasmeat")
+		end
 	},
 	{
 		id = "GRAHAM_HEAT_WAVE",
@@ -90,13 +120,10 @@ local to_insert = {
 			local x, y = EntityGetTransform(entity_who_picked)
 			local entity_id = EntityLoad("mods/grahamsperks/files/entities/heatwave.xml", x, y)
 			EntityAddChild(entity_who_picked, entity_id)
-
-			if GameHasFlagRun("PERK_PICKED_FREEZE_FIELD") then
-				local child_id = EntityLoad("data/entities/misc/perks/freeze_field.xml", x, y)
-				EntityAddTag(child_id, "perk_entity")
-				EntityAddChild(entity_who_picked, child_id)
-			end
 		end,
+		func_remove = function(entity_who_picked)
+			removechild(entity_who_picked, "graham_heatwave")
+		end
 	},
 	--[[
 {
@@ -131,55 +158,33 @@ local to_insert = {
 			local entity_id = EntityLoad("mods/grahamsperks/files/entities/sponge.xml", x, y)
 			EntityAddChild(entity_who_picked, entity_id)
 
-			local damagemodels = EntityGetComponent(entity_who_picked, "DamageModelComponent")
+			local damagemodel = EntityGetFirstComponent(entity_who_picked, "DamageModelComponent")
+			if damagemodel then
+				ComponentSetValue2(damagemodel, "blood_material", "salt")
+				ComponentSetValue2(damagemodel, "blood_spray_material", "salt")
+				ComponentSetValue2(damagemodel, "blood_multiplier", ComponentGetValue2(damagemodel, "blood_multiplier") + 0.5)
 
-			local salty = GlobalsGetValue("SALTBLOOD_MULTIPLIER", "1")
-			GlobalsSetValue("SALTBLOOD_MULTIPLIER", salty + salty / 15 + 3)
+				local projectile_resistance = ComponentObjectGetValue2(damagemodel, "damage_multipliers", "projectile") * 0.75
+				local explosion_resistance = ComponentObjectGetValue2(damagemodel, "damage_multipliers", "explosion") * 0.75
+				local ice_resistance = ComponentObjectGetValue2(damagemodel, "damage_multipliers", "ice") * 0.75
+				local electric_resistance = ComponentObjectGetValue2(damagemodel, "damage_multipliers", "electricity") * 0.75
+				local melee_resistance = ComponentObjectGetValue2(damagemodel, "damage_multipliers", "melee") * 0.75
 
-			if (damagemodels ~= nil) then
-				for i, damagemodel in ipairs(damagemodels) do
-					ComponentSetValue(damagemodel, "blood_material", "salt")
-					ComponentSetValue(damagemodel, "blood_spray_material", "salt")
-					ComponentSetValue(damagemodel, "blood_multiplier", salty)
-
-					local projectile_resistance = tonumber(ComponentObjectGetValue(damagemodel, "damage_multipliers",
-						"projectile"))
-					local explosion_resistance = tonumber(ComponentObjectGetValue(damagemodel, "damage_multipliers",
-						"explosion"))
-					local ice_resistance = tonumber(ComponentObjectGetValue(damagemodel, "damage_multipliers", "ice"))
-					local electric_resistance = tonumber(ComponentObjectGetValue(damagemodel, "damage_multipliers",
-						"electricity"))
-					local melee_resistance = tonumber(ComponentObjectGetValue(damagemodel, "damage_multipliers", "melee"))
-
-					projectile_resistance = projectile_resistance * 0.8
-					explosion_resistance = explosion_resistance * 0.8
-					ice_resistance = ice_resistance * 0.85
-					electric_resistance = electric_resistance * 0.85
-					melee_resistance = melee_resistance * 0.7
-
-					ComponentObjectSetValue(damagemodel, "damage_multipliers", "projectile",
-						tostring(projectile_resistance))
-					ComponentObjectSetValue(damagemodel, "damage_multipliers", "explosion",
-						tostring(explosion_resistance))
-					ComponentObjectSetValue(damagemodel, "damage_multipliers", "ice", tostring(ice_resistance))
-					ComponentObjectSetValue(damagemodel, "damage_multipliers", "melee", tostring(melee_resistance))
-					ComponentObjectSetValue(damagemodel, "damage_multipliers", "electricity",
-						tostring(electric_resistance))
-				end
+				ComponentObjectSetValue2(damagemodel, "damage_multipliers", "projectile", projectile_resistance)
+				ComponentObjectSetValue2(damagemodel, "damage_multipliers", "explosion", explosion_resistance)
+				ComponentObjectSetValue2(damagemodel, "damage_multipliers", "ice", ice_resistance)
+				ComponentObjectSetValue2(damagemodel, "damage_multipliers", "melee", melee_resistance)
+				ComponentObjectSetValue2(damagemodel, "damage_multipliers", "electricity", electric_resistance)
 			end
 		end,
 		func_remove = function(entity_who_picked)
-			local damagemodels = EntityGetComponent(entity_who_picked, "DamageModelComponent")
-			if (damagemodels ~= nil) then
-				for i, damagemodel in ipairs(damagemodels) do
-					ComponentSetValue(damagemodel, "blood_material", "blood")
-					ComponentSetValue(damagemodel, "blood_spray_material", "blood")
-					ComponentSetValue(damagemodel, "blood_multiplier", "1.0")
-					ComponentSetValue(damagemodel, "blood_sprite_directional", "")
-					ComponentSetValue(damagemodel, "blood_sprite_large", "")
-					ComponentObjectSetValue(damagemodel, "damage_multipliers", "projectile", "1.0")
-					GlobalsSetValue("SALTBLOOD_MULTIPLIER", "nil")
-				end
+			removechild(entity_who_picked, "graham_saltblood")
+			local damagemodel = EntityGetFirstComponent(entity_who_picked, "DamageModelComponent")
+			if damagemodel then
+				ComponentSetValue2(damagemodel, "blood_material", "blood")
+				ComponentSetValue2(damagemodel, "blood_spray_material", "blood")
+				ComponentSetValue2(damagemodel, "blood_multiplier", 1.0)
+				ComponentObjectSetValue2(damagemodel, "damage_multipliers", "projectile", 1)
 			end
 		end,
 	},
@@ -195,14 +200,13 @@ local to_insert = {
 		usable_by_enemies = false,
 		func = function(entity_perk_item, entity_who_picked, item_name)
 			local wand = find_the_wand_held(entity_who_picked)
-			local x, y = EntityGetTransform(entity_who_picked)
 
 			SetRandomSeed(entity_who_picked, wand)
 
 			if (wand ~= NULL_ENTITY) then
 				local comp = EntityGetFirstComponentIncludingDisabled(wand, "AbilityComponent")
 
-				if (comp ~= nil) then
+				if comp then
 					local mana_max = ComponentGetValue2(comp, "mana_max")
 					local mana_charge_speed = ComponentGetValue2(comp, "mana_charge_speed")
 					local reload_time = tonumber(ComponentObjectGetValue(comp, "gun_config", "reload_time"))
@@ -211,39 +215,20 @@ local to_insert = {
 					local deck_capacity2 = EntityGetWandCapacity(wand)
 					local always_casts = deck_capacity - deck_capacity2
 
-					if mana_max < 2000 then
-						mana_max = mana_max + Random(60, 100)
-						if mana_max > 2000 then mana_max = 2000 end
-					end
-
-					if mana_charge_speed < 1000 then
-						mana_charge_speed = mana_charge_speed + Random(30, 90)
-						if mana_charge_speed > 1000 then mana_charge_speed = 1000 end
-					end
-
-					if cast_delay > -21 then
-						cast_delay = cast_delay + Random(-8, -12)
-						if cast_delay < -21 then cast_delay = -21 end
-					end
-
-					if reload_time > -21 then
-						reload_time = reload_time + Random(-6, -10)
-						if reload_time < -21 then reload_time = -21 end
-					end
-
-					if deck_capacity2 < 25 then
-						deck_capacity2 = deck_capacity2 + Random(1, 3)
-						if deck_capacity2 > 25 then deck_capacity2 = 25 end
-					end
+					mana_max = math.min(2000, mana_max + Random(60, 100))
+					mana_charge_speed = math.min(1000, mana_charge_speed + Random(30, 90))
+					cast_delay = math.max(-21, cast_delay + Random(-8, -12))
+					reload_time = math.max(-21, reload_time + Random(-6, -10))
+					deck_capacity2 = math.min(25, deck_capacity2 + Random(1, 3))
 
 					ComponentSetValue2(comp, "mana_max", mana_max)
 					ComponentSetValue2(comp, "mana_charge_speed", mana_charge_speed)
-					ComponentObjectSetValue(comp, "gun_config", "reload_time", tostring(reload_time))
-					ComponentObjectSetValue(comp, "gunaction_config", "fire_rate_wait", tostring(cast_delay))
-					ComponentObjectSetValue(comp, "gun_config", "deck_capacity", deck_capacity2 + always_casts)
+					ComponentObjectSetValue2(comp, "gun_config", "reload_time", reload_time)
+					ComponentObjectSetValue2(comp, "gunaction_config", "fire_rate_wait", cast_delay)
+					ComponentObjectSetValue2(comp, "gun_config", "deck_capacity", deck_capacity2 + always_casts)
 
 					if (Random(1, 3) == 1) then
-						ComponentObjectSetValue(comp, "gun_config", "shuffle_deck_when_empty", 0)
+						ComponentObjectSetValue2(comp, "gun_config", "shuffle_deck_when_empty", false)
 					end
 				end
 			end
@@ -262,7 +247,7 @@ local to_insert = {
 		not_in_default_perk_pool = false,
 		func = function(entity_perk_item, entity_who_picked, item_name)
 			add_halo_level(entity_who_picked, 1)
-			if EntityHasTag(entity_who_picked, "player_unit") and not EntityHasTag(entity_who_picked, "ew_notplayer") then
+			if firsteffect("magmastone") then
 				local x, y = EntityGetTransform(entity_who_picked)
 				EntityLoad("mods/grahamsperks/files/pickups/magmastone.xml", x, y - 15)
 			end
@@ -281,6 +266,10 @@ local to_insert = {
 			add_halo_level(entity_who_picked, -1)
 			-- handled in bloodybonus_check.lua
 		end,
+		func_remove = function(entity_who_picked)
+			GameRemoveFlagRun("PERK_PICKED_GRAHAM_BLOODY_EXTRA_PERK")
+			add_halo_level(entity_who_picked, 1)
+		end
 	},
 	{
 		id = "GRAHAM_LUCKY_CLOVER",
@@ -291,7 +280,8 @@ local to_insert = {
 		usable_by_enemies = false,
 		not_in_default_perk_pool = false,
 		stackable = STACKABLE_NO,
-		func = function(entity_perk_item, entity_who_picked, item_name)
+		func_remove = function(entity_who_picked)
+			GameRemoveFlagRun("PERK_PICKED_GRAHAM_LUCKY_CLOVER")
 		end,
 	},
 	{
@@ -306,22 +296,23 @@ local to_insert = {
 		func = function(entity_perk_item, entity_who_picked, item_name)
 			EntityAddComponent2(entity_who_picked, "LuaComponent",
 				{
-					_tags = "perk_component",
+					_tags = "perk_component,graham_revengefreeze",
 					script_damage_received = "mods/grahamsperks/files/revenge_freeze.lua",
 					execute_every_n_frame = "-1",
 				})
 
 			if (damagemodels ~= nil) then
 				for i, damagemodel in ipairs(damagemodels) do
-					local resistance = tonumber(ComponentObjectGetValue(damagemodel, "damage_multipliers", "fire"))
-					resistance = resistance * 0.5
-					ComponentObjectSetValue(damagemodel, "damage_multipliers", "fire", tostring(resistance))
+					local resistance = ComponentObjectGetValue2(damagemodel, "damage_multipliers", "fire") * 0.5
+					ComponentObjectSetValue(damagemodel, "damage_multipliers", "fire", resistance)
 
-					resistance = tonumber(ComponentObjectGetValue(damagemodel, "damage_multipliers", "ice"))
-					resistance = resistance * 0.5
-					ComponentObjectSetValue(damagemodel, "damage_multipliers", "ice", tostring(resistance))
+					resistance = ComponentObjectGetValue2(damagemodel, "damage_multipliers", "ice") * 0.5
+					ComponentObjectSetValue(damagemodel, "damage_multipliers", "ice", resistance)
 				end
 			end
+		end,
+		func_remove = function(entity_who_picked)
+			removelua(entity_who_picked, "graham_revengefreeze")
 		end,
 	},
 	{
@@ -337,19 +328,18 @@ local to_insert = {
 		game_effect = "PROTECTION_MELEE",
 		remove_other_perks = { "PROTECTION_MELEE" },
 		func = function(entity_perk_item, entity_who_picked, item_name)
-			EntityAddComponent2(entity_who_picked, "LuaComponent",
-				{
-					_tags = "perk_component",
-					script_damage_about_to_be_received = "mods/grahamsperks/files/zaptap.lua",
-					execute_every_n_frame = -1,
-					limit_how_many_times_per_frame = 1,
-				})
 
 			local var_comp = get_variable_storage_component(entity_who_picked, "zap_tap_radius")
 			if var_comp ~= nil and var_comp > 0 then
 				local radius = ComponentGetValue2(var_comp, "value_int")
 				ComponentSetValue2(var_comp, "value_int", radius + 8)
 			else
+				EntityAddComponent2(entity_who_picked, "LuaComponent", {
+					_tags = "perk_component,graham_zaptap",
+					script_damage_about_to_be_received = "mods/grahamsperks/files/zaptap.lua",
+					execute_every_n_frame = -1,
+					limit_how_many_times_per_frame = 1,
+				})
 				EntityAddComponent2(entity_who_picked, "VariableStorageComponent", {
 					value_int = 18,
 					name = "zap_tap_radius"
@@ -359,6 +349,7 @@ local to_insert = {
 		func_remove = function(entity_who_picked)
 			local var_comp = get_variable_storage_component(entity_who_picked, "zap_tap_radius")
 			EntityRemoveComponent(entity_who_picked, var_comp)
+			removelua(entity_who_picked, "graham_zaptap")
 		end,
 	},
 	{
@@ -422,12 +413,14 @@ local to_insert = {
 		not_in_default_perk_pool = false,
 		stackable = STACKABLE_NO,
 		func = function(entity_perk_item, entity_who_picked, item_name)
-			EntityAddComponent2(entity_who_picked, "LuaComponent",
-				{
-					_tags = "perk_component",
-					script_source_file = "mods/grahamsperks/files/entities/breadcrumb_create.lua",
-					execute_every_n_frame = 1,
-				})
+			EntityAddComponent2(entity_who_picked, "LuaComponent", {
+				_tags = "perk_component,graham_breadcrumbs",
+				script_source_file = "mods/grahamsperks/files/entities/breadcrumb_create.lua",
+				execute_every_n_frame = 1,
+			})
+		end,
+		func_remove = function(entity_who_picked)
+			removelua(entity_who_picked, "graham_breadcrumbs")
 		end,
 	},
 	{
@@ -441,6 +434,9 @@ local to_insert = {
 		not_in_default_perk_pool = false,
 		func = function(entity_perk_item, entity_who_picked, item_name)
 		end,
+		func_remove = function(entity_who_picked)
+			GameRemoveFlagRun("PERK_PICKED_GRAHAM_CAMPFIRE")
+		end,
 	},
 	{
 		id = "GRAHAM_GUARD",
@@ -452,12 +448,14 @@ local to_insert = {
 		func = function(entity_perk_item, entity_who_picked, item_name)
 			-- this one is safe exploration, by the way
 
-			EntityAddComponent2(entity_who_picked, "LuaComponent",
-				{
-					_tags = "perk_component",
-					script_source_file = "mods/grahamsperks/files/scripts/protection.lua",
-					execute_every_n_frame = 30,
-				})
+			EntityAddComponent2(entity_who_picked, "LuaComponent", {
+				_tags = "perk_component,graham_guard",
+				script_source_file = "mods/grahamsperks/files/scripts/protection.lua",
+				execute_every_n_frame = 30,
+			})
+		end,
+		func_remove = function(entity_who_picked)
+			removelua(entity_who_picked, "graham_guard")
 		end,
 	},
 	{
@@ -486,13 +484,13 @@ local to_insert = {
 		func_remove = function(entity_who_picked)
 			reset_perk_pickup_event("GHOST")
 			GameRemoveFlagRun("player_status_tipsy_ghost")
+			removechild(entity_who_picked, "tipsy_ghost")
 		end,
-
 	},
 	{
 		id = "GRAHAM_PROJECTILES",
 		ui_name = "$perkname_graham_proj",
-		ui_description = "$perkdesc_graham_proj",
+		ui_description = "$perkdesc_graham_proj2",
 		ui_icon = "mods/grahamsperks/files/perks/perks_gfx/gui/projectiles.png",
 		perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/projectiles.png",
 		not_in_default_perk_pool = false,
@@ -501,32 +499,25 @@ local to_insert = {
 		stackable_maximum = 4,
 		stackable_is_rare = true,
 		func = function(entity_perk_item, entity_who_picked, item_name)
-			local damagemodels = EntityGetComponent(entity_who_picked, "DamageModelComponent")
-			local resistance
-			if (damagemodels ~= nil) then
-				for i, damagemodel in ipairs(damagemodels) do
-					resistance = tonumber(ComponentObjectGetValue(damagemodel, "damage_multipliers", "projectile"))
-					resistance = resistance * 0.125
-					ComponentObjectSetValue(damagemodel, "damage_multipliers", "projectile", tostring(resistance))
-					break
-				end
+			local damagemodel = EntityGetFirstComponent(entity_who_picked, "DamageModelComponent")
+			if damagemodel then
+				local resistance = ComponentObjectGetValue2(damagemodel, "damage_multipliers", "projectile") * 8
+				ComponentObjectSetValue2(damagemodel, "damage_multipliers", "projectile", resistance)
 			end
 
-			EntityAddComponent2(entity_who_picked, "LuaComponent",
-				{
-					_tags = "perk_component",
-					script_damage_about_to_be_received = "mods/grahamsperks/files/effects/damagedouble.lua",
-					execute_every_n_frame = -1,
-				})
+			EntityAddComponent2(entity_who_picked, "LuaComponent", {
+				_tags = "perk_component,graham_projectiles",
+				script_damage_about_to_be_received = "mods/grahamsperks/files/effects/damagedouble.lua",
+				execute_every_n_frame = -1,
+			})
 		end,
 
 		func_remove = function(entity_who_picked)
-			local damagemodels = EntityGetComponent(entity_who_picked, "DamageModelComponent")
-			if (damagemodels ~= nil) then
-				for i, damagemodel in ipairs(damagemodels) do
-					ComponentObjectSetValue(damagemodel, "damage_multipliers", "projectile", "1.0")
-				end
+			local damagemodel = EntityGetFirstComponent(entity_who_picked, "DamageModelComponent")
+			if damagemodel then
+				ComponentObjectSetValue2(damagemodel, "damage_multipliers", "projectile", 1)
 			end
+			removelua(entity_who_picked, "graham_projectiles")
 		end,
 	},
 	{
@@ -535,19 +526,22 @@ local to_insert = {
 		ui_description = "$perkdesc_graham_edge",
 		ui_icon = "mods/grahamsperks/files/perks/perks_gfx/gui/bleedingedge.png",
 		perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/bleedingedge.png",
-		usable_by_enemies = false,
+		usable_by_enemies = true,
 		not_in_default_perk_pool = false,
 		stackable = STACKABLE_NO,
 		func = function(entity_perk_item, entity_who_picked, item_name)
 			-- technically this should work perfectly fine when used by enemies, which would be really funny
 			-- wouldn't apply to the player, or exclude the entity that has it, though
 			-- if i fix those later, i'll turn it on
-			EntityAddComponent2(entity_who_picked, "LuaComponent",
-				{
-					_tags = "perk_component",
-					script_source_file = "mods/grahamsperks/files/scripts/bleeding_edge.lua",
-					execute_every_n_frame = 1,
-				})
+			-- 6/10/25: enabled
+			EntityAddComponent2(entity_who_picked, "LuaComponent", {
+				_tags = "perk_component,graham_bleedingedge",
+				script_source_file = "mods/grahamsperks/files/scripts/bleeding_edge.lua",
+				execute_every_n_frame = 1,
+			})
+		end,
+		func_remove = function(entity_who_picked)
+			removelua(entity_who_picked, "graham_bleedingedge")
 		end,
 	},
 	{
@@ -583,18 +577,18 @@ local to_insert = {
 					ComponentSetValue2(varsto, "value_int", orbs)
 
 					EntityAddComponent2(child_id, "VariableStorageComponent", {
-						_tags = "wizard_orb_id",
+						_tags = "wizard_orb_id,graham_bloodorb",
 						name = "wizard_orb_id",
 						value_int = orbs,
 					})
 				else
 					EntityAddComponent2(entity_who_picked, "VariableStorageComponent", {
-						_tags = "graham_blood_orbs",
+						_tags = "graham_blood_orbs,graham_bloodorb",
 						value_int = 1,
 					})
 
 					EntityAddComponent2(child_id, "VariableStorageComponent", {
-						_tags = "wizard_orb_id",
+						_tags = "wizard_orb_id,graham_bloodorb",
 						name = "wizard_orb_id",
 						value_int = 1,
 					})
@@ -609,6 +603,8 @@ local to_insert = {
 			if varsto ~= nil then
 				ComponentSetValue2(varsto, "value_int", 0)
 			end
+			removechild(entity_who_picked, "graham_bloodorb")
+			removevar(entity_who_picked, "graham_bloodorb")
 		end,
 	},
 	{
@@ -625,6 +621,9 @@ local to_insert = {
 			local child_id = EntityLoad("mods/grahamsperks/files/entities/halo.xml", x, y)
 			EntityAddTag(child_id, "perk_entity")
 			EntityAddChild(entity_who_picked, child_id)
+		end,
+		func_remove = function(entity_who_picked)
+			removechild(entity_who_picked, "graham_blindspot")
 		end,
 	},
 	{
@@ -647,7 +646,7 @@ local to_insert = {
 			end
 			ComponentSetValue2(comp, "value_int", ComponentGetValue2(comp, "value_int") + 1)
 
-			if EntityHasTag(entity_who_picked, "player_unit") and not EntityHasTag(entity_who_picked, "ew_notplayer") then
+			if firsteffect("refresher") then
 				local x, y = EntityGetTransform(entity_who_picked)
 				local eid = EntityLoad("data/entities/items/pickup/spell_refresh.xml", x, y)
 				local item_comp = EntityGetFirstComponent(eid, "ItemComponent")
@@ -700,16 +699,19 @@ local to_insert = {
 		stackable = STACKABLE_NO,
 		func = function(entity_perk_item, entity_who_picked, item_name)
 			EntityAddComponent2(entity_who_picked, "LuaComponent", {
-				_tags = "perk_component",
+				_tags = "perk_component,graham_wandkick",
 				script_kick = "mods/grahamsperks/files/scripts/wandkick.lua",
 				execute_every_n_frame = -1,
 			})
+		end,
+		func_remove = function(entity_who_picked)
+			removelua(entity_who_picked, "graham_wandkick")
 		end,
 	},
 	{
 		id = "GRAHAM_REPOSSESSION",
 		ui_name = "$perkname_graham_repossession",
-		ui_description = "$perkdesc_graham_repossession",
+		ui_description = "$perkdesc_graham_repossession2",
 		ui_icon = "mods/grahamsperks/files/perks/perks_gfx/gui/repossession.png",
 		perk_icon = "mods/grahamsperks/files/perks/perks_gfx/out/repossession.png",
 		usable_by_enemies = false,
@@ -717,6 +719,9 @@ local to_insert = {
 		stackable = STACKABLE_NO,
 		func = function(entity_perk_item, entity_who_picked, item_name)
 			-- handled in bloodybonus_check.lua
+		end,
+		func_remove = function(entity_who_picked)
+			GameRemoveFlagRun("PERK_PICKED_GRAHAM_REPOSSESSION")
 		end,
 	},
 	{
@@ -740,6 +745,7 @@ local to_insert = {
 		end,
 		func_remove = function(entity_who_picked)
 			GlobalsSetValue("GRAHAM_FORTUNETELLER_COUNT", "-1")
+			removechild(entity_who_picked, "graham_fortuneteller")
 		end,
 	},
 	{
@@ -755,11 +761,13 @@ local to_insert = {
 		func = function(entity_perk_item, entity_who_picked, item_name)
 			local length = tonumber(GlobalsGetValue("graham_silly_straw_length", "0") or "0")
 			local x, y = EntityGetTransform(entity_who_picked)
-			EntityLoad("data/entities/items/pickup/powder_stash.xml", x + 5, y)
-			EntityLoad("mods/grahamsperks/files/pickups/balloon.xml", x - 5, y)
+			if firsteffect("straw") then
+				EntityLoad("data/entities/items/pickup/powder_stash.xml", x + 5, y)
+				EntityLoad("mods/grahamsperks/files/pickups/balloon.xml", x - 5, y)
+			end
 			if length < 1 then
 				EntityAddComponent2(entity_who_picked, "LuaComponent", {
-					_tags = "perk_component",
+					_tags = "perk_component,graham_sillystraw",
 					script_source_file = "mods/grahamsperks/files/entities/straw/straw.lua",
 					execute_every_n_frame = 1,
 				})
@@ -770,6 +778,7 @@ local to_insert = {
 		end,
 		func_remove = function(entity_who_picked)
 			GlobalsSetValue("graham_silly_straw_length", "0")
+			removelua(entity_who_picked, "graham_sillystraw")
 		end,
 	},
 	{
@@ -782,6 +791,9 @@ local to_insert = {
 		not_in_default_perk_pool = false,
 		stackable = STACKABLE_NO,
 		func = function(entity_perk_item, entity_who_picked, item_name)
+		end,
+		func_remove = function(entity_who_picked)
+			GameRemoveFlagRun("PERK_PICKED_GRAHAM_TRICK_BETRAYAL")
 		end,
 	},
 	{
@@ -882,6 +894,9 @@ local to_insert = {
 			EntityAddTag(child_id, "perk_entity")
 			EntityAddChild(entity_who_picked, child_id)
 		end,
+		func_remove = function(entity_who_picked)
+			removechild(entity_who_picked, "graham_map")
+		end,
 	},
 	{
 		id = "GRAHAM_MAP2",
@@ -897,6 +912,9 @@ local to_insert = {
 			EntityAddTag(child_id, "perk_entity")
 			EntityAddChild(entity_who_picked, child_id)
 		end,
+		func_remove = function(entity_who_picked)
+			removechild(entity_who_picked, "graham_map2")
+		end,
 	},
 	{
 		id = "GRAHAM_SHEEPIFICATION",
@@ -909,13 +927,15 @@ local to_insert = {
 		stackable = STACKABLE_YES,
 		stackable_maximum = 2,
 		func = function(entity_perk_item, entity_who_picked, item_name)
-			EntityAddComponent2(entity_who_picked, "LuaComponent",
-				{
-					_tags = "perk_component",
-					_enabled = 1,
-					script_shot = "mods/grahamsperks/files/polychance.lua",
-					execute_every_n_frame = -1
-				})
+			EntityAddComponent2(entity_who_picked, "LuaComponent", {
+				_tags = "perk_component,graham_sheepification",
+				_enabled = 1,
+				script_shot = "mods/grahamsperks/files/polychance.lua",
+				execute_every_n_frame = -1
+			})
+		end,
+		func_remove = function(entity_who_picked)
+			removelua(entity_who_picked, "graham_sheepification")
 		end,
 	},
 	{
@@ -932,6 +952,9 @@ local to_insert = {
 			local entity_id = EntityLoad("mods/grahamsperks/files/entities/wandcharger.xml", x, y)
 			EntityAddChild(entity_who_picked, entity_id)
 		end,
+		func_remove = function(entity_who_picked)
+			removechild(entity_who_picked, "graham_materialist")
+		end,
 	},
 	{
 		id = "GRAHAM_LUCKYDAY",
@@ -943,12 +966,14 @@ local to_insert = {
 		not_in_default_perk_pool = not HasFlagPersistent("graham_progress_lucky"),
 		stackable = STACKABLE_NO,
 		func = function(entity_perk_item, entity_who_picked, item_name)
-			EntityAddComponent2(entity_who_picked, "LuaComponent",
-				{
-					_tags = "perk_component",
-					script_damage_about_to_be_received = "mods/grahamsperks/files/luckyday.lua",
-					execute_every_n_frame = -1,
-				})
+			EntityAddComponent2(entity_who_picked, "LuaComponent", {
+				_tags = "perk_component,graham_luckyday",
+				script_damage_about_to_be_received = "mods/grahamsperks/files/luckyday.lua",
+				execute_every_n_frame = -1,
+			})
+		end,
+		func_remove = function(entity_who_picked)
+			removelua(entity_who_picked, "graham_luckyday")
 		end,
 	},
 	{
@@ -966,7 +991,7 @@ local to_insert = {
 			local entity_id = EntityLoad("mods/grahamsperks/files/entities/oil.xml", x, y)
 			EntityAddChild(entity_who_picked, entity_id)
 
-			if EntityHasTag(entity_who_picked, "player_unit") and not EntityHasTag(entity_who_picked, "ew_notplayer") then
+			if firsteffect("robots") then
 				local value = GlobalsGetValue("GRAHAM_ROBOTS_COUNT", 0)
 				GlobalsSetValue("GRAHAM_ROBOTS_COUNT", value + 3)
 				local options = { "tank.xml", "tank_rocket.xml", "tank_super.xml", "toasterbot.xml" }
@@ -994,13 +1019,15 @@ local to_insert = {
 			add_halo_level(entity_who_picked, -1)
 			EntityAddComponent2(entity_who_picked, "LuaComponent",
 				{
-					_tags = "perk_component",
+					_tags = "perk_component,graham_death",
 					script_damage_received = "mods/grahamsperks/files/demise.lua",
 					execute_every_n_frame = -1,
 				})
 		end,
 		func_remove = function(entity_who_picked)
 			RemoveFlagPersistent("graham_death_hp_boost")
+			removelua(entity_who_picked, "graham_death")
+			add_halo_level(entity_who_picked, 1)
 		end,
 	},
 	{
@@ -1039,6 +1066,10 @@ local to_insert = {
 				value_string = "NONE",
 			})
 		end,
+		func_remove = function(entity_who_picked)
+			removechild(entity_who_picked, "graham_immunityaura")
+			removechild(entity_who_picked, "graham_immunityaura_cooldown")
+		end,
 	},
 	{
 		id = "GRAHAM_MAGIC_SKIN",
@@ -1057,6 +1088,7 @@ local to_insert = {
 		end,
 		func_remove = function(entity_who_picked)
 			GlobalsSetValue("GRAHAM_MAGIC_SKIN_COUNTER", "0")
+			add_halo_level(entity_who_picked, 1)
 		end,
 	},
 	{
@@ -1070,7 +1102,7 @@ local to_insert = {
 		stackable = STACKABLE_NO,
 		func = function(entity_perk_item, entity_who_picked, item_name)
 			EntityAddComponent2(entity_who_picked, "LuaComponent", {
-				_tags = "perk_component",
+				_tags = "perk_component,graham_lukkimount",
 				execute_on_added = true,
 				script_source_file = "mods/grahamsperks/files/scripts/lukki_mount_spawn.lua",
 				execute_every_n_frame = 1,
@@ -1080,6 +1112,11 @@ local to_insert = {
 		end,
 		func_remove = function(entity_who_picked)
 			reset_perk_pickup_event("LUKKI")
+			removelua(entity_who_picked, "graham_lukkimount")
+			local friends = EntityGetWithTag("graham_lukki_mount")
+			for i = 1, #friends do
+				EntityKill(friends[i])
+			end
 		end,
 	},
 	{
@@ -1097,7 +1134,7 @@ local to_insert = {
 			local amount = tonumber(GlobalsGetValue("graham_extra_slots_amount", "0") or "0")
 			if amount < 1 then
 				EntityAddComponent2(entity_who_picked, "LuaComponent", {
-					_tags = "perk_component",
+					_tags = "perk_component,graham_extraslots",
 					script_source_file = "mods/grahamsperks/files/scripts/extra_slots.lua",
 					execute_every_n_frame = 5,
 				})
@@ -1108,13 +1145,13 @@ local to_insert = {
 		end,
 		func_remove = function(entity_who_picked)
 			GlobalsSetValue("graham_extra_slots_amount", "0")
+			removelua(entity_who_picked, "graham_extraslots")
 		end,
 	},
-
 }
-
 
 local len = #perk_list
 for i=1, #to_insert do
+	to_insert[i]._remove = to_insert[i].func_remove
 	perk_list[len+i] = to_insert[i]
 end

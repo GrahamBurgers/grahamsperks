@@ -1,0 +1,22 @@
+<Entity tags="bleedingedge">
+
+    <GameEffectComponent 
+        effect="NONE"
+        frames="1"
+    >
+	</GameEffectComponent>
+
+	<InheritTransformComponent>
+    </InheritTransformComponent>
+
+	<UIIconComponent
+		name="$perkname_graham_edge"
+		description="$biomemodifierdesc_booby_trapped"
+		icon_sprite_file="mods/grahamsperks/files/effects/bleedingedge.png"
+		is_perk="0"
+		display_above_head="1"
+		display_in_hud="1"
+		>
+	</UIIconComponent>
+
+</Entity>

@@ -1,4 +1,4 @@
-<Entity tags="perk_entity">
+<Entity tags="perk_entity,graham_fortuneteller">
 
     <InheritTransformComponent>
     </InheritTransformComponent>

@@ -29,10 +29,7 @@ function item_pickup( entity_item, entity_who_picked, name )
             EntityRefreshSprite(eyes[i], temp)
         end
 
-        EntitySetComponentIsEnabled(eyes[i], EntityGetFirstComponentIncludingDisabled(eyes[i], "HitboxComponent") or 0, true)
-        EntitySetComponentIsEnabled(eyes[i], EntityGetFirstComponentIncludingDisabled(eyes[i], "ParticleEmitterComponent") or 0, true)
-        EntitySetComponentIsEnabled(eyes[i], EntityGetFirstComponentIncludingDisabled(eyes[i], "DamageModelComponent") or 0, true)
-        EntitySetComponentIsEnabled(eyes[i], EntityGetFirstComponentIncludingDisabled(eyes[i], "GenomeDataComponent") or 0, true)
+        EntitySetComponentsWithTagEnabled(eyes[i], "graham_bloodorb", true)
     end
 
     local robots = GlobalsGetValue( "GRAHAM_ROBOTS_COUNT", "0" )

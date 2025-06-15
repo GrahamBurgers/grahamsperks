@@ -1,4 +1,4 @@
-<Entity tags="perk_entity,warmth_affector">
+<Entity tags="perk_entity,warmth_affector,graham_heatwave">
 
 	<InheritTransformComponent>
 	</InheritTransformComponent>
@@ -34,7 +34,7 @@
 		gravity.y="0.0"
 		lifetime_min="0.2"
 		lifetime_max="1"
-		count_min="4"
+		count_min="2"
 		count_max="8"
 		render_on_grid="1"
 		fade_based_on_lifetime="1"
@@ -44,7 +44,7 @@
 		airflow_time="0.1"
 		airflow_scale="0.5"
 		emission_interval_min_frames="1"
-		emission_interval_max_frames="1"
+		emission_interval_max_frames="4"
 		emit_cosmetic_particles="1"
 		is_emitting="1" 
 		area_circle_sector_degrees="360"
@@ -57,5 +57,10 @@
 		value_float="20"
 		>
 	</VariableStorageComponent>
+
+	<LuaComponent
+		script_source_file="mods/grahamsperks/files/entities/heatwave.lua"
+		execute_every_n_frame="180"
+	></LuaComponent>
 
 </Entity>

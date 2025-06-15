@@ -1,4 +1,4 @@
-<Entity>
+<Entity tags="graham_blindspot">
 	<InheritTransformComponent>
     </InheritTransformComponent>
 
