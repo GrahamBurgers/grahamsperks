@@ -58,7 +58,7 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
 				local particles = EntityGetComponent(projectiles[i], "ParticleEmitterComponent") or {}
 				for k = 1, #particles do
 					ComponentSetValue2(particles[k], "create_real_particles", false)
-					ComponentSetValue2(particles[k], "emitted_material_name", CellFactory_GetType("spark_green"))
+					ComponentSetValue2(particles[k], "emitted_material_name", "spark_green")
 				end
 				local damage = ComponentGetValue2(proj, "damage") +
 					get(proj, "damage_by_type", "melee") +
