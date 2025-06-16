@@ -19,5 +19,11 @@ for i = 1, #particles do
     ComponentSetValue2(particles[i], "count_min", size / 2)
     ComponentSetValue2(particles[i], "count_max", size / 2)
 end
-local new = EntityGetFirstComponent(eid, "ProjectileComponent") or 0
-ComponentSetValue2(new, "friendly_fire", friendlyfire)
+local new = EntityGetFirstComponentIncludingDisabled(eid, "ProjectileComponent")
+if new then
+    ComponentSetValue2(new, "friendly_fire", friendlyfire)
+    ComponentSetValue2(new, "collide_with_shooter_frames", friendlyfire and 0 or -1)
+    ComponentObjectSetValue2(new, "damage_by_type", "curse", size * 0.006)
+end
+local gae = EntityGetFirstComponentIncludingDisabled(eid, "GameAreaEffectComponent")
+if gae then ComponentSetValue2(gae, "radius", size * 0.8) end

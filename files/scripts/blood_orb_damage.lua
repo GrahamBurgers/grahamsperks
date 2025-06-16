@@ -16,7 +16,7 @@ function damage_received( dmg, msg, source )
 			local hm = EntityGetTransform( source )
 			
 			if ( hm ~= nil ) and (hp > 0) then
-				dmg = dmg * 1.5
+				dmg = dmg * 1
 				EntityInflictDamage( source, dmg, "DAMAGE_CURSE", "$damage_orb_blood", "BLOOD_SPRAY", 0, 0, me )
 			end
 		end

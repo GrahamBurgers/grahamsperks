@@ -21,5 +21,3 @@ for i = 1, #items do
     end
 end
 EntitySetComponentIsEnabled(me, interact, true)
-local message = GameTextGet("$graham_fortuneteller", tostring(math.ceil(50 * 0.8 ^ tonumber(GlobalsGetValue( "GRAHAM_FORTUNETELLER_COUNT", "-1" )))))
-ComponentSetValue2(interact, "ui_text", message)

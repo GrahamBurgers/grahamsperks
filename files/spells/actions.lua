@@ -1869,7 +1869,7 @@ local to_insert = {
 		spawn_level         = "0,1,2,3,4,5",
 		spawn_nonsense      = {0.4,0.4,0.2,0.2,0.3,0.2},
 		price               = 200,
-		mana                = 20,
+		mana                = 30,
 		max_uses            = 8,
 		action              = function()
 			add_projectile("mods/grahamsperks/files/spells/cloud_hail.xml")

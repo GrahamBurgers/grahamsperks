@@ -26,17 +26,18 @@
 		image_file="mods/grahamsperks/files/entities/fireplace_fire_anim.xml"
 		alpha="0.9"
 		offset_x="8"
-		offset_y="14"
+		offset_y="15"
 		additive="0"
 		emissive="0" >
 	</SpriteComponent>
 
 	<!-- main sprite -->
 	<SpriteComponent
-		image_file="mods/grahamsperks/files/entities/fireplace_anim.xml"
+		image_file="mods/grahamsperks/files/entities/fireplace_mallow.png"
 		alpha="0.9"
-		offset_x="8"
-		offset_y="14"
+		z_index="2"
+		offset_x="10"
+		offset_y="17"
 		additive="0"
 		emissive="0" >
 	</SpriteComponent>

@@ -46,7 +46,7 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
 		-- find nearby projectiles
 		local projectiles = EntityGetInRadiusWithTag(x, y, 500, "projectile") or {}
 		for i = 1, #projectiles do
-			local proj = EntityGetFirstComponent(projectiles[i], "ProjectileComponent") or {}
+			local proj = EntityGetFirstComponentIncludingDisabled(projectiles[i], "ProjectileComponent") or {}
 			-- if this owns them, make them friendly
 			if ComponentGetValue2(proj, "mWhoShot") == me then
 				-- make sprites transparent
@@ -77,7 +77,7 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
 					get(proj, "damage_by_type", "holy") +
 					get(proj, "config_explosion", "damage") * 0.35
 				ComponentSetValue2(proj, "damage", 0)
-				ComponentObjectSetValue2(proj, "damage_by_type", "healing", damage * -0.75)
+				ComponentObjectSetValue2(proj, "damage_by_type", "healing", math.min(-0.08, damage * -0.75))
 
 				EntityAddComponent2(projectiles[i], "SpriteComponent", {
 					image_file="mods/grahamsperks/files/entities/repossession_heal.png",
@@ -119,11 +119,13 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
 				ComponentSetValue2(proj, "mWhoShot", player)
 				ComponentSetValue2(proj, "mShooterHerdId", StringToHerdId("player"))
 				ComponentSetValue2(proj, "friendly_fire", true)
-				ComponentSetValue2(proj, "spawn_entity", "data/entities/particles/heal_effect.xml")
-				ComponentSetValue2(proj, "on_collision_spawn_entity", true)
+				ComponentSetValue2(proj, "spawn_entity", "")
+				ComponentSetValue2(proj, "on_collision_spawn_entity", false)
 				ComponentSetValue2(proj, "on_collision_die", true)
 				ComponentSetValue2(proj, "on_death_explode", true)
-				ComponentSetValue2(proj, "damage_game_effect_entities", "")
+				ComponentSetValue2(proj, "collide_with_entities", true)
+				ComponentSetValue2(proj, "lifetime", ComponentGetValue2(proj, "lifetime") * 1.5)
+				ComponentSetValue2(proj, "damage_game_effect_entities", "data/entities/particles/heal_effect.xml")
 				ComponentObjectSetValue2(proj, "config_explosion", "explosion_sprite", "data/particles/explosion_016_slime.xml")
 				ComponentObjectSetValue2(proj, "config_explosion", "create_cell_probability", 0)
 				ComponentObjectSetValue2(proj, "config_explosion", "damage", 0)

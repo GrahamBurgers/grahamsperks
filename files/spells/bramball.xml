@@ -29,7 +29,7 @@
     shoot_light_flash_b="0"
     shoot_light_flash_radius="48"
 	knockback_force="1.0"
-	damage_every_x_frames="12"
+	damage_every_x_frames="18"
 	physics_impulse_coeff="2000"
 	explosion_dont_damage_shooter="1"
     on_collision_die="0"

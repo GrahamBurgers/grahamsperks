@@ -15,7 +15,7 @@
 
     <InteractableComponent
         radius="2"
-        ui_text="null"
+        ui_text="$graham_fortuneteller2"
     ></InteractableComponent>
 
 </Entity>

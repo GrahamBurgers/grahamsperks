@@ -88,8 +88,8 @@
 	
 	<DamageModelComponent 
 		_tags="graham_bloodorb"
-		hp="4.8"
-		max_hp="4.8"
+		hp="3.2"
+		max_hp="3.2"
 		ragdoll_filenames_file=""
 		blood_material="plasma_fading"
 		blood_spray_material="plasma_fading"

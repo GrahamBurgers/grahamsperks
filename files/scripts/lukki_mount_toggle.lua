@@ -11,7 +11,7 @@ function interacting( entity_who_interacted, entity_interacted, interactable_nam
     local comp = EntityGetFirstComponent(me, "InteractableComponent") or 0
     if interactable_name == "graham_lukki_mount" then
         ComponentSetValue2(comp, "name", "graham_lukki_dismount")
-        ComponentSetValue2(comp, "ui_text", "$graham_lukki_dismount")
+        ComponentSetValue2(comp, "ui_text", "$graham_lukki_dismount2")
         EntitySetComponentsWithTagEnabled(me, "graham_lukki_mount", true)
         EntitySetComponentsWithTagEnabled(me, "graham_lukki_dismount", false)
         ComponentSetValue2(varsto, "value_int", entity_who_interacted)
@@ -28,7 +28,7 @@ function interacting( entity_who_interacted, entity_interacted, interactable_nam
         end
     else
         ComponentSetValue2(comp, "name", "graham_lukki_mount")
-        ComponentSetValue2(comp, "ui_text", "$graham_lukki_mount")
+        ComponentSetValue2(comp, "ui_text", "$graham_lukki_mount2")
         EntitySetComponentsWithTagEnabled(me, "graham_lukki_mount", false)
         EntitySetComponentsWithTagEnabled(me, "graham_lukki_dismount", true)
         ComponentSetValue2(varsto, "value_int", 0)

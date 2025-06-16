@@ -47,10 +47,10 @@ if( damagemodels ~= nil ) then
             -- Very excessive use of parentheses cause I think I forgot the order of operations
             local display = math.floor(max_hp * 25 - fireplace_hp_used * 25)
             if display > 0 then
-                ComponentSetValue2( uiinfo, "ui_text", tostring(display) .. " health remaining")
+                ComponentSetValue2( uiinfo, "ui_text", GameTextGet("$graham_campfire_xleft", tostring(display)))
                 ComponentSetValue2(sprite, "alpha", 0.1 + trans )
             else
-                ComponentSetValue2( uiinfo, "ui_text", "0 health left")
+                ComponentSetValue2( uiinfo, "ui_text", GameTextGet("$graham_campfire_empty"))
                 ComponentSetValue2(sprite, "alpha", 0 )
             end
         break

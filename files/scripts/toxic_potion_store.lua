@@ -12,6 +12,7 @@ for i = 1, #comps do
     ComponentSetValue2(comps[i], "damage", 0)
     ComponentSetValue2(comps[i], "penetrate_world", false)
     ComponentSetValue2(comps[i], "penetrate_entities", false)
+    ComponentSetValue2(comps[i], "collide_with_entities", true)
 end
 
 EntityAddComponent2(GetUpdatedEntityID(), "VariableStorageComponent", {
