@@ -849,6 +849,9 @@ function OnMagicNumbersAndWorldSeedInitialized()
 
 	if ModIsEnabled("Apotheosis") then
 		text = text:gsub([[pos_x="15090"]], [[pos_x="22770"]])
+		text = text:gsub([[pos_x="(-?%d+)"([^>]+candyheart[^>]+>)]], function (num, rest)
+			return string.format([[pos_x="%d"%s]], tonumber(num) - 512, rest)
+		end)
 	end
 	local content = ModTextFileGetContent(biome_path)
 	content = content:gsub("<mBufferedPixelScenes>", text)
