@@ -4,7 +4,32 @@ local controlscomp = EntityGetFirstComponent(root, "ControlsComponent") or 0
 local comp = EntityGetFirstComponentIncludingDisabled(entity_id, "VariableStorageComponent") or 0
 local me = ComponentGetValue2(comp, "value_string")
 
-if ComponentGetValue2(controlscomp, "mButtonFrameRightClick") == GameGetFrameNum() then
+function isButtonJustDownApotheosis(key_name)
+    local binding = ModSettingGet(table.concat({"Apotheosis.bind_",key_name}))
+    local mode = "key_code"
+    for code in string.gmatch(binding, "[^,]+") do
+        if code == "mouse_code" or code == "key_code" or code == "joystick_code" then
+            mode = code
+        else
+            code = tonumber(code)
+            if (mode == "key_code" and InputIsKeyJustDown(code))
+            or (mode == "mouse_code" and InputIsMouseButtonJustDown(code))
+            or (mode == "joystick_code" and InputIsJoystickButtonJustDown(0, code)) then
+                return true
+            end
+        end
+    end
+end
+
+local should_toggle = false
+
+if ModIsEnabled("Apotheosis") then
+    should_toggle = isButtonJustDownApotheosis("altfire")
+else
+    should_toggle = ComponentGetValue2(controlscomp, "mButtonFrameRightClick") == GameGetFrameNum()
+end
+
+if should_toggle then
     -- shared script; find out which toggler we are
     if me == "GRAHAM_TOGGLER_ALT" then
 
