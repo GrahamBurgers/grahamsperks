@@ -354,25 +354,6 @@ local patches = {
         to      = [[CreateItemActionEntity%( "GRAHAM_GOLDEN", x + 128, y - 16%)
 		EntityKill%( entity_id %)]],
     },
-	{ -- Make glimmer spells work with plasma emitters. Thank you Conga Lyne!!! (and Sharpy796!)
-		path    = "data/scripts/projectiles/colour_spell.lua",
-		from    = "comps %= EntityGetComponent%( entity_id, \"ParticleEmitterComponent\" %)",
-		to      = [[comps = EntityGetComponent( entity_id, "LaserEmitterComponent" )
-	if ( comps ~= nil ) then
-		for i,v in ipairs( comps ) do
-		-- for k=1,#comps do
-			-- local v = comps[k]
-			if ( particle ~= nil ) then
-				ComponentObjectSetValue2( v, "laser", "beam_particle_type", CellFactory_GetType(particle))
-				ComponentObjectSetValue2( v, "laser", "beam_particle_chance", 90)
-			else
-				ComponentObjectSetValue2( v, "laser", "beam_particle_chance", 0)
-			end
-		end
-	end
-		
-	comps = EntityGetComponentIncludingDisabled( entity_id, "ParticleEmitterComponent" )]],
-	},
 	-- 11/25/24: stupid silly stupid hardcoded freezy effects
 	{
         path    = "data/entities/misc/material_converter_freeze.xml",

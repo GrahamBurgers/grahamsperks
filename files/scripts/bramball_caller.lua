@@ -3,7 +3,6 @@ local x, y = EntityGetTransform(me)
 local bramballs = EntityGetInRadiusWithTag(x, y, 2, "graham_bramball") or {}
 for i = 1, #bramballs do
     EntityRemoveTag(bramballs[i], "graham_bramball")
-    local x2, y2 = EntityGetTransform(bramballs[i])
     local vel = EntityGetFirstComponentIncludingDisabled(bramballs[i], "VelocityComponent")
     if vel then
         ComponentSetValue2(vel, "terminal_velocity", 0.1)

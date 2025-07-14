@@ -17,7 +17,7 @@ for i = 1, #entities do
 
 		if EntityGetComponent(entities[i], "PhysicsBodyComponent") == nil and EntityGetComponent(entities[i], "PhysicsBody2Component") == nil and not EntityHasTag(entities[i], "glue_NOT") then
 			if math.sqrt((bx - x)^2 + (by - y)^2) < radius then
-				EntityApplyTransform(entities[i], ex + (bx - ex) / 6, ey + (by - ey) / 4)
+				EntityApplyTransform(entities[i], ex + (bx - ex) / 4, ey + (by - ey) / 3)
 				local velocity = EntityGetFirstComponentIncludingDisabled(entities[i], "CharacterDataComponent") or 0
 				if velocity ~= 0 then
 					ComponentSetValue2(velocity, "mVelocity", 0, 0)
