@@ -1,4 +1,4 @@
-<Entity tags="projectile_player,graham_bramball" name="$projectile_default">
+<Entity tags="projectile_player,graham_bramball,graham_brambles_active" name="$projectile_default">
 
 	<Base file="data/entities/base_projectile.xml" >
 		<VelocityComponent
