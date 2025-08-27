@@ -7,32 +7,49 @@
         aabb_max_y="3"
     ></HitboxComponent>
 
-	<GenomeDataComponent 
-	herd_id="player"
-	food_chain_rank="7"
-	is_predator="1" >
-	</GenomeDataComponent>
-
-    <SimplePhysicsComponent
-        _tags="enabled_in_world" 
-    ></SimplePhysicsComponent>
-
     <VelocityComponent
         _tags="enabled_in_world"
 		gravity_y="0"
+		displace_liquid="0"
     ></VelocityComponent>
 
 	<!-- ghost functionality and visuals -->		
 	<SpriteComponent 
 		image_file="mods/grahamsperks/files/entities/tipsy_ghost/tipsy_ghost_anim.xml"
+		z_index="-0.5"
 		>
+	</SpriteComponent>
+
+	<SpriteComponent 
+		offset_x="3"
+		offset_y="7"
+		never_ragdollify_on_death="1"
+		z_index="-0.45"
+		image_file="mods/grahamsperks/files/entities/tipsy_ghost/charge_slider_back.png" >
+	</SpriteComponent>
+
+	<SpriteComponent 
+		_tags="tipsy_slider"
+		offset_x="3"
+		offset_y="7"
+		has_special_scale="1"
+		special_scale_x="1"
+		special_scale_y="1"
+		never_ragdollify_on_death="1"
+		z_index="-0.5"
+		image_file="mods/grahamsperks/files/entities/tipsy_ghost/charge_slider_tipsy.png" >
 	</SpriteComponent>
 
 	<LuaComponent 
 		script_source_file="mods/grahamsperks/files/scripts/tipsy_ghost.lua"
-		execute_every_n_frame="600"
-		>
-	</LuaComponent>
+		execute_every_n_frame="1"
+	></LuaComponent>
+
+	<VariableStorageComponent
+		_tags="tipsy_ghost_charge"
+		value_float="0"
+		value_int="0"
+	></VariableStorageComponent>
 	
 	<LuaComponent 
 		script_source_file="data/scripts/animals/tiny_ghost_move.lua"
@@ -41,23 +58,11 @@
 	</LuaComponent>
 
 	<CellEaterComponent
-		radius="20"
-		eat_probability="2"
+		radius="150"
+		eat_probability="100"
 		limited_materials="1"
-        materials="urine,soil"
+        materials="alcohol_gas"
 	></CellEaterComponent>
-
-	<LuaComponent 
-		script_source_file="mods/grahamsperks/files/scripts/tipsy_ghost_chomp.lua"
-		execute_every_n_frame="1"
-		>
-	</LuaComponent>
-
-	<LuaComponent 
-		script_source_file="mods/grahamsperks/files/scripts/drunk_immunity.lua"
-		execute_every_n_frame="1"
-		>
-	</LuaComponent>
 	
 	<AudioComponent
 		file="data/audio/Desktop/animals.bank"

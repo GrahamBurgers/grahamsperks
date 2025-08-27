@@ -11,7 +11,7 @@ if comp ~= 0 then
 			GamePrint( "$graham_perk_unlock_sheep" )
 			EntityLoad("data/entities/particles/image_emitters/orb_effect.xml", x, y-40)
 			EntityLoad("data/entities/particles/image_emitters/magical_symbol_fast.xml", x, y-40)
-			perk_spawn(x, y-40, "GRAHAM_SHEEPIFICATION")
+			perk_spawn(x, y-40, "GRAHAM_SHEEPIFICATION", true)
 		end
 	end
 end
@@ -24,7 +24,7 @@ if robotic >= 3 and HasFlagPersistent("graham_progress_robot") ~= true then
     GamePrint( "$graham_perk_unlock_robot" )
 	EntityLoad("data/entities/particles/image_emitters/orb_effect.xml", x, y-40)
 	EntityLoad("data/entities/particles/image_emitters/magical_symbol_fast.xml", x, y-40)
-	perk_spawn(x, y-40, "GRAHAM_MATERIALIST")
+	perk_spawn(x, y-40, "GRAHAM_MATERIALIST", true)
 end
 
 local children = EntityGetAllChildren(player) or {}
@@ -39,7 +39,7 @@ for i, child in ipairs(children) do
 					GamePrint( "$graham_perk_unlock_tech" )
 					EntityLoad("data/entities/particles/image_emitters/orb_effect.xml", x, y-40)
 					EntityLoad("data/entities/particles/image_emitters/magical_symbol_fast.xml", x, y-40)
-					perk_spawn(x, y-40, "GRAHAM_ROBOTS")
+					perk_spawn(x, y-40, "GRAHAM_ROBOTS", true)
 				end
 			end
 		end

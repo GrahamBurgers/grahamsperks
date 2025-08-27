@@ -41,6 +41,12 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
 		orig_death(damage_type_bit_field, damage_message, entity_thats_responsible, drop_items)
 	end
 
+	local tipsy = EntityGetInRadiusWithTag(x, y, 240, "tipsy_ghost")
+	if #tipsy > 0 and GameGetGameEffectCount(me, "DRUNK") > 0 then
+		dofile_once("data/scripts/lib/utilities.lua")
+		shoot_projectile(EntityGetRootEntity(tipsy[1]), "mods/grahamsperks/files/entities/tipsy_ghost/tipsy_homing.xml", x, y, 0, -300)
+	end
+
 	if GameHasFlagRun("PERK_PICKED_GRAHAM_REPOSSESSION") then
 		local player = EntityGetClosestWithTag(x, y, "player_unit")
 		-- find nearby projectiles
@@ -147,7 +153,7 @@ function death(damage_type_bit_field, damage_message, entity_thats_responsible, 
 					EntityLoad("data/entities/particles/image_emitters/orb_effect.xml", x, y-5)
 					EntityLoad("data/entities/particles/image_emitters/magical_symbol_fast.xml", x, y-5)
 					dofile_once("data/scripts/perks/perk.lua")
-					perk_spawn(x, y-8, "GRAHAM_LUCKYDAY")
+					perk_spawn(x, y-8, "GRAHAM_LUCKYDAY", true)
 				end
 			end
 		end

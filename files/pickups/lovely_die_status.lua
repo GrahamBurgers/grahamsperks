@@ -100,7 +100,7 @@ if ( variablestorages ~= nil ) then
 					anim = "rolled_bad"
 					dofile_once("data/scripts/perks/perk.lua")
 					local x, y = EntityGetTransform(players[1])
-					local perk = perk_spawn(x, y, "GENOME_MORE_HATRED") or 0
+					local perk = perk_spawn(x, y, "GENOME_MORE_HATRED", true) or 0
 					perk_pickup(perk, players[1], EntityGetName(perk), true, false)
 				else
 					textprint = textprint .. "good"

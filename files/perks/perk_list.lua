@@ -478,8 +478,6 @@ local to_insert = {
 				GameAddFlagRun("player_status_tipsy_ghost")
 				add_ghostness_level(entity_who_picked)
 			end
-
-			ConvertMaterialEverywhere(CellFactory_GetType("alcohol_gas"), CellFactory_GetType("graham_air"))
 		end,
 		func_remove = function(entity_who_picked)
 			reset_perk_pickup_event("GHOST")

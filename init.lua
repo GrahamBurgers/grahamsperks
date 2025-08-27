@@ -733,7 +733,7 @@ function OnPlayerSpawned(player)
 				ComponentSetValue2(dmg, "hp", ComponentGetValue2(dmg, "hp") * 1.5)
 				ComponentSetValue2(dmg, "max_hp", ComponentGetValue2(dmg, "max_hp") * 1.5)
 			end
-			local eid = perk_spawn_random(x, y)
+			local eid = perk_spawn_random(x, y, true)
 			perk_pickup(eid, player, EntityGetName(eid), true, false)
 		end
 

@@ -1,0 +1,195 @@
+<Entity name="$projectile_default" tags="projectile_player" >
+
+	<Base file="data/entities/base_projectile.xml" >
+		<VelocityComponent
+			gravity_y="0"
+			air_friction="-0.5"
+			mass="0.04"
+			liquid_drag="0"
+		></VelocityComponent>
+	</Base>
+
+  <ProjectileComponent 
+    _enabled="1" 
+    lob_min="0.5"
+    lob_max="0.7"
+    speed_min="750"
+    speed_max="850"
+    friction="1"
+    direction_random_rad="0.00"
+    on_death_explode="1"
+    on_death_gfx_leave_sprite="0" 
+    on_lifetime_out_explode="1"
+    explosion_dont_damage_shooter="1"
+    on_collision_die="1"
+    lifetime="90"
+    damage="0.08"
+	penetrate_world="1"
+	penetrate_world_velocity_coeff="1"
+    velocity_sets_scale="1"
+    lifetime_randomness="7"
+    ragdoll_force_multiplier="0.005"
+    hit_particle_force_multiplier="0.1"
+    muzzle_flash_file="data/entities/particles/muzzle_flashes/muzzle_flash_small_pink.xml"
+    shoot_light_flash_r="128"
+    shoot_light_flash_g="55"
+    shoot_light_flash_b="0"
+    shoot_light_flash_radius="64" 
+	knockback_force="0"
+	friendly_fire="0"
+	never_hit_player="1"
+	>
+    <config_explosion
+      never_cache="1" 
+      damage="0.0"
+      camera_shake="0.5" 
+      explosion_radius="24" 
+      explosion_sprite="" 
+      explosion_sprite_lifetime="0"
+      hole_destroy_liquid="0" 
+      hole_enabled="1" 
+      ray_energy="1400000"
+      max_durability_to_destroy="8"
+      particle_effect="0" 
+      damage_mortals="1"
+	  create_cell_material="alcohol"
+	  create_cell_probability="20"
+	  physics_explosion_power.min="0.22"
+      physics_explosion_power.max="0.3" 
+      physics_throw_enabled="1" 
+      shake_vegetation="1" 
+      sparks_count_max="20" 
+      sparks_count_min="7" 
+      sparks_enabled="0"  
+      material_sparks_enabled="1"
+      material_sparks_count_max="2"
+      material_sparks_count_min="0" 
+      light_enabled="0" 
+      stains_enabled="1"
+      stains_radius="3" >
+    </config_explosion>
+  </ProjectileComponent>
+
+	<HomingComponent
+  		detect_distance="350"
+		just_rotate_towards_target="1"
+		max_turn_rate="0.3"
+	></HomingComponent>
+
+  	<!-- dense emitter -->
+	<ParticleEmitterComponent 
+		emitted_material_name="graham_ia_orange"
+		cosmetic_force_create="1"
+		offset.x="0"
+		offset.y="0"
+		x_pos_offset_min="0"
+		x_pos_offset_max="0"
+		y_pos_offset_min="0"
+		y_pos_offset_max="0"
+		x_vel_min="0"
+		x_vel_max="0"
+		y_vel_min="0"
+		y_vel_max="0"
+		gravity.y="0.0"
+		count_min="10"
+		count_max="15"
+		collide_with_grid="0"
+		collide_with_gas_and_fire="0"
+		area_circle_radius.min="0"
+		area_circle_radius.max="2"
+		velocity_always_away_from_center="24"
+		fade_based_on_lifetime="1"
+		lifetime_min="2"
+		lifetime_max="7"
+		is_trail="1"
+		trail_gap="0"
+		render_on_grid="1"
+		render_back="0"
+		airflow_force="0"
+		airflow_time="0"
+		airflow_scale="0"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="1"
+		emit_cosmetic_particles="1"
+		create_real_particles="0"
+		is_emitting="1" >
+	</ParticleEmitterComponent>
+
+	<SpriteComponent
+		image_file="data/particles/fog_of_war_hole.xml"
+		fog_of_war_hole="1"
+		has_special_scale="1"
+		special_scale_x="4"
+		special_scale_y="4"
+		offset_x="16.5"
+		offset_y="16.5"
+	></SpriteComponent>
+
+	<SpriteParticleEmitterComponent
+		sprite_file="data/particles/drunk.xml"
+		delay="0"
+		lifetime="1.5"
+		color.r="1" color.g="1" color.b="1" color.a="1"
+		color_change.r="0" color_change.g="0" color_change.b="0" color_change.a="-0.5"
+		velocity.x="0" velocity.y="0"
+		gravity.x="0" gravity.y="10"
+		velocity_slowdown="0"
+		rotation="0"
+		angular_velocity="0"
+		use_velocity_as_rotation="0"
+		scale.x="1" scale.y="1"
+		scale_velocity.x="0" scale_velocity.y="0"
+		emission_interval_min_frames="6"
+		emission_interval_max_frames="6"
+		count_min="1" count_max="1"
+		randomize_rotation.min="-0.1415"
+		randomize_rotation.max="0.1415"
+		randomize_position.min_x="5"
+		randomize_position.max_x="5"
+		randomize_position.min_y="-5"
+		randomize_position.max_y="-5"
+		randomize_velocity.min_x="-5"
+		randomize_velocity.max_x="5"
+		randomize_velocity.min_y="-5"
+		randomize_velocity.max_y="-5"
+		>
+	</SpriteParticleEmitterComponent>
+
+	<ParticleEmitterComponent 
+		emitted_material_name="urine"
+		create_real_particles="1"
+		offset.x="0"
+		offset.y="0"
+		x_pos_offset_min="1"
+		x_pos_offset_max="1"
+		y_pos_offset_min="1"
+		y_pos_offset_max="1"
+		x_vel_min="10"
+		x_vel_max="20"
+		y_vel_min="0"
+		y_vel_max="0"
+		gravity.y="0.0"
+		count_min="1"
+		count_max="1"
+		lifetime_min="1.4"
+		lifetime_max="1.5"
+		is_trail="1"
+		trail_gap="0.0"
+		render_on_grid="1"
+		fade_based_on_lifetime="1"
+		airflow_force="0.5"
+		airflow_time="0.5"
+		airflow_scale="0.05"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="1"
+		emit_cosmetic_particles="1"
+		is_emitting="1" >
+	</ParticleEmitterComponent>
+
+    <HitEffectComponent 
+		condition_effect="DRUNK"
+        effect_hit="LOAD_UNIQUE_CHILD_ENTITY"
+        value_string="mods/grahamsperks/files/entities/tipsy_ghost/boom.xml" >
+	</HitEffectComponent >
+
+</Entity>

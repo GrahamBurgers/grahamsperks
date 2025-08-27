@@ -28,7 +28,7 @@ if ( #eggs > 0) then
 				EntityLoad("data/entities/particles/image_emitters/orb_effect.xml", x2, y2)
 				EntityLoad("data/entities/particles/image_emitters/magical_symbol_fast.xml", x2, y2)
 				dofile_once("data/scripts/perks/perk.lua")
-				perk_spawn(x2, y2, "GRAHAM_LUKKI_MOUNT")
+				perk_spawn(x2, y2, "GRAHAM_LUKKI_MOUNT", true)
 				GamePlaySound("data/audio/Desktop/animals.bank", "animals/lukki_eggs/destroy", x2, y2)
 			else
 				-- if lukki mount is already unlocked, then babies
@@ -87,7 +87,7 @@ if ( #books > 0 ) then
 						EntityLoad("data/entities/particles/image_emitters/orb_effect.xml", x, y-40)
 						EntityLoad("data/entities/particles/image_emitters/magical_symbol_fast.xml", x, y-40)
 						dofile_once("data/scripts/perks/perk.lua")
-						perk_spawn(x, y-40, "GRAHAM_DEATH")
+						perk_spawn(x, y-40, "GRAHAM_DEATH", true)
 					end
 				else
 					EntityLoad("data/entities/particles/image_emitters/chest_effect.xml", tx, ty)

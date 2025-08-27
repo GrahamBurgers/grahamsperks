@@ -7,7 +7,7 @@ function on_open( entity_item )
 
     if HasFlagPersistent("graham_progress_immunity") == false then
         AddFlagPersistent("graham_progress_immunity")
-        perk_spawn(x, y, "GRAHAM_IMMUNITY_AURA")
+        perk_spawn(x, y, "GRAHAM_IMMUNITY_AURA", true)
         GameTriggerMusicFadeOutAndDequeueAll( 3.0 )
         GameTriggerMusicEvent( "music/oneshot/dark_03", true, x, y )
 
