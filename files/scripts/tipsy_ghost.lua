@@ -22,7 +22,7 @@ if #EntityGetAllChildren(player, "drunbk") > 0 then
     supercharge = true
 end
 
-if target then
+if target and not EntityHasTag(target, "graham_dummy") then
     local x2, y2 = EntityGetTransform(target)
     local ai = EntityGetFirstComponent(target, "AnimalAIComponent")
     if wait <= 0 and (not RaytracePlatforms(x, y, x2, y2)) and ai and ComponentGetValue2(ai, "mHasBeenAttackedByPlayer") then
