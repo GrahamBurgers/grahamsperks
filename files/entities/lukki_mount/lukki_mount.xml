@@ -83,11 +83,11 @@
 		can_jump="0" 
 		can_swim_on_surface="1" 
 		can_walk="1" 
-		cost_of_flying="500" 
-		distance_to_reach_node_x="30" 
-		distance_to_reach_node_y="30" 
-		frames_between_searches="20" 
-		frames_to_get_stuck="120" 
+		cost_of_flying="0" 
+		distance_to_reach_node_x="99999" 
+		distance_to_reach_node_y="99999" 
+		frames_between_searches="12" 
+		frames_to_get_stuck="11" 
 		initial_jump_lob="1" 
 		initial_jump_max_distance_x="100" 
 		initial_jump_max_distance_y="60" 
@@ -96,7 +96,9 @@
 		jump_speed="200" 
 		max_jump_distance_from_camera="400" 
 		search_depth_max_no_goal="120" 
-		search_depth_max_with_goal="145000" 
+		search_depth_max_with_goal="145000"
+		never_consider_line_of_sight="1"
+		space_required="4"
 		y_walking_compensation="8" >
 	</PathFindingComponent>
 
@@ -110,17 +112,21 @@
 
 	<IKLimbsAnimatorComponent
 		no_ground_attachment_penalty_coeff="0.05"
+		ground_attachment_ray_length_coeff="0.8"
+		leg_velocity_coeff="20"
+		future_state_samples="10"
 	></IKLimbsAnimatorComponent>
 
 	<PhysicsAIComponent
 		_tags="graham_lukki_dismount"
-		target_vec_max_len="15.0"
-		force_coeff="10.0"
-		force_balancing_coeff="0.8"
+		target_vec_max_len="60"
+		force_coeff="14"
+		force_balancing_coeff="1"
 		force_max="100"
 		torque_coeff="50"
 		torque_balancing_coeff="4"
 		torque_max="50.0"
+		free_if_static="1"
 		damage_deactivation_probability="0"
 		damage_deactivation_time_min="2"
 		damage_deactivation_time_max="10" >
@@ -129,7 +135,7 @@
 	<PhysicsBodyComponent 
 		force_add_update_areas="1"
 		hax_fix_going_through_ground="0"
-		hax_fix_going_through_sand="1"
+		hax_fix_going_through_sand="0"
 		is_character="1"
 		allow_sleep="0" 
 		angular_damping="0.02" 
@@ -147,7 +153,9 @@
 		restitution="0.3" >
 	</PhysicsShapeComponent>
 
-	<GenomeDataComponent 
+	<GenomeDataComponent
+		food_chain_rank="-9"
+		is_predator="1"
 		herd_id="player" >
 	</GenomeDataComponent>
 

@@ -1714,10 +1714,22 @@ local to_insert = {
 				local activeitem = 0
 				if inv2comp then
 					activeitem = ComponentGetValue2(inv2comp, "mActiveItem")
-					if #EntityGetAllChildren(activeitem, "graham_spelltype_projectile") or 0 > #EntityGetAllChildren(activeitem, "graham_spelltype_modifier") or 0 then
+					local sprite = "mods/grahamsperks/files/spells/mixup.png"
+					if activeitem > 0 and #(EntityGetAllChildren(activeitem, "graham_spelltype_projectile") or {}) > #(EntityGetAllChildren(activeitem, "graham_spelltype_modifier") or {}) then
 						current_reload_time = current_reload_time - 30
+						sprite = "mods/grahamsperks/files/spells/mixup_recharge.png"
 					else
 						c.damage_critical_chance = c.damage_critical_chance + 30
+						sprite = "mods/grahamsperks/files/spells/mixup_crits.png"
+					end
+					-- Sprite all the mixups on the wand
+					-- Code partially stolen from copi
+					for i, wand_action in ipairs(EntityGetAllChildren(activeitem, "card_action") or {}) do
+						local itemcomp = EntityGetFirstComponentIncludingDisabled(wand_action, "ItemComponent")
+						local itemaction = EntityGetFirstComponentIncludingDisabled(wand_action, "ItemActionComponent")
+						if itemcomp and itemaction and ComponentGetValue2(itemaction, "action_id") == "GRAHAM_MIXUP" then
+							ComponentSetValue2(itemcomp, "ui_sprite", sprite)
+						end
 					end
 				end
 			end
