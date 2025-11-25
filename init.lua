@@ -827,12 +827,16 @@ function OnMagicNumbersAndWorldSeedInitialized()
 		text = text:gsub(tech_chest_shuffle[number], [[pos_y="-999999"]])
 		table.remove(tech_chest_shuffle, number)
 	end
-
 	if ModIsEnabled("Apotheosis") then
-		text = text:gsub([[pos_x="15090"]], [[pos_x="22770"]])
-		text = text:gsub([[pos_x="(-?%d+)"([^>]+candyheart[^>]+>)]], function (num, rest)
-			return string.format([[pos_x="%d"%s]], tonumber(num) - 512, rest)
-		end)
+		local function shiftx(x)
+			return function (num, rest)
+				return string.format([[pos_x="%d"%s]], tonumber(num) + x, rest)
+			end
+		end
+		text = text:gsub([[pos_x="(-?%d+)"([^>]+candyheart[^>]+>)]], shiftx(512 * -1))
+		-- why does the regex not like the quotes or the minus sign on this particular number???
+		text = text:gsub([[pos_x="(-?%d+)"([^>]+pos_y=..4642.[^>]+chest_tech[^>]+>)]], shiftx(512 * 14))
+		text = text:gsub([[pos_x="(-?%d+)"([^>]+ll_spawner[^>]+>)]], shiftx(512 * 15))
 	end
 	local content = ModTextFileGetContent(biome_path)
 	content = content:gsub("<mBufferedPixelScenes>", text)
