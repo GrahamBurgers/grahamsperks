@@ -32,12 +32,19 @@
 	</ParticleEmitterComponent>
 
 	<LuaComponent
-		script_source_file="mods/grahamsperks/files/entities/goldblood.lua"
+		script_source_file="mods/grahamsperks/files/entities/goldblood_init.lua"
+		execute_on_added="1"
+		remove_after_executed="1"
 	></LuaComponent>
 
 	<LuaComponent
 		execute_every_n_frame="-1"
 		script_material_area_checker_success="mods/grahamsperks/files/entities/goldblood.lua"
 	></LuaComponent>
+
+	<VariableStorageComponent
+		_tags="goldblood"
+		value_int="1"
+	></VariableStorageComponent>
 
 </Entity>
