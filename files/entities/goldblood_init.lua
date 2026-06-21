@@ -15,8 +15,8 @@ local m = EntityAddComponent2(me, "MaterialAreaCheckerComponent", {
 	_tags="removable_thing",
 	look_for_failure=false,
 	update_every_x_frame=15,
-	material=CellFactory_GetType(Options[count].mat1 or "just_death"),
-	material2=CellFactory_GetType(Options[count].mat2 or "just_death"),
+	material=Get_type_or_panic(Options[count].mat1),
+	material2=Get_type_or_panic(Options[count].mat2),
 	kill_after_message=false,
 })
 ComponentSetValue2(m, "area_aabb", -5, 0, 5, 2)
@@ -25,8 +25,8 @@ m = EntityAddComponent2(me, "MaterialAreaCheckerComponent", {
 	_tags="removable_thing",
 	look_for_failure=false,
 	update_every_x_frame=15,
-	material=CellFactory_GetType(Options[count].mat3 or "just_death"),
-	material2=CellFactory_GetType(Options[count].mat4 or "just_death"),
+	material=Get_type_or_panic(Options[count].mat3),
+	material2=Get_type_or_panic(Options[count].mat4),
 	kill_after_message=false,
 })
 ComponentSetValue2(m, "area_aabb", -5, 0, 5, 2)

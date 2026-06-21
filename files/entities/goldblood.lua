@@ -8,6 +8,12 @@ Options = {
 	{img = "feast.png", reward="magic_liquid_hp_regeneration", mat1 = "graham_meatdone", mat2 = "meat_done", mat3 = "graham_meatgreedy", mat4 = "graham_meathealthy"},
 }
 
+function Get_type_or_panic(type)
+	local thing = CellFactory_GetType(type)
+	if thing == -1 then return CellFactory_GetType("shock_powder") end
+	return thing
+end
+
 function material_area_checker_success(x, y)
     local var = EntityGetFirstComponent(me, "VariableStorageComponent", "goldblood")
     local count = var and ComponentGetValue2(var, "value_int") or 1
@@ -18,8 +24,8 @@ function material_area_checker_success(x, y)
 	EntitySetTransform(entity, x, y)
 	EntityAddComponent2(entity, "MagicConvertMaterialComponent", {
 		kill_when_finished=true,
-		from_material=CellFactory_GetType(Options[count].mat1),
-		to_material=CellFactory_GetType(Options[count].reward),
+		from_material=Get_type_or_panic(Options[count].mat1),
+		to_material=Get_type_or_panic(Options[count].reward),
 		radius=30,
 		steps_per_frame=4,
 		clean_stains=false,
@@ -28,8 +34,8 @@ function material_area_checker_success(x, y)
 	})
 	EntityAddComponent2(entity, "MagicConvertMaterialComponent", {
 		kill_when_finished=true,
-		from_material=CellFactory_GetType(Options[count].mat2),
-		to_material=CellFactory_GetType(Options[count].reward),
+		from_material=Get_type_or_panic(Options[count].mat2),
+		to_material=Get_type_or_panic(Options[count].reward),
 		radius=30,
 		steps_per_frame=4,
 		clean_stains=false,
@@ -38,8 +44,8 @@ function material_area_checker_success(x, y)
 	})
 	EntityAddComponent2(entity, "MagicConvertMaterialComponent", {
 		kill_when_finished=true,
-		from_material=CellFactory_GetType(Options[count].mat3),
-		to_material=CellFactory_GetType(Options[count].reward),
+		from_material=Get_type_or_panic(Options[count].mat3),
+		to_material=Get_type_or_panic(Options[count].reward),
 		radius=30,
 		steps_per_frame=4,
 		clean_stains=false,
@@ -48,8 +54,8 @@ function material_area_checker_success(x, y)
 	})
 	EntityAddComponent2(entity, "MagicConvertMaterialComponent", {
 		kill_when_finished=true,
-		from_material=CellFactory_GetType(Options[count].mat4),
-		to_material=CellFactory_GetType(Options[count].reward),
+		from_material=Get_type_or_panic(Options[count].mat4),
+		to_material=Get_type_or_panic(Options[count].reward),
 		radius=30,
 		steps_per_frame=4,
 		clean_stains=false,
@@ -67,8 +73,8 @@ function material_area_checker_success(x, y)
         EntitySetTransform(entity, x, y)
         EntityAddComponent2(entity, "MagicConvertMaterialComponent", {
             kill_when_finished=true,
-            from_material=CellFactory_GetType("templebrick_diamond_static"),
-            to_material=CellFactory_GetType("graham_ash"),
+            from_material=Get_type_or_panic("templebrick_diamond_static"),
+            to_material=Get_type_or_panic("graham_ash"),
             radius=128,
             steps_per_frame=20,
             clean_stains=false,
@@ -77,8 +83,8 @@ function material_area_checker_success(x, y)
         })
         EntityAddComponent2(entity, "MagicConvertMaterialComponent", {
             kill_when_finished=true,
-            from_material=CellFactory_GetType("templebrick_golden_static"),
-            to_material=CellFactory_GetType("graham_ash"),
+            from_material=Get_type_or_panic("templebrick_golden_static"),
+            to_material=Get_type_or_panic("graham_ash"),
             radius=128,
             steps_per_frame=20,
             clean_stains=false,
