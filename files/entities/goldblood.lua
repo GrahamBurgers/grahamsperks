@@ -1,4 +1,3 @@
-local me = GetUpdatedEntityID()
 Options = {
 	{img = "bleed.png", reward="gold", mat1 = "blood", mat2 = "meat", mat3 = "blood_fading", mat4 = "apotheosis_blood_infectious"},
 	{img = "drown.png", reward="graham_statium", mat1 = "water", mat2 = "water_fading", mat3 = "graham_water_cloud", mat4 = "apotheosis_magic_liquid_suffocatium"},
@@ -15,6 +14,7 @@ function Get_type_or_panic(type)
 end
 
 function material_area_checker_success(x, y)
+	local me = GetUpdatedEntityID()
     local var = EntityGetFirstComponent(me, "VariableStorageComponent", "goldblood")
     local count = var and ComponentGetValue2(var, "value_int") or 1
 
