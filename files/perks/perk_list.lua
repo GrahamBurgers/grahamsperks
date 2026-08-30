@@ -1,6 +1,9 @@
 ---@diagnostic disable: undefined-global, param-type-mismatch
 dofile_once("data/scripts/lib/utilities.lua")
 
+local mod_origin = "$graham_mod_name"
+local mod_author = "$graham_author_name_graham"
+
 local function removechild(who, name)
 	local children = EntityGetAllChildren(who) or {}
 	for i = 1, #children do
@@ -1150,6 +1153,8 @@ local to_insert = {
 
 local len = #perk_list
 for i=1, #to_insert do
+	to_insert[i].origin = to_insert[i].origin or mod_origin
+	to_insert[i].author = to_insert[i].author or mod_author
 	to_insert[i]._remove = to_insert[i].func_remove
 	perk_list[len+i] = to_insert[i]
 end
