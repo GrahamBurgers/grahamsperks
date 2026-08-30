@@ -397,7 +397,7 @@ perkdesc_graham_fortuneteller,"When standing still, you can pay gold to summon a
 perkname_graham_straw,Silly Straw,,,,,,,,,,,,
 perkdesc_graham_straw,"When holding a potion, a handy straw gives you extra reach!",,,,,,,,,,,,
 perkname_graham_betrayal,Trick Betrayal,,,,,,,,,,,,
-perkdesc_graham_betrayal,"Enemy deaths caused by other enemies always count as trick kills, and grant double gold.",,,,,,,,,,,,
+perkdesc_graham_betrayal,"Enemy deaths caused by other enemies count as trick kills, and grant 4x gold instead of 2x.",,,,,,,,,,,,
 perkname_graham_extraslots,Wand Capacity +,,,,,,,,,,,,
 perkdesc_graham_extraslots,"All wands have their capacity randomly increased or decreased by up to 4, ignoring caps.",,,,,,,,,,,,
 perkname_graham_buyback,Buyback (One-off),,,,,,,,,,,,

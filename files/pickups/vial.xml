@@ -41,6 +41,11 @@
   <LuaComponent 
     script_death="data/scripts/items/potion_glass_break.lua" 
   ></LuaComponent>
+
+  <LuaComponent
+    script_source_file="mods/grahamsperks/files/pickups/vial.lua"
+    remove_after_executed="1"
+  ></LuaComponent>
   
   <PotionComponent
     _tags="enabled_in_hand,enabled_in_world"

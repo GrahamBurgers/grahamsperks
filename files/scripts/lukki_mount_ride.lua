@@ -1,8 +1,34 @@
 local me = GetUpdatedEntityID()
 local varsto = EntityGetFirstComponent(me, "VariableStorageComponent", "player_riding_id") or 0
 local player_riding = ComponentGetValue2(varsto, "value_int") or 0
+-- UNSTUCK!
+local x, y = EntityGetTransform(me)
+local TRY_UNSTUCK_COUNT = 100
+Unstuck_size = Unstuck_size or 0
+for i = 1, TRY_UNSTUCK_COUNT do
+    if RaytracePlatforms(x - 2, y - 2, x + 2, y + 2) then
+        Unstuck_size = Unstuck_size + 0.2
+        SetRandomSeed(Unstuck_size + GameGetFrameNum() + x, y + GameGetFrameNum() + 34029340 + i)
+        local theta = math.rad(Random( 1,360 ))
+        local yes
+        Unstuck_x = math.cos( theta ) * Unstuck_size
+        Unstuck_y = math.sin( theta ) * Unstuck_size
+        yes = RaytracePlatforms(x - Unstuck_x, y - Unstuck_y, x - Unstuck_x, y - Unstuck_y)
+        local hit, hx, hy = RaytracePlatforms(x, y, x + Unstuck_x, y + Unstuck_y)
+        if hit and not yes then
+            x = hx - Unstuck_x
+            y = hy - Unstuck_y
+            EntitySetTransform(me, x, y)
+            EntityApplyTransform(me, x, y)
+            EntityApplyTransform(player_riding, x, y - 4)
+        end
+    else
+        Unstuck_size = 0
+        break
+    end
+end
+
 if player_riding ~= 0 then
-    local x, y = EntityGetTransform(me)
     if EntityHasTag(player_riding, "player_unit") == false then
         -- panic
         local substitute = EntityGetClosestWithTag(x, y, "player_unit")
@@ -47,18 +73,25 @@ if player_riding ~= 0 then
         xv = xv * -0.1
         yv = yv * -0.1
         yv = yv - 0.30159 --stop falling
-        local anim = EntityGetFirstComponent(me, "IKLimbsAnimatorComponent")
-        if anim then
-            local stand = ComponentGetValue2(anim, "mHasGroundAttachmentOnAnyLeg")
-            if not stand then
-                yv = yv + 1
-            else
-                if ComponentGetValue2(comp, "mButtonDownDown") then yv = yv + 1.2 end
-                if ComponentGetValue2(comp, "mButtonDownUp") then yv = yv - 1.2 end
+        if Unstuck_x or Unstuck_y then
+            xv = (Unstuck_x or 0) * -2
+            yv = (Unstuck_y or 0) * -1
+            Unstuck_x = nil
+            Unstuck_y = nil
+        else
+            local anim = EntityGetFirstComponent(me, "IKLimbsAnimatorComponent")
+            if anim then
+                local stand = ComponentGetValue2(anim, "mHasGroundAttachmentOnAnyLeg")
+                if not stand then
+                    yv = yv + 1
+                else
+                    if ComponentGetValue2(comp, "mButtonDownDown") then yv = yv + 1.2 end
+                    if ComponentGetValue2(comp, "mButtonDownUp") then yv = yv - 1.2 end
+                end
             end
+            if ComponentGetValue2(comp, "mButtonDownRight") then xv = xv + 1 end
+            if ComponentGetValue2(comp, "mButtonDownLeft") then xv = xv - 1 end
         end
-        if ComponentGetValue2(comp, "mButtonDownRight") then xv = xv + 1 end
-        if ComponentGetValue2(comp, "mButtonDownLeft") then xv = xv - 1 end
         PhysicsApplyForce(me, xv * 30, yv * 60)
     end
 end
