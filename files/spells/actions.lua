@@ -1,4 +1,8 @@
 ---@diagnostic disable: undefined-global, lowercase-global
+
+local mod_origin = "$graham_mod_name"
+local mod_author = "$graham_author_name_graham"
+
 local to_insert = {
 	{
 		id                  = "GRAHAM_MIST_SWEET",
@@ -1969,6 +1973,9 @@ local choice = multipliers[setting] or 1
 
 local len = #actions
 for i = 1, #to_insert do
+	to_insert[i].origin = to_insert[i].origin or mod_origin
+	to_insert[i].author = to_insert[i].author or mod_author
+
 	local string = ""
 	for j, thing in ipairs(to_insert[i].spawn_nonsense) do
 		thing = thing * choice
