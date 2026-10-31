@@ -45,7 +45,7 @@ end
 ModLuaFileAppend("data/scripts/gun/gun_actions.lua", "mods/grahamsperks/files/spells/actions.lua")
 ModLuaFileAppend("data/scripts/perks/perk_list.lua", "mods/grahamsperks/files/perks/perk_list.lua")
 
-if not ModSettingGet("grahamsperks.Creepy") == true then
+if ModSettingGet("grahamsperks.Creepy") ~= false then
 	ModMaterialsFileAdd("mods/grahamsperks/files/materials/reactions_creepy.xml")
 end
 
