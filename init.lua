@@ -549,6 +549,29 @@ if HasFlagPersistent("graham_death_hp_boost") then
     })
 end
 
+if ModIsEnabled("new_enemies") then
+	table.insert(patches, {
+        path    = "mods/grahamsperks/files/scenes_list_35840.lua",
+        from    = "-3811",
+        to      = "-4102",
+    })
+	table.insert(patches, {
+        path    = "mods/grahamsperks/files/scenes_list_35840.lua",
+        from    = "10113",
+        to      = "10199",
+    })
+	table.insert(patches, {
+        path    = "mods/grahamsperks/files/scenes_list_52224.lua",
+        from    = "-3811",
+        to      = "-4102",
+    })
+	table.insert(patches, {
+        path    = "mods/grahamsperks/files/scenes_list_52224.lua",
+        from    = "10113",
+        to      = "10199",
+    })
+end
+
 local event_patches = {}
 local events = {
 	["10/31"] = function()

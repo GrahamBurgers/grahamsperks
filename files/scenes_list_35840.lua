@@ -97,9 +97,9 @@ return [[<mBufferedPixelScenes>
 <PixelScene pos_x="4573" pos_y="528" just_load_an_entity="mods/grahamsperks/files/pixelscenes/eye.xml"/>
 <PixelScene pos_x="40413" pos_y="528" just_load_an_entity="mods/grahamsperks/files/pixelscenes/eye.xml"/>
 <PixelScene pos_x="-31267" pos_y="528" just_load_an_entity="mods/grahamsperks/files/pixelscenes/eye.xml"/>
-<PixelScene pos_x="2000" pos_y="1735" just_load_an_entity="mods/grahamsperks/files/pixelscenes/closedeye.xml"/>
-<PixelScene pos_x="37840" pos_y="1735" just_load_an_entity="mods/grahamsperks/files/pixelscenes/closedeye.xml"/>
-<PixelScene pos_x="-33840" pos_y="1735" just_load_an_entity="mods/grahamsperks/files/pixelscenes/closedeye.xml"/>
+<PixelScene pos_x="2000" pos_y="1855" just_load_an_entity="mods/grahamsperks/files/pixelscenes/closedeye.xml"/>
+<PixelScene pos_x="37840" pos_y="1855" just_load_an_entity="mods/grahamsperks/files/pixelscenes/closedeye.xml"/>
+<PixelScene pos_x="-33840" pos_y="1855" just_load_an_entity="mods/grahamsperks/files/pixelscenes/closedeye.xml"/>
 <PixelScene pos_x="-5302" pos_y="575" just_load_an_entity="mods/grahamsperks/files/pixelscenes/materials.xml"/>
 <PixelScene pos_x="-6760" pos_y="7424" just_load_an_entity="mods/grahamsperks/files/pixelscenes/yinyang.xml"/>
 <PixelScene pos_x="29080" pos_y="7424" just_load_an_entity="mods/grahamsperks/files/pixelscenes/yinyang.xml"/>

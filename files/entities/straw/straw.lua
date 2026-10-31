@@ -52,9 +52,11 @@ if activeitem ~= 0 and EntityGetComponent(activeitem, "MaterialInventoryComponen
 			-- ComponentSetValue2(comp, "offset_x", DISTANCE)
 			ComponentSetValue2(comp, "special_scale_x", 1 * (multiplier ^ length))
 
-			local suck1 = EntityGetFirstComponent(child, "MaterialSuckerComponent") or 0
-			local suck2 = EntityGetFirstComponent(activeitem, "MaterialSuckerComponent") or 0
-			ComponentSetValue2(suck1, "material_type", ComponentGetValue2(suck2, "material_type"))
+			local suck1 = EntityGetFirstComponent(child, "MaterialSuckerComponent")
+			local suck2 = EntityGetFirstComponent(activeitem, "MaterialSuckerComponent")
+			if suck1 and suck2 then
+				ComponentSetValue2(suck1, "material_type", ComponentGetValue2(suck2, "material_type"))
+			end
 
 			local mat_inv = EntityGetFirstComponent(child, "MaterialInventoryComponent") or 0
 			local mats_list = ComponentGetValue2(mat_inv, "count_per_material_type")
