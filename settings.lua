@@ -215,7 +215,7 @@ local settings = {
         name    = translations[8][1],
         desc    = translations[8][2],
         type    = "boolean",
-        default = false,
+        default = true,
     },
     {
         id   = "Reset",
