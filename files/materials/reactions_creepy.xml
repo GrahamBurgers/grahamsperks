@@ -31,4 +31,28 @@
 	direction="bottom" >
     </Reaction>
 
+  <Reaction probability="1000"
+	input_cell1="graham_graymatter_liquid" 			input_cell2="[solid]"
+	output_cell1="graham_graymatter_liquid" 			output_cell2="graham_graymatter_liquid"
+	blob_radius1="2"	blob_radius2="2" >
+  </Reaction>
+
+  <Reaction probability="1000"
+	input_cell1="graham_graymatter_liquid" 			input_cell2="[sand_ground]"
+	output_cell1="graham_graymatter_liquid" 			output_cell2="graham_graymatter_liquid"
+	blob_radius1="2"	blob_radius2="2" >
+  </Reaction>
+
+  <Reaction probability="1000"
+	input_cell1="graham_graymatter_liquid" 			input_cell2="[static]"
+	output_cell1="graham_graymatter_liquid" 			output_cell2="graham_graymatter_liquid"
+	blob_radius1="2"	blob_radius2="2" >
+  </Reaction>
+
+  <Reaction probability="1000"
+	input_cell1="graham_graymatter_liquid" 			input_cell2="[liquid]"
+	output_cell1="graham_graymatter_liquid" 			output_cell2="graham_graymatter_liquid"
+	blob_radius1="2"	blob_radius2="2" >
+  </Reaction>
+
 </Materials>
